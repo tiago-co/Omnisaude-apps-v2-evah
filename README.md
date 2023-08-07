@@ -23,12 +23,6 @@ LECUPON_ADMIN_PASSWORD = lecupon_admin_password
 CNPJ = cnpj
 ```
 
-* Instalar o versionador de versão do `Flutter`:
-
-``` https
-https://github.com/leoafarias/fvm
-```
-
 * O app foi atualizado para a versão mais atual do flutter
 
 # Contato
