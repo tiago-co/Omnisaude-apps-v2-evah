@@ -1,0 +1,143 @@
+name: omni_core
+description: A new Flutter plugin.
+version: 0.0.1
+homepage: https://www.omnisaude.co
+publish_to: "none"
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.20.0"
+
+dependencies:
+  ##Labels##
+  presentation_labels:
+    path: labels/presentation_labels
+  benefits_labels:
+    path: labels/benefits_labels
+  drawer_labels:
+    path: labels/drawer_labels
+  exams_labels:
+    path: labels/exams_labels
+  extra_data_labels:
+    path: labels/extra_data_labels
+  help_labels:
+    path: labels/help_labels
+  home_labels:
+    path: labels/home_labels
+  informative_labels:
+    path: labels/informative_labels
+  my_devices_labels:
+    path: labels/my_devices_labels
+  notifications_labels:
+    path: labels/notifications_labels
+  privacy_labels:
+    path: labels/privacy_labels
+  procedures_labels:
+    path: labels/procedures_labels
+  profile_labels:
+    path: labels/profile_labels
+  settings_labels:
+    path: labels/settings_labels
+  terms_labels:
+    path: labels/terms_labels
+  vaccine_labels:
+    path: labels/vaccine_labels
+  shared_labels:
+    path: labels/shared_labels
+  #########
+  flutter:
+    sdk: flutter
+  omni_general:
+    path: ../../packages/omni_general
+  omni_mediktor:
+    path: ../../plugins/omni_mediktor
+  omni_bot:
+    path: ../../packages/omni_bot
+  omni_scheduling:
+    path: ../../packages/omni_scheduling
+  omni_drug_control:
+    path: ../../packages/omni_drug_control
+  omni_caregiver:
+    path: ../../packages/omni_caregiver
+  omni_plan:
+    path: ../../packages/omni_plan
+  diseases:
+    path: ../../packages/diseases
+  omni_assistance:
+    path: ../../packages/omni_assistance
+  omni_trilhas:
+    path: ../../packages/omni_trilhas
+
+  encrypt: ^5.0.1
+  dio: ^4.0.6
+  lottie: ^2.2.0
+  shimmer: ^2.0.0
+  flutter_html_all: ^3.0.0-alpha.6
+  flutter_html_svg: ^3.0.0-alpha.4
+  package_info: ^2.0.2
+  flutter_svg: ^1.0.3
+  firebase_core: ^2.4.1
+  flutter_dotenv: ^5.0.2
+  flutter_triple: ^1.2.7+4
+  cupertino_icons: ^1.0.5
+  carousel_slider: ^4.2.1
+  flutter_modular: ^5.0.3
+  pin_code_fields: ^7.4.0
+  cloud_firestore: 4.7.1
+  firebase_analytics: ^10.1.0
+  firebase_messaging: ^14.2.1
+  flutter_screenutil: ^5.6.1
+  calendar_date_picker2: ^0.3.7
+  file_picker: ^5.2.5
+  flutter_blue_plus: ^1.12.6
+  mime: ^1.0.4
+  dashed_rect: ^0.0.4
+  camera: ^0.10.3
+  pdfx: ^2.3.0
+  internet_file: ^1.2.0
+  geolocator: ^9.0.2
+  permission_handler: ^10.2.0
+  secure_application: ^3.8.0
+  local_auth: ^2.1.3
+  url_launcher: ^6.1.8
+  mobile_scanner: ^3.3.0
+  webview_flutter: ^3.0.1
+
+
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  lint: ^1.5.3
+
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/presentation/vaccine/
+    - assets/presentation/management/
+    - assets/presentation/scheduling/
+    - assets/presentation/
+    - assets/icons/about/
+    - assets/icons/help/
+    - assets/icons/privacy/
+    - assets/icons/profile/
+    - assets/icons/terms/
+    - assets/lottie/
+    - assets/icons/connection/
+    - assets/icons/device/
+    - assets/icons/extract/
+    - assets/icons/vaccine/
+    - assets/icons/settings/
+    - assets/informative/
+
+  plugin:
+    platforms:
+      android:
+        package: com.omnisaude.omni_core
+        pluginClass: OmniCorePlugin
+      ios:
+        pluginClass: OmniCorePlugin

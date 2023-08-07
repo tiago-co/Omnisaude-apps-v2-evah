@@ -1,0 +1,62 @@
+name: omni_measurement
+description: A new Flutter plugin.
+version: 0.0.1
+homepage: https://www.omnisaude.co
+publish_to: "none"
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.20.0"
+
+dependencies:
+  omni_measurement_labels:
+    path: labels
+  flutter:
+    sdk: flutter
+  omni_general:
+    path: ../../packages/omni_general
+  cupertino_icons: ^1.0.5
+  flutter_modular: ^5.0.3
+  flutter_triple: ^1.2.7+4
+  flutter_svg: ^1.0.3
+  #flutter_blue: ^0.8.0
+  flutter_blue_plus: ^1.12.6
+  dio: ^4.0.6
+  shimmer: ^2.0.0
+  camera: ^0.10.3
+
+dev_dependencies:
+  lint: ^1.5.3
+
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - assets/images/
+    - assets/icons/smile/
+    - assets/error_camera/
+    - assets/alert_automatic/
+    - assets/error_automatic/
+    - assets/icons/ocr_loading/
+    - assets/icons/ble_get_measure/
+    - assets/instructions_mode/
+    - assets/icons/search_device/
+    - assets/alert_connect_device/
+    - assets/icons/mode_measurement/
+    - assets/icons/type_measurement/
+    - assets/instructions_mode/camera/
+    - assets/instructions_mode/manual/
+    - assets/instructions_mode/automatic/
+    - assets/instructions_mode/icon_tutorial/
+
+  plugin:
+    platforms:
+      android:
+        package: com.omnisaude.omni_measurement
+        pluginClass: OmniMeasurementPlugin
+      ios:
+        pluginClass: OmniMeasurementPlugin

@@ -1,0 +1,52 @@
+name: omni_mediktor
+description: A new Flutter plugin.
+version: 0.0.1
+homepage: https://www.omnisaude.co
+publish_to: "none"
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.20.0"
+
+dependencies:
+  omni_mediktor_labels:
+    path: labels
+  flutter:
+    sdk: flutter
+  omni_general:
+    path: ../../packages/omni_general
+  omni_scheduling:    
+    path: ../../packages/omni_scheduling
+  omni_measurement:
+    path: ../omni_measurement
+    
+  dio: ^4.0.6
+  shimmer: ^2.0.0
+  flutter_svg: ^1.0.3
+  url_launcher: ^6.1.8
+  flutter_triple: ^1.2.7+4
+  flutter_modular: ^5.0.3
+  webview_flutter: ^3.0.1
+  carousel_slider: ^4.2.1
+  html: ^0.15.0
+  path_provider: ^2.0.12
+
+
+dev_dependencies:
+  lint: ^1.5.3
+
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+      - assets/
+      - assets/lottie/
+      
+  plugin:
+    platforms:
+      android:
+        package: com.omnisaude.omni_mediktor
+        pluginClass: OmniMediktorPlugin
+      ios:
+        pluginClass: OmniMediktorPlugin

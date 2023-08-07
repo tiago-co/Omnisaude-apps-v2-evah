@@ -1,0 +1,7 @@
+name: plan_card_labels
+description: labels for plan_card
+version: 1.0.0
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.20.0"

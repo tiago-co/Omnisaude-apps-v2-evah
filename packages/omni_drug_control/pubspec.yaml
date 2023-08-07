@@ -1,0 +1,39 @@
+name: omni_drug_control
+description: A new Flutter package.
+version: 0.0.1
+homepage: https://www.omnisaude.co
+publish_to: "none"
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.20.0"
+
+dependencies:
+  omni_drug_control_labels:
+    path: labels
+  flutter:
+    sdk: flutter
+  omni_general:
+    path: ../../packages/omni_general
+  omni_caregiver:
+    path: ../../packages/omni_caregiver
+  omni_core:
+    path: ../../plugins/omni_core 
+  cupertino_icons: ^1.0.5
+  flutter_modular: ^5.0.3
+  flutter_triple: ^1.2.7+4
+  flutter_svg: ^1.0.3
+  dio: ^4.0.6
+
+dev_dependencies:
+  lint: ^1.5.3
+
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/icons/

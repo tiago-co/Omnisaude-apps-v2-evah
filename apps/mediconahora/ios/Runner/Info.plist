@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Mediconahora</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>mediconahora</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(FLUTTER_BUILD_NAME)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>https</string>
+		<string>http</string>
+	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Precisamos ter acesso à galeria para envio e armazenamento para que seja possível enviar arquivos ou mídias durante os antendimentos via chat</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Precisamos de acesso ao seu bluetooth, para que seja possível utilizar nossos serviços de integração de dispositivos para cuidados de saúde</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Precisamos de acesso ao seu bluetooth, para que seja possível utilizar nossos serviços de integração de dispositivos para cuidados de saúde</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Precisamos ter acesso à câmera para que consiga enviar fotos, vídeos e realizar vídeo chamadas</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Precisamos ter acesso aos contatos para otimizar os serviços oferecidos</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Precisamos saber sua localização, para que possamos localizar as melhores ofertas próximas a você!</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Precisamos saber sua localização, para que possamos localizar as melhores ofertas próximas a você!</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Precisamos saber sua localização, para que possamos localizar as melhores ofertas próximas a você!</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Precisamos ter acesso ao microfone para que possa enviar áudios e realizar ligações</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Precisamos ter acesso ao movimento do aparelho para otimizar os serviços oferecidos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Precisamos ter acesso às fotos para envio e armazenamento para que seja possível enviar imagens durante os antendimentos via chat</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>Precisamos ter acesso aos lembretes para que possa agendar seus compromissos</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Precisamos ter acesso à fala para que consiga enviar áudios</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Precisamos ter acesso ã biometria para entrar utilizando essa funcionalidade</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+</dict>
+</plist>

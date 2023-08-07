@@ -1,0 +1,1 @@
+enum LeadingType { close, back }

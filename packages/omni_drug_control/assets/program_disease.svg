@@ -1,0 +1,29 @@
+<svg width="30" height="28" viewBox="0 0 30 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14.7373 25.0527H27.4742C28.5787 25.0527 29.4742 24.1572 29.4742 23.0527V11.8375C29.4742 11.4002 29.3308 10.9749 29.0661 10.6268L26.0951 6.72009C25.8526 6.40121 25.7115 6.01684 25.69 5.61679L25.5455 2.93007C25.4738 1.5946 24.0104 0.811364 22.858 1.49006V1.49006C22.31 1.8128 21.6308 1.81879 21.0776 1.50523V1.50523C19.8917 0.833157 18.4215 1.68981 18.4215 3.0529V5.56625C18.4215 5.99764 18.282 6.41746 18.0239 6.76308L15.1349 10.631C14.8768 10.9766 14.7373 11.3964 14.7373 11.8278V14.1489" stroke="#DADADA" stroke-linecap="round" />
+    <mask id="path-2-inside-1" fill="white">
+        <rect x="17.6846" width="8.84212" height="3.68422" rx="1" />
+    </mask>
+    <rect x="17.6846" width="8.84212" height="3.68422" rx="1" fill="white" stroke="#DADADA" stroke-width="3.68422" mask="url(#path-2-inside-1)" />
+    <line x1="20.8945" y1="1.7373" x2="20.8945" y2="1.94783" stroke="#DADADA" stroke-width="2" stroke-linecap="round" />
+    <line x1="23.1055" y1="1.7373" x2="23.1055" y2="1.94783" stroke="#DADADA" stroke-width="2" stroke-linecap="round" />
+    <line x1="25.3154" y1="1.7373" x2="25.3154" y2="1.94783" stroke="#DADADA" stroke-width="2" stroke-linecap="round" />
+    <path d="M19.1582 16.3144V14.5264C19.1582 13.4218 20.0536 12.5264 21.1582 12.5264H23.7898C24.8944 12.5264 25.7898 13.4218 25.7898 14.5264V17.8948C25.7898 18.9994 24.8944 19.8948 23.7898 19.8948H22.573" stroke="#DADADA" stroke-linecap="round" />
+    <rect x="0.612372" y="4.73832" width="12.933" height="23.4485" rx="1.5" transform="rotate(-15 0.612372 4.73832)" fill="white" stroke="#DADADA" />
+    <circle cx="5.08567" cy="7.31214" r="1.97166" transform="rotate(-15 5.08567 7.31214)" fill="#DADADA" />
+    <circle cx="10.9255" cy="5.74769" r="1.97166" transform="rotate(-15 10.9255 5.74769)" fill="#DADADA" />
+    <circle cx="7.94407" cy="17.9772" r="1.97166" transform="rotate(-15 7.94407 17.9772)" fill="#DADADA" />
+    <circle cx="13.7839" cy="16.4127" r="1.97166" transform="rotate(-15 13.7839 16.4127)" fill="#DADADA" />
+    <circle cx="9.37278" cy="23.3092" r="1.97166" transform="rotate(-15 9.37278 23.3092)" fill="#DADADA" />
+    <circle cx="15.2126" cy="21.7448" r="1.97166" transform="rotate(-15 15.2126 21.7448)" fill="#DADADA" />
+    <circle cx="6.51536" cy="12.6451" r="1.97166" transform="rotate(-15 6.51536 12.6451)" fill="#DADADA" />
+    <circle cx="12.3552" cy="11.0797" r="1.97166" transform="rotate(-15 12.3552 11.0797)" fill="#DADADA" />
+    <line x1="3.53153" y1="5.75947" x2="6.71586" y2="8.55795" stroke="white" stroke-width="0.5" stroke-linecap="round" />
+    <line x1="4.96122" y1="11.0915" x2="8.14555" y2="13.89" stroke="white" stroke-width="0.5" stroke-linecap="round" />
+    <line x1="6.35575" y1="16.2976" x2="9.54008" y2="19.096" stroke="white" stroke-width="0.5" stroke-linecap="round" />
+    <line x1="7.81864" y1="21.7575" x2="11.003" y2="24.556" stroke="white" stroke-width="0.5" stroke-linecap="round" />
+    <line x1="9.2454" y1="4.22822" x2="12.4297" y2="7.0267" stroke="white" stroke-width="0.5" stroke-linecap="round" />
+    <line x1="10.6741" y1="9.56025" x2="13.8584" y2="12.3587" stroke="white" stroke-width="0.5" stroke-linecap="round" />
+    <line x1="12.0686" y1="14.7663" x2="15.253" y2="17.5648" stroke="white" stroke-width="0.5" stroke-linecap="round" />
+    <line x1="13.5315" y1="20.2263" x2="16.7159" y2="23.0247" stroke="white" stroke-width="0.5" stroke-linecap="round" />
+</svg>
+    

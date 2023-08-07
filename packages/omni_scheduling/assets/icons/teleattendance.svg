@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 128 128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <path d="M39.299,9.395L89.578,9.395C97.831,9.395 104.52,16.085 104.52,24.337L104.52,74.618C104.52,82.87 97.83,89.559 89.578,89.559L39.299,89.559C31.046,89.559 24.357,82.87 24.357,74.618L24.357,24.337C24.356,16.085 31.046,9.395 39.299,9.395Z" style="fill:none;fill-rule:nonzero;stroke:rgb(244,129,33);stroke-width:16px;"/>
+    <path d="M64.106,93.366L64.106,123.173" style="fill:none;fill-rule:nonzero;stroke:rgb(244,129,33);stroke-width:20px;"/>
+    <path d="M20.211,122.12L108.001,122.12" style="fill:none;fill-rule:nonzero;stroke:rgb(244,129,33);stroke-width:8px;stroke-linecap:round;"/>
+    <circle cx="64.44" cy="49.354" r="36.522" style="fill:none;stroke:rgb(244,129,33);stroke-width:14px;"/>
+    <path d="M64.434,32.309C73.849,32.309 81.487,39.938 81.487,49.352C81.487,58.767 73.849,66.399 64.434,66.399C55.023,66.399 47.393,58.767 47.393,49.352C47.391,39.939 55.022,32.309 64.434,32.309Z" style="fill:white;fill-opacity:0;fill-rule:nonzero;stroke:rgb(244,129,33);stroke-width:14px;"/>
+</svg>

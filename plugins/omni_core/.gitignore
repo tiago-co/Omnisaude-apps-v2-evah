@@ -1,0 +1,16 @@
+.DS_Store
+.dart_tool/
+
+.packages
+.pub/
+
+build/
+
+# Env variables
+lib/src/app/core/constants/.env
+
+# Exceptions to above rules.
+!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+pubspec.lock
+ios/Podfile.lock
+ios/build/

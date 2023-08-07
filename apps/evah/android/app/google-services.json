@@ -1,0 +1,155 @@
+{
+  "project_info": {
+    "project_number": "297427973883",
+    "firebase_url": "https://operadora-omnisaude-co.firebaseio.com",
+    "project_id": "operadora-omnisaude-co",
+    "storage_bucket": "operadora-omnisaude-co.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297427973883:android:974aeec5bbbf53569a625e",
+        "android_client_info": {
+          "package_name": "com.example.saudedamulher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297427973883-ug8ca4av7ie959ctb41qqckts6qiom1i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1kwdq_AIsrTg_c7BOP-ZB6FyBzjnh9jw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297427973883-ug8ca4av7ie959ctb41qqckts6qiom1i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "297427973883-4umsubputfig8mpn3oohrhltog6hf265.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.omnisaude.omnisaude"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297427973883:android:26fb332daf9265c99a625e",
+        "android_client_info": {
+          "package_name": "com.omnisaude.evah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297427973883-ug8ca4av7ie959ctb41qqckts6qiom1i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1kwdq_AIsrTg_c7BOP-ZB6FyBzjnh9jw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297427973883-ug8ca4av7ie959ctb41qqckts6qiom1i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "297427973883-4umsubputfig8mpn3oohrhltog6hf265.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.omnisaude.omnisaude"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297427973883:android:11d4f6042e630e6f9a625e",
+        "android_client_info": {
+          "package_name": "com.omnisaude.omnisaude"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297427973883-ug8ca4av7ie959ctb41qqckts6qiom1i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1kwdq_AIsrTg_c7BOP-ZB6FyBzjnh9jw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297427973883-ug8ca4av7ie959ctb41qqckts6qiom1i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "297427973883-4umsubputfig8mpn3oohrhltog6hf265.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.omnisaude.omnisaude"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297427973883:android:79340331a07e07759a625e",
+        "android_client_info": {
+          "package_name": "com.omnisaude.omnisaudepro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297427973883-ug8ca4av7ie959ctb41qqckts6qiom1i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1kwdq_AIsrTg_c7BOP-ZB6FyBzjnh9jw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297427973883-ug8ca4av7ie959ctb41qqckts6qiom1i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "297427973883-4umsubputfig8mpn3oohrhltog6hf265.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.omnisaude.omnisaude"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

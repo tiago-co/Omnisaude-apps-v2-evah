@@ -1,0 +1,54 @@
+name: omni_plan
+description: A new Flutter package.
+version: 0.0.1
+homepage: https://www.omnisaude.co
+publish_to: "none"
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  reimbursement_labels:
+    path: labels/reimbursement_labels
+  refund_tab_status_labels:
+    path: labels/refund_tab_status_labels
+  plan_card_labels:
+    path: labels/plan_card_labels
+  income_tax_statement_labels:
+    path: labels/income_tax_statement_labels
+  coparticipation_extract_labels:
+    path: labels/coparticipation_extract_labels
+  direct_debit_labels:
+    path: labels/direct_debit_labels
+  duplicate_tickets_labels:
+    path: labels/duplicate_tickets_labels
+  features_contacts_labels:
+    path: labels/features_contacts_labels
+  guide_providers_labels:
+    path: labels/guide_providers_labels
+  flutter:
+    sdk: flutter
+  omni_general:
+    path: ../../packages/omni_general
+  omni_core:
+    path: ../../plugins/omni_core
+  cupertino_icons: ^1.0.5
+  flutter_modular: ^5.0.3
+  flutter_triple: ^1.2.7+4
+  flutter_svg: ^1.0.3
+  dio: ^4.0.6
+  shimmer: ^2.0.0
+  calendar_date_picker2: ^0.3.7
+
+  
+dev_dependencies:
+  lint: ^1.5.3
+
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  assets:
+    - assets/success/reimbursement_success.svg

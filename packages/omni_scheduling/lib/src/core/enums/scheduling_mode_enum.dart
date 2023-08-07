@@ -1,0 +1,4 @@
+enum SchedulingModeType {
+  simple,
+  mediktor,
+}

@@ -1,0 +1,37 @@
+name: omni_auth
+description: A new Flutter package.
+version: 0.0.1
+homepage: https://www.omnisaude.co
+publish_to: "none"
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.20.0"
+
+dependencies:
+  omni_login_labels:
+    path: labels/login_labels
+  omni_register_labels:
+    path: labels/register_labels
+  omni_reset_password_labels:
+    path: labels/reset_password_labels
+
+  flutter:
+    sdk: flutter
+  omni_general:
+    path: ../../packages/omni_general
+  omni_core:
+    path: ../../plugins/omni_core
+  dio: ^4.0.6
+  flutter_modular: ^5.0.3
+  flutter_triple: ^1.2.7+4
+  flutter_svg: ^1.0.3
+  flutter_dotenv: ^5.0.2
+
+dev_dependencies:
+  lint: ^1.5.3
+
+  flutter_test:
+    sdk: flutter
+
+flutter:

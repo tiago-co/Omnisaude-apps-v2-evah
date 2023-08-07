@@ -1,0 +1,43 @@
+name: omni_video_call
+description: A new Flutter plugin.
+version: 0.0.1
+homepage: https://www.omnisaude.co
+publish_to: "none"
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.20.0"
+
+dependencies:
+  omni_video_call_labels:
+    path: labels
+  flutter:
+    sdk: flutter
+  omni_general:
+    path: ../../packages/omni_general
+  omni_scheduling:
+    path: ../../packages/omni_scheduling
+
+  shimmer: ^2.0.0
+  flutter_svg: ^1.0.3
+  flutter_triple: ^1.2.7+4
+  flutter_dotenv: ^5.0.2
+  cloud_firestore: 4.7.1
+  flutter_modular: ^5.0.3
+  agora_rtc_engine: ^5.3.1
+  permission_handler: ^10.2.0
+
+dev_dependencies:
+  lint: ^1.5.3
+
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.omnisaude.omni_video_call
+        pluginClass: OmniVideoCallPlugin
+      ios:
+        pluginClass: OmniVideoCallPlugin

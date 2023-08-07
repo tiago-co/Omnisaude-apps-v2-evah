@@ -1,0 +1,34 @@
+name: diseases
+description: Package to diseases and allergies.
+version: 0.0.1
+homepage: https://www.omnisaude.co
+publish_to: "none"
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  diseases_labels:
+    path: labels
+  flutter:
+    sdk: flutter
+  omni_general:
+    path: ../../packages/omni_general
+  omni_core:
+    path: ../../plugins/omni_core
+  dio: ^4.0.6
+  flutter_modular: ^5.0.3
+  flutter_triple: ^1.2.7+4
+  flutter_svg: ^1.0.3
+  flutter_dotenv: ^5.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+
+flutter:
+
+assets:
+  - assets/icons/
