@@ -5,19 +5,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_auth/src/modules/register/register_repository.dart';
 import 'package:omni_general/omni_general.dart'
-    show
-        AddressModel,
-        BeneficiaryModel,
-        Formaters,
-        IndividualPersonModel,
-        LecuponRepository,
-        LecuponService,
-        NewBeneficiaryModel,
-        UserModel,
-        ZipCodeStore;
+    show AddressModel, BeneficiaryModel, Formaters, IndividualPersonModel, LecuponRepository, LecuponService, NewBeneficiaryModel, UserModel, ZipCodeStore;
 
-class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel>
-    with Disposable {
+class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Disposable {
   final RegisterRepository _repository = Modular.get();
   final ZipCodeStore zipCodeStore = ZipCodeStore();
   final LecuponService lecuponService = LecuponService();
@@ -44,8 +34,7 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel>
           ..termsAccepted = state.termsAccepted
           ..programCode = beneficiary.programCode ?? state.programCode
           ..responsible = beneficiary.responsible ?? state.responsible
-          ..individualPerson =
-              beneficiary.individualPerson ?? state.individualPerson,
+          ..individualPerson = beneficiary.individualPerson ?? state.individualPerson,
       );
       setLoading(false);
     }).catchError((onError) {
@@ -67,16 +56,20 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel>
   }
 
   bool isUnderage() {
-    final int ageInDays = DateTime.now()
-        .difference(
-          Formaters.stringToDate(
-            state.individualPerson!.birth!,
-            format: 'dd/MM/yyyy',
-          ),
-        )
-        .inDays;
+    if (state.individualPerson?.birth != null) {
+      final int ageInDays = DateTime.now()
+          .difference(
+            Formaters.stringToDate(
+              state.individualPerson!.birth!,
+              format: 'dd/MM/yyyy',
+            ),
+          )
+          .inDays;
 
-    return (ageInDays / 365.25) < 18;
+      return (ageInDays / 365.25) < 18;
+    } else {
+      return false;
+    }
   }
 
   Future<void> registerBeneficiary(NewBeneficiaryModel data) async {
@@ -98,10 +91,11 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel>
     try {
       switch (page) {
         case 0:
-          final bool isDisable = (state.individualPerson!.birth == null ||
-                  state.individualPerson!.birth!.isEmpty) ||
-              (state.individualPerson!.cpf == null ||
-                  state.individualPerson!.cpf!.isEmpty);
+          final bool isDisable = (state.individualPerson!.birth == null || state.individualPerson!.birth!.isEmpty) ||
+              (state.individualPerson!.cpf == null || state.individualPerson!.cpf!.isEmpty) ||
+              (state.individualPerson!.name == null || state.individualPerson!.name!.isEmpty) ||
+              (state.individualPerson!.phone == null || state.individualPerson!.phone!.isEmpty) ||
+              state.individualPerson!.genre == null;
           return isDisable;
         case 1:
           return state.programCode == null || state.programCode!.isEmpty;
@@ -111,45 +105,31 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel>
             if (state.responsible == null) {
               isUnderageValid = true;
             } else {
-              isUnderageValid = (state.responsible!.name == null ||
-                      state.responsible!.name!.isEmpty) ||
-                  (state.responsible!.cpf == null ||
-                      state.responsible!.cpf!.isEmpty) ||
+              isUnderageValid = (state.responsible!.name == null || state.responsible!.name!.isEmpty) ||
+                  (state.responsible!.cpf == null || state.responsible!.cpf!.isEmpty) ||
                   (state.responsible!.type == null);
             }
           } else {
             isUnderageValid = false;
           }
-          final bool isDisable = (state.individualPerson!.name == null ||
-                  state.individualPerson!.name!.isEmpty) ||
-              (state.individualPerson!.phone == null ||
-                  state.individualPerson!.phone!.isEmpty) ||
+          final bool isDisable = (state.individualPerson!.name == null || state.individualPerson!.name!.isEmpty) ||
+              (state.individualPerson!.phone == null || state.individualPerson!.phone!.isEmpty) ||
               isUnderageValid;
 
           return isDisable;
         case 3:
-          final bool isDisable =
-              (state.individualPerson!.address!.zipCode == null ||
-                      state.individualPerson!.address!.zipCode!.isEmpty) ||
-                  (state.individualPerson!.address!.city == null ||
-                      state.individualPerson!.address!.city!.isEmpty) ||
-                  (state.individualPerson!.address!.state == null ||
-                      state.individualPerson!.address!.state!.isEmpty) ||
-                  (state.individualPerson!.address!.street == null ||
-                      state.individualPerson!.address!.street!.isEmpty) ||
-                  (state.individualPerson!.address!.district == null ||
-                      state.individualPerson!.address!.district!.isEmpty);
+          final bool isDisable = (state.individualPerson!.address!.zipCode == null || state.individualPerson!.address!.zipCode!.isEmpty) ||
+              (state.individualPerson!.address!.city == null || state.individualPerson!.address!.city!.isEmpty) ||
+              (state.individualPerson!.address!.state == null || state.individualPerson!.address!.state!.isEmpty) ||
+              (state.individualPerson!.address!.street == null || state.individualPerson!.address!.street!.isEmpty) ||
+              (state.individualPerson!.address!.district == null || state.individualPerson!.address!.district!.isEmpty);
 
           return isDisable;
         case 4:
-          final bool isDisable =
-              (state.individualPerson!.user!.username == null ||
-                      state.individualPerson!.user!.username!.isEmpty) ||
-                  (state.individualPerson!.user!.email == null ||
-                      state.individualPerson!.user!.email!.isEmpty) ||
-                  (state.individualPerson!.user!.password == null ||
-                      state.individualPerson!.user!.password!.isEmpty) ||
-                  !state.termsAccepted;
+          final bool isDisable = (state.individualPerson!.user!.username == null || state.individualPerson!.user!.username!.isEmpty) ||
+              (state.individualPerson!.user!.email == null || state.individualPerson!.user!.email!.isEmpty) ||
+              (state.individualPerson!.user!.password == null || state.individualPerson!.user!.password!.isEmpty) ||
+              !state.termsAccepted;
           return isDisable;
 
         default:

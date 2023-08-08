@@ -66,7 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     children: [
                       VerifyPersonalDataPage(pageController: pageController),
                       ProgramFormPage(pageController: pageController),
-                      PersonalDataFormPage(pageController: pageController),
+                      // PersonalDataFormPage(pageController: pageController),
                       AddressFormPage(pageController: pageController),
                       AccessDataFormPage(pageController: pageController),
                       const RegisterSuccessPage(),
