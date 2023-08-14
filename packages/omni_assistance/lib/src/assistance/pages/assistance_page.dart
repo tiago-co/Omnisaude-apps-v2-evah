@@ -31,7 +31,9 @@ class _AssistancePageState extends State<AssistancePage> {
     store.params.limit = '10';
     store.getAssistancesList(store.params);
     scrollController.addListener(() {
-      if (scrollController.offset == scrollController.position.maxScrollExtent && store.state.results!.length != store.state.count) {
+      if (scrollController.offset ==
+              scrollController.position.maxScrollExtent &&
+          store.state.results!.length != store.state.count) {
         store.params.limit = (int.parse(store.params.limit!) + 10).toString();
         store.getAssistancesList(store.params);
       }
@@ -43,7 +45,8 @@ class _AssistancePageState extends State<AssistancePage> {
   Widget build(BuildContext context) {
     assistanceStore.update(AssistanceModel());
     return Scaffold(
-      appBar: const NavBarWidget(title: AssistanceLabels.assistancePageTitle).build(context) as AppBar,
+      appBar: const NavBarWidget(title: AssistanceLabels.assistancePageTitle)
+          .build(context) as AppBar,
       resizeToAvoidBottomInset: false,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -108,19 +111,19 @@ class _AssistancePageState extends State<AssistancePage> {
         ),
         child: Stack(children: [
           SvgPicture.asset(
-            Assets.help,
+            Assets.whatsapp,
             package: AssetsPackage.omniCore,
-            color: Theme.of(context).cardColor,
-            width: 30,
-            height: 30,
+            // color: Theme.of(context).cardColor,
+            width: 38,
+            height: 38,
           ),
-          SvgPicture.asset(
-            Assets.helpBase,
-            package: AssetsPackage.omniCore,
-            color: Theme.of(context).primaryColor,
-            width: 30,
-            height: 30,
-          ),
+          // SvgPicture.asset(
+          //   Assets.helpBase,
+          //   package: AssetsPackage.omniCore,
+          //   color: Theme.of(context).primaryColor,
+          //   width: 30,
+          //   height: 30,
+          // ),
           // asset: Assets.help,
           //   assetBase: Assets.helpBase,
           //   package: AssetsPackage.omniCore,
@@ -202,14 +205,17 @@ class _AssistancePageState extends State<AssistancePage> {
                                   children: [
                                     Text(
                                       triple.state.results![index].subject!,
-                                      style: Theme.of(context).textTheme.headlineSmall,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall,
                                     ),
                                     const SizedBox(height: 10),
                                     Container(
                                       padding: const EdgeInsets.all(7.0),
                                       decoration: BoxDecoration(
                                         border: Border.all(
-                                          color: triple.state.results![index].status!.color,
+                                          color: triple.state.results![index]
+                                              .status!.color,
                                           width: 2,
                                         ),
                                         borderRadius: const BorderRadius.all(
@@ -217,9 +223,17 @@ class _AssistancePageState extends State<AssistancePage> {
                                         ),
                                       ),
                                       child: Text(
-                                        triple.state.results![index].status!.label,
-                                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                                              color: triple.state.results![index].status!.color,
+                                        triple.state.results![index].status!
+                                            .label,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge!
+                                            .copyWith(
+                                              color: triple
+                                                  .state
+                                                  .results![index]
+                                                  .status!
+                                                  .color,
                                             ),
                                       ),
                                     ),
