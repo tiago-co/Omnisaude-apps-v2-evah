@@ -113,20 +113,9 @@ class _AssistancePageState extends State<AssistancePage> {
           SvgPicture.asset(
             Assets.whatsapp,
             package: AssetsPackage.omniCore,
-            // color: Theme.of(context).cardColor,
             width: 38,
             height: 38,
           ),
-          // SvgPicture.asset(
-          //   Assets.helpBase,
-          //   package: AssetsPackage.omniCore,
-          //   color: Theme.of(context).primaryColor,
-          //   width: 30,
-          //   height: 30,
-          // ),
-          // asset: Assets.help,
-          //   assetBase: Assets.helpBase,
-          //   package: AssetsPackage.omniCore,
         ]),
       ),
     );
