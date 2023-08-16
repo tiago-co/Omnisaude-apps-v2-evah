@@ -12,21 +12,18 @@ class LecuponService {
   }) async {
     await _lecuponRepository.getAdmminToken();
     await _lecuponRepository
-        .createAuthorizedUser(
-          activeUser: ActivateUserModel(
+        .registerUser(
+          activateUser: ActivateUserModel(
             name: beneficiary.individualPerson?.name,
             cpf: beneficiary.individualPerson?.cpf,
             email: beneficiary.individualPerson?.user?.email,
-            phone: beneficiary.individualPerson?.phone,
+            cellphone: beneficiary.individualPerson?.phone,
+            password: beneficiary.individualPerson?.user?.password,
+            userTags: [beneficiary.programCode!],
             active: true,
           ),
         )
-        .then((value) => activateUser = value);
-    await _lecuponRepository
-        .registerUser(activateUser: activateUser)
         .then((value) => lecuponUser = value);
-
-    activateUser.cpf = beneficiary.individualPerson?.cpf;
 
     return lecuponUser;
   }
