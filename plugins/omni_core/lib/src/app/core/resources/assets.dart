@@ -28,6 +28,7 @@ class Assets {
       'assets/icons/extract/extrato-copa-weverton-color.svg';
   static String helpBase = 'assets/icons/help/help_base.svg';
   static String help = 'assets/icons/help/help.svg';
+  static String whatsapp = 'assets/icons/help/whatsapp.svg';
   static String informativeCategoryItem = 'assets/informative/informative.svg';
   static String lottieLoading = 'assets/lottie/loading.json';
   static String managementBase =

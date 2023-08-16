@@ -4,8 +4,8 @@ class AssistanceLabels {
   static const assistancePageTitle = 'Assistência';
   static const assistancePageTicketsLabel = 'Tickets';
   static const assistancePageTicketsPlaceholder = 'Informe o assunto do ticket';
-  static const assistancePageOpenTicket = 'Nenhum ticket encontrado!';
-  static const assistancePageEmptyList = 'Abrir Ticket';
+  static const assistancePageOpenTicket = 'Pedir Suporte';
+  static const assistancePageEmptyList = 'Nenhum pedido de suporte encontrado';
   static const assistancePageClean = 'Limpar';
   static const assistancePageStatus = 'Status';
   static const assistancePageStatusAll = 'Todos';
