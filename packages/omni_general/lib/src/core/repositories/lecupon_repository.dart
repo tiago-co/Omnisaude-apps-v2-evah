@@ -133,7 +133,7 @@ class LecuponRepository extends Disposable {
   }) async {
     try {
       final Response response = await _httpClientImpl.post(
-        path: '/api/v1/public_integration/users',
+        path: '/client/v2/businesses/$cnpj/users',
         data: activateUser.toJson(),
       );
 

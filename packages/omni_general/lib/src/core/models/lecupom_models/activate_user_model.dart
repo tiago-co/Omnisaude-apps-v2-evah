@@ -3,7 +3,7 @@ class ActivateUserModel {
   String? name;
   String? email;
   String? cpf;
-  String? phone;
+  String? cellphone;
   bool? active;
   String? createdAt;
   String? updatedAt;
@@ -16,7 +16,7 @@ class ActivateUserModel {
     this.cpf,
     this.email,
     this.name,
-    this.phone,
+    this.cellphone,
     this.createdAt,
     this.updatedAt,
     this.userTags,
@@ -28,12 +28,12 @@ class ActivateUserModel {
     name = json['name'];
     email = json['email'];
     cpf = json['cpf'];
-    phone = json['phone'];
+    cellphone = json['cellphone'];
     active = json['active'];
     if (json['user_tags'] != null) {
       userTags = List.empty(growable: true);
       json['user_tags'].forEach((element) {
-        userTags?.add(element);
+        userTags?.add(element['name']);
       });
     }
     password = json['password'];
@@ -48,7 +48,7 @@ class ActivateUserModel {
     data['name'] = name;
     data['email'] = email;
     data['cpf'] = cpf;
-    data['phone'] = phone;
+    data['cellphone'] = cellphone;
     data['activated_at'] = active;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;

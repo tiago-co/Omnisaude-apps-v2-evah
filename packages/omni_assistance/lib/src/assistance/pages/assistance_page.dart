@@ -11,6 +11,7 @@ import 'package:omni_assistance/src/core/models/assistance_model.dart';
 import 'package:omni_assistance_labels/labels.dart';
 import 'package:omni_core/omni_core.dart';
 import 'package:omni_general/omni_general.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AssistancePage extends StatefulWidget {
   const AssistancePage({Key? key}) : super(key: key);
@@ -102,6 +103,29 @@ class _AssistancePageState extends State<AssistancePage> {
         onPressed: () => Modular.to.pushNamed('create_assistance'),
         text: AssistanceLabels.assistancePageOpenTicket,
         buttonType: BottomButtonType.outline,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await launchUrl(
+            Uri.parse('https://wa.me/556231425363'),
+            mode: LaunchMode.externalApplication,
+          );
+        },
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: Theme.of(context).primaryColor.withOpacity(0.2),
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Stack(children: [
+          SvgPicture.asset(
+            Assets.whatsapp,
+            package: AssetsPackage.omniCore,
+            width: 38,
+            height: 38,
+          ),
+        ]),
       ),
     );
   }

@@ -67,16 +67,20 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel>
   }
 
   bool isUnderage() {
-    final int ageInDays = DateTime.now()
-        .difference(
-          Formaters.stringToDate(
-            state.individualPerson!.birth!,
-            format: 'dd/MM/yyyy',
-          ),
-        )
-        .inDays;
+    if (state.individualPerson?.birth != null) {
+      final int ageInDays = DateTime.now()
+          .difference(
+            Formaters.stringToDate(
+              state.individualPerson!.birth!,
+              format: 'dd/MM/yyyy',
+            ),
+          )
+          .inDays;
 
-    return (ageInDays / 365.25) < 18;
+      return (ageInDays / 365.25) < 18;
+    } else {
+      return false;
+    }
   }
 
   Future<void> registerBeneficiary(NewBeneficiaryModel data) async {
@@ -101,7 +105,12 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel>
           final bool isDisable = (state.individualPerson!.birth == null ||
                   state.individualPerson!.birth!.isEmpty) ||
               (state.individualPerson!.cpf == null ||
-                  state.individualPerson!.cpf!.isEmpty);
+                  state.individualPerson!.cpf!.isEmpty) ||
+              (state.individualPerson!.name == null ||
+                  state.individualPerson!.name!.isEmpty) ||
+              (state.individualPerson!.phone == null ||
+                  state.individualPerson!.phone!.isEmpty) ||
+              state.individualPerson!.genre == null;
           return isDisable;
         case 1:
           return state.programCode == null || state.programCode!.isEmpty;
