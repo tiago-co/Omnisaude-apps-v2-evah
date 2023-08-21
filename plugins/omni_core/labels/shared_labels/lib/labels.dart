@@ -61,8 +61,11 @@ class SharedLabels {
 
   static const inactivatedProgramProgram = 'Seu convênio';
   static const inactivatedProgramIsInactive = 'está inativo';
-  static const inactivatedProgramEjected ='Você foi inativado no convênio';
+  static const inactivatedProgramEjected = 'Você foi inativado no convênio';
   static const inactivatedProgramEnterInContact = 'Entre em contato '
-                  'com a sua operadora para mais detalhes!';
+      'com a sua operadora para mais detalhes!';
   static const inactivatedProgramUpdate = 'Atualizar';
+
+  static const newVersionAvailable =
+      'Há uma nova versão disponível para download! Atualize agora mesmo para usufruir!';
 }
