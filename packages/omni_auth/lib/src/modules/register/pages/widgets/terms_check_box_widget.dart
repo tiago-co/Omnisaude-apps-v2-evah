@@ -59,11 +59,13 @@ class _TermsCheckBoxWidgetState extends State<TermsCheckBoxWidget> {
                             ..onTap = () {
                               Modular.to.pushNamed(
                                 '/terms',
-                                arguments: 'OPSX1',
+                                arguments:
+                                    store.registerStore.state.programCode,
                               );
                             },
                         ),
-                        const TextSpan(text: RegisterLabels.termsCheckboxProgram),
+                        const TextSpan(
+                            text: RegisterLabels.termsCheckboxProgram),
                       ],
                     ),
                   ),
