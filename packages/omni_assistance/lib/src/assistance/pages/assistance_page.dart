@@ -70,6 +70,7 @@ class _AssistancePageState extends State<AssistancePage> {
             ),
           ),
           const AssistanceGeneralFiltersWidget(),
+          const SizedBox(height: 20),
           Expanded(
             child: Theme(
               data: Theme.of(context).copyWith(
@@ -100,6 +101,10 @@ class _AssistancePageState extends State<AssistancePage> {
           await launchUrl(
             Uri.parse('https://wa.me/556231425363'),
             mode: LaunchMode.externalApplication,
+          );
+          Helpers.showDialog(
+            context,
+            RatingDialog(module: 'assistance'),
           );
         },
         backgroundColor: Colors.white,

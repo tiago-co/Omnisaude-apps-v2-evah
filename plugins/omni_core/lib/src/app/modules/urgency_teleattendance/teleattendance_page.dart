@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:omni_core/src/app/shared/widgets/rating_dialog/rating_dialog.dart';
 import 'package:omni_general/omni_general.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -46,7 +47,11 @@ class _TeleattendancePageState extends State<TeleattendancePage> {
                 await launchUrl(
                   Uri.parse('https://wa.me/message/U3FWBVIFTGLKP1'),
                   mode: LaunchMode.externalApplication,
-                ).then((value) {
+                ).then((value) async {
+                  await Helpers.showDialog(
+                    context,
+                    RatingDialog(module: 'pronto_atendimento_virtual'),
+                  );
                   Modular.to.pop();
                 });
               },
