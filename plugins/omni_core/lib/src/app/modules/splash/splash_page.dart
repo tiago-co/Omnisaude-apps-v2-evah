@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:omni_core/omni_core.dart';
 
 import 'package:omni_core/src/app/modules/splash/splash_store.dart';
+import 'package:omni_core/src/app/shared/widgets/new_version_dialog/new_version_dialog.dart';
+import 'package:omni_general/omni_general.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -18,10 +20,18 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     getPermissions();
-    store.getBeneficiaryData().then((value) {
-      Modular.to.pushReplacementNamed('/home');
-    }).catchError((onError) {
-      Modular.to.pushReplacementNamed('/presentation');
+    store.verifyAppVersion().then((isUpdated) async {
+      if (!isUpdated) {
+        await Helpers.showDialog(
+          context,
+          const NewVersionDialog(),
+        );
+      }
+      store.getBeneficiaryData().then((value) async {
+        Modular.to.pushReplacementNamed('/home');
+      }).catchError((onError) {
+        Modular.to.pushReplacementNamed('/presentation');
+      });
     });
     super.initState();
   }

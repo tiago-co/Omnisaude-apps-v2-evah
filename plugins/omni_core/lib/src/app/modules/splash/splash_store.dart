@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -14,6 +15,7 @@ import 'package:omni_general/omni_general.dart'
         PreferencesModel,
         PreferencesService;
 import 'package:omni_general/src/stores/user_store.dart';
+import 'package:package_info/package_info.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class SplashStore extends NotifierStore<DioError, bool> with Disposable {
@@ -73,6 +75,22 @@ class SplashStore extends NotifierStore<DioError, bool> with Disposable {
     });
 
     setLoading(false);
+  }
+
+  Future<bool> verifyAppVersion() async {
+    final firebaseVersion = await FirebaseFirestore.instance
+        .collection('config')
+        .doc('version')
+        .get()
+      ..data();
+    final info = await PackageInfo.fromPlatform();
+    final appVersion = info.version;
+
+    if (appVersion == firebaseVersion['version']) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override
