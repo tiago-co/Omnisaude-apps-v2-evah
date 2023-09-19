@@ -14,7 +14,7 @@ class AuthNavBarWidget extends StatelessWidget {
       leading: GestureDetector(
         onTap: onLeadingPress ?? () => Navigator.pop(context),
         child: Container(
-          color: Colors.white,
+          color: Theme.of(context).appBarTheme.backgroundColor,
           padding: const EdgeInsets.symmetric(horizontal: 15),
           alignment: Alignment.centerLeft,
           child: SvgPicture.asset(
@@ -26,7 +26,7 @@ class AuthNavBarWidget extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       elevation: 0,
       centerTitle: false,
       automaticallyImplyLeading: false,

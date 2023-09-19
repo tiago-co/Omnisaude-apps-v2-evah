@@ -181,6 +181,17 @@ class _AccessDataFormPageState extends State<AccessDataFormPage> {
                   triple.state.individualPerson!.user!.username = input;
                   store.updateForm(store.state);
                 },
+                validator: (String? input) {
+                  final validCharacters = RegExp(r'^[a-zA-Z0-9]+$');
+
+                  if (!validCharacters.hasMatch(input!)) {
+                    return RegisterLabels.userNameFieldError;
+                  }
+                  if (input.isEmpty) {
+                    return RegisterLabels.emptyFildError;
+                  }
+                  return null;
+                },
                 onSubmitted: (String input) {
                   Helpers.changeFocus(_, usernameFocus, passwordFocus);
                 },

@@ -8,15 +8,16 @@ import 'package:omni_general/omni_general.dart';
 import 'package:omni_reset_password_labels/labels.dart';
 
 class InsertNewPasswordPage extends StatelessWidget {
-  final PageController pageController;
-  const InsertNewPasswordPage({
+  InsertNewPasswordPage({
     Key? key,
     required this.pageController,
   }) : super(key: key);
 
+  final PageController pageController;
+  final ResetPasswordStore store = Modular.get();
+
   @override
   Widget build(BuildContext context) {
-    final ResetPasswordStore store = Modular.get();
     final TextEditingController newPasswordController = TextEditingController();
     final FocusNode newPasswordFocus = FocusNode();
     final TextEditingController confirmPasswordController =

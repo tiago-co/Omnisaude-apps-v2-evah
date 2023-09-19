@@ -216,7 +216,7 @@ class _AddressFormPageState extends State<AddressFormPage> {
                 focusNode: stateFocus,
                 onSelectItem: (MapEntry<String, String> state) {
                   stateController.text = state.value;
-                  store.state.individualPerson!.address!.state = state.key;
+                  store.state.individualPerson!.address!.state = state.value;
                   store.updateForm(store.state);
                   Helpers.changeFocus(_, stateFocus, cityFocus);
                 },
