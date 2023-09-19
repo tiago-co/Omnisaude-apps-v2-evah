@@ -10,7 +10,7 @@ class InformativeDetailsShimmerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-      color: Theme.of(context).colorScheme.background,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: Shimmer.fromColors(
         baseColor: Theme.of(context).primaryColor.withOpacity(0.25),
         highlightColor: Theme.of(context).primaryColor.withOpacity(0.1),

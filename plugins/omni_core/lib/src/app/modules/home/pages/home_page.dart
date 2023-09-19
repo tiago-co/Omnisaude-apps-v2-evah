@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:omni_core/omni_core.dart';
 import 'package:omni_core/src/app/app_stores/modules_store.dart';
 import 'package:omni_core/src/app/modules/home/pages/stores/home_store.dart';
 import 'package:omni_core/src/app/modules/home/pages/stores/omniplan_module_icon_store.dart';
@@ -42,9 +43,10 @@ class _HomePageState extends State<HomePage> {
     store.modulesStore.getActiveModules().then(
       (value) {
         omniplanModuleIconStore.getOmniPlanModuleStatus();
-            store.modulesStore.state.any((element) => element.type == ModuleType.mediktor)
-        ? mediktorDiagnosisStore.authenticate()
-        : null;
+        store.modulesStore.state
+                .any((element) => element.type == ModuleType.mediktor)
+            ? mediktorDiagnosisStore.authenticate()
+            : null;
       },
     );
     RealLocalNotificationService.initialize();
@@ -96,7 +98,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: scaffoldKey,
       appBar: const HomeNavBarWidget().createState().build(context) as AppBar,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       resizeToAvoidBottomInset: false,
       body: const HomeLayoutWidget(),
       bottomNavigationBar:

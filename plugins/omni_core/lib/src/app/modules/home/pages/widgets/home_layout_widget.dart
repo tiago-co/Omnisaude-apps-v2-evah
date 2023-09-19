@@ -48,7 +48,7 @@ class _HomeLayoutWidgetState extends State<HomeLayoutWidget> {
         displacement: 0,
         strokeWidth: 0.75,
         color: Theme.of(context).primaryColor,
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         onRefresh: () async {
           refreshModules();
@@ -282,7 +282,8 @@ class _HomeLayoutWidgetState extends State<HomeLayoutWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (modules0.isNotEmpty)
+        if (modules0.isNotEmpty &&
+            modules0[0].type != ModuleType.urgencyAttendance)
           Text(
             category.name,
             style: Theme.of(context).textTheme.headlineMedium!.copyWith(
@@ -298,16 +299,19 @@ class _HomeLayoutWidgetState extends State<HomeLayoutWidget> {
             }
             switch (store.userStore.programSelected.homeLayout) {
               case HomeLayoutType.list:
-                return ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: modules0.length,
-                  physics: const NeverScrollableScrollPhysics(),
-                  separatorBuilder: (_, __) => const SizedBox(height: 15),
-                  padding: EdgeInsets.zero,
-                  itemBuilder: (_, index) {
-                    return _buildListItemWidget(modules0[index]);
-                  },
-                );
+                if (modules0[0].type != ModuleType.urgencyAttendance) {
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: modules0.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    separatorBuilder: (_, __) => const SizedBox(height: 15),
+                    padding: EdgeInsets.zero,
+                    itemBuilder: (_, index) {
+                      return _buildListItemWidget(modules0[index]);
+                    },
+                  );
+                }
+                return Container();
               case HomeLayoutType.grid:
                 return GridView.builder(
                   shrinkWrap: true,

@@ -24,15 +24,14 @@ class NavBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      surfaceTintColor: Theme.of(context).colorScheme.background,
-    
+      surfaceTintColor: Theme.of(context).appBarTheme.backgroundColor,
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: Colors.blue,
       ),
       leading: GestureDetector(
         onTap: () => Navigator.pop(context, argsCallback),
         child: Container(
-          color: Colors.white,
+          color: Theme.of(context).appBarTheme.backgroundColor,
           padding: const EdgeInsets.symmetric(horizontal: 15),
           alignment: Alignment.centerLeft,
           child: _buildLeadingWidget(context),
@@ -52,7 +51,7 @@ class NavBarWidget extends StatelessWidget {
       elevation: 0.5,
       bottom: bottom,
       shadowColor: Theme.of(context).cardColor,
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       actions: actions,
     );
   }
