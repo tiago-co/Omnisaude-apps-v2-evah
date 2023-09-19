@@ -72,7 +72,10 @@ class LecuponRepository extends Disposable {
       final List<CupomModel> cuponsList = List.empty(growable: true);
 
       response.data.forEach((cupom) {
-        cuponsList.add(CupomModel.fromJson(cupom));
+        final cup = CupomModel.fromJson(cupom);
+        if (cup.discount != null && cup.discount! > 0) {
+          cuponsList.add(cup);
+        }
       });
 
       return cuponsList;
