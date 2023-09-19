@@ -13,7 +13,7 @@ class NewVersionDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).colorScheme.background,
+      color: Theme.of(context).scaffoldBackgroundColor,
       padding: const EdgeInsets.all(15),
       child: Column(
         mainAxisSize: MainAxisSize.min,

@@ -78,19 +78,29 @@ class SplashStore extends NotifierStore<DioError, bool> with Disposable {
   }
 
   Future<bool> verifyAppVersion() async {
+    bool isUpdated = false;
+    final info = await PackageInfo.fromPlatform();
+    final packageName = info.packageName;
     final firebaseVersion = await FirebaseFirestore.instance
         .collection('config')
         .doc('version')
         .get()
       ..data();
-    final info = await PackageInfo.fromPlatform();
+    final version = firebaseVersion.data();
     final appVersion = info.version;
-
-    if (appVersion == firebaseVersion['version']) {
-      return true;
-    } else {
-      return false;
+    switch (packageName) {
+      case 'com.evahsaude.evah':
+        if (version?['evah'] == appVersion) {
+          isUpdated = true;
+        }
+        break;
+      case 'com.omnisaude.mediconahora':
+        if (version?['medico_na_hora'] == appVersion) {
+          isUpdated = true;
+        }
+        break;
     }
+    return isUpdated;
   }
 
   @override
