@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:omni_auth/src/modules/register/pages/widgets/birth_date_dialog.dart';
 import 'package:omni_auth/src/modules/register/pages/widgets/responsable_data_form_widget.dart';
 import 'package:omni_auth/src/modules/register/stores/register_store.dart';
 import 'package:omni_general/omni_general.dart';
@@ -40,7 +41,9 @@ class _VerifyPersonalDataPageState extends State<VerifyPersonalDataPage> {
   @override
   void initState() {
     cpfController = TextEditingController(
-      text: store.state.individualPerson?.cpf != null ? Formaters.formatCPF(store.state.individualPerson!.cpf!) : '',
+      text: store.state.individualPerson?.cpf != null
+          ? Formaters.formatCPF(store.state.individualPerson!.cpf!)
+          : '',
     );
     birthController = TextEditingController(
       text: store.state.individualPerson?.birth ?? '',
@@ -63,19 +66,22 @@ class _VerifyPersonalDataPageState extends State<VerifyPersonalDataPage> {
   }
 
   void chooseBirthDate() {
-    service
-        .selectDate(
-      context,
-      enablePastDates: true,
-      maxDate: DateTime.now(),
-      minDate: DateTime(1900),
-      initialDisplayDate: DateTime(
-        DateTime.now().year,
-        DateTime.now().month,
-        DateTime.now().day,
-      ),
-    )
-        .then(
+    // service
+    //     .selectDate(
+    //   context,
+    //   enablePastDates: true,
+    //   maxDate: DateTime.now(),
+    //   minDate: DateTime(1900),
+    //   initialDisplayDate: DateTime(
+    //     DateTime.now().year,
+    //     DateTime.now().month,
+    //     DateTime.now().day,
+    //   ),
+    // )
+    showDialog(
+      context: context,
+      builder: (context) => const BirthDateDialog(),
+    ).then(
       (birth) {
         if (birth == null) return;
 
@@ -190,7 +196,8 @@ class _VerifyPersonalDataPageState extends State<VerifyPersonalDataPage> {
                 keyboardType: TextInputType.number,
                 onChange: (String? input) {
                   if (input == null) return;
-                  store.state.individualPerson!.cpf = input.replaceAll(RegExp(r'[^0-9]'), '');
+                  store.state.individualPerson!.cpf =
+                      input.replaceAll(RegExp(r'[^0-9]'), '');
                   store.updateForm(store.state);
                 },
                 validator: (String? input) {
@@ -206,7 +213,8 @@ class _VerifyPersonalDataPageState extends State<VerifyPersonalDataPage> {
               const SizedBox(height: 15),
               TextFieldWidget(
                 label: RegisterLabels.verifyPersonalDataBirthDateLabel,
-                placeholder: RegisterLabels.verifyPersonalDataBirthDatePlaceholder,
+                placeholder:
+                    RegisterLabels.verifyPersonalDataBirthDatePlaceholder,
                 readOnly: true,
                 isEnabled: !triple.isLoading,
                 controller: birthController,
@@ -254,7 +262,8 @@ class _VerifyPersonalDataPageState extends State<VerifyPersonalDataPage> {
               SelectFieldWidget<GenreType>(
                 label: RegisterLabels.personalDataFormGenreLabel,
                 items: GenreType.values,
-                itemsLabels: GenreType.values.map((type) => type.label).toList(),
+                itemsLabels:
+                    GenreType.values.map((type) => type.label).toList(),
                 placeholder: RegisterLabels.personalDataFormGenrePlaceholder,
                 controller: genreController,
                 // focusNode: genreFocus,

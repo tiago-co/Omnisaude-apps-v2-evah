@@ -10,14 +10,14 @@ import 'package:omni_reset_password_labels/labels.dart';
 
 class VerificationTokenPage extends StatelessWidget {
   final PageController pageController;
-  const VerificationTokenPage({
+  VerificationTokenPage({
     Key? key,
     required this.pageController,
   }) : super(key: key);
+  final ResetPasswordStore store = Modular.get();
 
   @override
   Widget build(BuildContext context) {
-    final ResetPasswordStore store = Modular.get();
     final GlobalKey<FormState> formKey = GlobalKey();
 
     return Column(
@@ -31,7 +31,7 @@ class VerificationTokenPage extends StatelessWidget {
             ),
             child: Form(
               key: formKey,
-              child: const TokenFormWidget(),
+              child: TokenFormWidget(),
             ),
           ),
         ),

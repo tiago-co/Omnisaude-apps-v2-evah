@@ -46,6 +46,8 @@
 	<string>Precisamos ter acesso à câmera para que consiga enviar fotos, vídeos e realizar vídeo chamadas</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Precisamos ter acesso aos contatos para otimizar os serviços oferecidos</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Precisamos ter acesso ã biometria para entrar utilizando essa funcionalidade</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Precisamos ter acesso à sua localização enquanto usa o aplicativo para otimizar os serviços oferecidos</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -64,8 +66,8 @@
 	<string>Precisamos ter acesso aos lembretes para que possa agendar seus compromissos</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Precisamos ter acesso à fala para que consiga enviar áudios</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Precisamos ter acesso ã biometria para entrar utilizando essa funcionalidade</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -91,10 +93,6 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
-	<true/>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 </dict>
 </plist>
