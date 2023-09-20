@@ -16,15 +16,14 @@ class _HomeNavBarWidgetState extends State<HomeNavBarWidget> {
 
   @override
   void initState() {
-    
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      surfaceTintColor: Theme.of(context).colorScheme.background,
-      backgroundColor: Colors.white,
+      // surfaceTintColor: Theme.of(context).colorScheme.background,
+      // backgroundColor: Theme.of(context).colorScheme.background,
       elevation: 0,
       title: TripleBuilder<UserStore, Exception, PreferencesModel>(
         store: userStore,

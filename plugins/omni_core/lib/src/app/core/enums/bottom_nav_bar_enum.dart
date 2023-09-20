@@ -1,7 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:omni_core/src/app/core/resources/assets.dart';
 import 'package:omni_general/src/stores/user_store.dart';
 
-enum BottomNavBarType { notification, drawer, plan }
+enum BottomNavBarType { notification, drawer, plan, blog }
 
 extension BottomNavBarTypeExtension on BottomNavBarType {
   String get asset {
@@ -12,6 +13,8 @@ extension BottomNavBarTypeExtension on BottomNavBarType {
         return 'assets/icons/perfil_config_one.svg';
       case BottomNavBarType.plan:
         return 'assets/icons/plan_one.svg';
+      case BottomNavBarType.blog:
+        return Assets.preventionOne;
       default:
         return toString();
     }
@@ -25,6 +28,8 @@ extension BottomNavBarTypeExtension on BottomNavBarType {
         return 'assets/icons/perfil_config_two.svg';
       case BottomNavBarType.plan:
         return 'assets/icons/plan_two.svg';
+      case BottomNavBarType.blog:
+        return Assets.preventionTwo;
       default:
         return toString();
     }
@@ -38,6 +43,8 @@ extension BottomNavBarTypeExtension on BottomNavBarType {
         return 'assets/bottom_bar/icon_drawer.svg';
       case BottomNavBarType.plan:
         return 'assets/bottom_bar/icon_plan.svg';
+      case BottomNavBarType.blog:
+        return 'assets/modules/guide_providers/guide_providers_base.svg';
       default:
         return toString();
     }
@@ -64,6 +71,13 @@ extension BottomNavBarTypeExtension on BottomNavBarType {
             arguments: {
               'moduleName': 'Minha Assinatura',
             },
+          );
+        };
+      case BottomNavBarType.blog:
+        return () {
+          Modular.to.pushNamed(
+            '/home/informativesCategory',
+            arguments: 'Conteúdo',
           );
         };
       default:

@@ -102,7 +102,7 @@ class _InformativesCategoryPageState extends State<InformativesCategoryPage> {
                     displacement: 0,
                     strokeWidth: 0.75,
                     color: Theme.of(context).primaryColor,
-                    backgroundColor: Theme.of(context).colorScheme.background,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                     triggerMode: RefreshIndicatorTriggerMode.anywhere,
                     onRefresh: () async {
                       store.getCategories(store.params);

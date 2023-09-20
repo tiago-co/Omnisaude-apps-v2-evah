@@ -43,7 +43,7 @@ class BottomButtonWidget extends StatelessWidget {
                   ? Theme.of(context).primaryColor.withOpacity(
                         isDisabled || isLoading ? 0.5 : 1.0,
                       )
-                  : Colors.white,
+                  : Colors.transparent,
             ),
             overlayColor: MaterialStateProperty.all(
               buttonType == BottomButtonType.primary
