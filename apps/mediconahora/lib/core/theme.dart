@@ -74,6 +74,12 @@ final ThemeData theme = ThemeData(
       height: 1.5,
     ),
   ),
+  navigationBarTheme: const NavigationBarThemeData(
+    backgroundColor: Colors.white,
+  ),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Colors.white,
+  ),
   colorScheme: const ColorScheme(
     primary: Colors.black,
     primaryContainer: Colors.black,

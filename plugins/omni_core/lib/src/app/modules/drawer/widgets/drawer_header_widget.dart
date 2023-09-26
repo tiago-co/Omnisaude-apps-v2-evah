@@ -52,7 +52,7 @@ class _DrawerHeaderWidgetState extends State<DrawerHeaderWidget> {
                 child: Center(
                   child: ClipOval(
                     child: Container(
-                      color: Theme.of(context).colorScheme.background,
+                      color: Colors.transparent,
                       padding: const EdgeInsets.all(5),
                       child: ClipOval(child: _buildUserAvatar),
                     ),
@@ -164,7 +164,7 @@ class _DrawerHeaderWidgetState extends State<DrawerHeaderWidget> {
         }
       },
       child: ColoredBox(
-        color: Theme.of(context).cardColor.withOpacity(0.1),
+        color: Colors.grey.withOpacity(0.1),
         child: TripleBuilder<UserStore, Exception, PreferencesModel>(
           store: userStore,
           builder: (_, triple) {

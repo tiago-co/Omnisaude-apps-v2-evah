@@ -9,20 +9,20 @@ import 'package:omni_reset_password_labels/labels.dart';
 
 class SendPersonalDataPage extends StatelessWidget {
   final PageController pageController;
-  const SendPersonalDataPage({
+  SendPersonalDataPage({
     Key? key,
     required this.pageController,
   }) : super(key: key);
 
+  final ResetPasswordStore store = Modular.get();
+  final TextEditingController cpfController = TextEditingController();
+  final FocusNode cpfFocus = FocusNode();
+  final TextEditingController emailController = TextEditingController();
+  final FocusNode emailFocus = FocusNode();
+  final GlobalKey<FormState> formKey = GlobalKey();
+  final mask = Masks.generateMask('###.###.###-##');
   @override
   Widget build(BuildContext context) {
-    final ResetPasswordStore store = Modular.get();
-    final TextEditingController cpfController = TextEditingController();
-    final FocusNode cpfFocus = FocusNode();
-    final TextEditingController emailController = TextEditingController();
-    final FocusNode emailFocus = FocusNode();
-    final GlobalKey<FormState> formKey = GlobalKey();
-    final mask = Masks.generateMask('###.###.###-##');
     return Column(
       children: [
         const ResetPasswordHeaderWidget(),

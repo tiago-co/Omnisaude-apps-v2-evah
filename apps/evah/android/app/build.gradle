@@ -54,7 +54,7 @@ android {
     defaultConfig {
         applicationId "com.omnisaude.evah"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

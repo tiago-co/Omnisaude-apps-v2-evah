@@ -102,9 +102,11 @@ class _AssistancePageState extends State<AssistancePage> {
             Uri.parse('https://wa.me/556231425363'),
             mode: LaunchMode.externalApplication,
           );
-          Helpers.showDialog(
-            context,
-            RatingDialog(module: 'assistance'),
+          showDialog(
+            context: context,
+            builder: (context) => RatingDialog(
+              module: 'assistance',
+            ),
           );
         },
         backgroundColor: Colors.white,

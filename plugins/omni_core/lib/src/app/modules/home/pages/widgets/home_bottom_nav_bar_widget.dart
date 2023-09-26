@@ -43,7 +43,7 @@ class _HomeBottomNavBarWidgetState extends State<HomeBottomNavBarWidget> {
             color: Theme.of(context).cardColor,
           ),
         ],
-        color: Colors.white,
+        color: Theme.of(context).navigationBarTheme.backgroundColor,
       ),
       child: TripleBuilder<OmniplanModuleIconStore, Exception, bool>(
         store: store,
@@ -64,6 +64,7 @@ class _HomeBottomNavBarWidgetState extends State<HomeBottomNavBarWidget> {
                       );
                     },
                   ),
+                  _buildItemWidget(context, BottomNavBarType.blog),
                   _buildItemWidget(context, BottomNavBarType.drawer),
                   if (store.state)
                     _buildItemWidget(context, BottomNavBarType.plan),
@@ -80,7 +81,7 @@ class _HomeBottomNavBarWidgetState extends State<HomeBottomNavBarWidget> {
     return GestureDetector(
       onTap: () => type.navigate(),
       child: Container(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).navigationBarTheme.backgroundColor,
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: SvgPicture.asset(
@@ -103,7 +104,7 @@ class _HomeBottomNavBarWidgetState extends State<HomeBottomNavBarWidget> {
       child: Stack(
         children: [
           Container(
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).navigationBarTheme.backgroundColor,
             margin: const EdgeInsets.only(bottom: 10),
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: SvgPicture.asset(

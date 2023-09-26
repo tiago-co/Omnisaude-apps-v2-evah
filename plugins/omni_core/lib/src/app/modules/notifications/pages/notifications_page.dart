@@ -57,7 +57,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
       appBar: const NavBarWidget(
         title: NotificationsLabels.notificationsTitle,
       ).build(context) as AppBar,
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         children: [
           Expanded(
