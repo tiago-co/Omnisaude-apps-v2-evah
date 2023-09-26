@@ -1,12 +1,12 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_core/src/app/app_stores/modules_store.dart';
 import 'package:omni_core/src/app/app_stores/program_store.dart';
+import 'package:omni_core/src/app/modules/splash/splash_repository.dart';
 import 'package:omni_general/omni_general.dart'
     show
         BeneficiaryRepository,
@@ -15,12 +15,12 @@ import 'package:omni_general/omni_general.dart'
         PreferencesModel,
         PreferencesService;
 import 'package:omni_general/src/stores/user_store.dart';
-import 'package:package_info/package_info.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class SplashStore extends NotifierStore<DioError, bool> with Disposable {
   final PreferencesService _service = PreferencesService();
   final BeneficiaryRepository _repository = Modular.get();
+  final SplashRepository _splashRepository = SplashRepository();
   final FirebaseService firebaseService = Modular.get();
   final ModulesStore modulesStore = Modular.get();
   final ProgramStore programStore = Modular.get();
@@ -78,28 +78,7 @@ class SplashStore extends NotifierStore<DioError, bool> with Disposable {
   }
 
   Future<bool> verifyAppVersion() async {
-    bool isUpdated = false;
-    final info = await PackageInfo.fromPlatform();
-    final packageName = info.packageName;
-    final firebaseVersion = await FirebaseFirestore.instance
-        .collection('config')
-        .doc('version')
-        .get()
-      ..data();
-    final version = firebaseVersion.data();
-    final appVersion = info.version;
-    switch (packageName) {
-      case 'com.evahsaude.evah':
-        if (version?['evah'] == appVersion) {
-          isUpdated = true;
-        }
-        break;
-      case 'com.omnisaude.mediconahora':
-        if (version?['medico_na_hora'] == appVersion) {
-          isUpdated = true;
-        }
-        break;
-    }
+    final isUpdated = await _splashRepository.verifyAppVersion();
     return isUpdated;
   }
 
@@ -120,12 +99,4 @@ Future<void> getPermissions() async {
   ].request().whenComplete(() async {
     await Permissions.notification();
   });
-
-  // await Permissions.bluetoothScan();
-  // await Permissions.bluetoothConnect();
-  // await Permissions.camera();
-  // await Permissions.microphone();
-  // await Permissions.locationAlways();
-  // await Permissions.locationWhenInUse();
-  // await Permissions.notification();
 }
