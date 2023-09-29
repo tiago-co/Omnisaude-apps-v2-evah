@@ -86,11 +86,12 @@ class SplashStore extends NotifierStore<DioError, bool> with Disposable {
     final info = await PackageInfo.fromPlatform();
     final appVersion = info.version;
 
-    if (appVersion == firebaseVersion['version']) {
-      return true;
-    } else {
-      return false;
-    }
+    // if (appVersion == firebaseVersion['version']) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+    return true;
   }
 
   @override

@@ -12,16 +12,16 @@ class AppWidget extends StatelessWidget {
   final ThemeData theme;
   final String title;
 
-  const AppWidget({
+  AppWidget({
     required this.theme,
     required this.title,
   });
 
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  final PreferencesService service = PreferencesService();
+
   @override
   Widget build(BuildContext context) {
-    final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-    final PreferencesService service = PreferencesService();
-
     final UserStore userStore = Modular.get();
     WidgetsBinding.instance.addObserver(
       LifecycleEventHandler(

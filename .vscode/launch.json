@@ -1,0 +1,562 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "evah",
+            "cwd": "apps/evah",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "evah (profile mode)",
+            "cwd": "apps/evah",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "evah (release mode)",
+            "cwd": "apps/evah",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "mediconahora",
+            "cwd": "apps/mediconahora",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "mediconahora (profile mode)",
+            "cwd": "apps/mediconahora",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "mediconahora (release mode)",
+            "cwd": "apps/mediconahora",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "diseases",
+            "cwd": "packages/diseases",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "diseases (profile mode)",
+            "cwd": "packages/diseases",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "diseases (release mode)",
+            "cwd": "packages/diseases",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "omni_assistance",
+            "cwd": "packages/omni_assistance",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "omni_assistance (profile mode)",
+            "cwd": "packages/omni_assistance",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "omni_assistance (release mode)",
+            "cwd": "packages/omni_assistance",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "omni_auth",
+            "cwd": "packages/omni_auth",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "omni_auth (profile mode)",
+            "cwd": "packages/omni_auth",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "omni_auth (release mode)",
+            "cwd": "packages/omni_auth",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "omni_bot",
+            "cwd": "packages/omni_bot",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "omni_bot (profile mode)",
+            "cwd": "packages/omni_bot",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "omni_bot (release mode)",
+            "cwd": "packages/omni_bot",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "omni_caregiver",
+            "cwd": "packages/omni_caregiver",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "omni_caregiver (profile mode)",
+            "cwd": "packages/omni_caregiver",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "omni_caregiver (release mode)",
+            "cwd": "packages/omni_caregiver",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "omni_drug_control",
+            "cwd": "packages/omni_drug_control",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "omni_drug_control (profile mode)",
+            "cwd": "packages/omni_drug_control",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "omni_drug_control (release mode)",
+            "cwd": "packages/omni_drug_control",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "omni_general",
+            "cwd": "packages/omni_general",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "omni_general (profile mode)",
+            "cwd": "packages/omni_general",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "omni_general (release mode)",
+            "cwd": "packages/omni_general",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "omni_plan",
+            "cwd": "packages/omni_plan",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "omni_plan (profile mode)",
+            "cwd": "packages/omni_plan",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "omni_plan (release mode)",
+            "cwd": "packages/omni_plan",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "omni_scheduling",
+            "cwd": "packages/omni_scheduling",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "omni_scheduling (profile mode)",
+            "cwd": "packages/omni_scheduling",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "omni_scheduling (release mode)",
+            "cwd": "packages/omni_scheduling",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "omni_trilhas",
+            "cwd": "packages/omni_trilhas",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "omni_trilhas (profile mode)",
+            "cwd": "packages/omni_trilhas",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "omni_trilhas (release mode)",
+            "cwd": "packages/omni_trilhas",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "omni_core",
+            "cwd": "plugins/omni_core",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "omni_core (profile mode)",
+            "cwd": "plugins/omni_core",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "omni_core (release mode)",
+            "cwd": "plugins/omni_core",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "omni_measurement",
+            "cwd": "plugins/omni_measurement",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "omni_measurement (profile mode)",
+            "cwd": "plugins/omni_measurement",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "omni_measurement (release mode)",
+            "cwd": "plugins/omni_measurement",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "omni_mediktor",
+            "cwd": "plugins/omni_mediktor",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "omni_mediktor (profile mode)",
+            "cwd": "plugins/omni_mediktor",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "omni_mediktor (release mode)",
+            "cwd": "plugins/omni_mediktor",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "omni_video_call",
+            "cwd": "plugins/omni_video_call",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "omni_video_call (profile mode)",
+            "cwd": "plugins/omni_video_call",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "omni_video_call (release mode)",
+            "cwd": "plugins/omni_video_call",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "labels",
+            "cwd": "packages/diseases/labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "labels",
+            "cwd": "packages/omni_assistance/labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "labels",
+            "cwd": "packages/omni_bot/labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "labels",
+            "cwd": "packages/omni_caregiver/labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "labels",
+            "cwd": "packages/omni_drug_control/labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "labels",
+            "cwd": "packages/omni_general/labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "labels",
+            "cwd": "packages/omni_scheduling/labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "labels",
+            "cwd": "plugins/omni_measurement/labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "labels",
+            "cwd": "plugins/omni_mediktor/labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "labels",
+            "cwd": "plugins/omni_video_call/labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "login_labels",
+            "cwd": "packages/omni_auth/labels/login_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "register_labels",
+            "cwd": "packages/omni_auth/labels/register_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "reset_password_labels",
+            "cwd": "packages/omni_auth/labels/reset_password_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "coparticipation_extract_labels",
+            "cwd": "packages/omni_plan/labels/coparticipation_extract_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "direct_debit_labels",
+            "cwd": "packages/omni_plan/labels/direct_debit_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "duplicate_tickets_labels",
+            "cwd": "packages/omni_plan/labels/duplicate_tickets_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "features_contacts_labels",
+            "cwd": "packages/omni_plan/labels/features_contacts_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "guide_providers_labels",
+            "cwd": "packages/omni_plan/labels/guide_providers_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "income_tax_statement_labels",
+            "cwd": "packages/omni_plan/labels/income_tax_statement_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "plan_card_labels",
+            "cwd": "packages/omni_plan/labels/plan_card_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "refund_tab_status_labels",
+            "cwd": "packages/omni_plan/labels/refund_tab_status_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "reimbursement_labels",
+            "cwd": "packages/omni_plan/labels/reimbursement_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "benefits_labels",
+            "cwd": "plugins/omni_core/labels/benefits_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "drawer_labels",
+            "cwd": "plugins/omni_core/labels/drawer_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "exams_labels",
+            "cwd": "plugins/omni_core/labels/exams_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "extra_data_labels",
+            "cwd": "plugins/omni_core/labels/extra_data_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "help_labels",
+            "cwd": "plugins/omni_core/labels/help_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "home_labels",
+            "cwd": "plugins/omni_core/labels/home_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "informative_labels",
+            "cwd": "plugins/omni_core/labels/informative_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "my_devices_labels",
+            "cwd": "plugins/omni_core/labels/my_devices_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "notifications_labels",
+            "cwd": "plugins/omni_core/labels/notifications_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "presentation_labels",
+            "cwd": "plugins/omni_core/labels/presentation_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "privacy_labels",
+            "cwd": "plugins/omni_core/labels/privacy_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "procedures_labels",
+            "cwd": "plugins/omni_core/labels/procedures_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "profile_labels",
+            "cwd": "plugins/omni_core/labels/profile_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "settings_labels",
+            "cwd": "plugins/omni_core/labels/settings_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "shared_labels",
+            "cwd": "plugins/omni_core/labels/shared_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "terms_labels",
+            "cwd": "plugins/omni_core/labels/terms_labels",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "vaccine_labels",
+            "cwd": "plugins/omni_core/labels/vaccine_labels",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}
