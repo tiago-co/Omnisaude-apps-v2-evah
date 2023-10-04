@@ -51,7 +51,7 @@ class Onboarding extends StatelessWidget {
                     curve: Curves.decelerate,
                   );
                 } else {
-                  Navigator.pushNamed(context, '/auth/signUp');
+                  Navigator.pushNamed(context, '/auth/newLogin');
                 }
               },
               style: TextButton.styleFrom(
