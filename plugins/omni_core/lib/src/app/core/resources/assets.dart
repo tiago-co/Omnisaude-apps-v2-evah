@@ -176,6 +176,14 @@ class Assets {
   static String logoSplash = 'assets/logo/logo_splash.svg';
   static String oldPresentation = 'assets/presentation/old_presentation.jpg';
 
+  //novo Onboarding
+  static String onboarding1 = 'assets/presentation/onboarding/medico2-01.png';
+  static String onboarding2 = 'assets/presentation/onboarding/medico2-02.png';
+
+  //novo Login
+  static String facebookIcon = 'assets/icons/facebook-icon.svg';
+  static String googleIcon = 'assets/icons/google-icon.svg';
+
   static String getAssetPackage(String asset) {
     return asset.split('/').first;
   }

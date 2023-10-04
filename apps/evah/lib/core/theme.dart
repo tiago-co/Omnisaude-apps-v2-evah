@@ -40,42 +40,42 @@ final ThemeData theme = ThemeData(
     selectionHandleColor: Colors.black,
   ),
   textTheme: TextTheme(
-    bodyLarge: GoogleFonts.comfortaa(
+    bodyLarge: GoogleFonts.inter(
       color: const Color(0xff230630),
       fontSize: 16,
       height: 1.5,
     ),
-    labelLarge: GoogleFonts.comfortaa(
+    labelLarge: GoogleFonts.inter(
       color: const Color(0xff230630),
       fontSize: 14,
       height: 1.5,
     ),
-    displayLarge: GoogleFonts.comfortaa(
+    displayLarge: GoogleFonts.inter(
       color: const Color(0xff230630),
       fontSize: 25,
       height: 1.5,
     ),
-    displayMedium: GoogleFonts.comfortaa(
+    displayMedium: GoogleFonts.inter(
       color: const Color(0xff230630),
       fontSize: 22,
       height: 1.5,
     ),
-    displaySmall: GoogleFonts.comfortaa(
+    displaySmall: GoogleFonts.inter(
       color: const Color(0xff230630),
       fontSize: 20,
       height: 1.5,
     ),
-    headlineMedium: GoogleFonts.comfortaa(
+    headlineMedium: GoogleFonts.inter(
       color: const Color(0xff230630),
       fontSize: 18,
       height: 1.5,
     ),
-    headlineSmall: GoogleFonts.comfortaa(
+    headlineSmall: GoogleFonts.inter(
       color: const Color(0xff230630),
       fontSize: 16,
       height: 1.5,
     ),
-    titleLarge: GoogleFonts.comfortaa(
+    titleLarge: GoogleFonts.inter(
       color: const Color(0xff230630),
       fontSize: 14,
       height: 1.5,

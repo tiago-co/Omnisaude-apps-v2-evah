@@ -5,6 +5,7 @@ import 'package:omni_auth/src/auth_store.dart';
 import 'package:omni_auth/src/modules/login/login_module.dart';
 import 'package:omni_auth/src/modules/register/register_module.dart';
 import 'package:omni_auth/src/modules/reset_password/reset_password_module.dart';
+import 'package:omni_auth/src/modules/sign_up/sign_up_module.dart';
 import 'package:omni_general/omni_general.dart';
 
 class AuthModule extends Module {
@@ -19,6 +20,7 @@ class AuthModule extends Module {
   final List<ModularRoute> routes = [
     ModuleRoute('/login', module: LoginModule()),
     ModuleRoute('/register', module: RegisterModule()),
+    ModuleRoute('/signUp', module: SignUpModule()),
     ModuleRoute('/resetPassword', module: ResetPasswordModule()),
   ];
 }
