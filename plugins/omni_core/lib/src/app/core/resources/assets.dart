@@ -177,8 +177,8 @@ class Assets {
   static String oldPresentation = 'assets/presentation/old_presentation.jpg';
 
   //novo Onboarding
-  static String onboarding1 = 'assets/presentation/onboarding/medico2-01.png';
-  static String onboarding2 = 'assets/presentation/onboarding/medico2-02.png';
+  static String onboarding1 = 'assets/presentation/onboarding/medico_2-01.svg';
+  static String onboarding2 = 'assets/presentation/onboarding/medico_2-02.svg';
 
   //novo Login
   static String facebookIcon = 'assets/icons/facebook-icon.svg';

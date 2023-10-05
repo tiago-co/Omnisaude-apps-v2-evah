@@ -102,6 +102,7 @@ dependencies:
   url_launcher: ^6.1.8
   mobile_scanner: ^3.3.0
   webview_flutter: ^3.0.1
+  smooth_page_indicator: ^1.1.0
 
 
   flutter_localizations:
@@ -120,6 +121,7 @@ flutter:
     - assets/presentation/vaccine/
     - assets/presentation/management/
     - assets/presentation/scheduling/
+    - assets/presentation/onboarding/
     - assets/presentation/
     - assets/icons/about/
     - assets/icons/help/

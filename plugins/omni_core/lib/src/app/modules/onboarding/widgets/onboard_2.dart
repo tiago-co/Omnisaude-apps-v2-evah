@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:omni_core/omni_core.dart';
 
 class Onboard2 extends StatelessWidget {
@@ -17,7 +18,7 @@ class Onboard2 extends StatelessWidget {
       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Container(
           // frame1anj (4511:30437)
-          margin: EdgeInsets.fromLTRB(36 * fem, 0 * fem, 36 * fem, 74 * fem),
+          margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 24 * fem),
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -26,7 +27,7 @@ class Onboard2 extends StatelessWidget {
                 // trackyourqueriesi8F (4511:30438)
                 margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
                 child: Text(
-                  'Track your queries',
+                  'Acompanhe suas consultas',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 28 * ffem,
@@ -38,11 +39,9 @@ class Onboard2 extends StatelessWidget {
               ),
               Container(
                 // makeappointmentsandtrackyourap (4511:30439)
-                constraints: BoxConstraints(
-                  maxWidth: 263 * fem,
-                ),
+
                 child: Text(
-                  'Make appointments and track your appointments.',
+                  'Faça agendamentos e acompanhe seus compromissos.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16 * ffem,
@@ -58,13 +57,9 @@ class Onboard2 extends StatelessWidget {
         Container(
           // medico2021UWj (5304:19267)
           margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
-          width: 335 * fem,
-          height: 328 * fem,
-          child: Image.asset(
+          child: SvgPicture.asset(
             Assets.onboarding2,
             package: AssetsPackage.omniCore,
-            width: 335 * fem,
-            height: 328 * fem,
           ),
         ),
       ]),
