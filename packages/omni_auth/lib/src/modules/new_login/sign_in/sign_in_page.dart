@@ -101,33 +101,38 @@ class SignInPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                // masterbuttonmaster82s (I4511:30472;19:7770)
-                margin:
-                    EdgeInsets.fromLTRB(0 * fem, 0 * fem, 19 * fem, 0 * fem),
-                padding:
-                    EdgeInsets.fromLTRB(0 * fem, 16 * fem, 0 * fem, 16 * fem),
-
-                height: 56 * fem,
-                decoration: BoxDecoration(
-                  color: true ? Color(0xff2D73B3) : Color(0xff2d72b3),
-                  borderRadius: BorderRadius.circular(60 * fem),
-                ),
+              TextButton(
+                onPressed: () {
+                  Modular.to.pushReplacementNamed('/newHome');
+                },
                 child: Container(
-                  // autogroupfwxxDa7 (MYmMmLCB3rKy918MJrfWxX)
+                  // masterbuttonmaster82s (I4511:30472;19:7770)
+                  margin:
+                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 19 * fem, 0 * fem),
                   padding:
-                      EdgeInsets.fromLTRB(13 * fem, 0 * fem, 0 * fem, 0 * fem),
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: Center(
-                    child: Text(
-                      'Entrar',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16 * ffem,
-                        fontWeight: FontWeight.w600,
-                        height: 1.5 * ffem / fem,
-                        color: Color(0xffffffff),
+                      EdgeInsets.fromLTRB(0 * fem, 16 * fem, 0 * fem, 16 * fem),
+
+                  height: 56 * fem,
+                  decoration: BoxDecoration(
+                    color: true ? Color(0xff2D73B3) : Color(0xff2d72b3),
+                    borderRadius: BorderRadius.circular(60 * fem),
+                  ),
+                  child: Container(
+                    // autogroupfwxxDa7 (MYmMmLCB3rKy918MJrfWxX)
+                    padding: EdgeInsets.fromLTRB(
+                        13 * fem, 0 * fem, 0 * fem, 0 * fem),
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: Center(
+                      child: Text(
+                        'Entrar',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16 * ffem,
+                          fontWeight: FontWeight.w600,
+                          height: 1.5 * ffem / fem,
+                          color: Color(0xffffffff),
+                        ),
                       ),
                     ),
                   ),
@@ -141,8 +146,8 @@ class SignInPage extends StatelessWidget {
                       EdgeInsets.fromLTRB(0 * fem, 0 * fem, 19 * fem, 0 * fem),
                   child: TextButton(
                     onPressed: () {
-                      Modular.to
-                          .pushReplacementNamed('/auth/signUp/signUpPage');
+                      Modular.to.pushReplacementNamed(
+                          '/auth/signUp/emailConfirmation');
                     },
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.zero,

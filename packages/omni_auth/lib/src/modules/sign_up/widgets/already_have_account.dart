@@ -26,7 +26,7 @@ class AlreadyHaveAccount extends StatelessWidget {
             ),
             children: [
               TextSpan(
-                text: 'Already have an account?',
+                text: 'Já possui uma conta? ',
                 style: TextStyle(
                   fontSize: 16 * ffem,
                   fontWeight: FontWeight.w400,
@@ -35,16 +35,7 @@ class AlreadyHaveAccount extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: ' ',
-                style: TextStyle(
-                  fontSize: 16 * ffem,
-                  fontWeight: FontWeight.w600,
-                  height: 1.5 * ffem / fem,
-                  color: Color(0xff1a1c22),
-                ),
-              ),
-              TextSpan(
-                text: 'Sign In',
+                text: 'Entre',
                 style: TextStyle(
                   fontSize: 16 * ffem,
                   fontWeight: FontWeight.w600,

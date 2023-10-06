@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SocialLoginButton extends StatelessWidget {
-  const SocialLoginButton({super.key});
+  const SocialLoginButton();
 
   @override
   Widget build(BuildContext context) {

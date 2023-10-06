@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/utils.dart';
 
 class Onboard2 extends StatelessWidget {
-  const Onboard2({super.key});
+  const Onboard2();
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +27,7 @@ class Onboard2 extends StatelessWidget {
                 child: Text(
                   'Track your queries',
                   textAlign: TextAlign.center,
-                  style: SafeGoogleFont(
-                    'Inter',
+                  style: TextStyle(
                     fontSize: 28 * ffem,
                     fontWeight: FontWeight.w600,
                     height: 1.2000000817 * ffem / fem,
@@ -45,8 +43,7 @@ class Onboard2 extends StatelessWidget {
                 child: Text(
                   'Make appointments and track your appointments.',
                   textAlign: TextAlign.center,
-                  style: SafeGoogleFont(
-                    'Inter',
+                  style: TextStyle(
                     fontSize: 16 * ffem,
                     fontWeight: FontWeight.w400,
                     height: 1.6000000238 * ffem / fem,

@@ -18,7 +18,7 @@ class HorizontalDivider extends StatelessWidget {
           width: 14,
         ),
         const Text(
-          'or',
+          'ou',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w400,

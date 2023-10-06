@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/ui/welcome/widgets/welcome_form_field.dart';
-import 'package:myapp/utils.dart';
+import 'package:omni_auth/src/modules/welcome/widgets/welcome_form_field.dart';
 
 class WelcomeForm extends StatelessWidget {
-  const WelcomeForm({super.key});
+  const WelcomeForm();
 
   @override
   Widget build(BuildContext context) {

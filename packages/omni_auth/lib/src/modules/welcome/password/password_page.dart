@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/utils.dart';
 
 class PasswordPage extends StatelessWidget {
-  const PasswordPage({super.key});
+  const PasswordPage();
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +28,7 @@ class PasswordPage extends StatelessWidget {
                 ),
                 child: Text(
                   'Please type a password for your account',
-                  style: SafeGoogleFont(
-                    'Inter',
+                  style: TextStyle(
                     fontSize: 22 * ffem,
                     fontWeight: FontWeight.w600,
                     height: 1.2999999306 * ffem / fem,
@@ -81,8 +79,7 @@ class PasswordPage extends StatelessWidget {
                                     height: double.infinity,
                                     child: Text(
                                       'Password',
-                                      style: SafeGoogleFont(
-                                        'Inter',
+                                      style: TextStyle(
                                         fontSize: 16 * ffem,
                                         fontWeight: FontWeight.w400,
                                         height: 1.6000000238 * ffem / fem,
@@ -115,8 +112,7 @@ class PasswordPage extends StatelessWidget {
                             ),
                             child: Text(
                               'Minimum 8 characters with at least a number, \ncapital letter and symbol',
-                              style: SafeGoogleFont(
-                                'Inter',
+                              style: TextStyle(
                                 fontSize: 12 * ffem,
                                 fontWeight: FontWeight.w400,
                                 height: 1.3333333333 * ffem / fem,
@@ -155,8 +151,7 @@ class PasswordPage extends StatelessWidget {
                                 child: Text(
                                   'Continue',
                                   textAlign: TextAlign.center,
-                                  style: SafeGoogleFont(
-                                    'Inter',
+                                  style: TextStyle(
                                     fontSize: 16 * ffem,
                                     fontWeight: FontWeight.w600,
                                     height: 1.5 * ffem / fem,

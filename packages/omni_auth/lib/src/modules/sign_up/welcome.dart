@@ -31,8 +31,8 @@ class Welcome extends StatelessWidget {
                 children: [
                   Container(
                     // autogroupkvljjfV (MYmFKmRdKm5K5NYZsWKVLj)
-                    padding:
-                        EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 7 * fem),
+                    padding: EdgeInsets.fromLTRB(
+                        0 * fem, 20 * fem, 0 * fem, 7 * fem),
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,7 +50,7 @@ class Welcome extends StatelessWidget {
                                 margin: EdgeInsets.fromLTRB(
                                     0 * fem, 0 * fem, 0 * fem, 4 * fem),
                                 child: Text(
-                                  'Welcome',
+                                  'Bem-vindo',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 28 * ffem,
@@ -66,7 +66,7 @@ class Welcome extends StatelessWidget {
                                   maxWidth: 297 * fem,
                                 ),
                                 child: Text(
-                                  'To register an account, please fill in the fields below.',
+                                  'Para registrar uma conta, preencha os campos abaixo.',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 16 * ffem,
@@ -106,7 +106,7 @@ class Welcome extends StatelessWidget {
                               height: double.infinity,
                               child: Center(
                                 child: Text(
-                                  'Sign up',
+                                  'Cadastrar',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 16 * ffem,

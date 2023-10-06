@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/ui/gmail_button.dart';
-import 'package:myapp/utils.dart';
+import 'package:omni_auth/src/modules/sign_up/email_confirmation/widgets/gmail_button.dart';
 
 class EmailConfirmation extends StatelessWidget {
-  const EmailConfirmation({super.key});
+  const EmailConfirmation();
 
   @override
   Widget build(BuildContext context) {
@@ -79,8 +78,7 @@ class EmailConfirmation extends StatelessWidget {
                       child: Text(
                         'Almost there',
                         textAlign: TextAlign.center,
-                        style: SafeGoogleFont(
-                          'Inter',
+                        style: TextStyle(
                           fontSize: 28 * ffem,
                           fontWeight: FontWeight.w600,
                           height: 1.2000000817 * ffem / fem,
@@ -98,8 +96,7 @@ class EmailConfirmation extends StatelessWidget {
                       child: RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
-                          style: SafeGoogleFont(
-                            'Inter',
+                          style: TextStyle(
                             fontSize: 16 * ffem,
                             fontWeight: FontWeight.w400,
                             height: 1.6000000238 * ffem / fem,
@@ -112,8 +109,7 @@ class EmailConfirmation extends StatelessWidget {
                             ),
                             TextSpan(
                               text: 'ap****@gmail.com',
-                              style: SafeGoogleFont(
-                                'Inter',
+                              style: TextStyle(
                                 fontSize: 16 * ffem,
                                 fontWeight: FontWeight.w400,
                                 height: 1.6000000238 * ffem / fem,

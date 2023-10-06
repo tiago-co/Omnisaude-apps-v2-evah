@@ -1,13 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'dart:ui';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/ui/onboarding/onboarding-2.dart';
-import 'package:myapp/ui/onboarding/widgets/onboard_1.dart';
-import 'package:myapp/ui/onboarding/widgets/onboard_2.dart';
-import 'package:myapp/utils.dart';
+import 'package:omni_auth/src/modules/onboarding/widgets/onboard_1.dart';
+import 'package:omni_auth/src/modules/onboarding/widgets/onboard_2.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Onboarding extends StatelessWidget {
@@ -42,7 +35,6 @@ class Onboarding extends StatelessWidget {
           SmoothPageIndicator(
             controller: _controller,
             count: 2,
-            effect: const WormEffect(),
           ),
           const SizedBox(
             height: 24,
@@ -85,8 +77,7 @@ class Onboarding extends StatelessWidget {
                       child: Text(
                         'Let\'s go!',
                         textAlign: TextAlign.center,
-                        style: SafeGoogleFont(
-                          'Inter',
+                        style: TextStyle(
                           fontSize: 16 * ffem,
                           fontWeight: FontWeight.w600,
                           height: 1.5 * ffem / fem,

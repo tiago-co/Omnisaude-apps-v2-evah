@@ -31,10 +31,10 @@ class TermsPoliciesWidget extends StatelessWidget {
               ),
               children: [
                 TextSpan(
-                  text: 'Please read the ',
+                  text: 'Por favor, leia nossos ',
                 ),
                 TextSpan(
-                  text: 'Terms and policies',
+                  text: 'Termos e políticas',
                   style: TextStyle(
                     fontSize: 16 * ffem,
                     fontWeight: FontWeight.w600,
@@ -43,7 +43,7 @@ class TermsPoliciesWidget extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: ' before registering',
+                  text: ' antes de se cadastrar',
                 ),
               ],
             ),

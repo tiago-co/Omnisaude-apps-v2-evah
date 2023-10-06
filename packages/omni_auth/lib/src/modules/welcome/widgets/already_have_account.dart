@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/utils.dart';
 
 class AlreadyHaveAccount extends StatelessWidget {
-  const AlreadyHaveAccount({super.key});
+  const AlreadyHaveAccount();
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +18,7 @@ class AlreadyHaveAccount extends StatelessWidget {
         child: RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
-            style: SafeGoogleFont(
-              'Inter',
+            style: TextStyle(
               fontSize: 16 * ffem,
               fontWeight: FontWeight.w600,
               height: 1.5 * ffem / fem,
@@ -29,8 +27,7 @@ class AlreadyHaveAccount extends StatelessWidget {
             children: [
               TextSpan(
                 text: 'Already have an account?',
-                style: SafeGoogleFont(
-                  'Inter',
+                style: TextStyle(
                   fontSize: 16 * ffem,
                   fontWeight: FontWeight.w400,
                   height: 1.6000000238 * ffem / fem,
@@ -39,8 +36,7 @@ class AlreadyHaveAccount extends StatelessWidget {
               ),
               TextSpan(
                 text: ' ',
-                style: SafeGoogleFont(
-                  'Inter',
+                style: TextStyle(
                   fontSize: 16 * ffem,
                   fontWeight: FontWeight.w600,
                   height: 1.5 * ffem / fem,
@@ -49,8 +45,7 @@ class AlreadyHaveAccount extends StatelessWidget {
               ),
               TextSpan(
                 text: 'Sign In',
-                style: SafeGoogleFont(
-                  'Inter',
+                style: TextStyle(
                   fontSize: 16 * ffem,
                   fontWeight: FontWeight.w600,
                   height: 1.5 * ffem / fem,

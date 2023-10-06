@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-
-import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/utils.dart';
 
 class Onboarding2 extends StatelessWidget {
   @override
@@ -44,8 +40,7 @@ class Onboarding2 extends StatelessWidget {
                           child: Text(
                             'Track your queries',
                             textAlign: TextAlign.center,
-                            style: SafeGoogleFont(
-                              'Inter',
+                            style: TextStyle(
                               fontSize: 28 * ffem,
                               fontWeight: FontWeight.w600,
                               height: 1.2000000817 * ffem / fem,
@@ -61,8 +56,7 @@ class Onboarding2 extends StatelessWidget {
                           child: Text(
                             'Make appointments and track your appointments.',
                             textAlign: TextAlign.center,
-                            style: SafeGoogleFont(
-                              'Inter',
+                            style: TextStyle(
                               fontSize: 16 * ffem,
                               fontWeight: FontWeight.w400,
                               height: 1.6000000238 * ffem / fem,
@@ -129,8 +123,7 @@ class Onboarding2 extends StatelessWidget {
                               child: Text(
                                 'Let\'s go!',
                                 textAlign: TextAlign.center,
-                                style: SafeGoogleFont(
-                                  'Inter',
+                                style: TextStyle(
                                   fontSize: 16 * ffem,
                                   fontWeight: FontWeight.w600,
                                   height: 1.5 * ffem / fem,

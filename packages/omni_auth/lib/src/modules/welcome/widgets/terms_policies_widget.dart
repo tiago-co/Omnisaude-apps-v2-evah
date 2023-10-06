@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/utils.dart';
 
 class TermsPoliciesWidget extends StatelessWidget {
-  const TermsPoliciesWidget({super.key});
+  const TermsPoliciesWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +23,7 @@ class TermsPoliciesWidget extends StatelessWidget {
           child: RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
-              style: SafeGoogleFont(
-                'Inter',
+              style: TextStyle(
                 fontSize: 16 * ffem,
                 fontWeight: FontWeight.w400,
                 height: 1.6000000238 * ffem / fem,
@@ -37,8 +35,7 @@ class TermsPoliciesWidget extends StatelessWidget {
                 ),
                 TextSpan(
                   text: 'Terms and policies',
-                  style: SafeGoogleFont(
-                    'Inter',
+                  style: TextStyle(
                     fontSize: 16 * ffem,
                     fontWeight: FontWeight.w600,
                     height: 1.5 * ffem / fem,

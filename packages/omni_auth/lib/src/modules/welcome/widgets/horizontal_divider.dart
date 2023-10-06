@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/utils.dart';
 
 class HorizontalDivider extends StatelessWidget {
-  const HorizontalDivider({super.key});
+  const HorizontalDivider();
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +29,7 @@ class HorizontalDivider extends StatelessWidget {
           Text(
             // orLP1 (4511:30458)
             'or',
-            style: SafeGoogleFont(
-              'Inter',
+            style: TextStyle(
               fontSize: 16 * ffem,
               fontWeight: FontWeight.w400,
               height: 1.6000000238 * ffem / fem,

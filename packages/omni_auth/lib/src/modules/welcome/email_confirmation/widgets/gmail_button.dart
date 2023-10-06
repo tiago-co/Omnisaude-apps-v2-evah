@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'dart:ui';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/utils.dart';
 
 class GmailButton extends StatelessWidget {
   @override
@@ -41,8 +37,7 @@ class GmailButton extends StatelessWidget {
                 child: Text(
                   'Open Gmail',
                   textAlign: TextAlign.center,
-                  style: SafeGoogleFont(
-                    'Inter',
+                  style: TextStyle(
                     fontSize: 16 * ffem,
                     fontWeight: FontWeight.w600,
                     height: 1.5 * ffem / fem,

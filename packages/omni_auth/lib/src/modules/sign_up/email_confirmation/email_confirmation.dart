@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:omni_auth/src/modules/sign_up/email_confirmation/widgets/gmail_button.dart';
+import 'package:omni_core/omni_core.dart';
 
 class EmailConfirmation extends StatelessWidget {
   const EmailConfirmation();
@@ -24,7 +25,7 @@ class EmailConfirmation extends StatelessWidget {
               Container(
                 // autogroupatg3uP5 (MYqgYxeqcSJjrbDiweATG3)
                 padding:
-                    EdgeInsets.fromLTRB(21 * fem, 44 * fem, 19 * fem, 7 * fem),
+                    EdgeInsets.fromLTRB(0 * fem, 44 * fem, 0 * fem, 7 * fem),
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,8 +35,7 @@ class EmailConfirmation extends StatelessWidget {
                       margin: EdgeInsets.fromLTRB(
                           0 * fem, 0 * fem, 0 * fem, 24 * fem),
                       width: double.infinity,
-                      height: 328 * fem,
-                      child: Stack(
+                      child: Column(
                         children: [
                           Positioned(
                             // image9YK (201:17531)
@@ -46,7 +46,8 @@ class EmailConfirmation extends StatelessWidget {
                                 width: 335 * fem,
                                 height: 328 * fem,
                                 child: Image.asset(
-                                  'assets/ui/images/image-1AP.png',
+                                  Assets.logoSplash,
+                                  package: AssetsPackage.omniGeneral,
                                   width: 335 * fem,
                                   height: 328 * fem,
                                 ),
@@ -108,7 +109,7 @@ class EmailConfirmation extends StatelessWidget {
                                   'Confirm your identity by clicking the link I sent to ',
                             ),
                             TextSpan(
-                              text: 'ap****@gmail.com',
+                              text: 'jo****@gmail.com',
                               style: TextStyle(
                                 fontSize: 16 * ffem,
                                 fontWeight: FontWeight.w400,
@@ -119,6 +120,9 @@ class EmailConfirmation extends StatelessWidget {
                           ],
                         ),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 24,
                     ),
                     GmailButton()
                   ],

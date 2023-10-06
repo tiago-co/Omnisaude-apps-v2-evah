@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/utils.dart';
 
 class WelcomeFormField extends StatelessWidget {
-  const WelcomeFormField({super.key});
+  const WelcomeFormField();
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +19,7 @@ class WelcomeFormField extends StatelessWidget {
             margin: EdgeInsets.fromLTRB(24 * fem, 0 * fem, 0 * fem, 0 * fem),
             child: Text(
               'Caption text, description, notification',
-              style: SafeGoogleFont(
-                'Inter',
+              style: TextStyle(
                 fontSize: 12 * ffem,
                 fontWeight: FontWeight.w400,
                 height: 1.3333333333 * ffem / fem,
@@ -50,8 +48,7 @@ class WelcomeFormField extends StatelessWidget {
                 height: double.infinity,
                 child: Text(
                   'Email',
-                  style: SafeGoogleFont(
-                    'Inter',
+                  style: TextStyle(
                     fontSize: 16 * ffem,
                     fontWeight: FontWeight.w400,
                     height: 1.6000000238 * ffem / fem,

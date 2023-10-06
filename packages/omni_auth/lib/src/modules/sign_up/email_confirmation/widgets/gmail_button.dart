@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:omni_core/omni_core.dart';
 
 class GmailButton extends StatelessWidget {
   @override
@@ -21,24 +23,26 @@ class GmailButton extends StatelessWidget {
         child: Center(
           child: Row(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 // iconssocialiconsvjH (I202:13935;201:22697;19:7257)
-                margin:
-                    EdgeInsets.fromLTRB(0 * fem, 0 * fem, 10 * fem, 0 * fem),
+                margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
                 width: 20 * fem,
                 height: 20 * fem,
-                child: Image.asset(
-                  'assets/ui/images/icons-social-icons-J2K.png',
-                  width: 20 * fem,
-                  height: 20 * fem,
+                child: SvgPicture.asset(
+                  Assets.googleIcon,
+                  package: AssetsPackage.omniGeneral,
+                  width: 20,
+                  height: 20,
                 ),
               ),
+              const SizedBox(width: 8),
               Container(
-                margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 8 * fem, 0 * fem),
+                margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
                 child: Text(
-                  'Open Gmail',
+                  'Abrir Gmail',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16 * ffem,
@@ -48,16 +52,15 @@ class GmailButton extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(width: 8),
               Container(
-                // openinnewweP (I202:13935;201:22697;19:7261)
-                width: 24 * fem,
-                height: 24 * fem,
-                child: Image.asset(
-                  'assets/ui/images/openinnew.png',
+                  // openinnewweP (I202:13935;201:22697;19:7261)
                   width: 24 * fem,
                   height: 24 * fem,
-                ),
-              ),
+                  child: Icon(
+                    Icons.ios_share_rounded,
+                    size: 24,
+                  )),
             ],
           ),
         ),

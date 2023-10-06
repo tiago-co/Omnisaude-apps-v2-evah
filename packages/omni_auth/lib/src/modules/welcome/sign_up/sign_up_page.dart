@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/utils.dart';
-
-import 'widgets/sign_up_field.dart';
+import 'package:omni_auth/src/modules/sign_up/sign_up/widgets/sign_up_field.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+  const SignUpPage();
 
   @override
   Widget build(BuildContext context) {
@@ -100,8 +98,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                   child: Text(
                     'Please fill in all fields to complete registration',
-                    style: SafeGoogleFont(
-                      'Inter',
+                    style: TextStyle(
                       fontSize: 22 * ffem,
                       fontWeight: FontWeight.w600,
                       height: 1.2999999306 * ffem / fem,
@@ -198,8 +195,7 @@ class SignUpPage extends StatelessWidget {
                             child: Text(
                               'Complete',
                               textAlign: TextAlign.center,
-                              style: SafeGoogleFont(
-                                'Inter',
+                              style: TextStyle(
                                 fontSize: 16 * ffem,
                                 fontWeight: FontWeight.w600,
                                 height: 1.5 * ffem / fem,
