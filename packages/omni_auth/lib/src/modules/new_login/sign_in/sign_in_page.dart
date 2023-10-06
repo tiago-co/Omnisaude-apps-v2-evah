@@ -13,7 +13,7 @@ class SignInPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.fromLTRB(20 * fem, 0 * fem, 1 * fem, 7 * fem),
+          padding: EdgeInsets.fromLTRB(20 * fem, 40 * fem, 1 * fem, 7 * fem),
           // signinMNF (4511:30462)
           width: double.infinity,
           decoration: BoxDecoration(
@@ -35,7 +35,7 @@ class SignInPage extends StatelessWidget {
                       margin: EdgeInsets.fromLTRB(
                           0 * fem, 0 * fem, 0 * fem, 4 * fem),
                       child: Text(
-                        'Welcome back',
+                        'Bem-vindo de volta',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 28 * ffem,
@@ -51,7 +51,7 @@ class SignInPage extends StatelessWidget {
                         maxWidth: 306 * fem,
                       ),
                       child: Text(
-                        'Enter your access data and we will take care of better taking care of your health.',
+                        'Insira seus dados de acesso e cuidaremos melhor da sua saúde.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16 * ffem,
@@ -77,7 +77,10 @@ class SignInPage extends StatelessWidget {
                     SizedBox(
                       height: 12,
                     ),
-                    WelcomeFormField(label: 'Senha'),
+                    WelcomeFormField(
+                      label: 'Senha',
+                      isPassword: true,
+                    ),
                     SizedBox(
                       height: 12,
                     ),
@@ -85,13 +88,13 @@ class SignInPage extends StatelessWidget {
                       onTap: () =>
                           Modular.to.pushNamed('/auth/newLogin/resetPassword'),
                       child: Text(
-                        'Forgot password?',
+                        'Esqueceu sua senha?',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16 * ffem,
                           fontWeight: FontWeight.w500,
                           height: 1.6000000238 * ffem / fem,
-                          color: true ? Color(0xff2D73B3) : Color(0xff2d72b3),
+                          color: const Color(0xff2D73B3),
                         ),
                       ),
                     ),
@@ -101,13 +104,13 @@ class SignInPage extends StatelessWidget {
               Container(
                 // masterbuttonmaster82s (I4511:30472;19:7770)
                 margin:
-                    EdgeInsets.fromLTRB(0 * fem, 0 * fem, 19 * fem, 198 * fem),
-                padding: EdgeInsets.fromLTRB(
-                    128 * fem, 16 * fem, 141 * fem, 16 * fem),
-                width: 335 * fem,
+                    EdgeInsets.fromLTRB(0 * fem, 0 * fem, 19 * fem, 0 * fem),
+                padding:
+                    EdgeInsets.fromLTRB(0 * fem, 16 * fem, 0 * fem, 16 * fem),
+
                 height: 56 * fem,
                 decoration: BoxDecoration(
-                  color: Color(0xffbbd2e6),
+                  color: true ? Color(0xff2D73B3) : Color(0xff2d72b3),
                   borderRadius: BorderRadius.circular(60 * fem),
                 ),
                 child: Container(
@@ -118,7 +121,7 @@ class SignInPage extends StatelessWidget {
                   height: double.infinity,
                   child: Center(
                     child: Text(
-                      'Sign In',
+                      'Entrar',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 16 * ffem,
@@ -130,13 +133,17 @@ class SignInPage extends StatelessWidget {
                   ),
                 ),
               ),
+              const Spacer(),
               Center(
                 // donthaveanaccountsignupWJK (4511:30474)
                 child: Container(
                   margin:
-                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 19 * fem, 32 * fem),
+                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 19 * fem, 0 * fem),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Modular.to
+                          .pushReplacementNamed('/auth/signUp/signUpPage');
+                    },
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.zero,
                     ),
@@ -151,7 +158,7 @@ class SignInPage extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: 'Don’t have an account?',
+                            text: 'Não possui conta?',
                             style: TextStyle(
                               fontSize: 16 * ffem,
                               fontWeight: FontWeight.w400,
@@ -169,7 +176,7 @@ class SignInPage extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: 'Sign up',
+                            text: 'Cadastre-se',
                             style: TextStyle(
                               fontSize: 16 * ffem,
                               fontWeight: FontWeight.w600,

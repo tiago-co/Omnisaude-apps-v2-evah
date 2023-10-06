@@ -134,6 +134,9 @@ flutter:
     - assets/icons/extract/
     - assets/icons/vaccine/
     - assets/icons/settings/
+    - assets/icons/discounts/
+    - assets/icons/services/
+    - assets/icons/bottom_navigation_bar/
     - assets/informative/
 
   plugin:

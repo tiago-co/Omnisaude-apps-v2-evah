@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_auth/src/modules/sign_up/widgets/welcome_form_field.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -10,11 +11,25 @@ class SignUpPage extends StatelessWidget {
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.keyboard_arrow_left_outlined,
+            size: 42,
+            color: Colors.black54,
+          ),
+          onPressed: () {
+            Modular.to.pop();
+          },
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             width: double.infinity,
             decoration: const BoxDecoration(
               color: Color(0xffffffff),
@@ -28,7 +43,7 @@ class SignUpPage extends StatelessWidget {
                       EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
 
                   child: Text(
-                    'Please fill in all fields to complete registration',
+                    'Por favor preencha todos os campos para concluir a inscrição',
                     style: TextStyle(
                       fontSize: 22 * ffem,
                       fontWeight: FontWeight.w600,
@@ -57,7 +72,13 @@ class SignUpPage extends StatelessWidget {
                             SizedBox(
                               height: 12,
                             ),
-                            WelcomeFormField(label: 'Data de Nascimento'),
+                            WelcomeFormField(
+                              label: 'Data de Nascimento',
+                              suffixIcon: Icon(
+                                Icons.calendar_month_outlined,
+                                color: Colors.black54,
+                              ),
+                            ),
                             SizedBox(
                               height: 12,
                             ),
@@ -69,7 +90,13 @@ class SignUpPage extends StatelessWidget {
                             SizedBox(
                               height: 12,
                             ),
-                            WelcomeFormField(label: 'Estado Civil'),
+                            WelcomeFormField(
+                              label: 'Estado Civil',
+                              suffixIcon: Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.black54,
+                              ),
+                            ),
                             SizedBox(
                               height: 12,
                             ),

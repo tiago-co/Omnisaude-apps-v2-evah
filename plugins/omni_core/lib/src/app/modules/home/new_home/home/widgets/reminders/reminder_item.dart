@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/utils.dart';
 
 class ReminderItem extends StatelessWidget {
-  const ReminderItem({super.key});
+  const ReminderItem();
 
   @override
   Widget build(BuildContext context) {
@@ -15,21 +14,27 @@ class ReminderItem extends StatelessWidget {
       width: double.infinity,
       height: 90 * fem,
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
             color: Color(0x0f1f2023),
             offset: Offset(0 * fem, 4 * fem),
             blurRadius: 8 * fem,
           ),
+          BoxShadow(
+            color: Color(0xffffcccc),
+            offset: Offset(-4 * fem, 0),
+            blurRadius: 0,
+          ),
         ],
       ),
       child: Container(
         // component5VGK (I5103:12314;4511:32354)
-        padding: EdgeInsets.fromLTRB(20 * fem, 16 * fem, 20 * fem, 16 * fem),
+        padding: EdgeInsets.fromLTRB(16 * fem, 16 * fem, 0 * fem, 16 * fem),
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          border: Border.all(color: Color(0xffffcccc)),
+          border: Border.all(color: Color(0xffEEEEF2)),
           color: Color(0xffffffff),
           borderRadius: BorderRadius.circular(12 * fem),
         ),
@@ -43,28 +48,25 @@ class ReminderItem extends StatelessWidget {
               Container(
                 // frame15327oV (I5103:12314;4511:32358)
                 margin:
-                    EdgeInsets.fromLTRB(0 * fem, 0 * fem, 108 * fem, 12 * fem),
+                    EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 12 * fem),
                 width: double.infinity,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      // timeclockT6f (I5103:12314;4511:32359)
-                      margin: EdgeInsets.fromLTRB(
-                          0 * fem, 0 * fem, 4 * fem, 0 * fem),
-                      width: 16 * fem,
-                      height: 16 * fem,
-                      child: Image.asset(
-                        'assets/ui/images/time-clock-tjq.png',
+                        // timeclockT6f (I5103:12314;4511:32359)
+                        margin: EdgeInsets.fromLTRB(
+                            0 * fem, 0 * fem, 4 * fem, 0 * fem),
                         width: 16 * fem,
                         height: 16 * fem,
-                      ),
-                    ),
+                        child: Icon(
+                          Icons.watch_later_outlined,
+                          size: 12,
+                        )),
                     Text(
                       // amxZD (I5103:12314;4511:32360)
                       '9:30am',
-                      style: SafeGoogleFont(
-                        'Inter',
+                      style: TextStyle(
                         fontSize: 14 * ffem,
                         fontWeight: FontWeight.w400,
                         height: 1.4000000272 * ffem / fem,
@@ -76,9 +78,8 @@ class ReminderItem extends StatelessWidget {
               ),
               Text(
                 // takethedrugah225VJF (I5103:12314;4511:32361)
-                'Take the drug "AH 225"',
-                style: SafeGoogleFont(
-                  'Inter',
+                'Tomar "Ibuprofeno"',
+                style: TextStyle(
                   fontSize: 16 * ffem,
                   fontWeight: FontWeight.w500,
                   height: 1.6000000238 * ffem / fem,

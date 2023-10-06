@@ -5,6 +5,7 @@ import 'package:omni_core/omni_core.dart';
 import 'package:omni_core/src/app/app_stores/program_store.dart';
 import 'package:omni_core/src/app/app_widget.dart';
 import 'package:omni_core/src/app/modules/home/home_module.dart';
+import 'package:omni_core/src/app/modules/home/new_home_module.dart';
 import 'package:omni_core/src/app/modules/presentation/presentation_module.dart';
 import 'package:omni_core/src/app/modules/presentation/stores/slider_presentation_store.dart';
 import 'package:omni_core/src/app/modules/splash/splash_module.dart';
@@ -87,6 +88,11 @@ class AppModule extends Module {
     ModuleRoute(
       '/home',
       module: HomeModule(),
+      transition: TransitionType.fadeIn,
+    ),
+    ModuleRoute(
+      '/newHome',
+      module: NewHomeModule(),
       transition: TransitionType.fadeIn,
     ),
   ];

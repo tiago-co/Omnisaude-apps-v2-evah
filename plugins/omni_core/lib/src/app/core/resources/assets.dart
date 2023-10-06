@@ -184,6 +184,36 @@ class Assets {
   static String facebookIcon = 'assets/icons/facebook-icon.svg';
   static String googleIcon = 'assets/icons/google-icon.svg';
 
+  //Discontos
+  static String pillIcon = 'assets/icons/discounts/pill-icon.svg';
+  static String firstAidBagIcon =
+      'assets/icons/discounts/first-aid-bag-icon.svg';
+  static String medicalCrossIcon =
+      'assets/icons/discounts/medical-cross-icon.svg';
+
+  //Serviços
+  static String consultationIcon =
+      'assets/icons/services/consultation-icon.svg';
+  static String mentalCareIcon = 'assets/icons/services/mental-care-icon.svg';
+  static String selfAssessmentIcon =
+      'assets/icons/services/self-assessment-icon.svg';
+
+  //Bottom Navigation Bar
+  static String homeIcon = 'assets/icons/bottom_navigation_bar/home-icon.svg';
+  static String homeFilledIcon =
+      'assets/icons/bottom_navigation_bar/home-filled-icon.svg';
+  static String calendarIcon =
+      'assets/icons/bottom_navigation_bar/calendar-icon.svg';
+  static String calendarFilledIcon =
+      'assets/icons/bottom_navigation_bar/calendar-filled-icon.svg';
+  static String notesIcon = 'assets/icons/bottom_navigation_bar/notes-icon.svg';
+  static String notesFilledIcon =
+      'assets/icons/bottom_navigation_bar/notes-filled-icon.svg';
+  static String personIcon =
+      'assets/icons/bottom_navigation_bar/person-icon.svg';
+  static String personFilledIcon =
+      'assets/icons/bottom_navigation_bar/person-filled-icon.svg';
+
   static String getAssetPackage(String asset) {
     return asset.split('/').first;
   }

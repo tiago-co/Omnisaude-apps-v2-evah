@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_auth/src/modules/sign_up/widgets/welcome_form_field.dart';
 
 class NewResetPasswordPage extends StatelessWidget {
@@ -10,7 +11,18 @@ class NewResetPasswordPage extends StatelessWidget {
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.keyboard_arrow_left_outlined,
+            size: 42,
+            color: Colors.black54,
+          ),
+          onPressed: () {
+            Modular.to.pop();
+          },
+        ),
+      ),
       body: SafeArea(
         child: Container(
           // resetpasswordPqy (5103:11995)
@@ -24,7 +36,7 @@ class NewResetPasswordPage extends StatelessWidget {
               Container(
                 // autogroup6c6sioh (MYnnKNoknk8jRfZzzF6c6s)
                 padding:
-                    EdgeInsets.fromLTRB(20 * fem, 92 * fem, 1 * fem, 7 * fem),
+                    EdgeInsets.fromLTRB(20 * fem, 40 * fem, 1 * fem, 7 * fem),
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,7 +44,7 @@ class NewResetPasswordPage extends StatelessWidget {
                     Container(
                       // frame2EX9 (5103:11999)
                       margin: EdgeInsets.fromLTRB(
-                          59 * fem, 0 * fem, 78 * fem, 28 * fem),
+                          40 * fem, 0 * fem, 78 * fem, 28 * fem),
                       width: double.infinity,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,7 +54,7 @@ class NewResetPasswordPage extends StatelessWidget {
                             margin: EdgeInsets.fromLTRB(
                                 0 * fem, 0 * fem, 0 * fem, 4 * fem),
                             child: Text(
-                              'Reset password',
+                              'Redefinir senha',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 28 * ffem,
@@ -54,7 +66,7 @@ class NewResetPasswordPage extends StatelessWidget {
                           ),
                           Text(
                             // createnewpasswordFSF (5103:12001)
-                            'Create new password.',
+                            'Criar nova senha.',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 16 * ffem,
@@ -66,18 +78,27 @@ class NewResetPasswordPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    WelcomeFormField(label: 'Senha atual'),
+                    WelcomeFormField(
+                      label: 'Senha atual',
+                      isPassword: true,
+                    ),
                     SizedBox(
                       height: 12,
                     ),
-                    WelcomeFormField(label: 'Nova Senha'),
+                    WelcomeFormField(
+                      label: 'Nova Senha',
+                      isPassword: true,
+                    ),
                     SizedBox(height: 12),
-                    WelcomeFormField(label: 'Confirmar Senha'),
+                    WelcomeFormField(
+                      label: 'Confirmar Senha',
+                      isPassword: true,
+                    ),
                     SizedBox(height: 24),
                     Container(
                       // buttonprimary53D (5103:12006)
                       margin: EdgeInsets.fromLTRB(
-                          0 * fem, 0 * fem, 19 * fem, 204 * fem),
+                          0 * fem, 0 * fem, 19 * fem, 0 * fem),
                       child: TextButton(
                         onPressed: () {},
                         style: TextButton.styleFrom(
@@ -89,7 +110,7 @@ class NewResetPasswordPage extends StatelessWidget {
                           child: Container(
                             // masterbuttonmasteraVm (I5103:12006;19:7770)
                             padding: EdgeInsets.fromLTRB(
-                                105.5 * fem, 16 * fem, 105.5 * fem, 16 * fem),
+                                0.5 * fem, 16 * fem, 0.5 * fem, 16 * fem),
                             width: double.infinity,
                             height: double.infinity,
                             decoration: BoxDecoration(
@@ -104,7 +125,7 @@ class NewResetPasswordPage extends StatelessWidget {
                               child: Center(
                                 child: Center(
                                   child: Text(
-                                    'Reset password',
+                                    'Redefinir senha',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 16 * ffem,

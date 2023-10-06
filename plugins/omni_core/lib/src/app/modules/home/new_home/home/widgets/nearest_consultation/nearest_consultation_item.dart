@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/utils.dart';
 
 import 'consultation_header.dart';
 
 class NearestConsultationItem extends StatelessWidget {
-  const NearestConsultationItem({super.key});
+  const NearestConsultationItem();
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +34,7 @@ class NearestConsultationItem extends StatelessWidget {
                       Text(
                         // doctorsnotejZH (I4511:32375;3902:11770)
                         'Doctor’s note',
-                        style: SafeGoogleFont(
-                          'Inter',
+                        style: TextStyle(
                           fontSize: 16 * ffem,
                           fontWeight: FontWeight.w500,
                           height: 1.6000000238 * ffem / fem,
@@ -46,8 +44,7 @@ class NearestConsultationItem extends StatelessWidget {
                       Text(
                         // preparealistofdiseasesofyourre (I4511:32375;3902:11772)
                         'Prepare a list of diseases of your relatives.',
-                        style: SafeGoogleFont(
-                          'Inter',
+                        style: TextStyle(
                           fontSize: 14 * ffem,
                           fontWeight: FontWeight.w400,
                           height: 1.4000000272 * ffem / fem,
@@ -88,8 +85,7 @@ class NearestConsultationItem extends StatelessWidget {
                         child: Text(
                           'Receipts',
                           textAlign: TextAlign.center,
-                          style: SafeGoogleFont(
-                            'Inter',
+                          style: TextStyle(
                             fontSize: 14 * ffem,
                             fontWeight: FontWeight.w600,
                             height: 1.7142857143 * ffem / fem,
@@ -130,8 +126,7 @@ class NearestConsultationItem extends StatelessWidget {
                       Text(
                         // joomorais1cb (I4511:32375;3902:11775)
                         'João Morais',
-                        style: SafeGoogleFont(
-                          'Inter',
+                        style: TextStyle(
                           fontSize: 18 * ffem,
                           fontWeight: FontWeight.w500,
                           height: 1.5 * ffem / fem,
@@ -141,8 +136,7 @@ class NearestConsultationItem extends StatelessWidget {
                       Text(
                         // gynecologyandobstetricsMRZ (I4511:32375;3902:11777)
                         'Gynecology and obstetrics',
-                        style: SafeGoogleFont(
-                          'Inter',
+                        style: TextStyle(
                           fontSize: 14 * ffem,
                           fontWeight: FontWeight.w400,
                           height: 1.4000000272 * ffem / fem,
@@ -177,8 +171,7 @@ class NearestConsultationItem extends StatelessWidget {
                   child: Text(
                     'Reschedule',
                     textAlign: TextAlign.center,
-                    style: SafeGoogleFont(
-                      'Inter',
+                    style: TextStyle(
                       fontSize: 14 * ffem,
                       fontWeight: FontWeight.w600,
                       height: 1.7142857143 * ffem / fem,

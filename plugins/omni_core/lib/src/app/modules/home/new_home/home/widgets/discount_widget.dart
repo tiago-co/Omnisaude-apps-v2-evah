@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/utils.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:omni_core/omni_core.dart';
 
 class DiscountsWidget extends StatelessWidget {
-  const DiscountsWidget({super.key});
+  const DiscountsWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +31,8 @@ class DiscountsWidget extends StatelessWidget {
                   margin:
                       EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
                   child: Text(
-                    'Discounts',
-                    style: SafeGoogleFont(
-                      'Inter',
+                    'Descontos',
+                    style: TextStyle(
                       fontSize: 22 * ffem,
                       fontWeight: FontWeight.w600,
                       height: 1.2999999306 * ffem / fem,
@@ -64,10 +64,9 @@ class DiscountsWidget extends StatelessWidget {
                         child: Center(
                           child: Center(
                             child: Text(
-                              'See all',
+                              'Ver tudo',
                               textAlign: TextAlign.center,
-                              style: SafeGoogleFont(
-                                'Inter',
+                              style: TextStyle(
                                 fontSize: 16 * ffem,
                                 fontWeight: FontWeight.w600,
                                 height: 1.5 * ffem / fem,
@@ -85,123 +84,94 @@ class DiscountsWidget extends StatelessWidget {
           ),
           Container(
             // frame1576fQT (4511:32337)
+            padding: EdgeInsets.symmetric(horizontal: 8),
             height: 88 * fem,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   // frame1573oFm (4511:32338)
                   margin:
-                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 24 * fem, 0 * fem),
+                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
                   child: TextButton(
                     onPressed: () {},
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.zero,
                     ),
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(
-                          2.83 * fem, 0 * fem, 2.83 * fem, 0 * fem),
-                      width: 95.67 * fem,
-                      height: double.infinity,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            // group59V8b (4511:32339)
-                            margin: EdgeInsets.fromLTRB(
-                                18 * fem, 0 * fem, 18 * fem, 8 * fem),
-                            padding: EdgeInsets.fromLTRB(
-                                13 * fem, 13 * fem, 13 * fem, 13 * fem),
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Color(0xffed8181),
-                              borderRadius: BorderRadius.circular(27 * fem),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          // margin: const EdgeInsets.all(12.0),
+                          width: 54,
+                          height: 54,
+                          child: CircleAvatar(
+                            backgroundColor: const Color(
+                              0xffed8181,
                             ),
-                            child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
                               // firstaidbagbhR (4511:32341)
-                              child: SizedBox(
-                                width: 28 * fem,
-                                height: 28 * fem,
-                                child: Image.asset(
-                                  'assets/ui/images/first-aid-bag.png',
-                                  width: 28 * fem,
-                                  height: 28 * fem,
-                                ),
+                              child: SvgPicture.asset(
+                                Assets.pillIcon,
+                                package: AssetsPackage.omniCore,
+                                color: Colors.white,
                               ),
                             ),
                           ),
-                          Text(
-                            // pharmaciesvUo (4511:32342)
-                            'Pharmacies',
-                            textAlign: TextAlign.center,
-                            style: SafeGoogleFont(
-                              'Inter',
-                              fontSize: 16 * ffem,
-                              fontWeight: FontWeight.w500,
-                              height: 1.6000000238 * ffem / fem,
-                              color: Color(0xff1a1c22),
-                            ),
+                        ),
+                        Text(
+                          // pharmaciesvUo (4511:32342)
+                          'Farmácias',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16 * ffem,
+                            fontWeight: FontWeight.w600,
+                            height: 1.6000000238 * ffem / fem,
+                            color: Color(0xff1a1c22),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
                 Container(
                   // frame1574rdM (4511:32343)
                   margin:
-                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 24 * fem, 0 * fem),
+                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
                   child: TextButton(
                     onPressed: () {},
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.zero,
                     ),
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(
-                          20.83 * fem, 0 * fem, 20.83 * fem, 0 * fem),
-                      width: 95.67 * fem,
-                      height: double.infinity,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            // group598Ky (4511:32344)
-                            margin: EdgeInsets.fromLTRB(
-                                0 * fem, 0 * fem, 0 * fem, 8 * fem),
-                            padding: EdgeInsets.fromLTRB(
-                                13 * fem, 12 * fem, 13 * fem, 14 * fem),
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Color(0xff47bec1),
-                              borderRadius: BorderRadius.circular(27 * fem),
-                            ),
-                            child: Center(
-                              // pilldnX (4511:32346)
-                              child: SizedBox(
-                                width: 28 * fem,
-                                height: 28 * fem,
-                                child: Image.asset(
-                                  'assets/ui/images/pill-NrK.png',
-                                  width: 28 * fem,
-                                  height: 28 * fem,
-                                ),
-                              ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          // margin: const EdgeInsets.all(12.0),
+                          width: 54,
+                          height: 54,
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xff47bec1),
+                            // pilldnX (4511:32346)
+                            child: SvgPicture.asset(
+                              Assets.firstAidBagIcon,
+                              package: AssetsPackage.omniCore,
                             ),
                           ),
-                          Text(
-                            // examsZgB (4511:32347)
-                            'Exams',
-                            textAlign: TextAlign.center,
-                            style: SafeGoogleFont(
-                              'Inter',
-                              fontSize: 16 * ffem,
-                              fontWeight: FontWeight.w500,
-                              height: 1.6000000238 * ffem / fem,
-                              color: Color(0xff1a1c22),
-                            ),
+                        ),
+                        Text(
+                          // examsZgB (4511:32347)
+                          'Exames',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16 * ffem,
+                            fontWeight: FontWeight.w600,
+                            height: 1.6000000238 * ffem / fem,
+                            color: Color(0xff1a1c22),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -211,52 +181,37 @@ class DiscountsWidget extends StatelessWidget {
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
                   ),
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(
-                        20.83 * fem, 0 * fem, 20.83 * fem, 0 * fem),
-                    width: 95.67 * fem,
-                    height: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          // group59QRu (5303:17816)
-                          margin: EdgeInsets.fromLTRB(
-                              0 * fem, 0 * fem, 0 * fem, 8 * fem),
-                          padding: EdgeInsets.fromLTRB(
-                              13 * fem, 12 * fem, 13 * fem, 14 * fem),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Color(0xff949cb7),
-                            borderRadius: BorderRadius.circular(27 * fem),
-                          ),
-                          child: Center(
-                            // medicalcrossihV (5303:17818)
-                            child: SizedBox(
-                              width: 28 * fem,
-                              height: 28 * fem,
-                              child: Image.asset(
-                                'assets/ui/images/medical-cross.png',
-                                width: 28 * fem,
-                                height: 28 * fem,
-                              ),
-                            ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        // margin: const EdgeInsets.all(12.0),
+                        width: 54,
+                        height: 54,
+                        child: CircleAvatar(
+                          backgroundColor: Color(0xff949DB8),
+                          // pilldnX (4511:32346)
+                          child: SvgPicture.asset(
+                            Assets.medicalCrossIcon,
+                            package: AssetsPackage.omniCore,
+                            color: Colors.white,
+                            width: 28,
+                            height: 28,
                           ),
                         ),
-                        Text(
-                          // other3Dy (5303:17819)
-                          'Other',
-                          textAlign: TextAlign.center,
-                          style: SafeGoogleFont(
-                            'Inter',
-                            fontSize: 16 * ffem,
-                            fontWeight: FontWeight.w500,
-                            height: 1.6000000238 * ffem / fem,
-                            color: Color(0xff1a1c22),
-                          ),
+                      ),
+                      Text(
+                        // examsZgB (4511:32347)
+                        'Outros',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16 * ffem,
+                          fontWeight: FontWeight.w600,
+                          height: 1.6000000238 * ffem / fem,
+                          color: Color(0xff1a1c22),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ],

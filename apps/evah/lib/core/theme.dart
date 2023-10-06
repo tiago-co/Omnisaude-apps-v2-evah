@@ -13,7 +13,7 @@ final ThemeData theme = ThemeData(
     ),
   ),
   bottomSheetTheme: const BottomSheetThemeData(
-    backgroundColor: Color(0xfffcf5e6),
+    backgroundColor: Color(0xffffffff),
     // backgroundColor: Colors.white,
 
     elevation: 0,
@@ -21,11 +21,11 @@ final ThemeData theme = ThemeData(
     clipBehavior: Clip.antiAliasWithSaveLayer,
   ),
   navigationBarTheme: const NavigationBarThemeData(
-    backgroundColor: Color(0xfffcf5e6),
+    backgroundColor: Color(0xffffffff),
   ),
   primaryColor: const Color(0x0fff006a).withOpacity(1),
   primaryColorDark: const Color(0x0fff006a).withOpacity(1),
-  scaffoldBackgroundColor: const Color(0xfffcf5e6),
+  scaffoldBackgroundColor: const Color(0xffffffff),
   // scaffoldBackgroundColor: Colors.white,
   splashColor: Colors.white,
   cardColor: const Color(0xFF737375),
@@ -82,7 +82,7 @@ final ThemeData theme = ThemeData(
     ),
   ),
   appBarTheme: const AppBarTheme(
-    backgroundColor: Color(0xfffcf5e6),
+    backgroundColor: Color(0xffffffff),
   ),
   colorScheme: const ColorScheme(
     primary: Colors.black,
@@ -90,13 +90,13 @@ final ThemeData theme = ThemeData(
     secondary: Colors.black,
     secondaryContainer: Colors.black,
     surface: Colors.red,
-    background: Color(0xfffcf5e6),
+    background: Color(0xffffffff),
     // background: Colors.white,
     error: Colors.red,
     onPrimary: Colors.black,
     onSecondary: Colors.black,
     onSurface: Colors.black,
-    onBackground: Color(0xfffcf5e6),
+    onBackground: Color(0xffffffff),
     onError: Colors.red,
     brightness: Brightness.light,
   ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/ui/home/widgets/reminders/reminder_item.dart';
-import 'package:myapp/utils.dart';
+import 'package:omni_core/src/app/modules/home/new_home/home/widgets/reminders/reminder_item.dart';
 
 class RemindersWidget extends StatelessWidget {
-  const RemindersWidget({super.key});
+  const RemindersWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +30,8 @@ class RemindersWidget extends StatelessWidget {
                   margin:
                       EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
                   child: Text(
-                    'Today\'s reminders',
-                    style: SafeGoogleFont(
-                      'Inter',
+                    'Lembretes de Hoje',
+                    style: TextStyle(
                       fontSize: 22 * ffem,
                       fontWeight: FontWeight.w600,
                       height: 1.2999999306 * ffem / fem,
@@ -61,10 +59,9 @@ class RemindersWidget extends StatelessWidget {
                       child: Center(
                         child: Center(
                           child: Text(
-                            'See all',
+                            'Ver tudo',
                             textAlign: TextAlign.center,
-                            style: SafeGoogleFont(
-                              'Inter',
+                            style: TextStyle(
                               fontSize: 16 * ffem,
                               fontWeight: FontWeight.w600,
                               height: 1.5 * ffem / fem,
