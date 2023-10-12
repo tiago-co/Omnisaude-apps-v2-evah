@@ -36,9 +36,7 @@ class _PrivacyPoliciesPageState extends State<PrivacyPoliciesPage> {
   }
 
   void _shareDocument(BuildContext context) {
-    store.pdfStore
-        .sharePDF(PDFDocumentType.url, context, url: store.state)
-        .catchError((onError) {
+    store.pdfStore.sharePDF(PDFDocumentType.url, context, url: store.state).catchError((onError) {
       Helpers.showDialog(
         context,
         RequestErrorWidget(
@@ -54,9 +52,24 @@ class _PrivacyPoliciesPageState extends State<PrivacyPoliciesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const NavBarWidget(
-        title: TermsLabels.privacyPoliciesTitle,
-      ).build(context) as AppBar,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => Modular.to.pop(),
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.black54,
+          ),
+        ),
+        centerTitle: true,
+        title: const Text(
+          'Políticas de privacidade',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Colors.black54,
+          ),
+        ),
+      ),
       body: TripleBuilder<TermsStore, DioError, String>(
         store: store,
         builder: (_, triple) {
@@ -92,18 +105,18 @@ class _PrivacyPoliciesPageState extends State<PrivacyPoliciesPage> {
           return const SizedBox();
         },
       ),
-      bottomNavigationBar: TripleBuilder<PdfViewStore, Exception, bool>(
-        store: store.pdfStore,
-        builder: (_, triple) {
-          return BottomButtonWidget(
-            onPressed: () => _shareDocument(_),
-            buttonType: BottomButtonType.outline,
-            isLoading: triple.isLoading,
-            isDisabled: triple.isLoading || !triple.state,
-            text: TermsLabels.privacyPoliciesShare,
-          );
-        },
-      ),
+      // bottomNavigationBar: TripleBuilder<PdfViewStore, Exception, bool>(
+      //   store: store.pdfStore,
+      //   builder: (_, triple) {
+      //     return BottomButtonWidget(
+      //       onPressed: () => _shareDocument(_),
+      //       buttonType: BottomButtonType.outline,
+      //       isLoading: triple.isLoading,
+      //       isDisabled: triple.isLoading || !triple.state,
+      //       text: TermsLabels.privacyPoliciesShare,
+      //     );
+      //   },
+      // ),
     );
   }
 }

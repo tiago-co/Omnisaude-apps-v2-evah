@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:omni_auth/src/modules/register/stores/register_store.dart';
 import 'package:omni_auth/src/modules/sign_up/widgets/welcome_form_field.dart';
+import 'package:omni_general/omni_general.dart';
+import 'package:omni_register_labels/labels.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key});
+  SignUpPage({Key? key});
 
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController birthController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController streetController = TextEditingController();
+  final TextEditingController maritalStatusController = TextEditingController();
+  final TextEditingController heightController = TextEditingController();
+  final TextEditingController weightController = TextEditingController();
+
+  final RegisterStore store = Modular.get();
   @override
   Widget build(BuildContext context) {
     double baseWidth = 375;
@@ -39,8 +51,7 @@ class SignUpPage extends StatelessWidget {
               children: [
                 Container(
                   // pleasefillinallfieldstocomplet (4511:30507)
-                  margin:
-                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
+                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
 
                   child: Text(
                     'Por favor preencha todos os campos para concluir a inscrição',
@@ -54,93 +65,159 @@ class SignUpPage extends StatelessWidget {
                 ),
                 Container(
                   // autogroupga3rDM1 (MYmNg4BKgKm5iLVNgHGA3R)
-                  padding:
-                      EdgeInsets.fromLTRB(0 * fem, 28 * fem, 1 * fem, 7 * fem),
+                  padding: EdgeInsets.fromLTRB(0 * fem, 28 * fem, 1 * fem, 7 * fem),
                   width: double.infinity,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         // frame3ioZ (4511:30508)
-                        margin: EdgeInsets.fromLTRB(
-                            0 * fem, 0 * fem, 0 * fem, 4 * fem),
+                        margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 4 * fem),
                         width: double.infinity,
-                        height: 556 * fem,
-                        child: const Column(
+
+                        child: Column(
                           children: [
-                            WelcomeFormField(label: 'Nome completo'),
-                            SizedBox(
-                              height: 12,
+                            TextFieldWidget(
+                              label: 'Nome completo',
+                              controller: nameController,
+                              // focusNode: usernameFocus,
+                              focusedborder: InputBorder.none,
+                              padding: EdgeInsets.zero,
+                              onChange: (String? input) {
+                                store.state.individualPerson?.name = input;
+                                store.updateForm(store.state);
+                              },
                             ),
-                            WelcomeFormField(
+                            const SizedBox(height: 12),
+                            TextFieldWidget(
                               label: 'Data de Nascimento',
+                              controller: birthController,
+                              // focusNode: usernameFocus,
+                              focusedborder: InputBorder.none,
+                              padding: EdgeInsets.zero,
                               suffixIcon: Icon(
                                 Icons.calendar_month_outlined,
-                                color: Colors.black54,
+                                color: Colors.grey,
                               ),
+                              onChange: (String? input) {
+                                store.state.individualPerson?.birth = input;
+                                store.updateForm(store.state);
+                              },
                             ),
-                            SizedBox(
-                              height: 12,
+                            // const WelcomeFormField(label: 'Data de nascimento'),
+                            const SizedBox(height: 12),
+                            TextFieldWidget(
+                              label: 'Telefone',
+                              controller: phoneController,
+                              // focusNode: usernameFocus,
+                              focusedborder: InputBorder.none,
+                              padding: EdgeInsets.zero,
+                              onChange: (String? input) {
+                                store.state.individualPerson?.phone = input;
+                                store.updateForm(store.state);
+                              },
                             ),
-                            WelcomeFormField(label: 'Número de telefone'),
-                            SizedBox(
-                              height: 12,
+                            const SizedBox(height: 12),
+                            TextFieldWidget(
+                              label: 'Endereço',
+                              controller: streetController,
+                              // focusNode: usernameFocus,
+                              focusedborder: InputBorder.none,
+                              padding: EdgeInsets.zero,
+                              onChange: (String? input) {
+                                store.state.individualPerson?.address?.street = input;
+                                store.updateForm(store.state);
+                              },
                             ),
-                            WelcomeFormField(label: 'Endereço'),
-                            SizedBox(
-                              height: 12,
+                            const SizedBox(height: 12),
+                            SelectFieldWidget<MaritalStatus>(
+                              label: 'Estado civil',
+                              items: MaritalStatus.values,
+                              itemsLabels: MaritalStatus.values.map((type) => type.label!).toList(),
+                              placeholder: 'Estado civil',
+                              controller: maritalStatusController,
+                              // focusNode: genreFocus,
+                              onSelectItem: (MaritalStatus type) {
+                                maritalStatusController.text = type.label!;
+                                store.state.individualPerson!.maritalStatus = type;
+                                store.updateForm(store.state);
+                                // Helpers.changeFocus(context, genreFocus, bloodTypeFocus);
+                              },
                             ),
-                            WelcomeFormField(
-                              label: 'Estado Civil',
-                              suffixIcon: Icon(
-                                Icons.keyboard_arrow_down,
-                                color: Colors.black54,
-                              ),
+
+                            const SizedBox(height: 12),
+                            TextFieldWidget(
+                              label: 'Altura (cm)',
+                              controller: heightController,
+                              // focusNode: usernameFocus,
+                              focusedborder: InputBorder.none,
+                              padding: EdgeInsets.zero,
+                              onChange: (String? input) {
+                                store.state.individualPerson?.height = double.parse(input ?? '');
+                                store.updateForm(store.state);
+                              },
                             ),
-                            SizedBox(
-                              height: 12,
+
+                            const SizedBox(height: 12),
+                            TextFieldWidget(
+                              label: 'Peso (kg)',
+                              controller: weightController,
+                              // focusNode: usernameFocus,
+                              focusedborder: InputBorder.none,
+                              padding: EdgeInsets.zero,
+                              onChange: (String? input) {
+                                store.state.individualPerson?.weight = double.parse(input ?? '');
+                                store.updateForm(store.state);
+                              },
                             ),
-                            WelcomeFormField(label: 'Altura (cm)'),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            WelcomeFormField(label: 'Peso (kg)'),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            WelcomeFormField(label: 'Contato de emergência'),
+
+                            const SizedBox(height: 12),
+                            const WelcomeFormField(label: 'Contato de emergência'),
+                            const SizedBox(height: 24),
                           ],
                         ),
                       ),
-                      Container(
-                        // masterbuttonmasterPqh (I4511:30516;19:7770)
-                        margin: EdgeInsets.fromLTRB(
-                            0 * fem, 0 * fem, 0 * fem, 34 * fem),
-                        padding: EdgeInsets.fromLTRB(
-                            0 * fem, 16 * fem, 0.5 * fem, 16 * fem),
-
-                        height: 56 * fem,
-                        decoration: BoxDecoration(
-                          color: true
-                              ? const Color(0xff2D73B3)
-                              : const Color(0xffbbd2e6),
-                          borderRadius: BorderRadius.circular(60 * fem),
-                        ),
+                      TextButton(
+                        onPressed: () async {
+                          await store.registerBeneficiary(store.state).then((value) {
+                            Modular.to.pushReplacementNamed('/auth/newLogin');
+                          }).catchError((onError) {
+                            Helpers.showDialog(
+                              context,
+                              RequestErrorWidget(
+                                error: onError,
+                                buttonText: RegisterLabels.close,
+                                onPressed: () => Modular.to.pop(),
+                              ),
+                              showClose: true,
+                            );
+                          });
+                        },
                         child: Container(
-                          // autogroupu5ougpo (MYmRPPppj9ubWD8BZ7U5ou)
-                          padding: EdgeInsets.fromLTRB(
-                              1.5 * fem, 0 * fem, 0 * fem, 0 * fem),
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: Center(
-                            child: Text(
-                              'Complete',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 16 * ffem,
-                                fontWeight: FontWeight.w600,
-                                height: 1.5 * ffem / fem,
-                                color: const Color(0xffffffff),
+                          // masterbuttonmaster82s (I4511:30472;19:7770)
+                          margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 19 * fem, 0 * fem),
+                          padding: EdgeInsets.fromLTRB(0 * fem, 16 * fem, 0 * fem, 16 * fem),
+
+                          height: 56 * fem,
+                          decoration: BoxDecoration(
+                            color: true ? Color(0xff2D73B3) : Color(0xff2d72b3),
+                            borderRadius: BorderRadius.circular(60 * fem),
+                          ),
+                          child: Container(
+                            // autogroupfwxxDa7 (MYmMmLCB3rKy918MJrfWxX)
+                            padding: EdgeInsets.fromLTRB(13 * fem, 0 * fem, 0 * fem, 0 * fem),
+                            width: double.infinity,
+                            height: double.infinity,
+                            child: Center(
+                              child: Text(
+                                'Completar',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 16 * ffem,
+                                  fontWeight: FontWeight.w600,
+                                  height: 1.5 * ffem / fem,
+                                  color: Color(0xffffffff),
+                                ),
                               ),
                             ),
                           ),

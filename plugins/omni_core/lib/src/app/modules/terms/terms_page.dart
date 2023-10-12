@@ -21,22 +21,37 @@ class TermsPageState extends State<TermsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const NavBarWidget(
-        title: TermsLabels.termsTitle,
-      ).build(context) as AppBar,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => Modular.to.pop(),
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.black54,
+          ),
+        ),
+        centerTitle: true,
+        title: const Text(
+          'Termos',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Colors.black54,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(15),
-              child: Text(
-                TermsLabels.termsRead,
-                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                      color: Theme.of(context).primaryColor,
-                    ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(15),
+            //   child: Text(
+            //     TermsLabels.termsRead,
+            //     style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+            //           color: Theme.of(context).primaryColor,
+            //         ),
+            //   ),
+            // ),
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(

@@ -22,6 +22,7 @@ final ThemeData theme = ThemeData(
   ),
   navigationBarTheme: const NavigationBarThemeData(
     backgroundColor: Color(0xffffffff),
+    surfaceTintColor: Color(0xffffffff),
   ),
   primaryColor: const Color(0x0fff006a).withOpacity(1),
   primaryColorDark: const Color(0x0fff006a).withOpacity(1),
@@ -83,6 +84,7 @@ final ThemeData theme = ThemeData(
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: Color(0xffffffff),
+    surfaceTintColor: Color(0xffffffff),
   ),
   colorScheme: const ColorScheme(
     primary: Colors.black,

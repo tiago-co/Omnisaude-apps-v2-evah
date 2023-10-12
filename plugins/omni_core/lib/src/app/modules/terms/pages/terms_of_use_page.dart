@@ -36,9 +36,7 @@ class _TermOfUsePageState extends State<TermOfUsePage> {
   }
 
   void _shareDocument(BuildContext context) {
-    store.pdfStore
-        .sharePDF(PDFDocumentType.url, context, url: store.state)
-        .catchError((onError) {
+    store.pdfStore.sharePDF(PDFDocumentType.url, context, url: store.state).catchError((onError) {
       Helpers.showDialog(
         context,
         RequestErrorWidget(
@@ -54,9 +52,24 @@ class _TermOfUsePageState extends State<TermOfUsePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const NavBarWidget(
-        title: TermsLabels.termsOfUseTitle,
-      ).build(context) as AppBar,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => Modular.to.pop(),
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.black54,
+          ),
+        ),
+        centerTitle: true,
+        title: const Text(
+          'Termos e condições de uso',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Colors.black54,
+          ),
+        ),
+      ),
       body: TripleBuilder<TermsStore, DioError, String>(
         store: store,
         builder: (_, triple) {
@@ -65,20 +78,18 @@ class _TermOfUsePageState extends State<TermOfUsePage> {
             return Column(
               children: [
                 Expanded(
-                  child: Center(
-                    child: SingleChildScrollView(
-                      clipBehavior: Clip.antiAlias,
-                      physics: const BouncingScrollPhysics(),
-                      child: RequestErrorWidget(
-                        onPressed: () {
-                          store.getTerms(
-                            TermsType.policies,
-                            widget.programCode,
-                            service,
-                          );
-                        },
-                        error: triple.error,
-                      ),
+                  child: SingleChildScrollView(
+                    clipBehavior: Clip.antiAlias,
+                    physics: const BouncingScrollPhysics(),
+                    child: RequestErrorWidget(
+                      onPressed: () {
+                        store.getTerms(
+                          TermsType.policies,
+                          widget.programCode,
+                          service,
+                        );
+                      },
+                      error: triple.error,
                     ),
                   ),
                 ),
@@ -92,18 +103,18 @@ class _TermOfUsePageState extends State<TermOfUsePage> {
           return const SizedBox();
         },
       ),
-      bottomNavigationBar: TripleBuilder<PdfViewStore, Exception, bool>(
-        store: store.pdfStore,
-        builder: (_, triple) {
-          return BottomButtonWidget(
-            onPressed: () => _shareDocument(_),
-            buttonType: BottomButtonType.outline,
-            isLoading: triple.isLoading,
-            isDisabled: triple.isLoading || !triple.state,
-            text: TermsLabels.termsOfUseShare,
-          );
-        },
-      ),
+      // bottomNavigationBar: TripleBuilder<PdfViewStore, Exception, bool>(
+      //   store: store.pdfStore,
+      //   builder: (_, triple) {
+      //     return BottomButtonWidget(
+      //       onPressed: () => _shareDocument(_),
+      //       buttonType: BottomButtonType.outline,
+      //       isLoading: triple.isLoading,
+      //       isDisabled: triple.isLoading || !triple.state,
+      //       text: TermsLabels.termsOfUseShare,
+      //     );
+      //   },
+      // ),
     );
   }
 }

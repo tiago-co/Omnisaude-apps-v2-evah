@@ -39,7 +39,7 @@ class TermsItemWidget extends StatelessWidget {
             SvgPicture.asset(
               Assets.arrowRight,
               package: AssetsPackage.omniGeneral,
-              color: Theme.of(context).primaryColor,
+              color: Colors.black54,
               width: 15,
               height: 15,
             ),

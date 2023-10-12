@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 
 class WelcomeFormField extends StatelessWidget {
-  const WelcomeFormField(
-      {required this.label, this.isPassword = false, this.suffixIcon, Key? key})
-      : super(key: key);
+  const WelcomeFormField({
+    required this.label,
+    this.isPassword = false,
+    this.suffixIcon,
+    this.controller,
+    this.focus,
+    Key? key,
+  }) : super(key: key);
+
   final String label;
   final bool isPassword;
   final Widget? suffixIcon;
+  final TextEditingController? controller;
+  final FocusNode? focus;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,6 +34,8 @@ class WelcomeFormField extends StatelessWidget {
           ),
           child: TextFormField(
             obscureText: isPassword,
+            controller: controller,
+            focusNode: focus,
             cursorColor: const Color(0xff2D73B3),
             decoration: InputDecoration(
               labelText: label,
@@ -33,7 +43,7 @@ class WelcomeFormField extends StatelessWidget {
                 color: Colors.grey,
               ),
               suffixIcon: isPassword
-                  ? Icon(
+                  ? const Icon(
                       Icons.visibility_off_outlined,
                       color: Colors.grey,
                     )

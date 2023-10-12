@@ -67,66 +67,75 @@ class TextFieldWidget extends StatelessWidget {
       absorbing: !isEnabled,
       child: Opacity(
         opacity: isEnabled ? 1.0 : 0.75,
-        child: TextFormField(
-          maxLength: maxLenght,
-          textAlign: textAlign,
-          onTap: onTap,
-          onChanged: onChange,
-          controller: controller,
-          autocorrect: autocorrect,
-          readOnly: readOnly,
-          textCapitalization: textCapitalization,
-          enableSuggestions: enableSuggestions,
-          inputFormatters: mask != null ? [mask!] : null,
-          focusNode: focusNode,
-          maxLines: maxLines,
-          minLines: minLines,
-          obscureText: obscureText,
-          onFieldSubmitted: onSubmitted,
-          textInputAction: textInputAction,
-          keyboardType: keyboardType,
-          validator: validator,
-          style: textStyle ?? Theme.of(context).textTheme.titleLarge,
-          decoration: InputDecoration(
-            counter: const SizedBox.shrink(),
-            errorText: errorText,
-            errorStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Colors.red,
-                  fontSize: 11,
-                ),
-            errorMaxLines: 3,
-            labelText: label,
-            hintText: placeholder,
-            contentPadding: padding,
-            labelStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Theme.of(context).primaryColor,
-                ),
-            hintStyle: Theme.of(context).textTheme.titleLarge,
-            suffixIcon: suffixIcon != null
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 20, width: 20, child: suffixIcon)
-                    ],
-                  )
-                : null,
-            prefixIcon: prefixIcon != null
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 20, width: 20, child: prefixIcon)
-                    ],
-                  )
-                : null,
-            border: border(context),
-            enabledBorder: focusedborder ?? border(context),
-            focusedBorder: focusedborder ?? border(context),
-            errorBorder: border(context, color: Colors.red),
-            focusedErrorBorder: border(context, color: Colors.red),
-            disabledBorder: border(
-              context,
-              color: Theme.of(context).cardColor,
+        child: Container(
+          padding: const EdgeInsets.only(
+            left: 24,
+            right: 12,
+            top: 4,
+          ),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color(0xffededf1),
+            ),
+            borderRadius: BorderRadius.circular(60),
+          ),
+          child: TextFormField(
+            maxLength: maxLenght,
+            textAlign: textAlign,
+            onTap: onTap,
+            onChanged: onChange,
+            controller: controller,
+            autocorrect: autocorrect,
+            readOnly: readOnly,
+            textCapitalization: textCapitalization,
+            enableSuggestions: enableSuggestions,
+            inputFormatters: mask != null ? [mask!] : null,
+            focusNode: focusNode,
+            maxLines: maxLines,
+            minLines: minLines,
+            obscureText: obscureText,
+            onFieldSubmitted: onSubmitted,
+            textInputAction: textInputAction,
+            keyboardType: keyboardType,
+            validator: validator,
+            style: textStyle ?? Theme.of(context).textTheme.titleLarge,
+            decoration: InputDecoration(
+              // counter: const SizedBox.shrink(),
+              errorText: errorText,
+              errorStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Colors.red,
+                    fontSize: 11,
+                  ),
+              errorMaxLines: 3,
+              labelText: label,
+              hintText: placeholder,
+              contentPadding: padding,
+              labelStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  // color: Theme.of(context).primaryColor,
+                  ),
+              hintStyle: Theme.of(context).textTheme.titleLarge,
+              suffixIcon: suffixIcon != null
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [SizedBox(height: 20, width: 20, child: suffixIcon)],
+                    )
+                  : null,
+              prefixIcon: prefixIcon != null
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [SizedBox(height: 20, width: 20, child: prefixIcon)],
+                    )
+                  : null,
+              border: border(context),
+              enabledBorder: focusedborder ?? border(context),
+              focusedBorder: focusedborder ?? border(context),
+              errorBorder: border(context, color: Colors.red),
+              focusedErrorBorder: border(context, color: Colors.red),
+              disabledBorder: border(
+                context,
+                color: Theme.of(context).cardColor,
+              ),
             ),
           ),
         ),

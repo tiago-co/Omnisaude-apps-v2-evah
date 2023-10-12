@@ -20,7 +20,7 @@ class SelectFieldItemWidget<T> extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Theme.of(context).cardColor.withOpacity(0.05),
+        color: Colors.white,
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 10),
@@ -31,12 +31,12 @@ class SelectFieldItemWidget<T> extends StatelessWidget {
           Modular.to.pop();
         },
         title: Container(
-          constraints: const BoxConstraints(maxHeight: 50),
+          constraints: const BoxConstraints(maxHeight: 30),
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Text(
               label,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 16),
             ),
           ),
         ),
@@ -44,18 +44,6 @@ class SelectFieldItemWidget<T> extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         minLeadingWidth: 0,
-        leading: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              Assets.arrowRight,
-              color: Theme.of(context).primaryColor,
-              height: 10,
-              width: 10,
-              package: AssetsPackage.omniGeneral,
-            ),
-          ],
-        ),
       ),
     );
   }

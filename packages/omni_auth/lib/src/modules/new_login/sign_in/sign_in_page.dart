@@ -1,9 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:omni_auth/src/modules/login/stores/login_store.dart';
 import 'package:omni_auth/src/modules/sign_up/widgets/welcome_form_field.dart';
+import 'package:omni_general/omni_general.dart';
+import 'package:omni_login_labels/labels.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage();
+  SignInPage();
+  final TextEditingController username = TextEditingController();
+  final TextEditingController password = TextEditingController();
+  final FocusNode usernameFocus = FocusNode();
+  final FocusNode passwordFocus = FocusNode();
+  final LoginStore store = Modular.get();
+
+  void login(BuildContext context) {
+    store.authenticate(store.state).then(
+      (value) {
+        Modular.to.pushReplacementNamed('/newHome');
+      },
+    ).catchError(
+      (onError) {
+        password.clear();
+        Helpers.showDialog(
+          context,
+          RequestErrorWidget(
+            error: onError,
+            buttonText: LoginLabels.close,
+            onPressed: () => Modular.to.pop(),
+          ),
+          showClose: true,
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +53,14 @@ class SignInPage extends StatelessWidget {
             children: [
               Container(
                 // frame26UF (4511:30466)
-                margin: EdgeInsets.fromLTRB(
-                    14.5 * fem, 0 * fem, 33.5 * fem, 28 * fem),
+                margin: EdgeInsets.fromLTRB(14.5 * fem, 0 * fem, 33.5 * fem, 28 * fem),
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       // welcomebackdDH (4511:30467)
-                      margin: EdgeInsets.fromLTRB(
-                          0 * fem, 0 * fem, 0 * fem, 4 * fem),
+                      margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 4 * fem),
                       child: Text(
                         'Bem-vindo de volta',
                         textAlign: TextAlign.center,
@@ -66,27 +93,49 @@ class SignInPage extends StatelessWidget {
               ),
               Container(
                 // autogroupznhmbpK (MYmLMNYjpJxFJkyJuSznhm)
-                margin:
-                    EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 28 * fem),
+                margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 28 * fem),
                 width: double.infinity,
 
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    WelcomeFormField(label: 'E-mail'),
-                    SizedBox(
-                      height: 12,
+                    TextFieldWidget(
+                      label: 'E-mail',
+                      controller: username,
+                      focusNode: usernameFocus,
+                      focusedborder: InputBorder.none,
+                      padding: EdgeInsets.zero,
+                      onChange: (String? input) {
+                        store.state.username = input;
+                        store.updateForm(store.state);
+                      },
                     ),
-                    WelcomeFormField(
+                    const SizedBox(height: 12),
+                    TextFieldWidget(
                       label: 'Senha',
-                      isPassword: true,
+                      controller: password,
+                      focusNode: passwordFocus,
+                      focusedborder: InputBorder.none,
+                      padding: EdgeInsets.zero,
+                      onChange: (String? input) {
+                        store.state.password = input;
+                        store.updateForm(store.state);
+                      },
                     ),
-                    SizedBox(
-                      height: 12,
-                    ),
+                    // const SizedBox(height: 12),
+                    // WelcomeFormField(
+                    //   label: 'Senha',
+                    //   controller: password,
+                    //   focus: passwordFocus,
+                    //   isPassword: true,
+                    //   // onChange: (String? input) {
+                    //   //   store.state.username = input;
+                    //   //   store.updateForm(store.state);
+                    //   // },
+                    // ),
+                    const SizedBox(height: 12),
                     InkWell(
-                      onTap: () =>
-                          Modular.to.pushNamed('/auth/newLogin/resetPassword'),
+                      onTap: () => Modular.to.pushNamed('/auth/newLogin/resetPassword'),
                       child: Text(
                         'Esqueceu sua senha?',
                         textAlign: TextAlign.center,
@@ -103,14 +152,12 @@ class SignInPage extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Modular.to.pushReplacementNamed('/newHome');
+                  login(context);
                 },
                 child: Container(
                   // masterbuttonmaster82s (I4511:30472;19:7770)
-                  margin:
-                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 19 * fem, 0 * fem),
-                  padding:
-                      EdgeInsets.fromLTRB(0 * fem, 16 * fem, 0 * fem, 16 * fem),
+                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 19 * fem, 0 * fem),
+                  padding: EdgeInsets.fromLTRB(0 * fem, 16 * fem, 0 * fem, 16 * fem),
 
                   height: 56 * fem,
                   decoration: BoxDecoration(
@@ -119,8 +166,7 @@ class SignInPage extends StatelessWidget {
                   ),
                   child: Container(
                     // autogroupfwxxDa7 (MYmMmLCB3rKy918MJrfWxX)
-                    padding: EdgeInsets.fromLTRB(
-                        13 * fem, 0 * fem, 0 * fem, 0 * fem),
+                    padding: EdgeInsets.fromLTRB(13 * fem, 0 * fem, 0 * fem, 0 * fem),
                     width: double.infinity,
                     height: double.infinity,
                     child: Center(
@@ -142,12 +188,10 @@ class SignInPage extends StatelessWidget {
               Center(
                 // donthaveanaccountsignupWJK (4511:30474)
                 child: Container(
-                  margin:
-                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 19 * fem, 0 * fem),
+                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 19 * fem, 0 * fem),
                   child: TextButton(
                     onPressed: () {
-                      Modular.to.pushReplacementNamed(
-                          '/auth/signUp/emailConfirmation');
+                      Modular.to.pushReplacementNamed('/auth/signUp/');
                     },
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.zero,

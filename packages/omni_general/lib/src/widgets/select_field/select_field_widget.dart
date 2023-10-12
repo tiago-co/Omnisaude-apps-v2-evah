@@ -49,6 +49,7 @@ class SelectFieldWidget<T> extends StatelessWidget {
       child: AbsorbPointer(
         absorbing: !isEnabled || isLoading,
         child: TextFieldWidget(
+          focusedborder: InputBorder.none,
           label: label,
           placeholder: placeholder,
           controller: controller,
@@ -60,8 +61,10 @@ class SelectFieldWidget<T> extends StatelessWidget {
               ? const CircularProgressIndicator.adaptive()
               : SvgPicture.asset(
                   Assets.arrowDown,
+                  fit: BoxFit.fitWidth,
                   color: Theme.of(context).cardColor,
                   package: AssetsPackage.omniGeneral,
+                  clipBehavior: Clip.none,
                 ),
           onTap: () async {
             FocusScope.of(context).requestFocus(FocusNode());
@@ -95,16 +98,16 @@ class SelectFieldWidget<T> extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: BottomSheetHeaderWidget(
-                title: label,
-                controller: controller,
-                searchPlaceholder: placeholder,
-                showSearch: showSearch,
-                onSearch: onSearch,
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 15),
+            //   child: BottomSheetHeaderWidget(
+            //     title: label,
+            //     controller: controller,
+            //     searchPlaceholder: placeholder,
+            //     showSearch: showSearch,
+            //     onSearch: onSearch,
+            //   ),
+            // ),
             if (isLoading)
               LinearProgressIndicator(
                 minHeight: 2.5,
@@ -130,7 +133,7 @@ class SelectFieldWidget<T> extends StatelessWidget {
                     controller: scrollController,
                     itemCount: items.length,
                     separatorBuilder: (_, index) => const SizedBox(
-                      height: 10,
+                      height: 0,
                     ),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 15,

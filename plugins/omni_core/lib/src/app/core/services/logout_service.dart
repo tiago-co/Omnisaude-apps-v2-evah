@@ -2,18 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_general/omni_general.dart'
-    show
-        FirebaseService,
-        PreferencesService,
-        UseBiometricPermission,
-        UseBiometricsStore;
+    show FirebaseService, PreferencesService, UseBiometricPermission, UseBiometricsStore;
 import 'package:omni_general/src/stores/user_store.dart';
 
 class LogoutService {
   static Future<void> deactivateBiometricAuth() async {
     final PreferencesService preferencesService = PreferencesService();
-    await preferencesService
-        .setHasBiometrics(UseBiometricPermission.notAccepted);
+    await preferencesService.setHasBiometrics(UseBiometricPermission.notAccepted);
   }
 
   static Future<void> logout() async {
@@ -30,6 +25,6 @@ class LogoutService {
     await userStore.updateUser();
     service.removeUserPreferences(userStore.state);
     Modular.to.popUntil(ModalRoute.withName('/'));
-    Modular.to.navigate('/presentation/letsGo');
+    Modular.to.navigate('/auth/newLogin');
   }
 }

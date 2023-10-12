@@ -103,6 +103,7 @@ dependencies:
   mobile_scanner: ^3.3.0
   webview_flutter: ^3.0.1
   smooth_page_indicator: ^1.1.0
+  flutter_switch: ^0.3.2
 
 
   flutter_localizations:

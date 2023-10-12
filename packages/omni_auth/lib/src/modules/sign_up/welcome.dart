@@ -31,24 +31,21 @@ class Welcome extends StatelessWidget {
                 children: [
                   Container(
                     // autogroupkvljjfV (MYmFKmRdKm5K5NYZsWKVLj)
-                    padding: EdgeInsets.fromLTRB(
-                        0 * fem, 20 * fem, 0 * fem, 7 * fem),
+                    padding: EdgeInsets.fromLTRB(0 * fem, 20 * fem, 0 * fem, 7 * fem),
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
                           // frame2Spo (5101:11624)
-                          margin: EdgeInsets.fromLTRB(
-                              19 * fem, 0 * fem, 38 * fem, 28 * fem),
+                          margin: EdgeInsets.fromLTRB(19 * fem, 0 * fem, 38 * fem, 28 * fem),
                           width: double.infinity,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
                                 // welcomeMgs (5101:11625)
-                                margin: EdgeInsets.fromLTRB(
-                                    0 * fem, 0 * fem, 0 * fem, 4 * fem),
+                                margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 4 * fem),
                                 child: Text(
                                   'Bem-vindo',
                                   textAlign: TextAlign.center,
@@ -79,7 +76,7 @@ class Welcome extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const WelcomeForm(),
+                        WelcomeForm(),
                         const SizedBox(
                           height: 24,
                         ),
@@ -87,17 +84,13 @@ class Welcome extends StatelessWidget {
                           width: 335 * fem,
                           height: 56 * fem,
                           decoration: BoxDecoration(
-                            color: true
-                                ? const Color(0xff2D73B3)
-                                : Color(0xffbbd2e6),
+                            color: true ? const Color(0xff2D73B3) : Color(0xffbbd2e6),
                             borderRadius: BorderRadius.circular(60 * fem),
                           ),
                           child: InkWell(
                             onTap: () {
-                              debugger();
                               // Modular.to.pushNamed('/emailConfirmation');
-                              Navigator.pushNamed(
-                                  context, '/auth/signUp/emailConfirmation');
+                              Navigator.pushNamed(context, '/auth/signUp/signUpPage');
                             },
                             child: Container(
                               // autogroupvztqGaB (MYmGTQCvwMsEchRfLGVzTq)
