@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:omni_core/omni_core.dart';
 
@@ -28,8 +29,7 @@ class DiscountsWidget extends StatelessWidget {
               children: [
                 Container(
                   // discountsBrf (4511:32335)
-                  margin:
-                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
+                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
                   child: Text(
                     'Descontos',
                     style: TextStyle(
@@ -42,7 +42,14 @@ class DiscountsWidget extends StatelessWidget {
                 ),
                 TextButton(
                   // masterbuttonmasteri5u (4902:28309)
-                  onPressed: () {},
+                  onPressed: () {
+                    Modular.to.pushNamed(
+                      '/newHome/discounts/discounts',
+                      arguments: {
+                        'moduleName': 'Desconto em Farmácias',
+                      },
+                    );
+                  },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
                   ),
@@ -57,8 +64,7 @@ class DiscountsWidget extends StatelessWidget {
                       height: double.infinity,
                       child: Container(
                         // autogroupxjf5nrT (MYo2hYg9nTYQaMZ1aYXjf5)
-                        margin: EdgeInsets.fromLTRB(
-                            0 * fem, 0 * fem, 0 * fem, 0 * fem),
+                        margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
 
                         height: double.infinity,
                         child: Center(
@@ -87,21 +93,32 @@ class DiscountsWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 8),
             height: 88 * fem,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   // frame1573oFm (4511:32338)
-                  margin:
-                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
+                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Modular.to.pushNamed(
+                        '/newHome/discounts/cupons',
+                        arguments: {
+                          // 'moduleName': 'Desconto em Farmácia',
+                          'categoryParam': '19',
+                          'organizationId': 0,
+                          'moduleName': 'Desconto em Farmácias',
+                          'coverImage': '',
+                          'couponRescueType': '',
+                        },
+                      );
+                    },
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.zero,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
+                        SizedBox(
                           // margin: const EdgeInsets.all(12.0),
                           width: 54,
                           height: 54,
@@ -135,49 +152,63 @@ class DiscountsWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  // frame1574rdM (4511:32343)
-                  margin:
-                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
-                  child: TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          // margin: const EdgeInsets.all(12.0),
-                          width: 54,
-                          height: 54,
-                          child: CircleAvatar(
-                            backgroundColor: Color(0xff47bec1),
-                            // pilldnX (4511:32346)
-                            child: SvgPicture.asset(
-                              Assets.firstAidBagIcon,
-                              package: AssetsPackage.omniCore,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          // examsZgB (4511:32347)
-                          'Exames',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16 * ffem,
-                            fontWeight: FontWeight.w600,
-                            height: 1.6000000238 * ffem / fem,
-                            color: Color(0xff1a1c22),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                // Container(
+                //   // frame1574rdM (4511:32343)
+                //   margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
+                //   child: TextButton(
+                //     onPressed: () {},
+                //     style: TextButton.styleFrom(
+                //       padding: EdgeInsets.zero,
+                //     ),
+                //     child: Column(
+                //       crossAxisAlignment: CrossAxisAlignment.center,
+                //       children: [
+                //         Container(
+                //           // margin: const EdgeInsets.all(12.0),
+                //           width: 54,
+                //           height: 54,
+                //           child: CircleAvatar(
+                //             backgroundColor: Color(0xff47bec1),
+                //             // pilldnX (4511:32346)
+                //             child: SvgPicture.asset(
+                //               Assets.firstAidBagIcon,
+                //               package: AssetsPackage.omniCore,
+                //             ),
+                //           ),
+                //         ),
+                //         Text(
+                //           // examsZgB (4511:32347)
+                //           'Exames',
+                //           textAlign: TextAlign.center,
+                //           style: TextStyle(
+                //             fontSize: 16 * ffem,
+                //             fontWeight: FontWeight.w600,
+                //             height: 1.6000000238 * ffem / fem,
+                //             color: Color(0xff1a1c22),
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
+                const SizedBox(
+                  width: 32,
                 ),
                 TextButton(
                   // frame1575hXV (5303:17815)
-                  onPressed: () {},
+                  onPressed: () {
+                    Modular.to.pushNamed(
+                      '/newHome/discounts/cupons',
+                      arguments: {
+                        // 'moduleName': 'Desconto em Farmácia',
+                        'categoryParam': '',
+                        'organizationId': 0,
+                        'moduleName': 'Outros descontos',
+                        'coverImage': '',
+                        'couponRescueType': '',
+                      },
+                    );
+                  },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
                   ),

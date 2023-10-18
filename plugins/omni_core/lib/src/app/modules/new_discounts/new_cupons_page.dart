@@ -16,11 +16,13 @@ class NewCuponsPage extends StatefulWidget {
   final String? couponRescueType;
   final String moduleName;
   final String coverImage;
+  final String categoryParam;
   const NewCuponsPage({
     Key? key,
     required this.organizationId,
     required this.moduleName,
     required this.coverImage,
+    required this.categoryParam,
     this.couponRescueType,
   }) : super(key: key);
 
@@ -39,7 +41,11 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
     store.params.usageType = CouponRescueType.online.toJson;
     couponRescueTypeFilterStore.onChangeTypeWithoutRequest(CouponRescueType.online);
     store.params.usageType = widget.couponRescueType;
-    organizationStore.getPharmaOrganizationsList(categoryId: '19').then(
+    organizationStore
+        .getPharmaOrganizationsList(
+          categoryId: widget.categoryParam,
+        )
+        .then(
           (value) => organizationStore.getDiscountCategories(),
         );
 
@@ -64,7 +70,10 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 20),
-            child: Icon(Icons.storage_outlined),
+            child: Icon(
+              Icons.storage_outlined,
+              color: Colors.black54,
+            ),
           ),
         ],
       ),
@@ -81,8 +90,8 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
             Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Titulo do módulo',
+            Text(
+              widget.moduleName,
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
             ),
             const SizedBox(
@@ -95,7 +104,10 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
               focusedborder: InputBorder.none,
               padding: EdgeInsets.zero,
               textCapitalization: TextCapitalization.none,
-              prefixIcon: const Icon(Icons.search),
+              prefixIcon: const Icon(
+                Icons.search,
+                color: Colors.black54,
+              ),
               onChange: (String? input) {
                 // store.state.username = input;
                 // store.updateForm(store.state);
@@ -107,6 +119,14 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
             TripleBuilder<OrganizationsListStore, DioError, List<OrganizationModel>>(
                 store: organizationStore,
                 builder: (_, triple) {
+                  if (triple.isLoading) {
+                    return const SizedBox(
+                      height: 450,
+                      child: Center(
+                        child: LoadingWidget(),
+                      ),
+                    );
+                  }
                   if (triple.event == TripleEvent.error) {
                     return Column(
                       children: [

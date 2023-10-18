@@ -97,7 +97,9 @@ class CuponWidget extends StatelessWidget {
                             horizontal: 12,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xfff1f8fd),
+                            color: Helpers.getBackgroundColor(
+                              organization.bestDiscountPercent!,
+                            ),
                             borderRadius: BorderRadius.circular(40),
                           ),
                           child: Center(

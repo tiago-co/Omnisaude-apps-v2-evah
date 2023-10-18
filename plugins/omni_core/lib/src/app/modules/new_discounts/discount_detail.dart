@@ -60,7 +60,7 @@ class _DiscountDetailState extends State<DiscountDetail> {
               store: store,
               builder: (_, triple) {
                 if (triple.isLoading) {
-                  return const LoadingWidget();
+                  return const Center(child: LoadingWidget());
                 }
                 if (triple.event == TripleEvent.error) {
                   return Column(
@@ -83,11 +83,9 @@ class _DiscountDetailState extends State<DiscountDetail> {
                   );
                 }
                 if (!triple.isLoading && triple.state.isEmpty) {
-                  return Center(
-                    child: SingleChildScrollView(
-                      clipBehavior: Clip.antiAlias,
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      physics: const BouncingScrollPhysics(),
+                  return SizedBox(
+                    height: 450,
+                    child: Center(
                       child: EmptyWidget(
                         message: BenefitsLabels.cuponsEmpty,
                         textButton: BenefitsLabels.tryAgain,
@@ -116,7 +114,9 @@ class _DiscountDetailState extends State<DiscountDetail> {
                         width: double.maxFinite,
                         padding: const EdgeInsets.symmetric(vertical: 26),
                         decoration: BoxDecoration(
-                          border: Border.all(color: const Color(0xffa4c8e8)),
+                          border: Border.all(
+                            color: Helpers.getTextColor(cupomModel.discount!),
+                          ),
                           borderRadius: BorderRadius.circular(12 * fem),
                           color: Helpers.getBackgroundColor(cupomModel.discount!),
                         ),
@@ -133,7 +133,7 @@ class _DiscountDetailState extends State<DiscountDetail> {
                                 fontSize: 22 * ffem,
                                 fontWeight: FontWeight.w600,
                                 height: 1.2999999306 * ffem / fem,
-                                color: const Color(0xff2d72b3),
+                                color: Helpers.getTextColor(cupomModel.discount!),
                               ),
                             ),
 
@@ -202,7 +202,7 @@ class _DiscountDetailState extends State<DiscountDetail> {
                                   width: double.infinity,
                                   height: double.infinity,
                                   decoration: BoxDecoration(
-                                    color: const Color(0xff2d72b3),
+                                    color: Helpers.getTextColor(cupomModel.discount!),
                                     borderRadius: BorderRadius.circular(60 * fem),
                                   ),
                                   child: Center(

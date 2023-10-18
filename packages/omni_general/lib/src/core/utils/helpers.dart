@@ -285,4 +285,24 @@ class Helpers {
       ),
     );
   }
+
+  static Color getBackgroundColor(num discount) {
+    if (discount <= 30) {
+      return const Color(0xffF2F8FD);
+    } else if (discount <= 40) {
+      return const Color(0xffFDF4EC);
+    } else {
+      return const Color(0xffFDF2F2);
+    }
+  }
+
+  static Color getTextColor(num discount) {
+    if (discount <= 30) {
+      return const Color(0xff2D73B3);
+    } else if (discount <= 40) {
+      return const Color(0xffFCA364);
+    } else {
+      return const Color(0xffED8282);
+    }
+  }
 }

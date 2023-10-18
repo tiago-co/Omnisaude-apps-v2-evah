@@ -11,6 +11,7 @@ import 'package:omni_core/src/app/modules/benefits/discounts/stores/organization
 import 'package:omni_core/src/app/modules/benefits/discounts/stores/rescue_coupon_store.dart';
 import 'package:omni_core/src/app/modules/new_discounts/discount_detail.dart';
 import 'package:omni_core/src/app/modules/new_discounts/new_cupons_page.dart';
+import 'package:omni_core/src/app/modules/new_discounts/new_discounts_page.dart';
 
 class NewDiscountsModule extends Module {
   @override
@@ -32,7 +33,7 @@ class NewDiscountsModule extends Module {
     ),
     ChildRoute(
       '/discounts',
-      child: (_, args) => DiscountsPage(
+      child: (_, args) => NewDiscountsPage(
         moduleName: args.data['moduleName'],
         categoryParam: args.data['categoryParam'],
       ),
@@ -40,11 +41,11 @@ class NewDiscountsModule extends Module {
     ChildRoute(
       '/cupons',
       child: (_, args) => NewCuponsPage(
-        organizationId: args.data['organizationId'],
-        moduleName: args.data['moduleName'],
-        coverImage: args.data['coverImage'],
-        couponRescueType: args.data['couponRescueType'],
-      ),
+          organizationId: args.data['organizationId'],
+          moduleName: args.data['moduleName'],
+          coverImage: args.data['coverImage'],
+          couponRescueType: args.data['couponRescueType'],
+          categoryParam: args.data['categoryParam']),
     ),
     ChildRoute(
       '/coupon_details',
