@@ -9,6 +9,7 @@ import 'package:omni_core/src/app/modules/benefits/discounts/stores/coupon_detai
 import 'package:omni_core/src/app/modules/benefits/discounts/stores/coupon_rescue_type_filter_store.dart';
 import 'package:omni_core/src/app/modules/benefits/discounts/stores/organizations_list_store.dart';
 import 'package:omni_core/src/app/modules/benefits/discounts/stores/rescue_coupon_store.dart';
+import 'package:omni_core/src/app/modules/new_discounts/discount_detail.dart';
 import 'package:omni_core/src/app/modules/new_discounts/new_cupons_page.dart';
 
 class NewDiscountsModule extends Module {
@@ -49,6 +50,12 @@ class NewDiscountsModule extends Module {
       '/coupon_details',
       child: (_, args) => CouponDetailsPage(
         title: args.data,
+      ),
+    ),
+    ChildRoute(
+      '/discount_details',
+      child: (_, args) => DiscountDetail(
+        organizationId: args.data['organizationId'],
       ),
     ),
     ChildRoute(
