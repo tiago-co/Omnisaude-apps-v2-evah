@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_core/src/app/modules/home/new_home/home/widgets/reminders/reminder_item.dart';
+import 'package:omni_general/omni_general.dart';
 
 class RemindersWidget extends StatelessWidget {
   const RemindersWidget();
@@ -16,9 +18,7 @@ class RemindersWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            // group43JQo (4511:32349)
             margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 12 * fem),
-
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4 * fem),
             ),
@@ -26,9 +26,7 @@ class RemindersWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  // todaysremindersDGs (4511:32350)
-                  margin:
-                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
+                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
                   child: Text(
                     'Lembretes de Hoje',
                     style: TextStyle(
@@ -40,8 +38,21 @@ class RemindersWidget extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  // masterbuttonmasterKqh (4902:28304)
-                  onPressed: () {},
+                  onPressed: () {
+                    // Modular.to.pushNamed('/newHome/drugControl/newDrugControl', arguments: {
+                    //   'useCustomMedication': true,
+                    //   'useCaregiver': true,
+                    //   'moduleName': 'moduleName',
+                    //   'program': ProgramModel(code: 'MEDICONAHORA'),
+                    // });
+                    Modular.to.pushNamed(
+                      '/newHome/reminders',
+                      arguments: {
+                        'moduleName': 'lembretes',
+                        'program': ProgramModel(code: 'MEDICONAHORA'),
+                      },
+                    );
+                  },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
                   ),
@@ -51,10 +62,7 @@ class RemindersWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4 * fem),
                     ),
                     child: Container(
-                      // autogroupsseoamd (MYo38CdjnHeUCZMaqbsseo)
-                      margin: EdgeInsets.fromLTRB(
-                          0 * fem, 0 * fem, 0 * fem, 0 * fem),
-
+                      margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
                       height: double.infinity,
                       child: Center(
                         child: Center(
@@ -76,17 +84,19 @@ class RemindersWidget extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            // frame1560eWb (4511:32352)
-            width: 335 * fem,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const ReminderItem(),
-                const ReminderItem(),
-              ],
-            ),
-          ),
+          // SizedBox(
+          //   width: 335 * fem,
+          //   child: const Column(
+          //     children: [
+          //       ReminderItem(
+          //         buildFullWidget: true,
+          //       ),
+          //       ReminderItem(
+          //         buildFullWidget: true,
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );

@@ -90,6 +90,7 @@ class BottomSheetHeaderWidget extends StatelessWidget {
               onChange: onSearch,
               prefixIcon: prefixIcon,
               controller: controller!,
+              focusedborder: InputBorder.none,
             ),
           if (showSearch) const SizedBox(height: 10),
           if (!showSearch) const Divider(),
