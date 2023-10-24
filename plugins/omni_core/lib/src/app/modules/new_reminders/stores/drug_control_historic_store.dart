@@ -40,7 +40,13 @@ class DrugControlHistoricStore extends NotifierStore<DioError, DrugControlResult
     final listAppointsments = state.results?.map<Appointment>((e) {
       // final day = Formaters.stringToDate(e.startDate!);
       final day = DateTime.parse(e.startDate!);
-      final today = DateTime(2023, 10, 22, day.hour, day.minute);
+      final today = DateTime(
+        2023,
+        10,
+        e.continuousUse ? DateTime.now().day : day.day,
+        day.hour,
+        day.minute,
+      );
       return Appointment(
         startTime: today,
         endTime: today.add(const Duration(minutes: 30)),

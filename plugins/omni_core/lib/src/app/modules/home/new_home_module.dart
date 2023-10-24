@@ -17,6 +17,7 @@ import 'package:omni_core/src/app/modules/home/pages/stores/unread_notifications
 import 'package:omni_core/src/app/modules/informatives/informatives_module.dart';
 import 'package:omni_core/src/app/modules/new_discounts/discounts_module.dart';
 import 'package:omni_core/src/app/modules/new_profile/new_profile_module.dart';
+import 'package:omni_core/src/app/modules/new_reminders/reminders_module.dart';
 import 'package:omni_core/src/app/modules/notifications/notifications_module.dart';
 import 'package:omni_core/src/app/modules/procedures/procedures_module.dart';
 import 'package:omni_core/src/app/modules/profile/profile_module.dart';
@@ -148,6 +149,12 @@ class NewHomeModule extends Module {
     ModuleRoute(
       '/teleattendanceUrgency',
       module: TeleattendanceModule(),
+      transition: TransitionType.fadeIn,
+    ),
+    ModuleRoute(
+      '/reminders',
+      module: RemindersModule(),
+      // module: DrugControlModule(),
       transition: TransitionType.fadeIn,
     ),
   ];

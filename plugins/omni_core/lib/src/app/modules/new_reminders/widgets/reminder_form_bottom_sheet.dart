@@ -105,12 +105,15 @@ class _ReminderFormBottomSheetState extends State<ReminderFormBottomSheet> {
                     const SizedBox(
                       height: 12,
                     ),
-                    Row(
+                    const Row(
                       children: [
                         Expanded(
                           child: NewDrugControlDosageWidget(
                             useCustomMedication: false,
                           ),
+                        ),
+                        SizedBox(
+                          width: 8,
                         ),
                         Expanded(
                           child: NewDrugControlUnityWidget(useCustomMedication: false),
@@ -156,8 +159,7 @@ class _ReminderFormBottomSheetState extends State<ReminderFormBottomSheet> {
                         ),
                         Container(
                           padding: const EdgeInsets.symmetric(
-                            vertical: 16,
-                            horizontal: 38,
+                            horizontal: 36,
                           ),
                           decoration: BoxDecoration(
                             color: const Color(0xffED8282),

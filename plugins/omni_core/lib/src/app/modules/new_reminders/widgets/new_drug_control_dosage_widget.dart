@@ -48,6 +48,8 @@ class _NewDrugControlDosageWidgetState extends State<NewDrugControlDosageWidget>
             label: DrugControlLabels.newDrugControlDosageLabel,
             placeholder: DrugControlLabels.newDrugControlDosagePlaceholder,
             controller: textController,
+            padding: EdgeInsets.zero,
+            focusedborder: InputBorder.none,
             onChange: (String? input) {
               drugControlStore.state.dosage = input;
               drugControlStore.update(drugControlStore.state);

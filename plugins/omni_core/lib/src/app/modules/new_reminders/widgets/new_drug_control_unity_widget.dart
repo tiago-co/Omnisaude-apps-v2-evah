@@ -52,6 +52,7 @@ class _NewDrugControlUnityWidgetState extends State<NewDrugControlUnityWidget> {
             itemsLabels: DRUG_CONTROL_UNITIES.values.toList(),
             placeholder: DrugControlLabels.newDrugControlUnityPlaceholder,
             controller: textController,
+            padding: EdgeInsets.zero,
             onSelectItem: (MapEntry unity) {
               textController.text = unity.value;
               drugControlStore.state.unity = unity.value;

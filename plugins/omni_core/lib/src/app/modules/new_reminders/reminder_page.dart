@@ -27,12 +27,21 @@ class ReminderPage extends StatefulWidget {
 class _ReminderPageState extends State<ReminderPage> {
   final DrugControlHistoricStore store = Modular.get();
   final NewDrugControlStore newDrugStore = Modular.get();
+  // final MedicineHistoricDateFilterStore store = Modular.get();
+  final DatePickerController dateController = DatePickerController();
 
   @override
   void initState() {
     super.initState();
     store.params.limit = '10';
     store.getDrugControls(store.params);
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => dateController.animateToDate(
+        DateTime.now(),
+        duration: const Duration(milliseconds: 1000),
+        curve: Curves.decelerate,
+      ),
+    );
   }
 
   @override
@@ -62,8 +71,7 @@ class _ReminderPageState extends State<ReminderPage> {
               Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 3.25 * fem),
-                    height: 88 * fem,
+                    // height: 88 * fem,
                     decoration: const BoxDecoration(
                       color: Color(0xffffffff),
                     ),
@@ -103,47 +111,47 @@ class _ReminderPageState extends State<ReminderPage> {
                                   ),
                                 ),
                               ),
-                              Container(
-                                // autogroupe4stuEo (MYpEsXkY7KZ6oqjTa8E4ST)
-                                margin: EdgeInsets.fromLTRB(0 * fem, 5 * fem, 0 * fem, 0 * fem),
-                                width: 81 * fem,
-                                height: 32 * fem,
-                                child: Container(
-                                  // masterbadgemasterSEj (I5103:26205;13:2572)
-                                  padding: EdgeInsets.fromLTRB(12 * fem, 6 * fem, 12 * fem, 6 * fem),
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: const Color(0xffededf1)),
-                                    borderRadius: BorderRadius.circular(16 * fem),
-                                  ),
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        // autogroup5yjxjUj (MYpF1rqzVD5N98G5tY5yJX)
-                                        margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 8.27 * fem, 0 * fem),
-                                        padding: EdgeInsets.fromLTRB(2 * fem, 0 * fem, 0 * fem, 0 * fem),
-                                        height: double.infinity,
-                                        child: Text(
-                                          'Week',
-                                          style: TextStyle(
-                                            fontSize: 14 * ffem,
-                                            fontWeight: FontWeight.w400,
-                                            height: 1.4000000272 * ffem / fem,
-                                            color: const Color(0xff1a1c22),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 7.45 * fem,
-                                        height: 4.39 * fem,
-                                        child: const Icon(Icons.keyboard_arrow_down_rounded),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                              // Container(
+                              //   // autogroupe4stuEo (MYpEsXkY7KZ6oqjTa8E4ST)
+                              //   margin: EdgeInsets.fromLTRB(0 * fem, 5 * fem, 0 * fem, 0 * fem),
+                              //   width: 81 * fem,
+                              //   height: 32 * fem,
+                              //   child: Container(
+                              //     // masterbadgemasterSEj (I5103:26205;13:2572)
+                              //     padding: EdgeInsets.fromLTRB(12 * fem, 6 * fem, 12 * fem, 6 * fem),
+                              //     width: double.infinity,
+                              //     height: double.infinity,
+                              //     decoration: BoxDecoration(
+                              //       border: Border.all(color: const Color(0xffededf1)),
+                              //       borderRadius: BorderRadius.circular(16 * fem),
+                              //     ),
+                              //     child: Row(
+                              //       crossAxisAlignment: CrossAxisAlignment.center,
+                              //       children: [
+                              //         Container(
+                              //           // autogroup5yjxjUj (MYpF1rqzVD5N98G5tY5yJX)
+                              //           margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 8.27 * fem, 0 * fem),
+                              //           padding: EdgeInsets.fromLTRB(2 * fem, 0 * fem, 0 * fem, 0 * fem),
+                              //           height: double.infinity,
+                              //           child: Text(
+                              //             'Week',
+                              //             style: TextStyle(
+                              //               fontSize: 14 * ffem,
+                              //               fontWeight: FontWeight.w400,
+                              //               height: 1.4000000272 * ffem / fem,
+                              //               color: const Color(0xff1a1c22),
+                              //             ),
+                              //           ),
+                              //         ),
+                              //         Container(
+                              //           width: 7.45 * fem,
+                              //           height: 4.39 * fem,
+                              //           child: const Icon(Icons.keyboard_arrow_down_rounded),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -155,7 +163,7 @@ class _ReminderPageState extends State<ReminderPage> {
                     DateTime(DateTime.now().year, DateTime.now().month),
                     locale: 'pt_BR',
                     // activeDates: activeDates,
-                    // controller: widget.dateController,
+                    controller: dateController,
                     // selectionColor: Theme.of(context).primaryColor,
                     selectionColor: const Color(0xff2D73B3),
                     initialSelectedDate: DateTime.now(),
@@ -172,10 +180,6 @@ class _ReminderPageState extends State<ReminderPage> {
                           fontWeight: FontWeight.w600,
                           fontSize: 18,
                         ),
-                    // daysCount: DateTime(triple.state.year, triple.state.month + 1, 0)
-                    //         .difference(
-                    //           DateTime(triple.state.year, triple.state.month),
-                    //         )
                     daysCount: DateTime(2023, 10 + 1, 0)
                             .difference(
                               DateTime(2023, 10),
@@ -183,10 +187,10 @@ class _ReminderPageState extends State<ReminderPage> {
                             .inDays +
                         1,
                     onDateChange: (date) {
-                      // store.medicineStore.params.date = Formaters.dateToStringDate(
-                      //   date,
-                      // );
-                      // store.medicineStore.getMedicines(store.medicineStore.params);
+                      store.params.date = Formaters.dateToStringDate(
+                        date,
+                      );
+                      store.getDrugControls(store.params);
                     },
                   ),
                   TripleBuilder<DrugControlHistoricStore, DioError, DrugControlResultsModel>(
