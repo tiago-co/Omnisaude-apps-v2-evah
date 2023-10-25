@@ -71,14 +71,19 @@ class ReminderItem extends StatelessWidget {
                 ),
               ],
             ),
-            Text(
-              // takethedrugah225VJF (I5103:12314;4511:32361)
-              'Tomar "${title}"',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                height: 1.6,
-                color: Color(0xff1a1c22),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  // takethedrugah225VJF (I5103:12314;4511:32361)
+                  'Tomar "${title}"',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    height: 1.6,
+                    color: Color(0xff1a1c22),
+                  ),
+                ),
               ),
             ),
           ],

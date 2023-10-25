@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:omni_core/src/app/modules/home/new_home/home/widgets/bottom_navigation_bar_widget.dart';
 import 'package:omni_core/src/app/modules/home/new_home/home/widgets/reminders/reminder_item.dart';
 import 'package:omni_core/src/app/modules/new_reminders/hourly_timeline.dart';
 import 'package:omni_core/src/app/modules/new_reminders/stores/drug_control_historic_store.dart';
@@ -26,7 +27,7 @@ class ReminderPage extends StatefulWidget {
 
 class _ReminderPageState extends State<ReminderPage> {
   final DrugControlHistoricStore store = Modular.get();
-  final NewDrugControlStore newDrugStore = Modular.get();
+
   // final MedicineHistoricDateFilterStore store = Modular.get();
   final DatePickerController dateController = DatePickerController();
 
@@ -51,15 +52,6 @@ class _ReminderPageState extends State<ReminderPage> {
     double ffem = fem * 0.97;
 
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Modular.to.pop(),
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.black,
-          ),
-        ),
-      ),
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -157,6 +149,9 @@ class _ReminderPageState extends State<ReminderPage> {
                         ),
                       ],
                     ),
+                  ),
+                  const SizedBox(
+                    height: 12,
                   ),
                   DayPickerTimelineWidget(
                     // DateTime(triple.state.year, triple.state.month),
