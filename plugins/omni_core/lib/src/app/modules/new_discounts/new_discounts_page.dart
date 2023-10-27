@@ -96,7 +96,6 @@ class _NewDiscountsPageState extends State<NewDiscountsPage> {
                           Modular.to.pushNamed(
                             '/newHome/discounts/cupons',
                             arguments: {
-                              // 'moduleName': 'Desconto em Farmácia',
                               'categoryParam': '19',
                               'organizationId': 0,
                               'moduleName': 'Desconto em Farmácias',

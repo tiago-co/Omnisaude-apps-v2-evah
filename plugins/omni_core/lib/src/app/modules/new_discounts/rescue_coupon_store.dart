@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
@@ -12,12 +10,12 @@ class RescueCouponStore extends NotifierStore<DioError, String> {
   final LecuponService lecuponService = LecuponService();
   final CouponDetailsStore store = Modular.get();
 
-  Future<String> rescueCoupon({
+  Future<void> rescueCoupon({
     required int organizationId,
     required RescueCouponModel rescueCoupon,
   }) async {
     setLoading(true);
-    return await lecuponService
+    await lecuponService
         .rescueCoupon(
       organizationId: organizationId,
       rescueCoupon: rescueCoupon,
@@ -27,7 +25,6 @@ class RescueCouponStore extends NotifierStore<DioError, String> {
       store.update(store.state, force: true);
       update(value);
       setLoading(false);
-      return value;
     }).catchError((onError) {
       setLoading(false);
       setError(onError);

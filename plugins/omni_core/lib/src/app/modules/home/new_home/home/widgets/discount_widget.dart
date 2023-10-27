@@ -47,6 +47,7 @@ class DiscountsWidget extends StatelessWidget {
                       '/newHome/discounts/discounts',
                       arguments: {
                         'moduleName': 'Desconto em Farmácias',
+                        'categoryParam': '19',
                       },
                     );
                   },

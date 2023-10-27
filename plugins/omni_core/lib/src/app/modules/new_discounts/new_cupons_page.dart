@@ -7,8 +7,10 @@ import 'package:omni_core/src/app/core/enums/coupon_rescue_enum.dart';
 import 'package:omni_core/src/app/modules/benefits/discounts/stores/coupon_rescue_type_filter_store.dart';
 import 'package:omni_core/src/app/modules/benefits/discounts/stores/cupons_list_store.dart';
 import 'package:omni_core/src/app/modules/benefits/discounts/stores/organizations_list_store.dart';
+import 'package:omni_core/src/app/modules/benefits/discounts/widgets/coupon_rescue_type_filter_widget.dart';
 import 'package:omni_core/src/app/modules/benefits/discounts/widgets/cupon_card_widget.dart';
 import 'package:omni_core/src/app/modules/new_discounts/widgets/cupon_widget.dart';
+import 'package:omni_core/src/app/modules/new_discounts/widgets/new_coupon_rescue_type_filter_widget.dart';
 import 'package:omni_general/omni_general.dart';
 
 class NewCuponsPage extends StatefulWidget {
@@ -38,9 +40,10 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
   @override
   void initState() {
     super.initState();
-    store.params.usageType = CouponRescueType.online.toJson;
-    couponRescueTypeFilterStore.onChangeTypeWithoutRequest(CouponRescueType.online);
-    store.params.usageType = widget.couponRescueType;
+    // store.params.usageType = CouponRescueType.online.toJson;
+    store.params.usageType = CouponRescueType.physical.toJson;
+    couponRescueTypeFilterStore.onChangeTypeWithoutRequest(CouponRescueType.physical);
+    // store.params.usageType = widget.couponRescueType;
     organizationStore
         .getPharmaOrganizationsList(
           categoryId: widget.categoryParam,
@@ -67,13 +70,10 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
           ),
         ),
         centerTitle: true,
-        actions: [
+        actions: const [
           Padding(
             padding: EdgeInsets.only(right: 20),
-            child: Icon(
-              Icons.storage_outlined,
-              color: Colors.black54,
-            ),
+            child: NewCouponRescueTypeFilterWidget(),
           ),
         ],
       ),
@@ -92,7 +92,7 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
           children: [
             Text(
               widget.moduleName,
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
             ),
             const SizedBox(
               height: 20,
@@ -169,7 +169,10 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
                     itemCount: organizationStore.state.length,
                     itemBuilder: (context, index) {
                       final discount = organizationStore.state[index];
-                      return CuponWidget(organization: discount);
+                      return CuponWidget(
+                        organization: discount,
+                        couponRescueType: couponRescueTypeFilterStore.state,
+                      );
                     },
                   );
                 }),

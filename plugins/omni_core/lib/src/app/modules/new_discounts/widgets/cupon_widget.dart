@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:omni_core/src/app/core/enums/coupon_rescue_enum.dart';
 import 'package:omni_general/omni_general.dart';
 
 import '../../../core/resources/assets.dart';
 
 class CuponWidget extends StatelessWidget {
-  const CuponWidget({Key? key, required this.organization}) : super(key: key);
-
+  const CuponWidget({
+    Key? key,
+    required this.organization,
+    required this.couponRescueType,
+  }) : super(key: key);
+  final CouponRescueType couponRescueType;
   final OrganizationModel organization;
   @override
   Widget build(BuildContext context) {
@@ -15,6 +20,7 @@ class CuponWidget extends StatelessWidget {
         '/newHome/discounts/discount_details',
         arguments: {
           'organizationId': organization.id,
+          'couponRescueType': couponRescueType,
         },
       ),
       child: Container(
@@ -127,10 +133,10 @@ class CuponWidget extends StatelessWidget {
                             color: const Color(0xfff6f6f8),
                             borderRadius: BorderRadius.circular(40),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Text(
-                              'Offline',
-                              style: TextStyle(
+                              couponRescueType.label,
+                              style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
                                 height: 1.4000000272,

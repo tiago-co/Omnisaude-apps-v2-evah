@@ -8,14 +8,7 @@ import 'package:omni_core/src/app/modules/benefits/discounts/stores/rescue_coupo
 import 'package:omni_general/omni_general.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-enum CouponTemplateType {
-  link,
-  qrCode,
-  couponCode,
-  linkAndCode,
-  general,
-  physicalCouponCode
-}
+enum CouponTemplateType { link, qrCode, couponCode, linkAndCode, general, physicalCouponCode }
 
 extension CouponTemplateTypeExtension on CouponTemplateType {
   String get buttonLabel {
@@ -35,23 +28,23 @@ extension CouponTemplateTypeExtension on CouponTemplateType {
     }
   }
 
-  Function(BuildContext context) get getOnTapFloatingButton {
-    final CouponDetailsStore store = Modular.get();
+  Function(BuildContext context, CouponDetailsStore cuponDetailStore) get getOnTapFloatingButton {
+    // final CouponDetailsStore store = cuponDetailStore;
     final RescueCouponStore rescueCouponStore = Modular.get();
 
     switch (this) {
       case CouponTemplateType.link:
-        return (context) async {
+        return (context, store) async {
           await launchUrl(
             Uri.parse(store.state.activationUrl!),
           );
         };
       case CouponTemplateType.qrCode:
-        return (context) {
+        return (context, store) {
           Modular.to.pushNamed('scan_qrcode', arguments: store.state.id);
         };
       case CouponTemplateType.couponCode:
-        return (context) {
+        return (context, store) {
           rescueCouponStore
               .rescueCoupon(
             organizationId: store.state.organizationId!,
@@ -60,8 +53,7 @@ extension CouponTemplateTypeExtension on CouponTemplateType {
             ),
           )
               .then((value) {
-            final ClipboardData clipboardData =
-                ClipboardData(text: store.state.code!);
+            final ClipboardData clipboardData = ClipboardData(text: store.state.code!);
             Clipboard.setData(clipboardData);
             Helpers.showDialog(
               context,
@@ -85,18 +77,17 @@ extension CouponTemplateTypeExtension on CouponTemplateType {
           });
         };
       case CouponTemplateType.linkAndCode:
-        return (context) async {
-          final ClipboardData clipboardData =
-              ClipboardData(text: store.state.code!);
+        return (context, store) async {
+          final ClipboardData clipboardData = ClipboardData(text: store.state.code!);
           Clipboard.setData(clipboardData);
           await launchUrl(
             Uri.parse(store.state.activationUrl!),
           );
         };
       case CouponTemplateType.general:
-        return (context) async {};
+        return (context, store) async {};
       case CouponTemplateType.physicalCouponCode:
-        return (context) async {
+        return (context, store) async {
           showModalBottomSheet(
             context: context,
             isDismissible: true,
