@@ -6,9 +6,9 @@ import 'package:omni_general/omni_general.dart';
 
 class WelcomeForm extends StatelessWidget {
   WelcomeForm({Key? key}) : super(key: key);
-  final TextEditingController username = TextEditingController();
+  final TextEditingController name = TextEditingController();
   final TextEditingController email = TextEditingController();
-  final TextEditingController password = TextEditingController();
+  final TextEditingController cpf = TextEditingController();
   final RegisterStore store = Modular.get();
 
   @override
@@ -19,13 +19,14 @@ class WelcomeForm extends StatelessWidget {
     return Column(
       children: [
         TextFieldWidget(
-          label: 'Username',
-          controller: username,
+          label: 'Nome',
+          controller: name,
           focusedborder: InputBorder.none,
           padding: EdgeInsets.zero,
+          // keyboardType: TextInputType.name,
           onChange: (String? input) {
-            store.state.individualPerson?.user?.username = input;
-            store.updateForm(store.state);
+            store.state.individualPerson?.name = input;
+            // store.updateForm(store.state);
           },
         ),
         SizedBox(
@@ -36,22 +37,25 @@ class WelcomeForm extends StatelessWidget {
           controller: email,
           focusedborder: InputBorder.none,
           padding: EdgeInsets.zero,
+          // keyboardType: TextInputType.emailAddress,
           onChange: (String? input) {
-            store.state.individualPerson?.user?.email = input;
-            store.updateForm(store.state);
+            store.state.individualPerson?.user = UserModel(email: input);
+            // store.updateForm(store.state);
           },
         ),
         SizedBox(
           height: 12,
         ),
         TextFieldWidget(
-          label: 'Senha',
-          controller: password,
+          label: 'CPF',
+          controller: cpf,
           focusedborder: InputBorder.none,
           padding: EdgeInsets.zero,
+          // mask: Masks.generateMask('###.###.###-##'),
+          // keyboardType: TextInputType.number,
           onChange: (String? input) {
-            store.state.individualPerson?.user?.password = input;
-            store.updateForm(store.state);
+            store.state.individualPerson?.cpf = input;
+            // store.updateForm(store.state);
           },
         ),
       ],

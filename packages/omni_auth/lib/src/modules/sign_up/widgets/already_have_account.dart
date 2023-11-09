@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class AlreadyHaveAccount extends StatelessWidget {
   const AlreadyHaveAccount({Key? key}) : super(key: key);
@@ -11,7 +12,9 @@ class AlreadyHaveAccount extends StatelessWidget {
     return Center(
       // alreadyhaveanaccountsigninvVd (5101:11635)
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Modular.to.navigate('/auth/newLogin');
+        },
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
         ),

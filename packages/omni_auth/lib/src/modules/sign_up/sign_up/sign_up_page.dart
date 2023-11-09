@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:omni_auth/src/modules/register/pages/widgets/birth_date_dialog.dart';
 import 'package:omni_auth/src/modules/register/stores/register_store.dart';
 import 'package:omni_auth/src/modules/sign_up/widgets/welcome_form_field.dart';
 import 'package:omni_general/omni_general.dart';
@@ -17,6 +18,35 @@ class SignUpPage extends StatelessWidget {
   final TextEditingController weightController = TextEditingController();
 
   final RegisterStore store = Modular.get();
+
+  chooseBirthDate(BuildContext context) {
+    // service
+    //     .selectDate(
+    //   context,
+    //   enablePastDates: true,
+    //   maxDate: DateTime.now(),
+    //   minDate: DateTime(1900),
+    //   initialDisplayDate: DateTime(
+    //     DateTime.now().year,
+    //     DateTime.now().month,
+    //     DateTime.now().day,
+    //   ),
+    // )
+    showDialog(
+      context: context,
+      builder: (context) => const BirthDateDialog(),
+    ).then(
+      (birth) {
+        if (birth == null) return;
+
+        birthController.text = Formaters.dateToStringDate(birth);
+        store.state.individualPerson!.birth = Formaters.dateToStringDateWithHifen(birth);
+
+        store.updateForm(store.state);
+      },
+    ).whenComplete(() => FocusScope.of(context).requestFocus(FocusNode()));
+  }
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 375;
@@ -93,6 +123,10 @@ class SignUpPage extends StatelessWidget {
                               label: 'Data de Nascimento',
                               controller: birthController,
                               // focusNode: usernameFocus,
+                              onTap: () {
+                                chooseBirthDate(context);
+                              },
+                              readOnly: true,
                               focusedborder: InputBorder.none,
                               padding: EdgeInsets.zero,
                               suffixIcon: Icon(
@@ -109,6 +143,7 @@ class SignUpPage extends StatelessWidget {
                             TextFieldWidget(
                               label: 'Telefone',
                               controller: phoneController,
+                              mask: Masks.generateMask('(##) # ####-####'),
                               // focusNode: usernameFocus,
                               focusedborder: InputBorder.none,
                               padding: EdgeInsets.zero,
@@ -125,7 +160,7 @@ class SignUpPage extends StatelessWidget {
                               focusedborder: InputBorder.none,
                               padding: EdgeInsets.zero,
                               onChange: (String? input) {
-                                store.state.individualPerson?.address?.street = input;
+                                store.state.individualPerson?.address = AddressModel(street: input);
                                 store.updateForm(store.state);
                               },
                             ),
@@ -179,18 +214,36 @@ class SignUpPage extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () async {
-                          await store.registerBeneficiary(store.state).then((value) {
-                            Modular.to.pushReplacementNamed('/auth/newLogin');
-                          }).catchError((onError) {
-                            Helpers.showDialog(
-                              context,
-                              RequestErrorWidget(
-                                error: onError,
-                                buttonText: RegisterLabels.close,
-                                onPressed: () => Modular.to.pop(),
+                          await store.updateUser().then((value) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.green,
+                                content: Text(
+                                  "$value",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
-                              showClose: true,
                             );
+                            Modular.to.navigate('/auth/newLogin');
+                          }).catchError((onError) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text(
+                                  "${onError.message}",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            );
+                            // Helpers.showDialog(
+                            //   context,
+                            //   RequestErrorWidget(
+                            //     error: onError,
+                            //     buttonText: RegisterLabels.close,
+                            //     onPressed: () => Modular.to.pop(),
+                            //   ),
+                            //   showClose: true,
+                            // );
                           });
                         },
                         child: Container(

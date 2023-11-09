@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:omni_core/omni_core.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GmailButton extends StatelessWidget {
   @override
@@ -10,7 +11,11 @@ class GmailButton extends StatelessWidget {
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return InkWell(
-      onTap: () => Modular.to.pushNamed('/auth/signUp/password'),
+      // onTap: () => Modular.to.pushNamed('/auth/signUp/password'),
+      onTap: () => launchUrl(
+        Uri.parse('https://mail.google.com/mail/?q=from:atendimento@evahsaude.com.br'),
+        mode: LaunchMode.externalApplication,
+      ),
       child: Container(
         // masterbuttonmaster2P1 (I202:13935;201:22697)
         width: double.infinity,

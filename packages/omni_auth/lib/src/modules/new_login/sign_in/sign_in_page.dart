@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_auth/src/modules/login/stores/login_store.dart';
+import 'package:omni_auth/src/modules/new_login/store/new_login_store.dart';
 import 'package:omni_auth/src/modules/sign_up/widgets/welcome_form_field.dart';
 import 'package:omni_general/omni_general.dart';
 import 'package:omni_login_labels/labels.dart';
@@ -11,7 +12,7 @@ class SignInPage extends StatelessWidget {
   final TextEditingController password = TextEditingController();
   final FocusNode usernameFocus = FocusNode();
   final FocusNode passwordFocus = FocusNode();
-  final LoginStore store = Modular.get();
+  final NewLoginStore store = Modular.get();
 
   void login(BuildContext context) {
     store.authenticate(store.state).then(
@@ -20,7 +21,7 @@ class SignInPage extends StatelessWidget {
       },
     ).catchError(
       (onError) {
-        password.clear();
+        // password.clear();
         Helpers.showDialog(
           context,
           RequestErrorWidget(
@@ -105,6 +106,7 @@ class SignInPage extends StatelessWidget {
                       focusNode: usernameFocus,
                       focusedborder: InputBorder.none,
                       padding: EdgeInsets.zero,
+                      textCapitalization: TextCapitalization.none,
                       onChange: (String? input) {
                         store.state.username = input;
                         store.updateForm(store.state);
@@ -117,6 +119,7 @@ class SignInPage extends StatelessWidget {
                       focusNode: passwordFocus,
                       focusedborder: InputBorder.none,
                       padding: EdgeInsets.zero,
+                      textCapitalization: TextCapitalization.none,
                       onChange: (String? input) {
                         store.state.password = input;
                         store.updateForm(store.state);

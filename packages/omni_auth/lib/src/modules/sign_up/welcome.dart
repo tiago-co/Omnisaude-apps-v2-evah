@@ -2,13 +2,17 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_triple/flutter_triple.dart';
+import 'package:omni_auth/src/modules/register/stores/register_store.dart';
 import 'package:omni_auth/src/modules/sign_up/widgets/already_have_account.dart';
 import 'package:omni_auth/src/modules/sign_up/widgets/horizontal_divider.dart';
 import 'package:omni_auth/src/modules/sign_up/widgets/social_login_buttons.dart';
 import 'package:omni_auth/src/modules/sign_up/widgets/terms_policies_widget.dart';
 import 'package:omni_auth/src/modules/sign_up/widgets/welcome_form.dart';
+import 'package:omni_general/omni_general.dart';
 
 class Welcome extends StatelessWidget {
+  final RegisterStore store = Modular.get();
   @override
   Widget build(BuildContext context) {
     double baseWidth = 375;
@@ -88,27 +92,41 @@ class Welcome extends StatelessWidget {
                             borderRadius: BorderRadius.circular(60 * fem),
                           ),
                           child: InkWell(
-                            onTap: () {
-                              // Modular.to.pushNamed('/emailConfirmation');
-                              Navigator.pushNamed(context, '/auth/signUp/signUpPage');
-                            },
-                            child: Container(
-                              // autogroupvztqGaB (MYmGTQCvwMsEchRfLGVzTq)
-
-                              width: double.infinity,
-                              height: double.infinity,
-                              child: Center(
-                                child: Text(
-                                  'Cadastrar',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 16 * ffem,
-                                    fontWeight: FontWeight.w600,
-                                    height: 1.5 * ffem / fem,
-                                    color: Color(0xffffffff),
+                            onTap: () async {
+                              await store.createUser().then((value) {
+                                Modular.to.pushNamed('/auth/signUp/emailConfirmationSent');
+                              }).catchError((onError) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    backgroundColor: Colors.white,
+                                    content: Text('Erro ao criar usuário!'),
                                   ),
-                                ),
-                              ),
+                                );
+                              });
+                            },
+                            child: TripleBuilder(
+                              store: store,
+                              builder: (context, triple) {
+                                if (triple.isLoading) {
+                                  return const Center(
+                                    child: LoadingWidget(
+                                      indicatorColor: Colors.white,
+                                    ),
+                                  );
+                                }
+                                return Center(
+                                  child: Text(
+                                    'Cadastrar',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 16 * ffem,
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.5 * ffem / fem,
+                                      color: Color(0xffffffff),
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ),

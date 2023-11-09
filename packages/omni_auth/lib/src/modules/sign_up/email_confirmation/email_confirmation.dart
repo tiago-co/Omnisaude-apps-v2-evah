@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:omni_auth/src/modules/register/stores/register_store.dart';
 import 'package:omni_auth/src/modules/sign_up/email_confirmation/widgets/gmail_button.dart';
 import 'package:omni_core/omni_core.dart';
 
 class EmailConfirmation extends StatelessWidget {
-  const EmailConfirmation();
-
+  EmailConfirmation();
+  final RegisterStore store = Modular.get();
   @override
   Widget build(BuildContext context) {
     double baseWidth = 375;
@@ -15,7 +18,6 @@ class EmailConfirmation extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Container(
           // emailconfirmationeT9 (201:17386)
-          width: double.infinity,
           decoration: const BoxDecoration(
             color: Color(0xffffffff),
           ),
@@ -24,49 +26,25 @@ class EmailConfirmation extends StatelessWidget {
             children: [
               Container(
                 // autogroupatg3uP5 (MYqgYxeqcSJjrbDiweATG3)
-                padding:
-                    EdgeInsets.fromLTRB(0 * fem, 44 * fem, 0 * fem, 7 * fem),
+                padding: EdgeInsets.fromLTRB(0 * fem, 44 * fem, 0 * fem, 7 * fem),
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       // autogroup88ufRMR (MYqgRoC7CyQ2q5vfYr88Uf)
-                      margin: EdgeInsets.fromLTRB(
-                          0 * fem, 0 * fem, 0 * fem, 24 * fem),
+                      margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 24 * fem),
                       width: double.infinity,
                       child: Column(
                         children: [
-                          Positioned(
-                            // image9YK (201:17531)
-                            left: 0 * fem,
-                            top: 0 * fem,
-                            child: Align(
-                              child: SizedBox(
-                                width: 335 * fem,
-                                height: 328 * fem,
-                                child: Image.asset(
-                                  Assets.logoSplash,
-                                  package: AssetsPackage.omniGeneral,
-                                  width: 335 * fem,
-                                  height: 328 * fem,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            // logo1T3D (202:13952)
-                            left: 69 * fem,
-                            top: 98 * fem,
-                            child: Align(
-                              child: SizedBox(
-                                width: 203 * fem,
-                                height: 113 * fem,
-                                child: Image.asset(
-                                  'assets/ui/images/logo-1-AFR.png',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                          SizedBox(
+                            // width: 335 * fem,
+                            height: 300,
+                            child: SvgPicture.asset(
+                              Assets.logoSplash,
+                              // package: AssetsPackage.omniGeneral,
+                              // width: 335 * fem,
+                              // height: 328 * fem,
                             ),
                           ),
                         ],
@@ -74,10 +52,9 @@ class EmailConfirmation extends StatelessWidget {
                     ),
                     Container(
                       // almostthereM8b (201:17390)
-                      margin: EdgeInsets.fromLTRB(
-                          0 * fem, 0 * fem, 2 * fem, 13 * fem),
+                      margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 2 * fem, 13 * fem),
                       child: Text(
-                        'Almost there',
+                        'Quase lá',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 28 * ffem,
@@ -89,8 +66,7 @@ class EmailConfirmation extends StatelessWidget {
                     ),
                     Container(
                       // confirmyouridentitybyclickingt (201:17391)
-                      margin: EdgeInsets.fromLTRB(
-                          0 * fem, 0 * fem, 2 * fem, 0 * fem),
+                      margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 2 * fem, 0 * fem),
                       constraints: BoxConstraints(
                         maxWidth: 312 * fem,
                       ),
@@ -104,12 +80,11 @@ class EmailConfirmation extends StatelessWidget {
                             color: Color(0xff52576a),
                           ),
                           children: [
-                            TextSpan(
-                              text:
-                                  'Confirm your identity by clicking the link I sent to ',
+                            const TextSpan(
+                              text: 'Confirme seu cadastro clicando no link enviado para ',
                             ),
                             TextSpan(
-                              text: 'jo****@gmail.com',
+                              text: store.state.individualPerson?.user?.email,
                               style: TextStyle(
                                 fontSize: 16 * ffem,
                                 fontWeight: FontWeight.w400,

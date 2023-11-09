@@ -94,5 +94,9 @@
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
+	<key>FlutterDeepLinkingEnabled</key>
+	<true/>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 </dict>
 </plist>

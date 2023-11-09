@@ -23,12 +23,12 @@ class SignUpModule extends Module {
     ),
     ChildRoute(
       '/emailConfirmation',
-      child: (_, args) => const EmailConfirmation(),
+      child: (_, args) => PasswordPage(),
       transition: TransitionType.fadeIn,
     ),
     ChildRoute(
-      '/password',
-      child: (_, args) => const PasswordPage(),
+      '/emailConfirmationSent',
+      child: (_, args) => EmailConfirmation(),
       transition: TransitionType.fadeIn,
     ),
     ChildRoute(

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
@@ -28,9 +30,12 @@ class _SplashPageState extends State<SplashPage> {
         );
       }
       store.getBeneficiaryData().then((value) async {
-        Modular.to.pushReplacementNamed('/home');
+        Modular.to.pushReplacementNamed('/newHome');
       }).catchError((onError) {
-        Modular.to.pushReplacementNamed('/presentation');
+        // caso seja deeplink, não forçar retornar para a tela inicial
+        if (Modular.args.queryParams.isEmpty) {
+          Modular.to.pushReplacementNamed('/presentation');
+        }
       });
     });
     super.initState();

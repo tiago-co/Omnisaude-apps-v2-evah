@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_general/omni_general.dart'
-    show BeneficiaryModel, DioHttpClientImpl, NewBeneficiaryModel;
+    show BeneficiaryModel, DioHttpClientImpl, JwtModel, NewBeneficiaryModel, PreferencesModel, PreferencesService;
 
 class RegisterRepository extends Disposable {
   late final Dio _client;
@@ -58,6 +58,82 @@ class RegisterRepository extends Disposable {
       return BeneficiaryModel.fromJson(response.data);
     } on DioError catch (e) {
       log('registerBeneficiary: $e');
+      rethrow;
+    }
+  }
+
+  Future createUser(String name, String email, String cpf) async {
+    try {
+      final Dio dio = Dio();
+      dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
+      final Response responseLogin = await dio.post(
+        '/users/',
+        data: {
+          'name': name,
+          'email': email,
+          'cpf': cpf,
+          'client': dotenv.env['CLIENT_ID']!,
+        },
+      );
+    } on Exception catch (e) {
+      log('######## Create User: $e');
+      rethrow;
+    }
+  }
+
+  Future confirmUserCreate(String id, String token, String password) async {
+    try {
+      final Dio dio = Dio();
+      dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
+      dio.interceptors.add(
+        LogInterceptor(responseHeader: false, responseBody: true, error: false),
+      );
+      final Response responseLogin = await dio.post(
+        '/users/confirm-users',
+        data: {
+          'uidb64': id,
+          'token': token,
+          'password': password,
+        },
+      );
+      final JwtModel jwt = JwtModel.fromJson(responseLogin.data);
+      _client.options.headers['Authorization'] = 'Bearer ${jwt.token}';
+      final PreferencesService service = PreferencesService();
+      final PreferencesModel preferences = await service.getUserPreferences(
+        jwt.id!,
+      );
+      preferences.jwt = jwt;
+      await service.setUserPreferences(preferences);
+
+      return jwt;
+    } on Exception catch (e) {
+      log(e.toString());
+    }
+  }
+
+  // Future<BeneficiaryModel> updateUser(NewBeneficiaryModel data)async{
+  Future updateUser(NewBeneficiaryModel data, String token, String id) async {
+    try {
+      final Dio dio = Dio();
+      dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
+      dio.options.headers['Authorization'] = 'JWT $token';
+      final result = await dio.patch('/users/$id', data: data.individualPerson?.toJson());
+      return result.data['message'];
+    } on DioError catch (e) {
+      log('##### Update user: $e');
+      rethrow;
+    }
+  }
+
+  Future fetchUserData(String token, String id) async {
+    try {
+      final Dio dio = Dio();
+      dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
+      dio.options.headers['Authorization'] = 'JWT $token';
+      final result = await dio.get('/users/$id');
+      return result.data;
+    } on DioError catch (e) {
+      log('##### Update user: $e');
       rethrow;
     }
   }

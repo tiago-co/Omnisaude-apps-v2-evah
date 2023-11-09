@@ -5,23 +5,23 @@ import 'package:omni_auth/src/auth_repository.dart';
 import 'package:omni_auth/src/modules/login/stores/obscure_text_store.dart';
 import 'package:omni_general/omni_general.dart';
 import 'package:omni_general/src/core/models/credential_model.dart';
+import 'package:omni_general/src/core/models/new_credential_model.dart';
 
-class NewLoginStore extends NotifierStore<DioError, CredentialModel>
-    with Disposable {
-  NewLoginStore() : super(CredentialModel());
+class NewLoginStore extends NotifierStore<DioError, NewCredentialModel> with Disposable {
+  NewLoginStore() : super(NewCredentialModel());
 
   final ObscureTextStore obscureTextStore = Modular.get();
   final UseBiometricsStore useBiometricsStore = Modular.get();
   final AuthRepository _repository = Modular.get();
   final PreferencesService preferencesService = PreferencesService();
 
-  void updateForm(CredentialModel form) {
-    update(CredentialModel.fromJson(form.toJson()));
+  void updateForm(NewCredentialModel form) {
+    update(NewCredentialModel.fromJson(form.toJson()));
   }
 
-  Future<void> authenticate(CredentialModel data) async {
+  Future<void> authenticate(NewCredentialModel data) async {
     setLoading(true);
-    await _repository.authenticate(data).then(
+    await _repository.newAuthenticate(data).then(
       (prefs) async {
         preferencesService.setHasBiometrics(useBiometricsStore.state);
 
