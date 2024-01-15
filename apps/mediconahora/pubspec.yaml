@@ -3,7 +3,7 @@ description: A new Flutter application.
 
 publish_to: "none"
 
-version: 2.0.4+21
+version: 2.0.5+22
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -50,7 +50,7 @@ dev_dependencies:
 scripts:
   build:
     - flutter build appbundle --no-tree-shake-icons
-    - flutter build ipa
+    - flutter build ipa --no-tree-shake-icons
   buildapk:
     - flutter build apk --no-tree-shake-icons
   buildbundle:
