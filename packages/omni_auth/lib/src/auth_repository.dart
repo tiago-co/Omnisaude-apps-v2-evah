@@ -110,7 +110,7 @@ class AuthRepository extends Disposable {
         path: '/mobile/omni/beneficiario/${jwt.id}/',
         options: Options(headers: {'Authorization': 'JWT ${jwt.token}'}),
       );
-      final BeneficiaryModel beneficiary = BeneficiaryModel.fromJson(
+      final BeneficiaryModel beneficiary = BeneficiaryModel.oldFromJson(
         responseBeneficiary.data,
       );
       final Response responseOprConfigs = await _httpClientImpl.get(

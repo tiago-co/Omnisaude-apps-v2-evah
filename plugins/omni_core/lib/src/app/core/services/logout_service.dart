@@ -25,6 +25,8 @@ class LogoutService {
     await userStore.updateUser();
     service.removeUserPreferences(userStore.state);
     Modular.to.popUntil(ModalRoute.withName('/'));
+    // Modular.to.navigate('/presentation/letsGo');
+
     Modular.to.navigate('/auth/newLogin');
   }
 }

@@ -41,9 +41,10 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
   void initState() {
     super.initState();
     // store.params.usageType = CouponRescueType.online.toJson;
-    store.params.usageType = CouponRescueType.physical.toJson;
-    couponRescueTypeFilterStore.onChangeTypeWithoutRequest(CouponRescueType.physical);
-    // store.params.usageType = widget.couponRescueType;
+    store.params.usageType = widget.couponRescueType;
+    couponRescueTypeFilterStore.onChangeTypeWithoutRequest(
+      CouponRescueType.physical.couponRescueTypeFromJson(widget.couponRescueType),
+    );
     organizationStore
         .getPharmaOrganizationsList(
           categoryId: widget.categoryParam,
@@ -57,7 +58,8 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
 
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 375;
+    double baseWidth = MediaQuery.of(context).size.width > 500 ? 500 : 375;
+
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Scaffold(
@@ -70,15 +72,15 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
           ),
         ),
         centerTitle: true,
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: NewCouponRescueTypeFilterWidget(),
+            padding: EdgeInsets.only(right: 20 * fem),
+            child: const NewCouponRescueTypeFilterWidget(),
           ),
         ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16 * fem),
         child:
             // TripleBuilder<CuponsListStore, DioError, List<CupomModel>>(
             //   store: store,
@@ -92,10 +94,13 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
           children: [
             Text(
               widget.moduleName,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                fontSize: 22 * fem,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: 20 * fem,
             ),
             TextFieldWidget(
               label: 'Buscar...',
@@ -104,47 +109,43 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
               focusedborder: InputBorder.none,
               padding: EdgeInsets.zero,
               textCapitalization: TextCapitalization.none,
-              prefixIcon: const Icon(
+              fem: fem,
+              prefixIcon: Icon(
                 Icons.search,
                 color: Colors.black54,
+                size: 24 * fem,
               ),
               onChange: (String? input) {
                 // store.state.username = input;
                 // store.updateForm(store.state);
               },
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10 * fem,
             ),
             TripleBuilder<OrganizationsListStore, DioError, List<OrganizationModel>>(
                 store: organizationStore,
                 builder: (_, triple) {
                   if (triple.isLoading) {
-                    return const SizedBox(
-                      height: 450,
+                    return SizedBox(
+                      height: 450 * fem,
                       child: Center(
                         child: LoadingWidget(),
                       ),
                     );
                   }
                   if (triple.event == TripleEvent.error) {
-                    return Column(
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: SingleChildScrollView(
-                              clipBehavior: Clip.antiAlias,
-                              physics: const BouncingScrollPhysics(),
-                              child: RequestErrorWidget(
-                                error: triple.error,
-                                onPressed: () => store.getOrganizationCupons(
-                                  organzationId: widget.organizationId,
-                                ),
-                              ),
-                            ),
+                    return Center(
+                      child: SingleChildScrollView(
+                        clipBehavior: Clip.antiAlias,
+                        physics: const BouncingScrollPhysics(),
+                        child: RequestErrorWidget(
+                          error: triple.error,
+                          onPressed: () => store.getOrganizationCupons(
+                            organzationId: widget.organizationId,
                           ),
                         ),
-                      ],
+                      ),
                     );
                   }
                   if (!triple.isLoading && triple.state.isEmpty) {

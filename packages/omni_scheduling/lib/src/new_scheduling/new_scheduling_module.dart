@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:omni_scheduling/src/new_consultation/new_consultation_module.dart';
 import 'package:omni_scheduling/src/new_scheduling/pages/new_scheduling_page.dart';
 import 'package:omni_scheduling/src/new_scheduling/stores/new_scheduling_category_store.dart';
 import 'package:omni_scheduling/src/new_scheduling/stores/new_scheduling_professional_store.dart';
@@ -32,6 +33,11 @@ class NewSchedulingModule extends Module {
         beneficiaryId: args.data['beneficiaryId'],
         schedulingMode: args.data['schedulingMode'],
       ),
+    ),
+    ModuleRoute(
+      '/newConsultation',
+      module: NewConsultationModule(),
+      transition: TransitionType.downToUp,
     ),
   ];
 }

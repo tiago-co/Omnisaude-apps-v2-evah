@@ -4,8 +4,7 @@ import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_core/omni_core.dart';
 import 'package:omni_general/omni_general.dart';
 
-class UserStore extends NotifierStore<Exception, PreferencesModel>
-    with Disposable {
+class UserStore extends NotifierStore<Exception, PreferencesModel> with Disposable {
   final PreferencesService _service = PreferencesService();
   final BeneficiaryRepository _repository = Modular.get();
   final FirebaseService firebaseService = Modular.get();
@@ -23,10 +22,15 @@ class UserStore extends NotifierStore<Exception, PreferencesModel>
         );
 
   Future<PreferencesModel?> updateUser() async {
+    setLoading(true);
     return _service.getUserID().then((userId) async {
-      if (userId == null) throw Exception();
+      if (userId == null) {
+        setLoading(false);
+        throw Exception();
+      }
       return _service.getUserPreferences(userId).then((prefs) async {
         update(prefs);
+        setLoading(false);
         return prefs;
       });
     });

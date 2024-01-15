@@ -5,7 +5,7 @@ class Onboard1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 375;
+    double baseWidth = 500;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Container(
@@ -15,8 +15,7 @@ class Onboard1 extends StatelessWidget {
       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Container(
           // frame1Ksm (4511:30422)
-          margin:
-              EdgeInsets.fromLTRB(24.5 * fem, 0 * fem, 24.5 * fem, 40 * fem),
+          margin: EdgeInsets.fromLTRB(24.5 * fem, 0 * fem, 24.5 * fem, 40 * fem),
           width: double.infinity,
           child: Column(
             mainAxisSize: MainAxisSize.min,

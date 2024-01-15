@@ -29,6 +29,7 @@ class TextFieldWidget extends StatelessWidget {
   final int? maxLenght;
   final InputBorder? focusedborder;
   final TextStyle? textStyle;
+  final double fem;
 
   const TextFieldWidget({
     Key? key,
@@ -59,6 +60,7 @@ class TextFieldWidget extends StatelessWidget {
     this.maxLenght,
     this.focusedborder,
     this.textStyle,
+    this.fem = 0,
   }) : super(key: key);
 
   @override
@@ -68,10 +70,11 @@ class TextFieldWidget extends StatelessWidget {
       child: Opacity(
         opacity: isEnabled ? 1.0 : 0.75,
         child: Container(
-          padding: const EdgeInsets.only(
+          padding: EdgeInsets.only(
             left: 24,
             right: 12,
-            top: 4,
+            top: 4 * fem,
+            bottom: 4 * fem,
           ),
           decoration: BoxDecoration(
             border: Border.all(
@@ -98,26 +101,35 @@ class TextFieldWidget extends StatelessWidget {
             textInputAction: textInputAction,
             keyboardType: keyboardType,
             validator: validator,
-            style: textStyle ?? Theme.of(context).textTheme.titleLarge,
+            style: textStyle ??
+                Theme.of(context).textTheme.titleLarge!.copyWith(
+                      fontSize: 14 * fem,
+                    ),
             decoration: InputDecoration(
               // counter: const SizedBox.shrink(),
               errorText: errorText,
               errorStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: Colors.red,
-                    fontSize: 11,
+                    fontSize: 11 * fem,
                   ),
               errorMaxLines: 3,
               labelText: label,
               hintText: placeholder,
               contentPadding: padding,
               labelStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  // color: Theme.of(context).primaryColor,
+                    fontSize: 12 * fem,
                   ),
               hintStyle: Theme.of(context).textTheme.titleLarge,
               suffixIcon: suffixIcon != null
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [SizedBox(height: 20, width: 20, child: suffixIcon)],
+                      children: [
+                        SizedBox(
+                          height: 40 * fem,
+                          width: 40 * fem,
+                          child: suffixIcon,
+                        )
+                      ],
                     )
                   : null,
               prefixIcon: prefixIcon != null

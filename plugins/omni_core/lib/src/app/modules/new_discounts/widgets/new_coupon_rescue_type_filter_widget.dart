@@ -16,66 +16,89 @@ class NewCouponRescueTypeFilterWidget extends StatefulWidget {
 
 class _NewCouponRescueTypeFilterWidgetState extends State<NewCouponRescueTypeFilterWidget> {
   final CouponRescueTypeFilterStore store = Modular.get();
+  double baseWidth = 500;
+  double fem = 0.0;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () async {
-        await showModalBottomSheet(
-          context: context,
-          enableDrag: true,
-          isScrollControlled: true,
-          backgroundColor: Colors.transparent,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-            ),
+    baseWidth = MediaQuery.of(context).size.width > 500 ? 500 : 375;
+    fem = MediaQuery.of(context).size.width / baseWidth;
+    return TripleBuilder<CouponRescueTypeFilterStore, Exception, CouponRescueType>(
+      store: store,
+      builder: (_, triple) {
+        return InkWell(
+          onTap: () async {
+            await showModalBottomSheet(
+              context: context,
+              enableDrag: true,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+              ),
+              builder: (_) => _buildStatusSheetWidget(_),
+            );
+          },
+          borderRadius: BorderRadius.circular(10),
+          highlightColor: Colors.transparent,
+          splashColor: Theme.of(context).primaryColor.withOpacity(0.05),
+          child: Row(
+            children: [
+              Text(
+                triple.state.label,
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14 * fem,
+                    ),
+              ),
+              SizedBox(width: 4 * fem),
+              Icon(
+                Icons.tune,
+                color: Colors.black54,
+                size: 24 * fem,
+              ),
+            ],
           ),
-          builder: (_) => _buildStatusSheetWidget(_),
+          // TripleBuilder<CouponRescueTypeFilterStore, Exception, CouponRescueType>(
+          //   store: store,
+          //   builder: (_, triple) {
+          //     return Container(
+          //       decoration: BoxDecoration(
+          //         // color: Theme.of(context).primaryColor,
+          //         border: Border.all(
+          //           color: Theme.of(context).primaryColor,
+          //           width: 0.5,
+          //         ),
+          //         borderRadius: BorderRadius.circular(10),
+          //       ),
+          //       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          //       child:
+          //       Row(
+          //         children: [
+          //           SvgPicture.asset(
+          //             Assets.filter,
+          //             package: AssetsPackage.omniGeneral,
+          //             width: 15,
+          //             height: 15,
+          //             color: Colors.white,
+          //           ),
+          //           const SizedBox(width: 10),
+          //           Text(
+          //             triple.state.label,
+          //             style: Theme.of(context).textTheme.titleLarge!.copyWith(
+          //                   color: Colors.white,
+          //                 ),
+          //           ),
+          //         ],
+          //       ),
+          //     );
+          //   },
+          // ),
         );
       },
-      borderRadius: BorderRadius.circular(10),
-      highlightColor: Colors.transparent,
-      splashColor: Theme.of(context).primaryColor.withOpacity(0.05),
-      child: const Icon(
-        Icons.tune,
-        color: Colors.black,
-      ),
-      // TripleBuilder<CouponRescueTypeFilterStore, Exception, CouponRescueType>(
-      //   store: store,
-      //   builder: (_, triple) {
-      //     return Container(
-      //       decoration: BoxDecoration(
-      //         // color: Theme.of(context).primaryColor,
-      //         border: Border.all(
-      //           color: Theme.of(context).primaryColor,
-      //           width: 0.5,
-      //         ),
-      //         borderRadius: BorderRadius.circular(10),
-      //       ),
-      //       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      //       child:
-      //       Row(
-      //         children: [
-      //           SvgPicture.asset(
-      //             Assets.filter,
-      //             package: AssetsPackage.omniGeneral,
-      //             width: 15,
-      //             height: 15,
-      //             color: Colors.white,
-      //           ),
-      //           const SizedBox(width: 10),
-      //           Text(
-      //             triple.state.label,
-      //             style: Theme.of(context).textTheme.titleLarge!.copyWith(
-      //                   color: Colors.white,
-      //                 ),
-      //           ),
-      //         ],
-      //       ),
-      //     );
-      //   },
-      // ),
     );
   }
 
@@ -91,13 +114,16 @@ class _NewCouponRescueTypeFilterWidgetState extends State<NewCouponRescueTypeFil
       margin: const EdgeInsets.only(top: 60),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          padding: EdgeInsets.symmetric(
+            horizontal: 15 * fem,
+            vertical: 10 * fem,
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: 30,
-                height: 2.5,
+                width: 30 * fem,
+                height: 2.5 * fem,
                 decoration: BoxDecoration(color: Colors.grey.shade300),
               ),
               Flexible(
@@ -132,7 +158,9 @@ class _NewCouponRescueTypeFilterWidgetState extends State<NewCouponRescueTypeFil
         contentPadding: EdgeInsets.zero,
         title: Text(
           status.label,
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                fontSize: 14 * fem,
+              ),
         ),
       ),
     );

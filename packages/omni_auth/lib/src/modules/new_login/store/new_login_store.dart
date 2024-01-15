@@ -14,6 +14,7 @@ class NewLoginStore extends NotifierStore<DioError, NewCredentialModel> with Dis
   final UseBiometricsStore useBiometricsStore = Modular.get();
   final AuthRepository _repository = Modular.get();
   final PreferencesService preferencesService = PreferencesService();
+  bool hasSavedCredential = false;
 
   void updateForm(NewCredentialModel form) {
     update(NewCredentialModel.fromJson(form.toJson()));
@@ -24,6 +25,19 @@ class NewLoginStore extends NotifierStore<DioError, NewCredentialModel> with Dis
     await _repository.newAuthenticate(data).then(
       (prefs) async {
         preferencesService.setHasBiometrics(useBiometricsStore.state);
+
+        if (prefs.beneficiary?.individualPerson?.phone != null &&
+            prefs.beneficiary!.individualPerson!.phone != '11999995555') {
+          Modular.to.pushReplacementNamed('/newHome');
+        } else {
+          Modular.to.pushNamed(
+            '/auth/signUp/signUpPage',
+            arguments: {
+              'data': prefs,
+              'password': data.password,
+            },
+          );
+        }
 
         setLoading(false);
       },
@@ -42,6 +56,12 @@ class NewLoginStore extends NotifierStore<DioError, NewCredentialModel> with Dis
         state.username == null ||
         (state.password != null && state.password!.length < 3) ||
         (state.username != null && state.username!.length < 3);
+  }
+
+  Future<NewCredentialModel> getCredential() async {
+    final credential = await preferencesService.getCredential();
+    if (credential.password != null) hasSavedCredential = true;
+    return credential;
   }
 
   @override

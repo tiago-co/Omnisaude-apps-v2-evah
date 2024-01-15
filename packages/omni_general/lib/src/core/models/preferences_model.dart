@@ -1,6 +1,5 @@
 import 'package:omni_general/omni_general.dart';
 
-
 class PreferencesModel {
   BeneficiaryModel? beneficiary;
   JwtModel? jwt;
@@ -19,14 +18,10 @@ class PreferencesModel {
   });
 
   PreferencesModel.fromJson(Map<String, dynamic> json) {
-    beneficiary = json['beneficiary'] != null
-        ? BeneficiaryModel.fromJson(json['beneficiary'])
-        : null;
+    beneficiary = json['beneficiary'] != null ? BeneficiaryModel.fromJson(json['beneficiary']) : null;
     jwt = json['jwt'] != null ? JwtModel.fromJson(json['jwt']) : null;
     primaryColor = json['primaryColor'];
-    oprConfigs = json['globalConfigs'] != null
-        ? OperatorConfigsModel.fromJson(json['globalConfigs'])
-        : null;
+    oprConfigs = json['globalConfigs'] != null ? OperatorConfigsModel.fromJson(json['globalConfigs']) : null;
     renderViewType = renderViewTypeFromJson(json['renderViewType']);
     pairedDevices = json['pairedDevices'] != null
         ? PairedDevicesModel.fromJson(json['pairedDevices'])

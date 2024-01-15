@@ -108,6 +108,23 @@ class RegisterRepository extends Disposable {
       return jwt;
     } on Exception catch (e) {
       log(e.toString());
+      rethrow;
+    }
+  }
+
+  Future resendUserConfirmation(String email) async {
+    try {
+      final Dio dio = Dio();
+      dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
+      final Response responseLogin = await dio.post(
+        '/users/re-send-registration-email',
+        data: {
+          'email': email,
+        },
+      );
+    } on DioError catch (e) {
+      log('######## Resend User Confirmation: $e');
+      rethrow;
     }
   }
 

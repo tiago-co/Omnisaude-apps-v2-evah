@@ -34,7 +34,7 @@ class _DiscountDetailState extends State<DiscountDetail> {
 
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 375;
+    double baseWidth = 500;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Scaffold(
@@ -49,19 +49,19 @@ class _DiscountDetailState extends State<DiscountDetail> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20 * fem),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Selecione um desconto',
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 22 * fem,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: 20 * fem,
             ),
             TripleBuilder<CuponsListStore, DioError, List<CupomModel>>(
               store: store,

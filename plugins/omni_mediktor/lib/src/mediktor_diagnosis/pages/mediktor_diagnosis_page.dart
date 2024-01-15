@@ -29,15 +29,14 @@ class MediktorDiagnosisPage extends StatefulWidget {
 
 class MediktorDiagnosisPageState extends State<MediktorDiagnosisPage> {
   final MediktorDiagnosisStore store = Modular.get();
-  final Completer<WebViewController> _controller =
-      Completer<WebViewController>();
-  final MediktorRecomendationStore recomendationStore =
-      Modular.get<MediktorRecomendationStore>();
+  final Completer<WebViewController> _controller = Completer<WebViewController>();
+  final MediktorRecomendationStore recomendationStore = Modular.get<MediktorRecomendationStore>();
   final BaseUrlStore baseUrlStore = Modular.get();
   String _buttonText = 'Continuar';
 
   @override
   void initState() {
+    // baseUrlStore.changeToProd();
     if (store.state.authToken == null) {
       store.authenticate();
     }
@@ -126,8 +125,7 @@ class MediktorDiagnosisPageState extends State<MediktorDiagnosisPage> {
           );
         },
       ),
-      bottomNavigationBar:
-          TripleBuilder<MediktorDiagnosisStore, DioError, TokenMediktorModel>(
+      bottomNavigationBar: TripleBuilder<MediktorDiagnosisStore, DioError, TokenMediktorModel>(
         store: store,
         builder: (_, triple) {
           if (store.isLoading) {
@@ -137,11 +135,8 @@ class MediktorDiagnosisPageState extends State<MediktorDiagnosisPage> {
               isDisabled: store.state.isSessionFinished!,
               onPressed: () async {
                 if (_buttonText == 'Continuar') {
-                  if (recomendationStore.state.diagnosis!.urgency!.toJson! >=
-                      3) {
-                    await recomendationStore
-                        .sendHighUrgencyDiagnosis()
-                        .catchError((onError) {
+                  if (recomendationStore.state.diagnosis!.urgency!.toJson! >= 3) {
+                    await recomendationStore.sendHighUrgencyDiagnosis().catchError((onError) {
                       Helpers.showDialog(
                         context,
                         RequestErrorWidget(
@@ -177,12 +172,9 @@ class MediktorDiagnosisPageState extends State<MediktorDiagnosisPage> {
           store.setLoading(false);
         }
         if (events.message.contains('sessionFinish')) {
-          recomendationStore
-              .update(RecomendationModel.fromJson(events.message));
+          recomendationStore.update(RecomendationModel.fromJson(events.message));
 
-          if (recomendationStore.state.diagnosis!.sessionConclusions!
-                  .summarySessionConclusionList !=
-              null) {
+          if (recomendationStore.state.diagnosis!.sessionConclusions!.summarySessionConclusionList != null) {
             store.state.isSessionFinished = false;
             store.onFinishSessionEnableButton(store.state);
           } else {

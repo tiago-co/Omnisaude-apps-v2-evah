@@ -31,6 +31,7 @@ class _SplashPageState extends State<SplashPage> {
       }
       store.getBeneficiaryData().then((value) async {
         Modular.to.pushReplacementNamed('/newHome');
+        // Modular.to.pushReplacementNamed('/home');
       }).catchError((onError) {
         // caso seja deeplink, não forçar retornar para a tela inicial
         if (Modular.args.queryParams.isEmpty) {
@@ -43,6 +44,8 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    double baseWidth = 375;
+    double fem = MediaQuery.of(context).size.width / baseWidth;
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -58,7 +61,7 @@ class _SplashPageState extends State<SplashPage> {
         ),
         child: SvgPicture.asset(
           Assets.logoSplash,
-          height: 130,
+          height: 130 * fem,
         ),
       ),
     );

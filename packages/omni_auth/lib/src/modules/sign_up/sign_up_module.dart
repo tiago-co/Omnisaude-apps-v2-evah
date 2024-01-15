@@ -6,11 +6,13 @@ import 'package:omni_auth/src/modules/sign_up/email_confirmation/email_confirmat
 import 'package:omni_auth/src/modules/sign_up/password/password_page.dart';
 import 'package:omni_auth/src/modules/sign_up/sign_up/sign_up_page.dart';
 import 'package:omni_auth/src/modules/sign_up/welcome.dart';
+import 'package:omni_general/omni_general.dart';
 
 class SignUpModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.lazySingleton((i) => RegisterStore()),
+    Bind.lazySingleton((i) => ZipCodeStore()),
     Bind.lazySingleton((i) => RegisterTermsStore()),
     Bind.lazySingleton((i) => RegisterRepository()),
   ];

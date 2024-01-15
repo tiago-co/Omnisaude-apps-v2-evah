@@ -22,6 +22,7 @@ class SelectFieldWidget<T> extends StatelessWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final ScrollController scrollController = ScrollController();
+  final double fem;
 
   SelectFieldWidget({
     this.padding,
@@ -40,6 +41,7 @@ class SelectFieldWidget<T> extends StatelessWidget {
     required this.controller,
     required this.onSelectItem,
     this.enableSuggestions = true,
+    this.fem = 0,
   });
 
   @override
@@ -57,15 +59,20 @@ class SelectFieldWidget<T> extends StatelessWidget {
           focusNode: focusNode,
           validator: validator,
           errorText: errorText,
+          padding: EdgeInsets.zero,
+          fem: fem,
           suffixIcon: isLoading
               ? const CircularProgressIndicator.adaptive()
-              : SvgPicture.asset(
-                  Assets.arrowDown,
-                  fit: BoxFit.fitWidth,
-                  color: Theme.of(context).cardColor,
-                  package: AssetsPackage.omniGeneral,
-                  clipBehavior: Clip.none,
+              : Icon(
+                  Icons.keyboard_arrow_down_rounded,
                 ),
+          // SvgPicture.asset(
+          //     Assets.arrowDown,
+          //     fit: BoxFit.fitWidth,
+          //     color: Theme.of(context).cardColor,
+          //     package: AssetsPackage.omniGeneral,
+          //     clipBehavior: Clip.none,
+          //   ),
           onTap: () async {
             FocusScope.of(context).requestFocus(FocusNode());
             await showModalBottomSheet(

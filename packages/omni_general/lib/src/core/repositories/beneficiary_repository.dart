@@ -2,9 +2,10 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:omni_general/omni_general.dart'
-    show DioHttpClientImpl, IndividualPersonModel, PreferencesModel;
+import 'package:omni_general/omni_general.dart' show DioHttpClientImpl, IndividualPersonModel, PreferencesModel;
+import 'package:omni_general/src/core/models/address_model.dart';
 import 'package:omni_general/src/core/models/beneficiary_model.dart';
 import 'package:omni_general/src/core/models/jwt_model.dart';
 import 'package:omni_general/src/core/models/operator_configs_model.dart';
@@ -20,7 +21,7 @@ class BeneficiaryRepository extends Disposable {
       final Response response = await _client.get(
         path: '/mobile/omni/beneficiario/$id/',
       );
-      return BeneficiaryModel.fromJson(response.data);
+      return BeneficiaryModel.oldFromJson(response.data);
     } on DioError catch (e) {
       log('getBeneficiaryById: $e');
       rethrow;
@@ -31,6 +32,28 @@ class BeneficiaryRepository extends Disposable {
     try {
       final Response response = await _client.get(
         path: '/mobile/omni/pessoa-fisica/$id/',
+      );
+      return IndividualPersonModel.oldFromJson(response.data);
+    } on DioError catch (e) {
+      log('getBeneficiaryById: $e');
+      rethrow;
+    }
+  }
+
+  Future<IndividualPersonModel> getNewIndividualPerson(String id) async {
+    try {
+      final PreferencesService service = PreferencesService();
+
+      final Dio dio = Dio();
+      dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
+      dio.interceptors.add(
+        LogInterceptor(responseHeader: false, responseBody: true, error: false),
+      );
+      final PreferencesModel prefs = await service.getUserPreferences(id);
+
+      final Response response = await dio.get(
+        '/users/$id',
+        options: Options(headers: {'Authorization': 'JWT ${prefs.jwt?.token}'}),
       );
       return IndividualPersonModel.fromJson(response.data);
     } on DioError catch (e) {
@@ -59,6 +82,34 @@ class BeneficiaryRepository extends Disposable {
         data: data,
       );
       return IndividualPersonModel.fromJson(response.data);
+    } on DioError catch (e) {
+      log('getBeneficiaryById: $e');
+      rethrow;
+    }
+  }
+
+  Future updateProfile(
+    IndividualPersonModel data,
+    String id,
+  ) async {
+    try {
+      final PreferencesService service = PreferencesService();
+
+      final Dio dio = Dio();
+      dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
+      dio.interceptors.add(
+        LogInterceptor(responseHeader: false, responseBody: true, error: false),
+      );
+      final PreferencesModel prefs = await service.getUserPreferences(id);
+
+      final Response response = await dio.patch(
+        '/users/$id',
+        options: Options(headers: {'Authorization': 'JWT ${prefs.jwt?.token}'}),
+        data: data,
+      );
+
+      // return IndividualPersonModel.fromJson(response.data);
+      return response.data;
     } on DioError catch (e) {
       log('getBeneficiaryById: $e');
       rethrow;

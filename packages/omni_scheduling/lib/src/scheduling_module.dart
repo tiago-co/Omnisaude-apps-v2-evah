@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_general/omni_general.dart';
 import 'package:omni_scheduling/src/core/repositories/scheduling_repository.dart';
+import 'package:omni_scheduling/src/new_consultation/new_consultation_module.dart';
 import 'package:omni_scheduling/src/new_scheduling/new_scheduling_module.dart';
 import 'package:omni_scheduling/src/scheduling_details/scheduling_details_module.dart';
 import 'package:omni_scheduling/src/scheduling_historic/scheduling_historic_page.dart';
@@ -27,14 +28,19 @@ class SchedulingModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(
+    // ChildRoute(
+    //   '/historic',
+    //   child: (_, args) => SchedulingHistoricPage(
+    //     moduleName: args.data['moduleName'],
+    //     beneficiaryId: args.data['beneficiaryId'],
+    //     schedulingType: args.data['schedulingType'],
+    //     schedulingModeModel: args.data['schedulingModeModel'],
+    //   ),
+    //   transition: TransitionType.fadeIn,
+    // ),
+    ModuleRoute(
       '/historic',
-      child: (_, args) => SchedulingHistoricPage(
-        moduleName: args.data['moduleName'],
-        beneficiaryId: args.data['beneficiaryId'],
-        schedulingType: args.data['schedulingType'],
-        schedulingModeModel: args.data['schedulingModeModel'],
-      ),
+      module: NewConsultationModule(),
       transition: TransitionType.fadeIn,
     ),
     ModuleRoute(

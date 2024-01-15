@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_auth/src/modules/register/pages/widgets/birth_date_dialog.dart';
 import 'package:omni_auth/src/modules/register/stores/register_store.dart';
+import 'package:omni_auth/src/modules/sign_up/sign_up/widgets/address_form.dart';
 import 'package:omni_auth/src/modules/sign_up/widgets/welcome_form_field.dart';
 import 'package:omni_general/omni_general.dart';
 import 'package:omni_register_labels/labels.dart';
@@ -52,6 +54,7 @@ class SignUpPage extends StatelessWidget {
     double baseWidth = 375;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
+    final args = Modular.args;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -107,18 +110,18 @@ class SignUpPage extends StatelessWidget {
 
                         child: Column(
                           children: [
-                            TextFieldWidget(
-                              label: 'Nome completo',
-                              controller: nameController,
-                              // focusNode: usernameFocus,
-                              focusedborder: InputBorder.none,
-                              padding: EdgeInsets.zero,
-                              onChange: (String? input) {
-                                store.state.individualPerson?.name = input;
-                                store.updateForm(store.state);
-                              },
-                            ),
-                            const SizedBox(height: 12),
+                            // TextFieldWidget(
+                            //   label: 'Nome completo',
+                            //   controller: nameController,
+                            //   // focusNode: usernameFocus,
+                            //   focusedborder: InputBorder.none,
+                            //   padding: EdgeInsets.zero,
+                            //   onChange: (String? input) {
+                            //     store.state.individualPerson?.name = input;
+                            //     store.updateForm(store.state);
+                            //   },
+                            // ),
+                            // const SizedBox(height: 12),
                             TextFieldWidget(
                               label: 'Data de Nascimento',
                               controller: birthController,
@@ -133,6 +136,7 @@ class SignUpPage extends StatelessWidget {
                                 Icons.calendar_month_outlined,
                                 color: Colors.grey,
                               ),
+                              fem: fem,
                               onChange: (String? input) {
                                 store.state.individualPerson?.birth = input;
                                 store.updateForm(store.state);
@@ -146,31 +150,26 @@ class SignUpPage extends StatelessWidget {
                               mask: Masks.generateMask('(##) # ####-####'),
                               // focusNode: usernameFocus,
                               focusedborder: InputBorder.none,
-                              padding: EdgeInsets.zero,
+                              padding: EdgeInsets.zero, fem: fem,
                               onChange: (String? input) {
+                                input = input!.replaceAll('(', '');
+                                input = input.replaceAll(')', '');
+                                input = input.replaceAll('-', '');
+                                input = input.replaceAll(' ', '');
                                 store.state.individualPerson?.phone = input;
                                 store.updateForm(store.state);
                               },
                             ),
                             const SizedBox(height: 12),
-                            TextFieldWidget(
-                              label: 'Endereço',
-                              controller: streetController,
-                              // focusNode: usernameFocus,
-                              focusedborder: InputBorder.none,
-                              padding: EdgeInsets.zero,
-                              onChange: (String? input) {
-                                store.state.individualPerson?.address = AddressModel(street: input);
-                                store.updateForm(store.state);
-                              },
-                            ),
+                            const AddressForm(),
+
                             const SizedBox(height: 12),
                             SelectFieldWidget<MaritalStatus>(
                               label: 'Estado civil',
                               items: MaritalStatus.values,
                               itemsLabels: MaritalStatus.values.map((type) => type.label!).toList(),
                               placeholder: 'Estado civil',
-                              controller: maritalStatusController,
+                              controller: maritalStatusController, fem: fem,
                               // focusNode: genreFocus,
                               onSelectItem: (MaritalStatus type) {
                                 maritalStatusController.text = type.label!;
@@ -184,11 +183,12 @@ class SignUpPage extends StatelessWidget {
                             TextFieldWidget(
                               label: 'Altura (cm)',
                               controller: heightController,
-                              // focusNode: usernameFocus,
+                              keyboardType: TextInputType.number,
                               focusedborder: InputBorder.none,
                               padding: EdgeInsets.zero,
+                              fem: fem,
                               onChange: (String? input) {
-                                store.state.individualPerson?.height = double.parse(input ?? '');
+                                store.state.individualPerson?.height = int.parse(input ?? '');
                                 store.updateForm(store.state);
                               },
                             ),
@@ -197,24 +197,30 @@ class SignUpPage extends StatelessWidget {
                             TextFieldWidget(
                               label: 'Peso (kg)',
                               controller: weightController,
-                              // focusNode: usernameFocus,
+                              keyboardType: TextInputType.number,
                               focusedborder: InputBorder.none,
                               padding: EdgeInsets.zero,
+                              fem: fem,
                               onChange: (String? input) {
                                 store.state.individualPerson?.weight = double.parse(input ?? '');
                                 store.updateForm(store.state);
                               },
                             ),
 
-                            const SizedBox(height: 12),
-                            const WelcomeFormField(label: 'Contato de emergência'),
+                            // const SizedBox(height: 12),
+                            // const WelcomeFormField(label: 'Contato de emergência'),
                             const SizedBox(height: 24),
                           ],
                         ),
                       ),
                       TextButton(
                         onPressed: () async {
-                          await store.updateUser().then((value) {
+                          await store
+                              .updateUser(
+                            pass: args.data?['password'],
+                            prefs: args.data?['data'],
+                          )
+                              .then((value) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 backgroundColor: Colors.green,
@@ -224,7 +230,7 @@ class SignUpPage extends StatelessWidget {
                                 ),
                               ),
                             );
-                            Modular.to.navigate('/auth/newLogin');
+                            Modular.to.pushReplacementNamed('/newHome');
                           }).catchError((onError) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -248,10 +254,11 @@ class SignUpPage extends StatelessWidget {
                         },
                         child: Container(
                           // masterbuttonmaster82s (I4511:30472;19:7770)
-                          margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 19 * fem, 0 * fem),
+                          margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
                           padding: EdgeInsets.fromLTRB(0 * fem, 16 * fem, 0 * fem, 16 * fem),
 
                           height: 56 * fem,
+                          width: double.maxFinite,
                           decoration: BoxDecoration(
                             color: true ? Color(0xff2D73B3) : Color(0xff2d72b3),
                             borderRadius: BorderRadius.circular(60 * fem),
@@ -259,19 +266,25 @@ class SignUpPage extends StatelessWidget {
                           child: Container(
                             // autogroupfwxxDa7 (MYmMmLCB3rKy918MJrfWxX)
                             padding: EdgeInsets.fromLTRB(13 * fem, 0 * fem, 0 * fem, 0 * fem),
-                            width: double.infinity,
-                            height: double.infinity,
-                            child: Center(
-                              child: Text(
-                                'Completar',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 16 * ffem,
-                                  fontWeight: FontWeight.w600,
-                                  height: 1.5 * ffem / fem,
-                                  color: Color(0xffffffff),
-                                ),
-                              ),
+                            child: TripleBuilder(
+                              store: store,
+                              builder: (context, triple) {
+                                if (triple.isLoading) {
+                                  return const LoadingWidget(
+                                    indicatorColor: Colors.white,
+                                  );
+                                }
+                                return Text(
+                                  'Completar',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 16 * ffem,
+                                    fontWeight: FontWeight.w600,
+                                    height: 1.5 * ffem / fem,
+                                    color: Color(0xffffffff),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ),

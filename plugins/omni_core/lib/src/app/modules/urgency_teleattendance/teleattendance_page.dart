@@ -7,8 +7,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class TeleattendancePage extends StatefulWidget {
   final String? moduleName;
-  const TeleattendancePage({Key? key, required this.moduleName})
-      : super(key: key);
+  const TeleattendancePage({Key? key, required this.moduleName}) : super(key: key);
 
   @override
   State<TeleattendancePage> createState() => _TeleattendancePageState();

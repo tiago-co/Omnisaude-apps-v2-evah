@@ -15,6 +15,9 @@ class CuponWidget extends StatelessWidget {
   final OrganizationModel organization;
   @override
   Widget build(BuildContext context) {
+    double baseWidth = MediaQuery.of(context).size.width > 500 ? 500 : 375;
+
+    double fem = MediaQuery.of(context).size.width / baseWidth;
     return InkWell(
       onTap: () => Modular.to.pushNamed(
         '/newHome/discounts/discount_details',
@@ -24,8 +27,8 @@ class CuponWidget extends StatelessWidget {
         },
       ),
       child: Container(
-        padding: const EdgeInsets.all(8),
-        margin: const EdgeInsets.only(bottom: 10),
+        padding: EdgeInsets.all(8 * fem),
+        margin: EdgeInsets.only(bottom: 10 * fem),
         decoration: BoxDecoration(
           border: Border.all(color: const Color(0xffededf1)),
           color: const Color(0xffffffff),
@@ -43,14 +46,14 @@ class CuponWidget extends StatelessWidget {
             Container(
               // rectangle36mQ3 (I4902:29248;4902:25943)
               margin: const EdgeInsets.fromLTRB(0, 0, 16, 0),
-              width: 80,
-              height: 80,
+              width: 80 * fem,
+              height: 80 * fem,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.network(
                   organization.coverPicture!,
-                  width: 60,
-                  height: 60,
+                  width: 60 * fem,
+                  height: 60 * fem,
                   loadingBuilder: (
                     context,
                     child,
@@ -83,8 +86,8 @@ class CuponWidget extends StatelessWidget {
                     margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                     child: Text(
                       organization.name!,
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style: TextStyle(
+                        fontSize: 16 * fem,
                         fontWeight: FontWeight.w500,
                         height: 1.6000000238,
                         color: Color(0xff1a1c22),
@@ -98,9 +101,9 @@ class CuponWidget extends StatelessWidget {
                       children: [
                         Container(
                           // statusgfR (I4902:29248;4902:25317)
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 4,
-                            horizontal: 12,
+                          padding: EdgeInsets.symmetric(
+                            vertical: 4 * fem,
+                            horizontal: 12 * fem,
                           ),
                           decoration: BoxDecoration(
                             color: Helpers.getBackgroundColor(
@@ -112,7 +115,7 @@ class CuponWidget extends StatelessWidget {
                             child: Text(
                               'Até ${organization.bestDiscountPercent}% off',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 14 * fem,
                                 fontWeight: FontWeight.w500,
                                 height: 1.4000000272,
                                 color: Helpers.getTextColor(
@@ -125,9 +128,9 @@ class CuponWidget extends StatelessWidget {
                         Container(
                           // statusxsq (I4902:29248;4902:23631)
 
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 4,
-                            horizontal: 12,
+                          padding: EdgeInsets.symmetric(
+                            vertical: 4 * fem,
+                            horizontal: 12 * fem,
                           ),
                           decoration: BoxDecoration(
                             color: const Color(0xfff6f6f8),
@@ -136,8 +139,8 @@ class CuponWidget extends StatelessWidget {
                           child: Center(
                             child: Text(
                               couponRescueType.label,
-                              style: const TextStyle(
-                                fontSize: 14,
+                              style: TextStyle(
+                                fontSize: 14 * fem,
                                 fontWeight: FontWeight.w500,
                                 height: 1.4000000272,
                                 color: Color(0xff878da0),

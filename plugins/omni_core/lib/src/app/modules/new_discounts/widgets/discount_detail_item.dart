@@ -25,12 +25,13 @@ class _DiscountDetailItemState extends State<DiscountDetailItem> {
   final CouponDetailsStore store = CouponDetailsStore();
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 375;
+    double baseWidth = MediaQuery.of(context).size.width > 500 ? 500 : 375;
+
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Container(
       width: double.maxFinite,
-      padding: const EdgeInsets.symmetric(vertical: 26),
+      padding: EdgeInsets.symmetric(vertical: 26 * fem),
       decoration: BoxDecoration(
         border: Border.all(
           color: Helpers.getTextColor(widget.cupom.discount!),

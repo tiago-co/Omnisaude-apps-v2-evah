@@ -8,6 +8,7 @@ import 'package:omni_core/src/app/app_stores/program_store.dart';
 import 'package:omni_core/src/app/modules/new_profile/widgets/menu_option.dart';
 import 'package:omni_core/src/app/modules/profile/profile_store.dart';
 import 'package:omni_general/omni_general.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage();
@@ -84,13 +85,15 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 375;
+    double baseWidth = MediaQuery.of(context).size.width > 500 ? 500 : 375;
+
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Scaffold(
+      // appBar: AppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: 20 * fem),
           child: SizedBox(
             width: double.infinity,
             child: Container(
@@ -111,7 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         padding: EdgeInsets.zero,
                       ),
                       child: Text(
-                        'Editar perfil',
+                        'Perfil',
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           fontSize: 16 * ffem,
@@ -128,105 +131,105 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).cardColor.withOpacity(0.1),
-                                shape: BoxShape.circle,
-                              ),
-                              padding: const EdgeInsets.all(5),
-                              child: TripleBuilder<UserStore, Exception, PreferencesModel>(
-                                store: store.userStore,
-                                builder: (_, triple) {
-                                  return ClipOval(
-                                    child: ImageWidget(
-                                      key: ValueKey(
-                                        triple.state.beneficiary!.individualPerson,
+                        TripleBuilder<UserStore, Exception, PreferencesModel>(
+                          store: store.userStore,
+                          builder: (_, triple) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).cardColor.withOpacity(0.1),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    padding: const EdgeInsets.all(5),
+                                    child: ClipOval(
+                                      child: ImageWidget(
+                                        key: ValueKey(
+                                          triple.state.beneficiary!.individualPerson,
+                                        ),
+                                        url: triple.state.beneficiary!.individualPerson!.image ?? '',
+                                        asset: Assets.user,
+                                        assetBase: Assets.userBase,
+                                        boxFit: BoxFit.cover,
+                                        width: 125 * fem,
+                                        height: 125 * fem,
                                       ),
-                                      url: triple.state.beneficiary!.individualPerson!.image ?? '',
-                                      asset: Assets.user,
-                                      assetBase: Assets.userBase,
-                                      boxFit: BoxFit.cover,
-                                      width: 125,
-                                      height: 125,
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            SizedBox(
-                              // frame552puD (5103:24869)
-                              width: double.infinity,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    // joanafonsecayGK (5103:24870)
-                                    store.state.name ?? "",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 22 * ffem,
-                                      fontWeight: FontWeight.w600,
-                                      height: 1.2999999306 * ffem / fem,
-                                      color: const Color(0xff1a1c22),
-                                    ),
+                                    )),
+                                const SizedBox(height: 12),
+                                SizedBox(
+                                  // frame552puD (5103:24869)
+                                  width: double.infinity,
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        // joanafonsecayGK (5103:24870)
+                                        store.state.name ?? '',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 22 * ffem,
+                                          fontWeight: FontWeight.w600,
+                                          height: 1.2999999306 * ffem / fem,
+                                          color: const Color(0xff1a1c22),
+                                        ),
+                                      ),
+                                      Text(
+                                        // yearsoldhCK (5103:24871)
+                                        '${Helpers.getAge(store.state.birth!)} anos de idade',
+                                        // '33 anos de idade',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 16 * ffem,
+                                          fontWeight: FontWeight.w400,
+                                          height: 1.6000000238 * ffem / fem,
+                                          color: const Color(0xff52576a),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    // yearsoldhCK (5103:24871)
-                                    '33 anos de idade',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 16 * ffem,
-                                      fontWeight: FontWeight.w400,
-                                      height: 1.6000000238 * ffem / fem,
-                                      color: const Color(0xff52576a),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                                ),
+                              ],
+                            );
+                          },
                         ),
                         SizedBox(
                           height: 20 * fem,
                         ),
-                        const Card(
-                          color: Color(0xffF6F6F8),
-                          surfaceTintColor: Color(0xffF6F6F8),
-                          elevation: 0,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                MenuOption(
-                                  leadingIcon: Icon(
-                                    Icons.add,
-                                    color: Colors.black,
-                                  ),
-                                  title: 'Diagnóstico',
-                                ),
-                                MenuOption(
-                                  leadingIcon: Icon(
-                                    Icons.create_new_folder_outlined,
-                                    color: Colors.black,
-                                  ),
-                                  title: 'Prescrições',
-                                ),
-                                MenuOption(
-                                  leadingIcon: Icon(
-                                    Icons.featured_play_list_outlined,
-                                    color: Colors.black,
-                                  ),
-                                  title: 'Notas médicas',
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        // Card(
+                        //   color: const Color(0xffF6F6F8),
+                        //   surfaceTintColor: const Color(0xffF6F6F8),
+                        //   elevation: 0,
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.symmetric(horizontal: 16),
+                        //     child: Column(
+                        //       crossAxisAlignment: CrossAxisAlignment.end,
+                        //       children: [
+                        //         // MenuOption(
+                        //         //   leadingIcon: const Icon(
+                        //         //     Icons.add,
+                        //         //     color: Colors.black,
+                        //         //   ),
+                        //         //   title: 'Diagnóstico',
+                        //         //   onTap: () => Modular.to.pushNamed('/newHome/profile/diagnosis'),
+                        //         // ),
+                        //         const MenuOption(
+                        //           leadingIcon: Icon(
+                        //             Icons.create_new_folder_outlined,
+                        //             color: Colors.black,
+                        //           ),
+                        //           title: 'Prescrições',
+                        //         ),
+                        //         const MenuOption(
+                        //           leadingIcon: Icon(
+                        //             Icons.featured_play_list_outlined,
+                        //             color: Colors.black,
+                        //           ),
+                        //           title: 'Notas médicas',
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                         Card(
                           color: const Color(0xffF6F6F8),
                           surfaceTintColor: const Color(0xffF6F6F8),
@@ -236,19 +239,20 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
+                                // MenuOption(
+                                //   leadingIcon: const Icon(
+                                //     Icons.settings,
+                                //     color: Colors.black,
+                                //   ),
+                                //   title: 'Configurações',
+                                //   onTap: () => Modular.to.pushNamed('/newHome/profile/settings'),
+                                // ),
                                 MenuOption(
                                   leadingIcon: const Icon(
-                                    Icons.settings,
-                                    color: Colors.black,
-                                  ),
-                                  title: 'Configurações',
-                                  onTap: () => Modular.to.pushNamed('/newHome/profile/settings'),
-                                ),
-                                MenuOption(
-                                  leadingIcon: Icon(
                                     Icons.list_alt_outlined,
                                     color: Colors.black,
                                   ),
+                                  fem: fem,
                                   title: 'Termos e condições',
                                   onTap: () => Modular.to.pushNamed(
                                     '/terms',
@@ -256,21 +260,32 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                                 MenuOption(
-                                  leadingIcon: Icon(
-                                    Icons.help_outline,
-                                    color: Colors.black,
-                                  ),
-                                  title: 'Centro de ajuda',
-                                  onTap: () => Modular.to.pushNamed(
-                                    '/newHome/profile/assistance',
-                                  ),
-                                ),
-                                MenuOption(
-                                  leadingIcon: Icon(
+                                  leadingIcon: const Icon(
                                     Icons.logout,
                                     color: Colors.black,
                                   ),
-                                  title: 'Log out',
+                                  fem: fem,
+                                  title: 'Configurações',
+                                  onTap: () => Modular.to.pushNamed('/newHome/profile/settings/'),
+                                ),
+                                MenuOption(
+                                  leadingIcon: const Icon(
+                                    Icons.help_outline,
+                                    color: Colors.black,
+                                    size: 24,
+                                  ),
+                                  fem: fem,
+                                  title: 'Centro de ajuda',
+                                  onTap: () => launchUrl(Uri.parse('https://wa.me/5562982167570'),
+                                      mode: LaunchMode.externalApplication),
+                                ),
+                                MenuOption(
+                                  leadingIcon: const Icon(
+                                    Icons.logout,
+                                    color: Colors.black,
+                                  ),
+                                  fem: fem,
+                                  title: 'Sair',
                                   onTap: () => Helpers.showDialog(
                                     context,
                                     _buildExitWidget(context),

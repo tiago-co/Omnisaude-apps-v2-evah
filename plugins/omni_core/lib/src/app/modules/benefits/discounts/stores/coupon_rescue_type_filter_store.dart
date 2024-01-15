@@ -3,9 +3,8 @@ import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_core/src/app/core/enums/coupon_rescue_enum.dart';
 import 'package:omni_core/src/app/modules/benefits/discounts/stores/organizations_list_store.dart';
 
-class CouponRescueTypeFilterStore
-    extends NotifierStore<Exception, CouponRescueType> {
-  CouponRescueTypeFilterStore() : super(CouponRescueType.online);
+class CouponRescueTypeFilterStore extends NotifierStore<Exception, CouponRescueType> {
+  CouponRescueTypeFilterStore() : super(CouponRescueType.physical);
 
   final OrganizationsListStore organizationsListStore = Modular.get();
 

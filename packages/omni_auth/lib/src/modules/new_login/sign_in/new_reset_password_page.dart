@@ -35,24 +35,21 @@ class NewResetPasswordPage extends StatelessWidget {
             children: [
               Container(
                 // autogroup6c6sioh (MYnnKNoknk8jRfZzzF6c6s)
-                padding:
-                    EdgeInsets.fromLTRB(20 * fem, 40 * fem, 1 * fem, 7 * fem),
+                padding: EdgeInsets.fromLTRB(20 * fem, 40 * fem, 1 * fem, 7 * fem),
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       // frame2EX9 (5103:11999)
-                      margin: EdgeInsets.fromLTRB(
-                          40 * fem, 0 * fem, 78 * fem, 28 * fem),
+                      margin: EdgeInsets.fromLTRB(40 * fem, 0 * fem, 78 * fem, 28 * fem),
                       width: double.infinity,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
                             // resetpasswordZ3d (5103:12000)
-                            margin: EdgeInsets.fromLTRB(
-                                0 * fem, 0 * fem, 0 * fem, 4 * fem),
+                            margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 4 * fem),
                             child: Text(
                               'Redefinir senha',
                               textAlign: TextAlign.center,
@@ -97,8 +94,7 @@ class NewResetPasswordPage extends StatelessWidget {
                     SizedBox(height: 24),
                     Container(
                       // buttonprimary53D (5103:12006)
-                      margin: EdgeInsets.fromLTRB(
-                          0 * fem, 0 * fem, 19 * fem, 0 * fem),
+                      margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 19 * fem, 0 * fem),
                       child: TextButton(
                         onPressed: () {},
                         style: TextButton.styleFrom(
@@ -109,13 +105,11 @@ class NewResetPasswordPage extends StatelessWidget {
                           height: 56 * fem,
                           child: Container(
                             // masterbuttonmasteraVm (I5103:12006;19:7770)
-                            padding: EdgeInsets.fromLTRB(
-                                0.5 * fem, 16 * fem, 0.5 * fem, 16 * fem),
+                            padding: EdgeInsets.fromLTRB(0.5 * fem, 16 * fem, 0.5 * fem, 16 * fem),
                             width: double.infinity,
                             height: double.infinity,
                             decoration: BoxDecoration(
-                              color:
-                                  true ? Color(0xff2D73B3) : Color(0xffbbd2e6),
+                              color: true ? Color(0xff2D73B3) : Color(0xffbbd2e6),
                               borderRadius: BorderRadius.circular(60 * fem),
                             ),
                             child: Container(

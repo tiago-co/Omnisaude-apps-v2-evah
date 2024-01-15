@@ -66,25 +66,25 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> loginWithBiometricMode() async {
-    final credential = await preferencesService.getCredential();
-    store.authenticate(credential).then(
-      (value) {
-        Modular.to.pushReplacementNamed('/home/presentation');
-      },
-    ).catchError(
-      (onError) {
-        password.clear();
-        Helpers.showDialog(
-          context,
-          RequestErrorWidget(
-            error: onError,
-            buttonText: LoginLabels.close,
-            onPressed: () => Modular.to.pop(),
-          ),
-          showClose: true,
-        );
-      },
-    );
+    // final credential = await preferencesService.getCredential();
+    // store.authenticate(credential).then(
+    //   (value) {
+    //     Modular.to.pushReplacementNamed('/home/presentation');
+    //   },
+    // ).catchError(
+    //   (onError) {
+    //     password.clear();
+    //     Helpers.showDialog(
+    //       context,
+    //       RequestErrorWidget(
+    //         error: onError,
+    //         buttonText: LoginLabels.close,
+    //         onPressed: () => Modular.to.pop(),
+    //       ),
+    //       showClose: true,
+    //     );
+    //   },
+    // );
   }
 
   @override
@@ -128,8 +128,7 @@ class _LoginPageState extends State<LoginPage> {
           return BottomButtonWidget(
             onPressed: () {
               if (store.useBiometricsStore.canUseBiometricAuth &&
-                  store.useBiometricsStore.state ==
-                      UseBiometricPermission.notAccepted) {
+                  store.useBiometricsStore.state == UseBiometricPermission.notAccepted) {
                 Helpers.showDialog(
                   context,
                   Helpers.activateBiometricAuth(
@@ -144,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                 login();
               }
             },
-            isDisabled: store.isDisabled,
+            // isDisabled: store.isDisabled,
             isLoading: triple.isLoading,
             buttonType: BottomButtonType.outline,
             text: LoginLabels.enter,

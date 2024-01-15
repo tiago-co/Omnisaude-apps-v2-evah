@@ -13,10 +13,11 @@ class IndividualPersonModel {
   String? fatherName;
   String? motherName;
   String? birth;
-  double? height;
+  int? height;
   double? weight;
   MaritalStatus? maritalStatus;
   String? phone;
+  String? emergencyContact;
   BloodType? bloodType;
   EthnicityType? ethnicity;
   GenreType? genre;
@@ -34,6 +35,7 @@ class IndividualPersonModel {
     this.weight,
     this.maritalStatus,
     this.phone,
+    this.emergencyContact,
     this.bloodType,
     this.ethnicity,
     this.genre,
@@ -42,6 +44,21 @@ class IndividualPersonModel {
   });
 
   IndividualPersonModel.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    birth = json['birth_date'];
+    height = json['height'] is String ? double.parse(json['height']) : json['height'];
+    weight = json['weight'] is int ? (json['weight'] as int).toDouble() : json['weight'];
+    phone = json['phone'];
+    emergencyContact = json['emergency_phone'];
+    maritalStatus = maritalStatusFromJson(json['marital_status']);
+    image = json['image'];
+    if (json['address'] != null) {
+      address = AddressModel.fromJson(json['address']);
+    } else {
+      address = null;
+    }
+  }
+  IndividualPersonModel.oldFromJson(Map<String, dynamic> json) {
     if (json['usuario'] != null) {
       user = UserModel.fromJson(json['usuario']);
     } else {
@@ -52,7 +69,7 @@ class IndividualPersonModel {
     motherName = json['nome_mae'];
     fatherName = json['nome_pai'];
     birth = json['dt_nascimento'];
-    height = json['altura'];
+    height = json['altura'] is double ? (json['altura'] as double).toInt() : json['altura'];
     weight = json['peso'];
     phone = json['telefone'];
     bloodType = bloodTypeFromJson(json['tipo_sanguineo']);
@@ -61,13 +78,27 @@ class IndividualPersonModel {
     maritalStatus = maritalStatusFromJson(json['estado_civil']);
     image = json['imagem'];
     if (json['endereco'] != null) {
-      address = AddressModel.fromJson(json['endereco']);
+      address = AddressModel.oldFromJson(json['endereco']);
     } else {
       address = null;
     }
   }
 
   Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['birth_date'] = birth;
+    data['height'] = height;
+    data['weight'] = weight;
+    data['marital_status'] = maritalStatus?.toJson;
+    data['phone'] = phone;
+    data['emergency_phone'] = emergencyContact;
+    data['image'] = '';
+    data['address'] = address?.toJson();
+    return data;
+  }
+
+  Map<String, dynamic> oldToJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['usuario'] = user?.toJson();
     data['nome'] = name;
@@ -84,7 +115,7 @@ class IndividualPersonModel {
     data['sexo'] = genre?.toJson;
     data['estado_civil'] = maritalStatus?.toJson;
     data['imagem'] = image;
-    data['endereco'] = address?.toJson();
+    data['endereco'] = address?.OldToJson();
     return data;
   }
 }

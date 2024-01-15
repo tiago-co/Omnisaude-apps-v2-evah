@@ -40,8 +40,8 @@ class DayPickerTimelineWidget extends StatefulWidget {
 
   const DayPickerTimelineWidget(
     this.startDate, {
-    this.width = 60,
-    this.height = 80,
+    this.width = 50,
+    this.height = 70,
     this.controller,
     this.monthTextStyle = defaultMonthTextStyle,
     this.dayTextStyle = defaultDayTextStyle,
@@ -84,19 +84,13 @@ class _DatePickerState extends State<DayPickerTimelineWidget> {
 
     widget.controller?.setDatePickerState(this);
 
-    selectedDateStyle =
-        widget.dateTextStyle.copyWith(color: widget.selectedTextColor);
-    selectedMonthStyle =
-        widget.monthTextStyle.copyWith(color: widget.selectedTextColor);
-    selectedDayStyle =
-        widget.dayTextStyle.copyWith(color: widget.selectedTextColor);
+    selectedDateStyle = widget.dateTextStyle.copyWith(color: widget.selectedTextColor);
+    selectedMonthStyle = widget.monthTextStyle.copyWith(color: widget.selectedTextColor);
+    selectedDayStyle = widget.dayTextStyle.copyWith(color: widget.selectedTextColor);
 
-    deactivatedDateStyle =
-        widget.dateTextStyle.copyWith(color: widget.deactivatedColor);
-    deactivatedMonthStyle =
-        widget.monthTextStyle.copyWith(color: widget.deactivatedColor);
-    deactivatedDayStyle =
-        widget.dayTextStyle.copyWith(color: widget.deactivatedColor);
+    deactivatedDateStyle = widget.dateTextStyle.copyWith(color: widget.deactivatedColor);
+    deactivatedMonthStyle = widget.monthTextStyle.copyWith(color: widget.deactivatedColor);
+    deactivatedDayStyle = widget.dayTextStyle.copyWith(color: widget.deactivatedColor);
 
     super.initState();
   }
@@ -135,8 +129,7 @@ class _DatePickerState extends State<DayPickerTimelineWidget> {
             }
           }
 
-          final bool isSelected =
-              _currentDate != null ? _compareDate(date, _currentDate!) : false;
+          final bool isSelected = _currentDate != null ? _compareDate(date, _currentDate!) : false;
 
           return DateWidget(
             date: date,
@@ -157,8 +150,7 @@ class _DatePickerState extends State<DayPickerTimelineWidget> {
                     : widget.dayTextStyle,
             width: widget.width,
             locale: widget.locale,
-            selectionColor:
-                isSelected ? widget.selectionColor : Colors.transparent,
+            selectionColor: isSelected ? widget.selectionColor : Colors.transparent,
             onDateSelected: (selectedDate) {
               if (isDeactivated) return;
 
@@ -175,9 +167,7 @@ class _DatePickerState extends State<DayPickerTimelineWidget> {
   }
 
   bool _compareDate(DateTime date1, DateTime date2) {
-    return date1.day == date2.day &&
-        date1.month == date2.month &&
-        date1.year == date2.year;
+    return date1.day == date2.day && date1.month == date2.month && date1.year == date2.year;
   }
 }
 
@@ -194,8 +184,7 @@ class DatePickerController {
       'DatePickerController is not attached to any DatePicker View.',
     );
 
-    _datePickerState!._controller
-        .jumpTo(_calculateDateOffset(_datePickerState!._currentDate!));
+    _datePickerState!._controller.jumpTo(_calculateDateOffset(_datePickerState!._currentDate!));
   }
 
   void animateToSelection({

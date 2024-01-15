@@ -3,8 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:omni_general/omni_general.dart'
-    show PreferencesService, RequestErrorWidget;
+import 'package:omni_general/omni_general.dart' show PreferencesService, RequestErrorWidget;
 
 class AuthInterceptor extends Interceptor {
   @override
@@ -91,7 +90,8 @@ class AuthInterceptor extends Interceptor {
       );
 
       Modular.to.popUntil(ModalRoute.withName('/'));
-      Modular.to.navigate('/presentation/letsGo');
+      // Modular.to.navigate('/presentation/letsGo');
+      Modular.to.navigate('/auth/newLogin');
       log('Sessão do beneficiário expirou!');
     }
     handler.next(err);

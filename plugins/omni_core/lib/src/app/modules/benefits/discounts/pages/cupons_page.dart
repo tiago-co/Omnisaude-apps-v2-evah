@@ -30,7 +30,8 @@ class _CuponsPageState extends State<CuponsPage> {
   @override
   void initState() {
     super.initState();
-    store.params.usageType = widget.couponRescueType;
+    // store.params.usageType = widget.couponRescueType;
+    store.params.usageType = 'physical';
     store.getOrganizationCupons(organzationId: widget.organizationId);
   }
 
@@ -90,8 +91,7 @@ class _CuponsPageState extends State<CuponsPage> {
               },
               child: ListView.separated(
                 physics: const AlwaysScrollableScrollPhysics(),
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 20),
+                separatorBuilder: (context, index) => const SizedBox(height: 20),
                 shrinkWrap: true,
                 itemCount: store.state.length > 3 ? 3 : store.state.length,
                 itemBuilder: (_, index) {

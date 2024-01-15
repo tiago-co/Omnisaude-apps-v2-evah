@@ -62,6 +62,38 @@ class ResetPasswordRepository extends Disposable {
     }
   }
 
+  Future<void> requestPasswordReset(String email) async {
+    try {
+      final dio = Dio();
+      dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
+      await dio.post(
+        '/users/send-password-reset-email',
+        data: {'email': email},
+      );
+    } on DioError catch (e) {
+      log('reset password: $e');
+      rethrow;
+    }
+  }
+
+  Future<void> newResetPassword(ResetPasswordModel model) async {
+    try {
+      final dio = Dio();
+      dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
+      await dio.post(
+        '/auth/password-reset/',
+        data: {
+          'token': model.token,
+          'uidb64': model.id,
+          'password': model.password,
+        },
+      );
+    } on DioError catch (e) {
+      log('reset password: $e');
+      rethrow;
+    }
+  }
+
   @override
   void dispose() {}
 }

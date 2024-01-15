@@ -12,16 +12,13 @@ import 'package:omni_scheduling/omni_scheduling.dart';
 
 class MediktorRecomendationCardsPage extends StatefulWidget {
   final String specialtyId;
-  const MediktorRecomendationCardsPage({Key? key, required this.specialtyId})
-      : super(key: key);
+  const MediktorRecomendationCardsPage({Key? key, required this.specialtyId}) : super(key: key);
 
   @override
-  _MediktorRecomendationCardsPageState createState() =>
-      _MediktorRecomendationCardsPageState();
+  _MediktorRecomendationCardsPageState createState() => _MediktorRecomendationCardsPageState();
 }
 
-class _MediktorRecomendationCardsPageState
-    extends State<MediktorRecomendationCardsPage> {
+class _MediktorRecomendationCardsPageState extends State<MediktorRecomendationCardsPage> {
   final RecomendationStore store = Modular.get<RecomendationStore>();
   final UserStore userStore = Modular.get<UserStore>();
 
@@ -51,8 +48,7 @@ class _MediktorRecomendationCardsPageState
       appBar: const NavBarWidget(
         title: MediktorLabels.mediktorRecomendationCardsTitle,
       ).build(context) as AppBar,
-      body: TripleBuilder<RecomendationStore, Exception,
-          RecomendationModulesModel>(
+      body: TripleBuilder<RecomendationStore, Exception, RecomendationModulesModel>(
         store: store,
         builder: (_, triple) {
           if (triple.isLoading) {
@@ -70,10 +66,8 @@ class _MediktorRecomendationCardsPageState
                       physics: const BouncingScrollPhysics(),
                       child: error.response!.statusCode == 404
                           ? RequestErrorWidget(
-                              buttonText: MediktorLabels
-                                  .mediktorRecomendationCardsErrorButton,
-                              message: MediktorLabels
-                                  .mediktorRecomendationCardsError,
+                              buttonText: MediktorLabels.mediktorRecomendationCardsErrorButton,
+                              message: MediktorLabels.mediktorRecomendationCardsError,
                               onPressed: () async {
                                 Modular.to.pop();
                               },
@@ -102,30 +96,24 @@ class _MediktorRecomendationCardsPageState
                         asset: Assets.bot,
                         baseAsset: Assets.botBase,
                         package: AssetsPackage.omniGeneral,
-                        title:
-                            MediktorLabels.mediktorRecomendationCardsBotTitle,
-                        description: MediktorLabels
-                            .mediktorRecomendationCardsBotDescription,
+                        title: MediktorLabels.mediktorRecomendationCardsBotTitle,
+                        description: MediktorLabels.mediktorRecomendationCardsBotDescription,
                         onTap: () => Modular.to.pushNamed(
                           'bot_recommendations',
                           arguments: widget.specialtyId,
                         ),
                       ),
-                    if (store.state.schedule &&
-                        moduleIsActive(ModuleType.teleAttendance))
+                    if (store.state.schedule && moduleIsActive(ModuleType.teleAttendance))
                       RecomendationCardWidget(
                         asset: Assets.scheduling,
                         baseAsset: Assets.schedulingBase,
                         package: AssetsPackage.omniGeneral,
-                        title: MediktorLabels
-                            .mediktorRecomendationCardsTeleAttendanceTitle,
-                        description: MediktorLabels
-                            .mediktorRecomendationCardsTeleAttendanceDescription,
+                        title: MediktorLabels.mediktorRecomendationCardsTeleAttendanceTitle,
+                        description: MediktorLabels.mediktorRecomendationCardsTeleAttendanceDescription,
                         onTap: () => Modular.to.pushNamed(
                           '../../schedulings/newScheduling/',
                           arguments: {
-                            'moduleName': MediktorLabels
-                                .mediktorRecomendationCardsTeleAttendanceTitle,
+                            'moduleName': MediktorLabels.mediktorRecomendationCardsTeleAttendanceTitle,
                             'beneficiaryId': userStore.state.jwt!.id,
                             'schedulingType': SchedulingType.teleAttendance,
                             'schedulingMode': SchedulingModeModel(
@@ -135,21 +123,17 @@ class _MediktorRecomendationCardsPageState
                           },
                         ),
                       ),
-                    if (store.state.schedule &&
-                        moduleIsActive(ModuleType.presential))
+                    if (store.state.schedule && moduleIsActive(ModuleType.presential))
                       RecomendationCardWidget(
                         asset: Assets.scheduling,
                         baseAsset: Assets.schedulingBase,
                         package: AssetsPackage.omniGeneral,
-                        title: MediktorLabels
-                            .mediktorRecomendationCardsPresentaionTitle,
-                        description: MediktorLabels
-                            .mediktorRecomendationCardsPresentaionDescription,
+                        title: MediktorLabels.mediktorRecomendationCardsPresentaionTitle,
+                        description: MediktorLabels.mediktorRecomendationCardsPresentaionDescription,
                         onTap: () => Modular.to.pushNamed(
-                          '../../schedulings/newScheduling/',
+                          '../../schedulings/newScheduling/newConsultation',
                           arguments: {
-                            'moduleName': MediktorLabels
-                                .mediktorRecomendationCardsPresentaionTitle,
+                            'moduleName': MediktorLabels.mediktorRecomendationCardsPresentaionTitle,
                             'beneficiaryId': userStore.state.jwt!.id,
                             'schedulingType': SchedulingType.presential,
                             'schedulingMode': SchedulingModeModel(
@@ -164,10 +148,8 @@ class _MediktorRecomendationCardsPageState
                         asset: Assets.informative,
                         baseAsset: Assets.informativeBase,
                         package: AssetsPackage.omniGeneral,
-                        title: MediktorLabels
-                            .mediktorRecomendationCardsInformativeTitle,
-                        description: MediktorLabels
-                            .mediktorRecomendationCardsInformativeDescription,
+                        title: MediktorLabels.mediktorRecomendationCardsInformativeTitle,
+                        description: MediktorLabels.mediktorRecomendationCardsInformativeDescription,
                         onTap: () => Modular.to.pushNamed(
                           '/home/informativesCategory/informatives_mediktor',
                           arguments: widget.specialtyId,
@@ -178,10 +160,8 @@ class _MediktorRecomendationCardsPageState
                         asset: Assets.measurement,
                         baseAsset: Assets.informativeBase,
                         package: AssetsPackage.omniGeneral,
-                        title: MediktorLabels
-                            .mediktorRecomendationCardsMeasurementTitle,
-                        description: MediktorLabels
-                            .mediktorRecomendationCardsmeaturementDescription,
+                        title: MediktorLabels.mediktorRecomendationCardsMeasurementTitle,
+                        description: MediktorLabels.mediktorRecomendationCardsmeaturementDescription,
                         onTap: () => Modular.to.pushNamed(
                           '/home/measurements/newMeasurement',
                           arguments: {

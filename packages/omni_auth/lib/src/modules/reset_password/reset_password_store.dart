@@ -17,16 +17,14 @@ class ResetPasswordStore extends NotifierStore<Exception, ResetPasswordModel> {
     try {
       switch (page) {
         case 0:
-          final bool isDisable = (state.cpf == null || state.cpf!.isEmpty) ||
-              (state.email == null || state.email!.isEmpty);
+          final bool isDisable =
+              (state.cpf == null || state.cpf!.isEmpty) || (state.email == null || state.email!.isEmpty);
           return isDisable;
         case 1:
-          final bool isDisable =
-              state.token!.length != 8 || state.token!.isEmpty;
+          final bool isDisable = state.token!.length != 8 || state.token!.isEmpty;
           return isDisable;
         case 2:
-          final bool isDisable =
-              state.password == null || state.password!.isEmpty;
+          final bool isDisable = state.password == null || state.password!.isEmpty;
           return isDisable;
         default:
           return false;
@@ -76,6 +74,37 @@ class ResetPasswordStore extends NotifierStore<Exception, ResetPasswordModel> {
         setLoading(false);
         throw onError;
       });
+    } catch (e) {
+      setLoading(false);
+      rethrow;
+    }
+  }
+
+  Future<void> requestPasswordReset(String email) async {
+    setLoading(true);
+    final formattedEmail = email.toLowerCase().trim();
+    try {
+      await _repository.requestPasswordReset(formattedEmail).catchError((onError) {
+        setLoading(false);
+        throw onError;
+      });
+    } catch (e) {
+      setLoading(false);
+      rethrow;
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  Future<void> newResetPassword(ResetPasswordModel model) async {
+    setLoading(true);
+
+    try {
+      await _repository.newResetPassword(model).catchError((onError) {
+        setLoading(false);
+        throw onError;
+      });
+      setLoading(false);
     } catch (e) {
       setLoading(false);
       rethrow;

@@ -187,8 +187,9 @@ class Helpers {
   static Widget activateBiometricAuth(
     BuildContext context,
     VoidCallback login,
-    BiometricTypeEnum biometricType,
-  ) {
+    BiometricTypeEnum biometricType, {
+    VoidCallback? alternative,
+  }) {
     final PreferencesService preferencesService = PreferencesService();
     final UseBiometricsStore useBiometricsStore = Modular.get();
 
@@ -251,7 +252,7 @@ class Helpers {
                     await setBiometricUsage(UseBiometricPermission.denied).then(
                       (value) {
                         Navigator.of(context).pop();
-                        login.call();
+                        alternative?.call();
                       },
                     );
                   },

@@ -8,6 +8,7 @@ import 'package:omni_drug_control/src/core/models/medicine_model.dart';
 import 'package:omni_drug_control/src/drug_control_historic/pages/widgets/drug_control_date_filter_widget.dart';
 import 'package:omni_drug_control/src/drug_control_historic/pages/widgets/drugcontrol_vertical_timeline_item_widget.dart';
 import 'package:omni_drug_control/src/drug_control_historic/pages/widgets/historic_item_shimmer_widget.dart';
+import 'package:omni_drug_control/src/drug_control_historic/pages/widgets/new_drug_control_date_filter_widget.dart';
 import 'package:omni_drug_control/src/drug_control_historic/stores/consuption_store.dart';
 import 'package:omni_drug_control/src/drug_control_historic/stores/drug_control_historic_store.dart';
 import 'package:omni_drug_control/src/drug_control_historic/stores/medicine_historic_store.dart';
@@ -149,15 +150,11 @@ class _MedicineHistoricPageState extends State<MedicineHistoricPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   itemBuilder: (_, index) {
                     return GestureDetector(
-                      onTap: store.medicines.results![index].status!.label !=
-                                  'Não Consumido' &&
-                              store.medicines.results![index].status!.label !=
-                                  'Consumido'
+                      onTap: store.medicines.results![index].status!.label != 'Não Consumido' &&
+                              store.medicines.results![index].status!.label != 'Consumido'
                           ? () async {
-                              consuptionStore.state.confirmMedicineConsupution =
-                                  false;
-                              consuptionStore
-                                  .state.confirmMedicineNotConsupution = false;
+                              consuptionStore.state.confirmMedicineConsupution = false;
+                              consuptionStore.state.confirmMedicineNotConsupution = false;
                               consuptionStore.updateForm(consuptionStore.state);
 
                               showModalBottomSheet(
@@ -182,8 +179,7 @@ class _MedicineHistoricPageState extends State<MedicineHistoricPage> {
                             }
                           : null,
                       child: SafeArea(
-                        bottom: store.medicines.results!.last ==
-                            store.medicines.results![index],
+                        bottom: store.medicines.results!.last == store.medicines.results![index],
                         child: DrugControlVerticalTimelineItemWidget(
                           medicine: store.medicines.results![index],
                           index: index,
@@ -241,14 +237,11 @@ class _MedicineHistoricPageState extends State<MedicineHistoricPage> {
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
-                      overflow: medicine.medicamento!.medicine!.length < 20
-                          ? null
-                          : TextOverflow.ellipsis,
+                      overflow: medicine.medicamento!.medicine!.length < 20 ? null : TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
                   ),
-                  if (medicine.medicamento!.medicine!.length < 20)
-                    const Spacer(),
+                  if (medicine.medicamento!.medicine!.length < 20) const Spacer(),
                   const SizedBox(
                     width: 10,
                   ),
@@ -312,10 +305,9 @@ class _MedicineHistoricPageState extends State<MedicineHistoricPage> {
                   children: [
                     Text(
                       DrugControlLabels.medicineHistoricInformConsumption,
-                      style:
-                          Theme.of(context).textTheme.headlineMedium!.copyWith(
-                                color: Theme.of(context).primaryColor,
-                              ),
+                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                            color: Theme.of(context).primaryColor,
+                          ),
                     ),
                     const SizedBox(
                       height: 25,
@@ -326,16 +318,13 @@ class _MedicineHistoricPageState extends State<MedicineHistoricPage> {
                         Expanded(
                           child: DefaultButtonWidget(
                             onPressed: () async {
-                              consuptionStore.state.confirmMedicineConsupution =
-                                  true;
-                              consuptionStore
-                                  .state.confirmMedicineNotConsupution = false;
+                              consuptionStore.state.confirmMedicineConsupution = true;
+                              consuptionStore.state.confirmMedicineNotConsupution = false;
                               consuptionStore.state.consumed = true;
                               consuptionStore.updateForm(consuptionStore.state);
                             },
                             text: DrugControlLabels.medicineHistoricInformDrank,
-                            buttonType: consuptionStore
-                                    .state.confirmMedicineConsupution!
+                            buttonType: consuptionStore.state.confirmMedicineConsupution!
                                 ? DefaultButtonType.primary
                                 : DefaultButtonType.outline,
                           ),
@@ -346,17 +335,13 @@ class _MedicineHistoricPageState extends State<MedicineHistoricPage> {
                         Expanded(
                           child: DefaultButtonWidget(
                             onPressed: () async {
-                              consuptionStore.state.confirmMedicineConsupution =
-                                  false;
-                              consuptionStore
-                                  .state.confirmMedicineNotConsupution = true;
+                              consuptionStore.state.confirmMedicineConsupution = false;
+                              consuptionStore.state.confirmMedicineNotConsupution = true;
                               consuptionStore.state.consumed = false;
                               consuptionStore.updateForm(consuptionStore.state);
                             },
-                            text: DrugControlLabels
-                                .medicineHistoricInformNotDrank,
-                            buttonType: consuptionStore
-                                    .state.confirmMedicineNotConsupution!
+                            text: DrugControlLabels.medicineHistoricInformNotDrank,
+                            buttonType: consuptionStore.state.confirmMedicineNotConsupution!
                                 ? DefaultButtonType.primary
                                 : DefaultButtonType.outline,
                           ),
@@ -367,15 +352,13 @@ class _MedicineHistoricPageState extends State<MedicineHistoricPage> {
                                   Formaters.stringToDate(medicine.dataUso!),
                                 ) <
                                 Duration.zero &&
-                            consuptionStore
-                                .state.confirmMedicineConsupution!) ||
+                            consuptionStore.state.confirmMedicineConsupution!) ||
                         consuptionStore.state.confirmMedicineNotConsupution!)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextFieldWidget(
-                            label: DrugControlLabels
-                                .medicineHistoricInformJustification,
+                            label: DrugControlLabels.medicineHistoricInformJustification,
                             controller: justificationController,
                             validator: (value) {
                               if ((DateTime.now().difference(
@@ -384,12 +367,9 @@ class _MedicineHistoricPageState extends State<MedicineHistoricPage> {
                                             ),
                                           ) <
                                           Duration.zero &&
-                                      consuptionStore
-                                          .state.confirmMedicineConsupution!) ||
-                                  consuptionStore
-                                      .state.confirmMedicineNotConsupution!) {
-                                return DrugControlLabels
-                                    .medicineHistoricInformRequiredField;
+                                      consuptionStore.state.confirmMedicineConsupution!) ||
+                                  consuptionStore.state.confirmMedicineNotConsupution!) {
+                                return DrugControlLabels.medicineHistoricInformRequiredField;
                               } else {
                                 return null;
                               }
@@ -401,12 +381,8 @@ class _MedicineHistoricPageState extends State<MedicineHistoricPage> {
                           ),
                           if (isMandatory)
                             Text(
-                              DrugControlLabels
-                                  .medicineHistoricInformRequiredField,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .copyWith(
+                              DrugControlLabels.medicineHistoricInformRequiredField,
+                              style: Theme.of(context).textTheme.titleLarge!.copyWith(
                                     color: Colors.red,
                                   ),
                             )
@@ -436,8 +412,7 @@ class _MedicineHistoricPageState extends State<MedicineHistoricPage> {
                               Duration.zero &&
                           consuptionStore.state.confirmMedicineConsupution! &&
                           justificationController.text.isEmpty) ||
-                      consuptionStore.state.confirmMedicineNotConsupution! &&
-                          justificationController.text.isEmpty) {
+                      consuptionStore.state.confirmMedicineNotConsupution! && justificationController.text.isEmpty) {
                     isMandatory = true;
                     consuptionStore.updateForm(consuptionStore.state);
                   } else {

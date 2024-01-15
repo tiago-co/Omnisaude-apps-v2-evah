@@ -51,44 +51,44 @@ class RemindersModule extends Module {
           // categoryParam: args.data['categoryParam'],
           ),
     ),
-    ChildRoute(
-      '/discounts',
-      child: (_, args) => NewDiscountsPage(
-        moduleName: args.data['moduleName'],
-        categoryParam: args.data['categoryParam'],
-      ),
-    ),
-    ChildRoute(
-      '/cupons',
-      child: (_, args) => NewCuponsPage(
-          organizationId: args.data['organizationId'],
-          moduleName: args.data['moduleName'],
-          coverImage: args.data['coverImage'],
-          couponRescueType: args.data['couponRescueType'],
-          categoryParam: args.data['categoryParam']),
-    ),
-    ChildRoute(
-      '/coupon_details',
-      child: (_, args) => CouponDetailsPage(
-        title: args.data,
-      ),
-    ),
-    ChildRoute(
-      '/discount_details',
-      child: (_, args) => DiscountDetail(
-        organizationId: args.data['organizationId'],
-      ),
-    ),
-    ChildRoute(
-      '/scan_qrcode',
-      child: (_, args) => const ScanQrcodePage(),
-    ),
-    ChildRoute(
-      '/success_page',
-      child: (_, args) => SuccessCouponRescuePage(
-        coupon: args.data['coupon'],
-        organizationId: args.data['organizationId'],
-      ),
-    ),
+    // ChildRoute(
+    //   '/discounts',
+    //   child: (_, args) => NewDiscountsPage(
+    //     moduleName: args.data['moduleName'],
+    //     categoryParam: args.data['categoryParam'],
+    //   ),
+    // ),
+    // ChildRoute(
+    //   '/cupons',
+    //   child: (_, args) => NewCuponsPage(
+    //       organizationId: args.data['organizationId'],
+    //       moduleName: args.data['moduleName'],
+    //       coverImage: args.data['coverImage'],
+    //       couponRescueType: args.data['couponRescueType'],
+    //       categoryParam: args.data['categoryParam']),
+    // ),
+    // ChildRoute(
+    //   '/coupon_details',
+    //   child: (_, args) => CouponDetailsPage(
+    //     title: args.data,
+    //   ),
+    // ),
+    // ChildRoute(
+    //   '/discount_details',
+    //   child: (_, args) => DiscountDetail(
+    //     organizationId: args.data['organizationId'],
+    //   ),
+    // ),
+    // ChildRoute(
+    //   '/scan_qrcode',
+    //   child: (_, args) => const ScanQrcodePage(),
+    // ),
+    // ChildRoute(
+    //   '/success_page',
+    //   child: (_, args) => SuccessCouponRescuePage(
+    //     coupon: args.data['coupon'],
+    //     organizationId: args.data['organizationId'],
+    //   ),
+    // ),
   ];
 }

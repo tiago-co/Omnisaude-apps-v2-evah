@@ -7,7 +7,7 @@ class Onboarding extends StatelessWidget {
   final PageController _controller = PageController();
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 375;
+    double baseWidth = 500;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     double he = MediaQuery.of(context).size.height;
@@ -59,8 +59,7 @@ class Onboarding extends StatelessWidget {
                 height: 56 * fem,
                 child: Container(
                   // masterbuttonmasterBZZ (I4511:30440;19:7388)
-                  padding: EdgeInsets.fromLTRB(
-                      128 * fem, 16 * fem, 134.5 * fem, 16 * fem),
+                  padding: EdgeInsets.fromLTRB(128 * fem, 16 * fem, 134.5 * fem, 16 * fem),
                   width: double.infinity,
                   height: double.infinity,
                   decoration: BoxDecoration(
@@ -69,8 +68,7 @@ class Onboarding extends StatelessWidget {
                   ),
                   child: Container(
                     // autogroupdwo5VKM (MYmEasVSBSEkWkj3SHdwo5)
-                    padding: EdgeInsets.fromLTRB(
-                        6.5 * fem, 0 * fem, 0 * fem, 0 * fem),
+                    padding: EdgeInsets.fromLTRB(6.5 * fem, 0 * fem, 0 * fem, 0 * fem),
                     width: double.infinity,
                     height: double.infinity,
                     child: Center(

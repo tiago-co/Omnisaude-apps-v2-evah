@@ -5,6 +5,7 @@ import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_auth/src/modules/register/stores/register_store.dart';
 import 'package:omni_general/omni_general.dart'
     show
+        AddressModel,
         BottomButtonType,
         BottomButtonWidget,
         Helpers,
@@ -65,9 +66,8 @@ class _AddressFormPageState extends State<AddressFormPage> {
   }
 
   void autocompleteAddress(String input) {
-    store.zipCodeStore
-        .getAddressByCep(input.replaceAll(RegExp(r'[^0-9]'), ''))
-        .then((address) {
+    store.zipCodeStore.getAddressByCep(input.replaceAll(RegExp(r'[^0-9]'), '')).then((address) {
+      store.state.individualPerson!.address = AddressModel();
       store.state.individualPerson!.address!.zipCode = input;
       stateController.text = address.uf ?? stateController.text;
       cityController.text = address.city ?? cityController.text;
@@ -172,7 +172,7 @@ class _AddressFormPageState extends State<AddressFormPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              flex: 7,
+              flex: 5,
               child: TripleBuilder<ZipCodeStore, Exception, ViaCepModel>(
                 store: store.zipCodeStore,
                 builder: (_, triple) {
@@ -184,12 +184,9 @@ class _AddressFormPageState extends State<AddressFormPage> {
                     keyboardType: const TextInputType.numberWithOptions(
                       signed: true,
                     ),
-                    suffixIcon: triple.isLoading
-                        ? const CupertinoActivityIndicator()
-                        : const Icon(Icons.location_on_rounded),
-                    errorText: triple.error != null && !triple.isLoading
-                        ? triple.error!.toString()
-                        : null,
+                    suffixIcon:
+                        triple.isLoading ? const CupertinoActivityIndicator() : const Icon(Icons.location_on_rounded),
+                    errorText: triple.error != null && !triple.isLoading ? triple.error!.toString() : null,
                     textCapitalization: TextCapitalization.none,
                     mask: Masks.generateMask('##.###-###'),
                     placeholder: RegisterLabels.addressFormCEPPlaceholder,
@@ -206,20 +203,23 @@ class _AddressFormPageState extends State<AddressFormPage> {
             const SizedBox(width: 15),
             Expanded(
               flex: 3,
-              child: SelectFieldWidget<MapEntry<String, String>>(
-                label: RegisterLabels.addressFormUFLabel,
-                items: states.entries.toList(),
-                itemsLabels: states.entries.map((state) => state.key).toList(),
-                placeholder: RegisterLabels.addressFormUFPlaceholder,
-                isEnabled: !isLoading,
-                controller: stateController,
-                focusNode: stateFocus,
-                onSelectItem: (MapEntry<String, String> state) {
-                  stateController.text = state.value;
-                  store.state.individualPerson!.address!.state = state.value;
-                  store.updateForm(store.state);
-                  Helpers.changeFocus(_, stateFocus, cityFocus);
-                },
+              child: Padding(
+                padding: EdgeInsets.only(top: 12),
+                child: SelectFieldWidget<MapEntry<String, String>>(
+                  label: RegisterLabels.addressFormUFLabel,
+                  items: states.entries.toList(),
+                  itemsLabels: states.entries.map((state) => state.key).toList(),
+                  placeholder: RegisterLabels.addressFormUFPlaceholder,
+                  isEnabled: !isLoading,
+                  controller: stateController,
+                  focusNode: stateFocus,
+                  onSelectItem: (MapEntry<String, String> state) {
+                    stateController.text = state.value;
+                    store.state.individualPerson!.address!.state = state.value;
+                    store.updateForm(store.state);
+                    Helpers.changeFocus(_, stateFocus, cityFocus);
+                  },
+                ),
               ),
             ),
           ],

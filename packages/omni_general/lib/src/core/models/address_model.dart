@@ -18,6 +18,15 @@ class AddressModel {
   });
 
   AddressModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'].toString();
+    city = json['city'];
+    district = json['district'];
+    state = json['state'];
+    zipCode = json['zip_code'];
+    street = json['street'];
+    complement = json['complement'];
+  }
+  AddressModel.oldFromJson(Map<String, dynamic> json) {
     id = json['id'];
     city = json['cidade'];
     district = json['bairro'];
@@ -28,6 +37,22 @@ class AddressModel {
   }
 
   Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    // data['id'] = id ?? '1';
+    data['city'] = city ?? 'Goiania';
+    data['district'] = district ?? 'Goiania';
+    data['state'] = state ?? 'GO';
+    data['zip_code'] = zipCode ?? '74815700';
+    data['street'] = street ?? 'Avenida São João';
+    data['number'] = 44;
+    // data['complement'] = complement ?? 'avenida';
+    // if (complement == null) {
+    data['complement'] = '';
+    // }
+    return data;
+  }
+
+  Map<String, dynamic> OldToJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['cidade'] = city;

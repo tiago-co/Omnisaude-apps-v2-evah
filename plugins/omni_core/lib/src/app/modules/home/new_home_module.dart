@@ -16,6 +16,7 @@ import 'package:omni_core/src/app/modules/home/pages/stores/module_category_stor
 import 'package:omni_core/src/app/modules/home/pages/stores/omniplan_module_icon_store.dart';
 import 'package:omni_core/src/app/modules/home/pages/stores/unread_notifications_count_store.dart';
 import 'package:omni_core/src/app/modules/informatives/informatives_module.dart';
+import 'package:omni_core/src/app/modules/new_chatbot/new_consultation_module.dart';
 import 'package:omni_core/src/app/modules/new_consultation/new_consultation_module.dart';
 import 'package:omni_core/src/app/modules/new_consultation/new_consultation_page.dart';
 import 'package:omni_core/src/app/modules/new_discounts/discounts_module.dart';
@@ -187,6 +188,12 @@ class NewHomeModule extends Module {
     ModuleRoute(
       '/reminders',
       module: RemindersModule(),
+      // module: DrugControlModule(),
+      transition: TransitionType.fadeIn,
+    ),
+    ModuleRoute(
+      '/new_chatbot_webview',
+      module: NewChatBotModule(),
       // module: DrugControlModule(),
       transition: TransitionType.fadeIn,
     ),

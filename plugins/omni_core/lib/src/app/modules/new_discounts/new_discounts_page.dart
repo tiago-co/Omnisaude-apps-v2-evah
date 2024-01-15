@@ -50,7 +50,8 @@ class _NewDiscountsPageState extends State<NewDiscountsPage> {
 
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 375;
+    double baseWidth = MediaQuery.of(context).size.width > 500 ? 500 : 375;
+
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Scaffold(
@@ -100,7 +101,7 @@ class _NewDiscountsPageState extends State<NewDiscountsPage> {
                               'organizationId': 0,
                               'moduleName': 'Desconto em Farmácias',
                               'coverImage': '',
-                              'couponRescueType': '',
+                              'couponRescueType': 'physical',
                             },
                           );
                         },
@@ -108,7 +109,7 @@ class _NewDiscountsPageState extends State<NewDiscountsPage> {
                           padding: EdgeInsets.zero,
                         ),
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 42),
+                          padding: EdgeInsets.symmetric(vertical: 42 * fem),
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: Color(0xfffdf2f2),
@@ -119,16 +120,19 @@ class _NewDiscountsPageState extends State<NewDiscountsPage> {
                             children: [
                               SizedBox(
                                 // margin: const EdgeInsets.all(12.0),
-                                width: 54,
-                                height: 64,
+                                width: 54 * fem,
+                                height: 64 * fem,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8),
                                   // firstaidbagbhR (4511:32341)
-                                  child: SvgPicture.asset(
-                                    Assets.pillIcon,
-                                    package: AssetsPackage.omniCore,
-                                    color: const Color(
-                                      0xffed8181,
+                                  child: AspectRatio(
+                                    aspectRatio: fem > 2 ? 2 : fem + 0.5,
+                                    child: SvgPicture.asset(
+                                      Assets.pillIcon,
+                                      package: AssetsPackage.omniCore,
+                                      color: const Color(
+                                        0xffed8181,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -162,7 +166,7 @@ class _NewDiscountsPageState extends State<NewDiscountsPage> {
                               'organizationId': 0,
                               'moduleName': 'Outros descontos',
                               'coverImage': '',
-                              'couponRescueType': '',
+                              'couponRescueType': 'physical',
                             },
                           );
                         },
@@ -170,7 +174,7 @@ class _NewDiscountsPageState extends State<NewDiscountsPage> {
                           padding: EdgeInsets.zero,
                         ),
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 42),
+                          padding: EdgeInsets.symmetric(vertical: 42 * fem),
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: Color(0xfff6f6f8),
@@ -181,12 +185,15 @@ class _NewDiscountsPageState extends State<NewDiscountsPage> {
                             children: [
                               Container(
                                 // margin: const EdgeInsets.all(12.0),
-                                width: 54,
-                                height: 64,
-                                child: SvgPicture.asset(
-                                  Assets.medicalCrossIcon,
-                                  package: AssetsPackage.omniCore,
-                                  color: const Color(0xff949DB8),
+                                width: 54 * fem,
+                                height: 64 * fem,
+                                child: AspectRatio(
+                                  aspectRatio: fem > 2 ? 2 : fem + 0.5,
+                                  child: SvgPicture.asset(
+                                    Assets.medicalCrossIcon,
+                                    package: AssetsPackage.omniCore,
+                                    color: const Color(0xff949DB8),
+                                  ),
                                 ),
                               ),
                               Text(

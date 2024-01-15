@@ -2,8 +2,7 @@ import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_general/omni_general.dart';
 import 'package:omni_general/src/core/enums/biometric_type_enum.dart';
 
-class UseBiometricsStore
-    extends NotifierStore<Exception, UseBiometricPermission> {
+class UseBiometricsStore extends NotifierStore<Exception, UseBiometricPermission> {
   final PreferencesService preferencesService = PreferencesService();
   bool canUseBiometricAuth = false;
   BiometricTypeEnum? biometricType;
@@ -26,9 +25,9 @@ class UseBiometricsStore
 
   Future<void> canAuthenticateUser() async {
     await LocalAuthService.canAuthenticateUser().then(
-      (value) {
+      (value) async {
         canUseBiometricAuth = value;
-        LocalAuthService.getBiometricType().then(
+        await LocalAuthService.getBiometricType().then(
           (value) {
             biometricType = biometricEnumFromBiometricType(value);
           },

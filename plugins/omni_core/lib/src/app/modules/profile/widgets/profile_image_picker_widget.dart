@@ -13,8 +13,7 @@ class ProfileImagePickerWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ProfileImagePickerWidgetState createState() =>
-      _ProfileImagePickerWidgetState();
+  _ProfileImagePickerWidgetState createState() => _ProfileImagePickerWidgetState();
 }
 
 class _ProfileImagePickerWidgetState extends State<ProfileImagePickerWidget> {
@@ -59,12 +58,12 @@ class _ProfileImagePickerWidgetState extends State<ProfileImagePickerWidget> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: BottomSheetHeaderWidget(
-              title: ProfileLabels.profileImagePickerTitle,
-            ),
-          ),
+          // const Padding(
+          //   padding: EdgeInsets.symmetric(horizontal: 15),
+          //   child: BottomSheetHeaderWidget(
+          //     title: ProfileLabels.profileImagePickerTitle,
+          //   ),
+          // ),
           Flexible(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
@@ -95,11 +94,11 @@ class _ProfileImagePickerWidgetState extends State<ProfileImagePickerWidget> {
               ),
             ),
           ),
-          BottomButtonWidget(
-            onPressed: () => Modular.to.pop(),
-            buttonType: BottomButtonType.outline,
-            text: ProfileLabels.profileImagePickerCancel,
-          ),
+          // BottomButtonWidget(
+          //   onPressed: () => Modular.to.pop(),
+          //   buttonType: BottomButtonType.outline,
+          //   text: ProfileLabels.profileImagePickerCancel,
+          // ),
         ],
       ),
     );
@@ -121,25 +120,22 @@ class _ProfileImagePickerWidgetState extends State<ProfileImagePickerWidget> {
         title: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
-          child: Text(
-            label,
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
+          child: Text(label, style: Theme.of(context).textTheme.titleLarge),
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
         minLeadingWidth: 0,
-        leading: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              size: 20,
-              color: Theme.of(context).primaryColor,
-            ),
-          ],
-        ),
+        // leading: Column(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     Icon(
+        //       icon,
+        //       size: 20,
+        //       color: Theme.of(context).primaryColor,
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }

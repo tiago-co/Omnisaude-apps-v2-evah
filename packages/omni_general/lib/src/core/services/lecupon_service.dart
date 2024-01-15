@@ -84,9 +84,7 @@ class LecuponService {
         log(onError.toString());
       },
     );
-    await _lecuponRepository
-        .smartLinkAuthenticate(smartToken: smartLinkToken)
-        .then(
+    await _lecuponRepository.smartLinkAuthenticate(smartToken: smartLinkToken).then(
       (value) {
         lecuponUser = value;
       },

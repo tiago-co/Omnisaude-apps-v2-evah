@@ -104,7 +104,7 @@ class _RemindersWidgetState extends State<RemindersWidget> {
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 2,
+                  itemCount: store.state.results!.length > 1 ? 2 : 1,
                   itemBuilder: (context, index) {
                     final reminder = store.state.results![index];
                     return Padding(

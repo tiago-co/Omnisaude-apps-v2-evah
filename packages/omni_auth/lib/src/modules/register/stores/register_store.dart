@@ -31,6 +31,8 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Di
   final ZipCodeStore zipCodeStore = ZipCodeStore();
   final LecuponService lecuponService = LecuponService();
   final PreferencesService _service = PreferencesService();
+  final NewBeneficiaryModel data = NewBeneficiaryModel();
+
   String password = '';
   JwtModel? jwtModel;
   RegisterStore()
@@ -44,7 +46,7 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Di
         );
 
   void updateForm(NewBeneficiaryModel form) {
-    update(NewBeneficiaryModel.fromJson(form.toJson()));
+    update(NewBeneficiaryModel.oldFromJson(form.toJson()));
   }
 
   Future<void> verifyUser(Map<String, String> params) async {
@@ -110,45 +112,90 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Di
   }
 
   Future confirmUser(String id, String token, String password) async {
-    setLoading(true);
-    this.password = password;
-    jwtModel = await _repository.confirmUserCreate(
-      id,
-      token,
-      password,
-    );
-    setLoading(false);
+    try {
+      setLoading(true);
+      this.password = password;
+      jwtModel = await _repository.confirmUserCreate(
+        id,
+        token,
+        password,
+      );
+      setLoading(false);
+    } on DioError catch (e) {
+      setLoading(false);
+      throw Exception(e.response?.data);
+    }
   }
 
-  Future updateUser() async {
-    setLoading(true);
-    final userData = await _repository.fetchUserData(
-      jwtModel!.token!,
-      jwtModel!.id!,
-    );
-    final NewBeneficiaryModel data = NewBeneficiaryModel(
-        individualPerson: IndividualPersonModel(
-          user: UserModel(
-            email: jwtModel!.email,
-            password: password,
-          ),
-          name: state.individualPerson!.name,
-          cpf: userData['cpf'],
-          phone: state.individualPerson!.phone,
-        ),
-        programCode: dotenv.env['CLIENT_LABEL']);
-    await lecuponService.registerUser(beneficiary: data).catchError((onError) {
+  Future resendConfirmUser(String email) async {
+    try {
+      setLoading(true);
+      jwtModel = await _repository.resendUserConfirmation(email);
       setLoading(false);
-      throw onError;
-    });
+    } on DioError catch (e) {
+      setLoading(false);
+      throw Exception(e.response?.data);
+    }
+  }
+
+  Future updateUser({PreferencesModel? prefs, String? pass}) async {
+    setLoading(true);
+    dynamic userData;
+    if (prefs?.jwt != null) {
+      jwtModel = prefs!.jwt;
+    } else {
+      userData = await _repository.fetchUserData(
+        jwtModel!.token!,
+        jwtModel!.id!,
+      );
+    }
+    if (prefs != null) {
+      data.individualPerson = IndividualPersonModel(
+        user: UserModel(email: jwtModel!.email, password: pass),
+        name: prefs.beneficiary!.individualPerson!.name,
+        cpf: prefs.beneficiary!.individualPerson!.cpf,
+        phone: state.individualPerson!.phone,
+      );
+      data.programCode = dotenv.env['CLIENT_LABEL'];
+      state.individualPerson!.name = prefs.beneficiary!.individualPerson!.name;
+    } else {
+      data.individualPerson = IndividualPersonModel(
+        user: UserModel(email: jwtModel!.email, password: password),
+        name: state.individualPerson!.name,
+        cpf: userData['cpf'],
+        phone: state.individualPerson!.phone,
+      );
+      data.programCode = dotenv.env['CLIENT_LABEL'];
+      state.individualPerson!.name = userData['name'];
+    }
+
+    // await lecuponService.registerUser(beneficiary: data).catchError((onError) {
+    //   setLoading(false);
+    //   throw onError;
+    // });
+
     return await _repository
         .updateUser(
       state,
       jwtModel!.token!,
       jwtModel!.id!,
     )
-        .then((value) {
+        .then((value) async {
+      // final individualPerson = await _beneficiaryRepository.getIndividualPerson(
+      //   userData['omni_id'],
+      // );
+      // userStore.beneficiary.individualPerson = individualPerson;
+      // userStore.state.beneficiary = userStore.beneficiary;
+      // userStore.setUserPreferences(
+      //   PreferencesModel.fromJson(userStore.state.toJson()),
+      //   userStore.userId,
+      // );
       setLoading(false);
+      // se for somente atualizar os dados, como quem já fez o login e
+      // foi redirecionado, enviar para a tela inicial
+      if (prefs != null) {
+        Modular.to.pushReplacementNamed('/newHome');
+      }
       return value;
     }).catchError((onError) {
       setLoading(false);

@@ -8,7 +8,8 @@ class DiscountsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 375;
+    double baseWidth = MediaQuery.of(context).size.width > 500 ? 500 : 375;
+
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Container(
@@ -27,22 +28,17 @@ class DiscountsWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  // discountsBrf (4511:32335)
-                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
-                  child: Text(
-                    'Descontos',
-                    style: TextStyle(
-                      fontSize: 22 * ffem,
-                      fontWeight: FontWeight.w600,
-                      height: 1.2999999306 * ffem / fem,
-                      color: Color(0xff1a1c22),
-                    ),
+                Text(
+                  'Descontos',
+                  style: TextStyle(
+                    fontSize: 22 * ffem,
+                    fontWeight: FontWeight.w600,
+                    height: 1.2999999306 * ffem / fem,
+                    color: Color(0xff1a1c22),
                   ),
                 ),
-                TextButton(
-                  // masterbuttonmasteri5u (4902:28309)
-                  onPressed: () {
+                InkWell(
+                  onTap: () {
                     Modular.to.pushNamed(
                       '/newHome/discounts/discounts',
                       arguments: {
@@ -51,9 +47,6 @@ class DiscountsWidget extends StatelessWidget {
                       },
                     );
                   },
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                  ),
                   child: Container(
                     height: 24 * fem,
                     decoration: BoxDecoration(
@@ -75,7 +68,7 @@ class DiscountsWidget extends StatelessWidget {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 16 * ffem,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                                 height: 1.5 * ffem / fem,
                                 color: Color(0xff52576a),
                               ),
@@ -94,42 +87,36 @@ class DiscountsWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 8),
             height: 88 * fem,
             child: Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  // frame1573oFm (4511:32338)
-                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
-                  child: TextButton(
-                    onPressed: () {
-                      Modular.to.pushNamed(
-                        '/newHome/discounts/cupons',
-                        arguments: {
-                          // 'moduleName': 'Desconto em Farmácia',
-                          'categoryParam': '19',
-                          'organizationId': 0,
-                          'moduleName': 'Desconto em Farmácias',
-                          'coverImage': '',
-                          'couponRescueType': '',
-                        },
-                      );
-                    },
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          // margin: const EdgeInsets.all(12.0),
-                          width: 54,
-                          height: 54,
-                          child: CircleAvatar(
-                            backgroundColor: const Color(
-                              0xffed8181,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
-                              // firstaidbagbhR (4511:32341)
+                TextButton(
+                  onPressed: () {
+                    Modular.to.pushNamed(
+                      '/newHome/discounts/cupons',
+                      arguments: {
+                        // 'moduleName': 'Desconto em Farmácia',
+                        'categoryParam': '19',
+                        'organizationId': 0,
+                        'moduleName': 'Desconto em Farmácias',
+                        'coverImage': '',
+                        'couponRescueType': 'physical',
+                      },
+                    );
+                  },
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: 54 * fem,
+                        height: 54 * fem,
+                        child: CircleAvatar(
+                          backgroundColor: const Color(0xffed8181),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: AspectRatio(
+                              aspectRatio: fem > 2 ? 2 : fem + 0.5,
                               child: SvgPicture.asset(
                                 Assets.pillIcon,
                                 package: AssetsPackage.omniCore,
@@ -138,19 +125,19 @@ class DiscountsWidget extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Text(
-                          // pharmaciesvUo (4511:32342)
-                          'Farmácias',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16 * ffem,
-                            fontWeight: FontWeight.w600,
-                            height: 1.6000000238 * ffem / fem,
-                            color: Color(0xff1a1c22),
-                          ),
+                      ),
+                      Text(
+                        // pharmaciesvUo (4511:32342)
+                        'Farmácias',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16 * ffem,
+                          fontWeight: FontWeight.w600,
+                          height: 1.6000000238 * ffem / fem,
+                          color: Color(0xff1a1c22),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 // Container(
@@ -206,7 +193,7 @@ class DiscountsWidget extends StatelessWidget {
                         'organizationId': 0,
                         'moduleName': 'Outros descontos',
                         'coverImage': '',
-                        'couponRescueType': '',
+                        'couponRescueType': 'physical',
                       },
                     );
                   },
@@ -216,19 +203,20 @@ class DiscountsWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        // margin: const EdgeInsets.all(12.0),
-                        width: 54,
-                        height: 54,
+                      SizedBox(
+                        width: 54 * fem,
+                        height: 54 * fem,
                         child: CircleAvatar(
                           backgroundColor: Color(0xff949DB8),
-                          // pilldnX (4511:32346)
-                          child: SvgPicture.asset(
-                            Assets.medicalCrossIcon,
-                            package: AssetsPackage.omniCore,
-                            color: Colors.white,
-                            width: 28,
-                            height: 28,
+                          child: AspectRatio(
+                            aspectRatio: fem > 2 ? 2 : fem + 0.5,
+                            child: SvgPicture.asset(
+                              Assets.medicalCrossIcon,
+                              package: AssetsPackage.omniCore,
+                              color: Colors.white,
+                              width: 28 * fem,
+                              height: 28 * fem,
+                            ),
                           ),
                         ),
                       ),

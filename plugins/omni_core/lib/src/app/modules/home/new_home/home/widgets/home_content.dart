@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:omni_core/src/app/modules/home/new_home/home/widgets/advices/advices_card.dart';
 import 'package:omni_core/src/app/modules/home/new_home/home/widgets/discount_widget.dart';
 import 'package:omni_core/src/app/modules/home/new_home/home/widgets/nearest_consultation/nearest_consultation_widget.dart';
 import 'package:omni_core/src/app/modules/home/new_home/home/widgets/posts_widget.dart';
@@ -42,35 +43,39 @@ class _HomePageContentState extends State<HomePageContent> {
 
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 375;
+    double baseWidth = MediaQuery.of(context).size.width > 500 ? 500 : 375;
+
     double fem = MediaQuery.of(context).size.width / baseWidth;
     return SafeArea(
       child: SingleChildScrollView(
-        padding: const EdgeInsets.only(bottom: 12),
+        padding: EdgeInsets.only(bottom: 12 * fem),
         child: Container(
-          padding: const EdgeInsets.only(left: 20),
+          padding: EdgeInsets.only(left: 16 * fem),
           decoration: const BoxDecoration(
             color: Color(0xffffffff),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Header(),
-              Container(
-                padding: const EdgeInsets.only(right: 0),
-                child: const ServicesWidget(),
+              Header(),
+              const Padding(
+                padding: EdgeInsets.only(right: 16),
+                child: AdvicesCard(),
               ),
+              const SizedBox(height: 20),
+              ServicesWidget(),
+
               SizedBox(
-                height: 40 * fem,
+                height: 24 * fem,
               ),
               Container(
-                padding: const EdgeInsets.only(right: 20),
+                padding: EdgeInsets.only(right: 20 * fem),
                 child: const DiscountsWidget(),
               ),
-              Container(
-                padding: const EdgeInsets.only(right: 20),
-                child: RemindersWidget(),
-              ),
+              // Container(
+              //   padding: const EdgeInsets.only(right: 20),
+              //   child: RemindersWidget(),
+              // ),
               // const NearestConsultationWidget(),
               // const SelfAssessmentWidget(),
               // const PostsWidgets()

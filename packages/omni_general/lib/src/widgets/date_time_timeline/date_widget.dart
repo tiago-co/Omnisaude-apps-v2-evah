@@ -28,7 +28,7 @@ class DateWidget extends StatelessWidget {
         width: width,
         margin: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(12.0)),
           color: selectionColor,
         ),
         child: Padding(
@@ -41,13 +41,13 @@ class DateWidget extends StatelessWidget {
                 style: monthTextStyle,
               ),
               Text(
+                DateFormat('E', locale).format(date).toUpperCase(), // WeekDay
+                style: dayTextStyle,
+              ),
+              Text(
                 date.day.toString(), // Date
                 style: dateTextStyle,
               ),
-              Text(
-                DateFormat('E', locale).format(date).toUpperCase(), // WeekDay
-                style: dayTextStyle,
-              )
             ],
           ),
         ),

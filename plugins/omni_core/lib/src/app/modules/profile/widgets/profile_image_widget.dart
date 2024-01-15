@@ -51,11 +51,8 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
                           mimeType: ext,
                         ).toString();
                         String url = '';
-                        if (profileStore.userStore.beneficiary.individualPerson!
-                                .image !=
-                            null) {
-                          url = profileStore
-                              .userStore.beneficiary.individualPerson!.image!;
+                        if (profileStore.userStore.beneficiary.individualPerson!.image != null) {
+                          url = profileStore.userStore.beneficiary.individualPerson!.image!;
                           await CachedNetworkImage.evictFromCache(
                             profileStore.state.image!,
                           ).whenComplete(() {
@@ -66,19 +63,16 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
                               onError,
                               showClose: true,
                             );
-                            profileStore.userStore.beneficiary.individualPerson!
-                                .image = url;
+                            profileStore.userStore.beneficiary.individualPerson!.image = url;
                           });
                         }
-                        profileStore
-                            .updateField({'b64': b64}).catchError((onError) {
+                        profileStore.updateField({'b64': b64}).catchError((onError) {
                           Helpers.showDialog(
                             context,
                             onError,
                             showClose: true,
                           );
-                          profileStore.userStore.beneficiary.individualPerson!
-                              .image = url;
+                          profileStore.userStore.beneficiary.individualPerson!.image = url;
                         });
                       },
                     ),
@@ -87,20 +81,17 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
                 child: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .background
-                        .withOpacity(0.85),
+                    color: Theme.of(context).colorScheme.background.withOpacity(0.85),
                     border: Border.all(
                       color: Theme.of(context).cardColor.withOpacity(0.1),
                       width: 1.5,
                     ),
                   ),
                   padding: const EdgeInsets.all(5),
-                  child: Icon(
-                    Icons.camera_alt_rounded,
-                    color: Theme.of(context).primaryColor,
-                  ),
+                  // child: Icon(
+                  //   Icons.camera_alt_rounded,
+                  //   color: Theme.of(context).primaryColor,
+                  // ),
                 ),
               ),
             ),

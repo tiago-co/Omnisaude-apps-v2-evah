@@ -69,10 +69,7 @@ class _CuponCardWidgetState extends State<CuponCardWidget> {
                             child: Text(
                               'Até ${widget.model.discount}%',
                               textAlign: TextAlign.center,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineMedium!
-                                  .copyWith(
+                              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                                     fontSize: 26,
                                     fontWeight: FontWeight.bold,
                                     color: Theme.of(context).primaryColor,
@@ -85,10 +82,7 @@ class _CuponCardWidgetState extends State<CuponCardWidget> {
                               child: Text(
                                 'de desconto',
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium!
-                                    .copyWith(
+                                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                                       fontSize: 13,
                                       fontWeight: FontWeight.bold,
                                       color: Theme.of(context).primaryColor,
@@ -114,10 +108,7 @@ class _CuponCardWidgetState extends State<CuponCardWidget> {
                                   '${BenefitsLabels.cuponCardUntil} ${widget.model.discount}%',
                                   textAlign: TextAlign.center,
                                   maxLines: 4,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displaySmall!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 13,
                                         color: Theme.of(context).primaryColor,
@@ -130,10 +121,7 @@ class _CuponCardWidgetState extends State<CuponCardWidget> {
                                   child: Text(
                                     BenefitsLabels.cuponCardDiscount,
                                     textAlign: TextAlign.center,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineMedium!
-                                        .copyWith(
+                                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                                           fontSize: 13,
                                           fontWeight: FontWeight.bold,
                                           color: Theme.of(context).primaryColor,
@@ -155,10 +143,7 @@ class _CuponCardWidgetState extends State<CuponCardWidget> {
                                   BenefitsLabels.cuponCardGetCoupon,
                                   textAlign: TextAlign.center,
                                   maxLines: 4,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displaySmall!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 13,
                                         color: Theme.of(context).primaryColor,
@@ -177,10 +162,7 @@ class _CuponCardWidgetState extends State<CuponCardWidget> {
                             children: [
                               Text(
                                 '${BenefitsLabels.cuponCardValidUnitl}: ',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineSmall!
-                                    .copyWith(
+                                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                                       color: Theme.of(context).cardColor,
                                       fontSize: 12,
                                     ),

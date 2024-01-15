@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_core/omni_core.dart';
 import 'package:omni_general/omni_general.dart';
 import 'package:omni_general/src/core/models/credential_model.dart';
+import 'package:omni_general/src/core/models/new_credential_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesService {
@@ -47,7 +48,7 @@ class PreferencesService {
     );
   }
 
-  Future<void> setCredential(CredentialModel credentials) async {
+  Future<void> setCredential(NewCredentialModel credentials) async {
     await SharedPreferences.getInstance().then(
       (instance) async {
         await instance.setString(
@@ -58,12 +59,12 @@ class PreferencesService {
     );
   }
 
-  Future<CredentialModel> getCredential() async {
+  Future<NewCredentialModel> getCredential() async {
     return SharedPreferences.getInstance().then(
       (instance) async {
         final String? credential = instance.getString('credential');
-        if (credential == null) return CredentialModel();
-        return CredentialModel.fromJson(jsonDecode(credential));
+        if (credential == null) return NewCredentialModel();
+        return NewCredentialModel.fromJson(jsonDecode(credential));
       },
     );
   }
@@ -105,21 +106,19 @@ class PreferencesService {
         await repository.verifyToken(userId).then(
           (jwt) async {
             if (jwt == null) return;
-            final bool isBiometricAvaliable =
-                await LocalAuthService.isBiometricAvaliable();
+            final bool isBiometricAvaliable = await LocalAuthService.isBiometricAvaliable();
             final bool hasBiometric = await LocalAuthService.hasBiometrics();
-            final UseBiometricPermission? biometricPermission =
-                await service.getHasBiometrics();
+            final UseBiometricPermission? biometricPermission = await service.getHasBiometrics();
+            appStateStore.updateState(true);
             if (isBiometricAvaliable && hasBiometric && appStateStore.state) {
               if (biometricPermission == UseBiometricPermission.accepted) {
-                await LocalAuthService.authenticate()
-                    .then((value) {})
-                    .catchError(
-                  // ignore: body_might_complete_normally_catch_error
+                await LocalAuthService.authenticate().then((value) {}).catchError(
                   (onError) {
-                    LogoutService.logout();
-                    Modular.to.popUntil(ModalRoute.withName('/'));
-                    Modular.to.navigate('/presentation/letsGo');
+                    if (onError.code != 'auth_in_progress') {
+                      LogoutService.logout();
+                      Modular.to.popUntil(ModalRoute.withName('/'));
+                      Modular.to.navigate('/auth/newLogin');
+                    }
                   },
                 );
               }

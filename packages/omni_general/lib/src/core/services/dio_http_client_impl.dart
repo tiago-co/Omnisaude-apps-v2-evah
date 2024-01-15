@@ -17,10 +17,10 @@ class DioHttpClientImpl implements ApplicationHttpClient {
     Map<String, dynamic>? queryParameters,
     String? authorization,
   }) async {
-    assert(
-      path.startsWith('/'),
-      'Path parameter must start with "/"!',
-    );
+    // assert(
+    //   path.startsWith('/'),
+    //   'Path parameter must start with "/"!',
+    // );
     final Response response = await _client.post(
       path,
       data: data,

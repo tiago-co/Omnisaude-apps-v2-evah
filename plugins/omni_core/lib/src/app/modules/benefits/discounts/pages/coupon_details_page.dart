@@ -48,9 +48,7 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
           child: TripleBuilder<RescueCouponStore, DioError, String>(
             store: rescueCouponStore,
             builder: (_, triple) {
-              if (triple.isLoading &&
-                  (couponRescueTypeFilterStore.state ==
-                      CouponRescueType.physical)) {
+              if (triple.isLoading && (couponRescueTypeFilterStore.state == CouponRescueType.physical)) {
                 return const LoadingWidget();
               }
               return ColoredBox(
@@ -63,8 +61,7 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                       buildDescription,
                       const SizedBox(height: 10),
                       buildRules,
-                      if (couponRescueTypeFilterStore.state ==
-                          CouponRescueType.physical)
+                      if (couponRescueTypeFilterStore.state == CouponRescueType.physical)
                         Column(
                           children: [
                             const SizedBox(height: 10),
@@ -154,8 +151,7 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
     return TripleBuilder<RescueCouponStore, DioError, String>(
       store: rescueCouponStore,
       builder: (_, triple) {
-        if (triple.isLoading &&
-            (couponRescueTypeFilterStore.state == CouponRescueType.physical)) {
+        if (triple.isLoading && (couponRescueTypeFilterStore.state == CouponRescueType.physical)) {
           return const SizedBox();
         }
 
@@ -165,7 +161,7 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
             padding: const EdgeInsets.only(bottom: 8),
             child: FloatingActionButton.extended(
               onPressed: () {
-                store.state.template!.getOnTapFloatingButton(context);
+                store.state.template!.getOnTapFloatingButton(context, store);
               },
               label: triple.isLoading
                   ? const CircularProgressIndicator(

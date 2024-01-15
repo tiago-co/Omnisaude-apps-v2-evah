@@ -37,6 +37,7 @@ extension CouponTemplateTypeExtension on CouponTemplateType {
         return (context, store) async {
           await launchUrl(
             Uri.parse(store.state.activationUrl!),
+            mode: LaunchMode.externalApplication,
           );
         };
       case CouponTemplateType.qrCode:
@@ -82,6 +83,7 @@ extension CouponTemplateTypeExtension on CouponTemplateType {
           Clipboard.setData(clipboardData);
           await launchUrl(
             Uri.parse(store.state.activationUrl!),
+            mode: LaunchMode.externalApplication,
           );
         };
       case CouponTemplateType.general:

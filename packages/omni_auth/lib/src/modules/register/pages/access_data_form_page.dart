@@ -5,12 +5,7 @@ import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_auth/src/modules/register/pages/widgets/terms_check_box_widget.dart';
 import 'package:omni_auth/src/modules/register/stores/register_store.dart';
 import 'package:omni_general/omni_general.dart'
-    show
-        BottomButtonWidget,
-        Helpers,
-        NewBeneficiaryModel,
-        RequestErrorWidget,
-        TextFieldWidget;
+    show BottomButtonWidget, Helpers, NewBeneficiaryModel, RequestErrorWidget, TextFieldWidget, UserModel;
 import 'package:omni_register_labels/labels.dart';
 
 class AccessDataFormPage extends StatefulWidget {
@@ -162,6 +157,9 @@ class _AccessDataFormPageState extends State<AccessDataFormPage> {
                 focusNode: emailFocus,
                 controller: emailController,
                 onChange: (String? input) {
+                  if (triple.state.individualPerson!.user == null) {
+                    triple.state.individualPerson!.user = UserModel();
+                  }
                   triple.state.individualPerson!.user!.email = input;
                   store.updateForm(store.state);
                 },
@@ -225,8 +223,7 @@ class _AccessDataFormPageState extends State<AccessDataFormPage> {
               const SizedBox(height: 15),
               TextFieldWidget(
                 label: RegisterLabels.accessDataFormConfirmPasswordLabel,
-                placeholder:
-                    RegisterLabels.accessDataFormConfirmPasswordPlaceholder,
+                placeholder: RegisterLabels.accessDataFormConfirmPasswordPlaceholder,
                 isEnabled: !triple.isLoading,
                 obscureText: true,
                 focusNode: confirmPasswordFocus,
@@ -239,8 +236,7 @@ class _AccessDataFormPageState extends State<AccessDataFormPage> {
                   if (input == passwordController.text) {
                     return null;
                   } else {
-                    return RegisterLabels
-                        .accessDataFormConfirmPasswordInaqualityError;
+                    return RegisterLabels.accessDataFormConfirmPasswordInaqualityError;
                   }
                 },
                 textCapitalization: TextCapitalization.none,
