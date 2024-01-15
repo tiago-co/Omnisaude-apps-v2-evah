@@ -72,9 +72,7 @@ class _SignInPageState extends State<SignInPage> {
 
   void login(BuildContext context) async {
     await store.useBiometricsStore.canAuthenticateUser();
-    if (store.useBiometricsStore.canUseBiometricAuth &&
-            store.useBiometricsStore.state == UseBiometricPermission.notAccepted ||
-        store.useBiometricsStore.state == UseBiometricPermission.accepted) {
+    if (store.useBiometricsStore.canUseBiometricAuth) {
       Helpers.showDialog(
         context,
         Helpers.activateBiometricAuth(

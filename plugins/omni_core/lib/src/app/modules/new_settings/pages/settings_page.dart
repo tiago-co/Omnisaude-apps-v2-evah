@@ -109,29 +109,28 @@ class _SettingsPageState extends State<SettingsPage> {
                                 ),
                               ),
                               TripleBuilder<UseBiometricsStore, Exception, UseBiometricPermission>(
-                                  store: useBiometricsStore,
-                                  builder: (_, triple) {
-                                    return FlutterSwitch(
-                                      value: triple.state == UseBiometricPermission.accepted,
-                                      activeToggleColor: Colors.white,
-                                      activeColor: const Color(0xff06C270),
-                                      height: 25,
-                                      width: 48,
-                                      padding: 2.5,
-                                      onToggle: (change) async {
-                                        await useBiometricsStore.canAuthenticateUser();
-                                        if (useBiometricsStore.canUseBiometricAuth &&
-                                                useBiometricsStore.state == UseBiometricPermission.notAccepted ||
-                                            useBiometricsStore.state == UseBiometricPermission.accepted) {
-                                          LocalAuthService.authenticate().then(
-                                            (value) {
-                                              useBiometricsStore.changeBiometricPermission(change);
-                                            },
-                                          );
-                                        }
-                                      },
-                                    );
-                                  }),
+                                store: useBiometricsStore,
+                                builder: (_, triple) {
+                                  return FlutterSwitch(
+                                    value: triple.state == UseBiometricPermission.accepted,
+                                    activeToggleColor: Colors.white,
+                                    activeColor: const Color(0xff06C270),
+                                    height: 25,
+                                    width: 48,
+                                    padding: 2.5,
+                                    onToggle: (change) async {
+                                      await useBiometricsStore.canAuthenticateUser();
+                                      if (useBiometricsStore.canUseBiometricAuth) {
+                                        LocalAuthService.authenticate().then(
+                                          (value) {
+                                            useBiometricsStore.changeBiometricPermission(change);
+                                          },
+                                        );
+                                      }
+                                    },
+                                  );
+                                },
+                              ),
                             ],
                           ),
                         ),
