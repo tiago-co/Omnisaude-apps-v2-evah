@@ -193,7 +193,7 @@ class DiscountsWidget extends StatelessWidget {
                         'organizationId': 0,
                         'moduleName': 'Outros descontos',
                         'coverImage': '',
-                        'couponRescueType': 'physical',
+                        'couponRescueType': 'online',
                       },
                     );
                   },

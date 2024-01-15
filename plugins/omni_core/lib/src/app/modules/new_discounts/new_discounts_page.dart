@@ -166,7 +166,7 @@ class _NewDiscountsPageState extends State<NewDiscountsPage> {
                               'organizationId': 0,
                               'moduleName': 'Outros descontos',
                               'coverImage': '',
-                              'couponRescueType': 'physical',
+                              'couponRescueType': 'online',
                             },
                           );
                         },

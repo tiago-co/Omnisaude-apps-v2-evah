@@ -162,7 +162,7 @@ class ServicesPage extends StatelessWidget {
                         'organizationId': 0,
                         'moduleName': 'Outros descontos',
                         'coverImage': '',
-                        'couponRescueType': '',
+                        'couponRescueType': 'online',
                       },
                     );
                   },
