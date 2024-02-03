@@ -28,7 +28,7 @@ class NewLoginStore extends NotifierStore<DioError, NewCredentialModel> with Dis
 
         if (prefs.beneficiary?.individualPerson?.phone != null &&
             prefs.beneficiary!.individualPerson!.phone != '11999995555') {
-          Modular.to.pushReplacementNamed('/newHome');
+          Modular.to.navigate('/newHome');
         } else {
           Modular.to.pushNamed(
             '/auth/signUp/signUpPage',

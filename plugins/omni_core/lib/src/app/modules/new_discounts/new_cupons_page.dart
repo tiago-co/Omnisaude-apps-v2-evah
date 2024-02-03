@@ -73,10 +73,13 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
         ),
         centerTitle: true,
         actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 20 * fem),
-            child: const NewCouponRescueTypeFilterWidget(),
-          ),
+          if (widget.categoryParam != '247')
+            const Padding(
+              padding: EdgeInsets.only(right: 20),
+              child: NewCouponRescueTypeFilterWidget(),
+            )
+          else
+            const SizedBox(),
         ],
       ),
       body: SingleChildScrollView(
@@ -173,6 +176,7 @@ class _NewCuponsPageState extends State<NewCuponsPage> {
                       return CuponWidget(
                         organization: discount,
                         couponRescueType: couponRescueTypeFilterStore.state,
+                        categoryParam: widget.categoryParam,
                       );
                     },
                   );

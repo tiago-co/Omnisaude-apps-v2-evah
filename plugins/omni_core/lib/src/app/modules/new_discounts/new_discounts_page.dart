@@ -162,6 +162,79 @@ class _NewDiscountsPageState extends State<NewDiscountsPage> {
                             '/newHome/discounts/cupons',
                             arguments: {
                               // 'moduleName': 'Desconto em Farmácia',
+                              'categoryParam': '247',
+                              'organizationId': 0,
+                              'moduleName': 'Descontos em Exames',
+                              'coverImage': '',
+                              'couponRescueType': 'online',
+                            },
+                          );
+                        },
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                        ),
+                        child: Container(
+                          width: double.infinity,
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                            color: Color(0xffECF9F6),
+                            borderRadius: BorderRadius.circular(12 * fem),
+                            boxShadow: [
+                              BoxShadow(
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                color: Colors.grey.shade200,
+                              )
+                            ],
+                          ),
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 42),
+                                child: Center(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 54,
+                                        height: 54,
+                                        child: SvgPicture.asset(
+                                          Assets.examsNewIcon,
+                                          package: AssetsPackage.omniCore,
+                                          color: Color(0xcc48BEC2),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      Text(
+                                        'Exames',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 22 * ffem,
+                                          fontWeight: FontWeight.w600,
+                                          height: 1.2999999306 * ffem / fem,
+                                          color: Color(0xff1a1c22),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 12 * fem,
+                      ),
+                      TextButton(
+                        // cuponrqd (5304:31508)
+                        onPressed: () {
+                          Modular.to.pushNamed(
+                            '/newHome/discounts/cupons',
+                            arguments: {
+                              // 'moduleName': 'Desconto em Farmácia',
                               'categoryParam': '',
                               'organizationId': 0,
                               'moduleName': 'Outros descontos',

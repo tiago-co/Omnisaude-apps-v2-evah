@@ -165,6 +165,8 @@ class Assets {
   static String selfAssessmentIcon = 'assets/icons/services/self-assessment-icon.svg';
   static String pillFilledIcon = 'assets/icons/services/pill-filled.svg';
   static String clipboardIcon = 'assets/icons/services/clipboard.svg';
+  static String examsIcon = 'assets/icons/discounts/exams_icon.svg';
+  static String examsNewIcon = 'assets/icons/discounts/exams_new_icon.svg';
 
   //Bottom Navigation Bar
   static String homeIcon = 'assets/icons/bottom_navigation_bar/home-icon.svg';

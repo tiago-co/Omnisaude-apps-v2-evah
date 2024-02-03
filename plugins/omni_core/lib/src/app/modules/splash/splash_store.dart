@@ -8,12 +8,7 @@ import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_core/src/app/app_stores/modules_store.dart';
 import 'package:omni_core/src/app/app_stores/program_store.dart';
 import 'package:omni_general/omni_general.dart'
-    show
-        BeneficiaryRepository,
-        FirebaseService,
-        Permissions,
-        PreferencesModel,
-        PreferencesService;
+    show BeneficiaryRepository, FirebaseService, Permissions, PreferencesModel, PreferencesService;
 import 'package:omni_general/src/stores/user_store.dart';
 import 'package:package_info/package_info.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -43,9 +38,7 @@ class SplashStore extends NotifierStore<DioError, bool> with Disposable {
 
       await _repository.verifyToken(userId).then((jwt) async {
         if (jwt == null) return;
-        await _repository
-            .refreshToken(userId, jwt.refreshToken!)
-            .then((jwt) async {
+        await _repository.refreshToken(userId, jwt.refreshToken!).then((jwt) async {
           final PreferencesModel prefs = PreferencesModel(jwt: jwt);
           await userStore.setUserPreferences(prefs, userId);
         });
@@ -78,20 +71,16 @@ class SplashStore extends NotifierStore<DioError, bool> with Disposable {
   }
 
   Future<bool> verifyAppVersion() async {
-    final firebaseVersion = await FirebaseFirestore.instance
-        .collection('config')
-        .doc('version')
-        .get()
+    final firebaseVersion = await FirebaseFirestore.instance.collection('config').doc('version').get()
       ..data();
     final info = await PackageInfo.fromPlatform();
     final appVersion = info.version;
 
-    // if (appVersion == firebaseVersion['version']) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-    return true;
+    if (appVersion == firebaseVersion.data()![info.packageName]) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override

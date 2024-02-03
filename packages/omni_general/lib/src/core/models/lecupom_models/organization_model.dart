@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class OrganizationModel {
   int? id;
   String? name;
@@ -15,7 +16,26 @@ class OrganizationModel {
   bool? favorited;
   String? shortDescription;
   num? distanceKm;
-
+  String? address;
+  OrganizationModel({
+    this.id,
+    this.name,
+    this.coverPicture,
+    this.backgroundPicture,
+    this.bestDiscountPercent,
+    this.categoryName,
+    this.instagramUrl,
+    this.facebooKUrl,
+    this.twitterUrl,
+    this.cashbackPercent,
+    this.cashbackText,
+    this.discountText,
+    this.description,
+    this.favorited,
+    this.shortDescription,
+    this.distanceKm,
+    this.address,
+  });
   OrganizationModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
@@ -33,6 +53,7 @@ class OrganizationModel {
     favorited = json['favorited'];
     shortDescription = json['short_description'];
     distanceKm = json['distance_km'];
+    address = json['address'];
   }
 
   Map<String, dynamic> toJson() {
@@ -53,6 +74,8 @@ class OrganizationModel {
     data['favorited'] = favorited;
     data['short_description'] = shortDescription;
     data['distance_km'] = distanceKm;
+    data['address'] = address;
+
     return data;
   }
 }

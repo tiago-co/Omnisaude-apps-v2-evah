@@ -35,15 +35,15 @@ class DiscountsModule extends Module {
         categoryParam: args.data['categoryParam'],
       ),
     ),
-    ChildRoute(
-      '/cupons',
-      child: (_, args) => CuponsPage(
-        organizationId: args.data['organizationId'],
-        moduleName: args.data['moduleName'],
-        coverImage: args.data['coverImage'],
-        couponRescueType: args.data['couponRescueType'],
-      ),
-    ),
+    // ChildRoute(
+    //   '/cupons',
+    //   child: (_, args) => CuponsPage(
+    //     organizationId: args.data['organizationId'],
+    //     moduleName: args.data['moduleName'],
+    //     coverImage: args.data['coverImage'],
+    //     couponRescueType: args.data['couponRescueType'],
+    //   ),
+    // ),
     ChildRoute(
       '/coupon_details',
       child: (_, args) => CouponDetailsPage(

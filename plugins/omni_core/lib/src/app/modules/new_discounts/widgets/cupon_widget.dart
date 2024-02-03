@@ -10,9 +10,11 @@ class CuponWidget extends StatelessWidget {
     Key? key,
     required this.organization,
     required this.couponRescueType,
+    this.categoryParam,
   }) : super(key: key);
   final CouponRescueType couponRescueType;
   final OrganizationModel organization;
+  final String? categoryParam;
   @override
   Widget build(BuildContext context) {
     double baseWidth = MediaQuery.of(context).size.width > 500 ? 500 : 375;
@@ -24,6 +26,7 @@ class CuponWidget extends StatelessWidget {
         arguments: {
           'organizationId': organization.id,
           'couponRescueType': couponRescueType,
+          'organization': organization,
         },
       ),
       child: Container(
@@ -52,8 +55,8 @@ class CuponWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 child: Image.network(
                   organization.coverPicture!,
-                  width: 60 * fem,
-                  height: 60 * fem,
+                  width: 80 * fem,
+                  height: 80 * fem,
                   loadingBuilder: (
                     context,
                     child,
@@ -81,9 +84,7 @@ class CuponWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    // drograriasopauloPgK (I4902:29248;2631:17573)
-
-                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: Text(
                       organization.name!,
                       style: TextStyle(
@@ -94,16 +95,28 @@ class CuponWidget extends StatelessWidget {
                       ),
                     ),
                   ),
+                  if (organization.address != null)
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                      child: Text(
+                        organization.address.toString(),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xff696969),
+                        ),
+                      ),
+                    )
+                  else
+                    const SizedBox(height: 15),
                   SizedBox(
-                    // width: double.maxFinite,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          // statusgfR (I4902:29248;4902:25317)
-                          padding: EdgeInsets.symmetric(
-                            vertical: 4 * fem,
-                            horizontal: 12 * fem,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 4,
+                            horizontal: 12,
                           ),
                           decoration: BoxDecoration(
                             color: Helpers.getBackgroundColor(
@@ -113,37 +126,14 @@ class CuponWidget extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              'Até ${organization.bestDiscountPercent}% off',
+                              'Até ${organization.bestDiscountPercent}% de desconto',
                               style: TextStyle(
-                                fontSize: 14 * fem,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w500,
                                 height: 1.4000000272,
                                 color: Helpers.getTextColor(
                                   organization.bestDiscountPercent!,
                                 ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          // statusxsq (I4902:29248;4902:23631)
-
-                          padding: EdgeInsets.symmetric(
-                            vertical: 4 * fem,
-                            horizontal: 12 * fem,
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(0xfff6f6f8),
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-                          child: Center(
-                            child: Text(
-                              couponRescueType.label,
-                              style: TextStyle(
-                                fontSize: 14 * fem,
-                                fontWeight: FontWeight.w500,
-                                height: 1.4000000272,
-                                color: Color(0xff878da0),
                               ),
                             ),
                           ),

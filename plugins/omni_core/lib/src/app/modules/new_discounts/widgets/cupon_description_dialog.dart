@@ -102,7 +102,8 @@ class _CuponDescriptionDialogState extends State<CuponDescriptionDialog> {
 
         return Visibility(
           visible: (rescueCouponStore.state.isNotEmpty) ||
-              (store.state.activationUrl != null && store.state.activationUrl!.isNotEmpty),
+              (store.state.activationUrl != null && store.state.activationUrl!.isNotEmpty) &&
+                  store.state.template!.buttonLabel != CouponTemplateType.general,
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Padding(

@@ -43,13 +43,11 @@ class LecuponRepository extends Disposable {
         ).toJson(),
       );
 
-      final AdministratorUserModel administratorUser =
-          AdministratorUserModel.fromJson(response.data);
+      final AdministratorUserModel administratorUser = AdministratorUserModel.fromJson(response.data);
 
       _client.options.headers.addAll(
         {
-          'X-ClientEmployee-Email':
-              dotenv.env['LECUPON_X_ClientEmployee_Email'],
+          'X-ClientEmployee-Email': dotenv.env['LECUPON_X_ClientEmployee_Email'],
           'X-ClientEmployee-Token': administratorUser.authToken,
         },
       );
@@ -64,8 +62,7 @@ class LecuponRepository extends Disposable {
   }) async {
     try {
       final Response response = await _httpClientImpl.get(
-        path:
-            '/api/v1/public_integration/organizations/$organizationUid/coupons',
+        path: '/api/v1/public_integration/organizations/$organizationUid/coupons',
         queryParameters: params.toJson(),
       );
 
@@ -92,8 +89,7 @@ class LecuponRepository extends Disposable {
         path: '/businesses/$cnpj/authorized_users',
         data: activeUser.toJson(),
       );
-      final ActivateUserModel activateUser =
-          ActivateUserModel.fromJson(response.data);
+      final ActivateUserModel activateUser = ActivateUserModel.fromJson(response.data);
       return activateUser;
     } catch (e) {
       rethrow;
@@ -105,8 +101,7 @@ class LecuponRepository extends Disposable {
     required CupomParamsModel params,
   }) async {
     try {
-      final List<DiscountCategoryModel> discountsCategories =
-          List.empty(growable: true);
+      final List<DiscountCategoryModel> discountsCategories = List.empty(growable: true);
       _client.options.headers.addAll(
         {
           'Api-Secret': dotenv.env['LECUPON_API_SECRET'],
@@ -121,8 +116,7 @@ class LecuponRepository extends Disposable {
       );
 
       response.data.forEach((discountCategory) {
-        discountsCategories
-            .add(DiscountCategoryModel.fromMap(discountCategory));
+        discountsCategories.add(DiscountCategoryModel.fromMap(discountCategory));
       });
 
       return discountsCategories;
@@ -140,8 +134,7 @@ class LecuponRepository extends Disposable {
         data: activateUser.toJson(),
       );
 
-      final LecuponUserModel lecuponUser =
-          LecuponUserModel.fromJson(response.data);
+      final LecuponUserModel lecuponUser = LecuponUserModel.fromJson(response.data);
 
       return lecuponUser;
     } on DioError {
@@ -168,11 +161,16 @@ class LecuponRepository extends Disposable {
         queryParameters: params.toJson(),
       );
 
-      final List<OrganizationModel> organizationsList =
-          List.empty(growable: true);
+      final List<OrganizationModel> organizationsList = List.empty(growable: true);
 
-      response.data.forEach((organization) {
-        organizationsList.add(OrganizationModel.fromJson(organization));
+      response.data.forEach((element) {
+        final organization = OrganizationModel.fromJson(element);
+        if (organization.id == 4474) {
+          organization.address = 'São Paulo (SP) e Rio de Janeiro (RJ)';
+        } else if (organization.id == 8761) {
+          organization.address = 'Brasília (DF), São Paulo (SP) e Rio de Janeiro (RJ)';
+        }
+        organizationsList.add(organization);
       });
 
       return organizationsList;
@@ -231,8 +229,7 @@ class LecuponRepository extends Disposable {
   }) async {
     try {
       final Response response = await _httpClientImpl.get(
-        path:
-            '/api/v1/public_integration/organizations/$organizationId/coupons/$couponId',
+        path: '/api/v1/public_integration/organizations/$organizationId/coupons/$couponId',
       );
       final CupomModel coupon = CupomModel.fromJson(response.data);
 

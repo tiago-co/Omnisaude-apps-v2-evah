@@ -91,7 +91,8 @@ dependencies:
   file_picker: ^5.2.5
   flutter_blue_plus: ^1.12.6
   mime: ^1.0.4
-  dashed_rect: ^0.0.4
+  # dashed_rect: ^0.0.4
+  dotted_border: ^2.1.0
   camera: ^0.10.3
   pdfx: ^2.3.0
   internet_file: ^1.2.0

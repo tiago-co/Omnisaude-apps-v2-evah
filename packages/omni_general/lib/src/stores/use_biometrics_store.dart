@@ -29,7 +29,7 @@ class UseBiometricsStore extends NotifierStore<Exception, UseBiometricPermission
         canUseBiometricAuth = value;
         await LocalAuthService.getBiometricType().then(
           (value) {
-            biometricType = biometricEnumFromBiometricType(value);
+            biometricType = biometricEnumFromBiometricType(value.first);
           },
         ).catchError(
           (onError) {

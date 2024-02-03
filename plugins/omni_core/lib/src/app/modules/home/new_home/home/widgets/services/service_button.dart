@@ -21,7 +21,7 @@ class ServiceButton extends StatelessWidget {
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(12 * fem),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 offset: Offset(0.5, 2),
                 blurRadius: 2,

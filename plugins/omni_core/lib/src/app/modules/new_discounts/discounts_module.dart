@@ -58,6 +58,7 @@ class NewDiscountsModule extends Module {
       child: (_, args) => DiscountDetail(
         organizationId: args.data['organizationId'],
         couponRescueType: args.data['couponRescueType'],
+        organization: args.data['organization'],
       ),
     ),
     ChildRoute(

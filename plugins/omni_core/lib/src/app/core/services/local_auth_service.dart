@@ -14,9 +14,9 @@ class LocalAuthService {
     }
   }
 
-  static Future<BiometricType> getBiometricType() async {
+  static Future<List<BiometricType>> getBiometricType() async {
     final List<BiometricType> list = await _auth.getAvailableBiometrics();
-    return list.first;
+    return list;
   }
 
   static Future<bool> isBiometricAvaliable() async {
@@ -24,7 +24,18 @@ class LocalAuthService {
   }
 
   static Future<bool> canAuthenticateUser() async {
-    return await hasBiometrics() || await _auth.isDeviceSupported();
+    final biometricType = await getBiometricType();
+    final hasBiometric = await hasBiometrics();
+    final isDeviceSupported = await _auth.isDeviceSupported();
+    if (biometricType.isNotEmpty) {
+      return (hasBiometric || isDeviceSupported) &&
+          (biometricType.first == BiometricType.fingerprint ||
+              biometricType.first == BiometricType.weak ||
+              biometricType.first == BiometricType.strong);
+    } else {
+      return false;
+      // throw PlatformException(code: 'None Biometric Type');
+    }
   }
 
   static Future<bool> authenticate() async {

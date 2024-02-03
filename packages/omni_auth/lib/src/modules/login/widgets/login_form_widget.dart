@@ -49,7 +49,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
       (value) {
         LocalAuthService.getBiometricType().then(
           (value) {
-            biometricType = biometricEnumFromBiometricType(value);
+            biometricType = biometricEnumFromBiometricType(value.first);
           },
         );
       },
@@ -134,9 +134,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
               store.obscureTextStore.update(!store.obscureTextStore.state);
             },
             child: Icon(
-              triple.state
-                  ? Icons.visibility_off_outlined
-                  : Icons.visibility_outlined,
+              triple.state ? Icons.visibility_off_outlined : Icons.visibility_outlined,
               color: Theme.of(context).primaryColor.withOpacity(1),
             ),
           ),
@@ -144,8 +142,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
             FocusScope.of(context).requestFocus(FocusNode());
             if (store.isDisabled) return;
             if (store.useBiometricsStore.canUseBiometricAuth &&
-                store.useBiometricsStore.state ==
-                    UseBiometricPermission.notAccepted) {
+                store.useBiometricsStore.state == UseBiometricPermission.notAccepted) {
               Helpers.showDialog(
                 context,
                 Helpers.activateBiometricAuth(
@@ -181,9 +178,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
               );
             }
           },
-          textInputAction: defaultTargetPlatform == TargetPlatform.android
-              ? TextInputAction.go
-              : TextInputAction.join,
+          textInputAction: defaultTargetPlatform == TargetPlatform.android ? TextInputAction.go : TextInputAction.join,
           onChange: (String? input) {
             store.state.password = input;
             store.updateForm(store.state);

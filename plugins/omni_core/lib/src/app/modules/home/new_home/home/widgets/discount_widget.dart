@@ -182,6 +182,66 @@ class DiscountsWidget extends StatelessWidget {
                 const SizedBox(
                   width: 32,
                 ),
+                Container(
+                  // frame1573oFm (4511:32338)
+                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
+                  child: TextButton(
+                    onPressed: () {
+                      Modular.to.pushNamed(
+                        '/newHome/discounts/cupons',
+                        arguments: {
+                          // 'moduleName': 'Desconto em Farmácia',
+                          'categoryParam': '247',
+                          'organizationId': 0,
+                          'moduleName': 'Descontos em Exames',
+                          'coverImage': '',
+                          'couponRescueType': 'online',
+                        },
+                      );
+                    },
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          // margin: const EdgeInsets.all(12.0),
+                          width: 54,
+                          height: 54,
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xff48BEC2),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              // firstaidbagbhR (4511:32341)
+                              child: SvgPicture.asset(
+                                Assets.examsNewIcon,
+                                package: AssetsPackage.omniCore,
+                                color: Colors.white,
+                                width: 24,
+                                height: 24,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Text(
+                          // pharmaciesvUo (4511:32342)
+                          'Exames',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16 * ffem,
+                            fontWeight: FontWeight.w600,
+                            height: 1.6000000238 * ffem / fem,
+                            color: Color(0xff1a1c22),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 32,
+                ),
                 TextButton(
                   // frame1575hXV (5303:17815)
                   onPressed: () {
