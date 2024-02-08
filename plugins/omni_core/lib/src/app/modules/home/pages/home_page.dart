@@ -38,13 +38,12 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    unreadNotificationsStore.getUnreadNotificationsCount(userStore.userId);
+    // unreadNotificationsStore.getUnreadNotificationsCount(userStore.userId);
 
     store.modulesStore.getActiveModules().then(
       (value) {
         omniplanModuleIconStore.getOmniPlanModuleStatus();
-        store.modulesStore.state
-                .any((element) => element.type == ModuleType.mediktor)
+        store.modulesStore.state.any((element) => element.type == ModuleType.mediktor)
             ? mediktorDiagnosisStore.authenticate()
             : null;
       },
@@ -68,14 +67,14 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
-  Future<void> refreshModules() async {
-    store.userStore.getBeneficiaryById(store.userStore.userId);
-    await store.modulesStore.getActiveModules().then(
-      (value) {
-        omniplanModuleIconStore.getOmniPlanModuleStatus();
-      },
-    );
-  }
+  // Future<void> refreshModules() async {
+  //   store.userStore.getBeneficiaryById(store.userStore.userId);
+  //   await store.modulesStore.getActiveModules().then(
+  //     (value) {
+  //       omniplanModuleIconStore.getOmniPlanModuleStatus();
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -101,8 +100,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       resizeToAvoidBottomInset: false,
       body: const HomeLayoutWidget(),
-      bottomNavigationBar:
-          ScopedBuilder<ModulesStore, DioError, List<ModuleModel>>(
+      bottomNavigationBar: ScopedBuilder<ModulesStore, DioError, List<ModuleModel>>(
         store: store.modulesStore,
         onState: (_, state) {
           return const HomeBottomNavBarWidget();

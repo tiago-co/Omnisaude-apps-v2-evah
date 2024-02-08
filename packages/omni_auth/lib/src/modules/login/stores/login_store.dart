@@ -6,8 +6,7 @@ import 'package:omni_auth/src/modules/login/stores/obscure_text_store.dart';
 import 'package:omni_general/omni_general.dart';
 import 'package:omni_general/src/core/models/credential_model.dart';
 
-class LoginStore extends NotifierStore<DioError, CredentialModel>
-    with Disposable {
+class LoginStore extends NotifierStore<DioError, CredentialModel> with Disposable {
   LoginStore() : super(CredentialModel());
 
   final ObscureTextStore obscureTextStore = Modular.get();
@@ -21,19 +20,19 @@ class LoginStore extends NotifierStore<DioError, CredentialModel>
 
   Future<void> authenticate(CredentialModel data) async {
     setLoading(true);
-    await _repository.authenticate(data).then(
-      (prefs) async {
-        preferencesService.setHasBiometrics(useBiometricsStore.state);
+    // await _repository.authenticate(data).then(
+    //   (prefs) async {
+    //     preferencesService.setHasBiometrics(useBiometricsStore.state);
 
-        setLoading(false);
-      },
-    ).catchError(
-      (onError) {
-        setLoading(false);
+    //     setLoading(false);
+    //   },
+    // ).catchError(
+    //   (onError) {
+    //     setLoading(false);
 
-        throw onError;
-      },
-    );
+    //     throw onError;
+    //   },
+    // );
     setLoading(false);
   }
 

@@ -4,38 +4,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_core/omni_core.dart';
 import 'package:omni_general/omni_general.dart';
-import 'package:omni_general/src/core/models/credential_model.dart';
 import 'package:omni_general/src/core/models/new_credential_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesService {
-  Future<void> setUserPreferences(PreferencesModel preferences) async {
+  Future<void> setUserPreferences(NewPreferencesModel preferences) async {
     await SharedPreferences.getInstance().then(
       (instance) async {
-        await instance.setString('userId', preferences.jwt!.id!);
+        await instance.setString('userId', preferences.jwt!.id!.toString());
         await instance.setString(
-          preferences.jwt!.id!,
+          'user',
           jsonEncode(preferences.toJson()),
         );
       },
     );
   }
 
-  Future<void> removeUserPreferences(PreferencesModel preferences) async {
+  Future<void> removeUserPreferences(NewPreferencesModel preferences) async {
     await SharedPreferences.getInstance().then(
       (instance) {
-        instance.remove(preferences.jwt!.id!);
+        instance.remove('user');
         // instance.remove('userId');
       },
     );
   }
 
-  Future<PreferencesModel> getUserPreferences(String userId) {
+  Future<NewPreferencesModel> getUserPreferences(String userId) {
     return SharedPreferences.getInstance().then(
       (instance) {
-        final String? preferences = instance.getString(userId);
-        if (preferences == null) return PreferencesModel();
-        return PreferencesModel.fromJson(jsonDecode(preferences));
+        final String? preferences = instance.getString('user');
+        if (preferences == null) return NewPreferencesModel();
+        return NewPreferencesModel.fromJson(jsonDecode(preferences));
       },
     );
   }
@@ -103,29 +102,29 @@ class PreferencesService {
       (userId) async {
         if (userId == null) return;
 
-        await repository.verifyToken(userId).then(
-          (jwt) async {
-            if (jwt == null) return;
-            final bool isBiometricAvaliable = await LocalAuthService.isBiometricAvaliable();
-            final bool hasBiometric = await LocalAuthService.hasBiometrics();
-            final UseBiometricPermission? biometricPermission = await service.getHasBiometrics();
-            appStateStore.updateState(true);
-            if (isBiometricAvaliable && hasBiometric && appStateStore.state) {
-              if (biometricPermission == UseBiometricPermission.accepted) {
-                await LocalAuthService.authenticate().then((value) {}).catchError(
-                  (onError) {
-                    if (onError.code != 'auth_in_progress') {
-                      LogoutService.logout();
-                      Modular.to.popUntil(ModalRoute.withName('/'));
-                      Modular.to.navigate('/auth/newLogin');
-                    }
-                  },
-                );
-              }
-              appStateStore.updateState(false);
-            }
-          },
-        );
+        final bool isBiometricAvaliable = await LocalAuthService.isBiometricAvaliable();
+        final bool hasBiometric = await LocalAuthService.hasBiometrics();
+        final UseBiometricPermission? biometricPermission = await service.getHasBiometrics();
+        appStateStore.updateState(true);
+        if (isBiometricAvaliable && hasBiometric && appStateStore.state) {
+          if (biometricPermission == UseBiometricPermission.accepted) {
+            await LocalAuthService.authenticate().then((value) {}).catchError(
+              (onError) {
+                if (onError.code != 'auth_in_progress') {
+                  LogoutService.logout();
+                  Modular.to.popUntil(ModalRoute.withName('/'));
+                  Modular.to.navigate('/auth/newLogin');
+                }
+              },
+            );
+          }
+          appStateStore.updateState(false);
+        }
+        // await repository.verifyToken(userId).then(
+        //   (jwt) async {
+        //     if (jwt == null) return;
+        //   },
+        // );
       },
     );
   }

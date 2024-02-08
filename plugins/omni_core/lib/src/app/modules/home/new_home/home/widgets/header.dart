@@ -34,14 +34,10 @@ class Header extends StatelessWidget {
                       height: 40 * fem,
                       child: CircleAvatar(
                         backgroundColor: Colors.grey.shade300,
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.white,
-                          size: 24 * fem,
-                        ),
+                        child: const Icon(Icons.person, color: Colors.white),
                       ),
                     ),
-                    SizedBox(width: 12 * fem),
+                    const SizedBox(width: 12),
                     RichText(
                       text: TextSpan(
                         style: TextStyle(
@@ -61,7 +57,7 @@ class Header extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: userStore.state.beneficiary?.individualPerson?.name?.split(' ').first,
+                            text: userStore.state.user?.individualPerson?.name?.split(' ').first,
                             style: TextStyle(
                               fontSize: 22 * ffem,
                               fontWeight: FontWeight.w600,

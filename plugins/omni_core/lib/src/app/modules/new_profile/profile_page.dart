@@ -1,5 +1,6 @@
 import 'package:drawer_labels/labels.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_triple/flutter_triple.dart';
@@ -79,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-    store.updateProfile(store.userStore.state.beneficiary!.individualPerson!);
+    store.updateProfile(store.userStore.state.user!.individualPerson!);
     super.initState();
   }
 
@@ -131,7 +132,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        TripleBuilder<UserStore, Exception, PreferencesModel>(
+                        TripleBuilder<UserStore, Exception, NewPreferencesModel>(
                           store: store.userStore,
                           builder: (_, triple) {
                             return Column(
@@ -146,9 +147,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: ClipOval(
                                       child: ImageWidget(
                                         key: ValueKey(
-                                          triple.state.beneficiary!.individualPerson,
+                                          triple.state.user!.individualPerson,
                                         ),
-                                        url: triple.state.beneficiary!.individualPerson!.image ?? '',
+                                        url: triple.state.user!.individualPerson!.image ?? '',
                                         asset: Assets.user,
                                         assetBase: Assets.userBase,
                                         boxFit: BoxFit.cover,
@@ -256,7 +257,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   title: 'Termos e condições',
                                   onTap: () => Modular.to.pushNamed(
                                     '/terms',
-                                    arguments: programStore.programSelected.code,
+                                    arguments: dotenv.env['CLIENT_LABEL']!,
                                   ),
                                 ),
                                 MenuOption(

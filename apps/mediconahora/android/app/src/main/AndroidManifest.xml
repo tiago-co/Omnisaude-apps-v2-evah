@@ -69,6 +69,15 @@
              <intent-filter android:autoVerify="true">
             <data android:scheme="http" android:host="backend.evahsaude.com.br" />
             <data android:scheme="https" android:host="backend.evahsaude.com.br" />
+            
+          <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter >
+             <intent-filter android:autoVerify="true">
+            <data android:scheme="http" android:host="backend-evahsaude-dev.onrender.com" />
+            <data android:scheme="https" android:host="backend-evahsaude-dev.onrender.com" />
+
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.BROWSABLE" />
             <category android:name="android.intent.category.DEFAULT" />

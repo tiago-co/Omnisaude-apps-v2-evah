@@ -12,8 +12,8 @@ import 'package:omni_core/src/app/modules/notifications/stores/notices_store.dar
 import 'package:omni_core/src/app/modules/notifications/stores/reminders_store.dart';
 
 // ignore: must_be_immutable
-class NotificationsStore extends NotifierStore<Exception,
-    List<QueryDocumentSnapshot<Map<String, dynamic>>>> with Disposable {
+class NotificationsStore extends NotifierStore<Exception, List<QueryDocumentSnapshot<Map<String, dynamic>>>>
+    with Disposable {
   final NoticesStore noticesStore = Modular.get();
   final ReminderStore reminderStore = Modular.get();
   final UnreadNotificationsCountStore unreadNotificationsStore = Modular.get();
@@ -63,14 +63,12 @@ class NotificationsStore extends NotifierStore<Exception,
 
   Future<void> markAsReadNotification(DocumentReference reference) async {
     await reference.update({'visualizado': true});
-    await unreadNotificationsStore
-        .getUnreadNotificationsCount(userStore.userId);
+    await unreadNotificationsStore.getUnreadNotificationsCount(userStore.userId.toString());
   }
 
   Future<void> markAsUnreadNotification(DocumentReference reference) async {
     await reference.update({'visualizado': false});
-    await unreadNotificationsStore
-        .getUnreadNotificationsCount(userStore.userId);
+    await unreadNotificationsStore.getUnreadNotificationsCount(userStore.userId.toString());
   }
 
   @override

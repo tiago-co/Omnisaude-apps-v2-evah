@@ -16,14 +16,14 @@ class LogoutService {
     final FirebaseService firebaseService = Modular.get();
     final PreferencesService service = PreferencesService();
 
-    firebaseService.onUnsubscribeFromTopic(userStore.userId);
+    firebaseService.onUnsubscribeFromTopic(userStore.userId.toString());
     firebaseService.onUnsubscribeFromTopic(dotenv.env['POWERED_BY']!);
 
-    userStore.state.primaryColor = null;
-    await service.setUserPreferences(userStore.state);
-    await userStore.setUserPreferences(userStore.state, userStore.userId);
-    await userStore.updateUser();
-    service.removeUserPreferences(userStore.state);
+    // userStore.state.primaryColor = null;
+    // await service.setUserPreferences(userStore.state);
+    // await userStore.setUserPreferences(userStore.state, userStore.userId);
+    // await userStore.updateUser();
+    // service.removeUserPreferences(userStore.state);
     Modular.to.popUntil(ModalRoute.withName('/'));
     // Modular.to.navigate('/presentation/letsGo');
 

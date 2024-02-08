@@ -1,35 +1,36 @@
 import 'dart:developer';
 
 import 'package:omni_general/omni_general.dart';
+import 'package:omni_general/src/core/models/new_beneficiary_model.dart';
 
 class LecuponService {
   static final _lecuponRepository = LecuponRepository();
   late ActivateUserModel activateUser;
   late LecuponUserModel lecuponUser;
 
-  Future<LecuponUserModel> registerUser({
-    required NewBeneficiaryModel beneficiary,
-  }) async {
-    await _lecuponRepository.getAdmminToken();
-    await _lecuponRepository
-        .registerUser(
-          activateUser: ActivateUserModel(
-            name: beneficiary.individualPerson?.name,
-            cpf: beneficiary.individualPerson?.cpf,
-            email: beneficiary.individualPerson?.user?.email,
-            cellphone: beneficiary.individualPerson?.phone,
-            password: beneficiary.individualPerson?.user?.password,
-            userTags: [beneficiary.programCode!],
-            active: true,
-          ),
-        )
-        .then((value) => lecuponUser = value);
+  // Future<LecuponUserModel> registerUser({
+  //   required NewBeneficiaryModel beneficiary,
+  // }) async {
+  //   await _lecuponRepository.getAdmminToken();
+  //   await _lecuponRepository
+  //       .registerUser(
+  //         activateUser: ActivateUserModel(
+  //           name: beneficiary.individualPerson?.name,
+  //           cpf: beneficiary.individualPerson?.cpf,
+  //           email: beneficiary.individualPerson?.user?.email,
+  //           cellphone: beneficiary.individualPerson?.phone,
+  //           password: beneficiary.individualPerson?.user?.password,
+  //           userTags: [beneficiary.programCode!],
+  //           active: true,
+  //         ),
+  //       )
+  //       .then((value) => lecuponUser = value);
 
-    return lecuponUser;
-  }
+  //   return lecuponUser;
+  // }
 
   Future<List<DiscountCategoryModel>> getDiscountsCategories({
-    required BeneficiaryModel beneficiary,
+    required NewBeneficiaryModel beneficiary,
     required CupomParamsModel params,
   }) async {
     List<DiscountCategoryModel> listDiscountCategories = [];
@@ -44,7 +45,7 @@ class LecuponService {
   }
 
   Future<List<OrganizationModel>> getOrganizationsList({
-    required BeneficiaryModel beneficiary,
+    required NewBeneficiaryModel beneficiary,
     required CupomParamsModel params,
   }) async {
     return _lecuponRepository.getOrganizationsList(
@@ -64,7 +65,7 @@ class LecuponService {
   }
 
   Future<LecuponUserModel?> lecuponAuthenticate({
-    required BeneficiaryModel beneficiary,
+    required NewBeneficiaryModel beneficiary,
   }) async {
     late String smartLinkToken;
 

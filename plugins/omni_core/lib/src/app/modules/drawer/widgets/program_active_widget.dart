@@ -42,27 +42,27 @@ class _ProgramActiveWidgetState extends State<ProgramActiveWidget> {
                 ),
           ),
           const SizedBox(height: 5),
-          ScopedBuilder(
-            store: programStore,
-            onState: (_, state) {
-              return InkWell(
-                onTap: programStore.canChangeProgram
-                    ? chooseProgramSheetCallback
-                    : null,
-                borderRadius: BorderRadius.circular(10),
-                highlightColor: Theme.of(context).primaryColor.withOpacity(0.1),
-                splashColor: Theme.of(context).primaryColor.withOpacity(0.05),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Theme.of(context).cardColor.withOpacity(0.025),
-                  ),
-                  padding: const EdgeInsets.all(10),
-                  child: _buildProgramWidget(programStore.programSelected),
-                ),
-              );
-            },
-          ),
+          // ScopedBuilder(
+          //   store: programStore,
+          //   onState: (_, state) {
+          //     return InkWell(
+          //       onTap: programStore.canChangeProgram
+          //           ? chooseProgramSheetCallback
+          //           : null,
+          //       borderRadius: BorderRadius.circular(10),
+          //       highlightColor: Theme.of(context).primaryColor.withOpacity(0.1),
+          //       splashColor: Theme.of(context).primaryColor.withOpacity(0.05),
+          //       child: Container(
+          //         decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(10),
+          //           color: Theme.of(context).cardColor.withOpacity(0.025),
+          //         ),
+          //         padding: const EdgeInsets.all(10),
+          //         child: _buildProgramWidget(programStore.programSelected),
+          //       ),
+          //     );
+          //   },
+          // ),
         ],
       ),
     );
@@ -98,8 +98,8 @@ class _ProgramActiveWidgetState extends State<ProgramActiveWidget> {
             style: Theme.of(context).textTheme.headlineMedium!.copyWith(),
           ),
         ),
-        if (programStore.canChangeProgram)
-          Icon(Icons.edit, color: Theme.of(context).primaryColor),
+        // if (programStore.canChangeProgram)
+        Icon(Icons.edit, color: Theme.of(context).primaryColor),
       ],
     );
   }

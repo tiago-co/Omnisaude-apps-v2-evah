@@ -4,13 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_core/src/app/app_stores/modules_store.dart';
-import 'package:omni_general/omni_general.dart'
-    show PreferencesModel, ProgramModel, ProgramRepository;
+import 'package:omni_general/omni_general.dart' show PreferencesModel, ProgramModel, ProgramRepository;
 import 'package:omni_general/src/stores/user_store.dart' show UserStore;
 
 // ignore: must_be_immutable
-class ProgramStore extends NotifierStore<DioError, List<ProgramModel>>
-    with Disposable {
+class ProgramStore extends NotifierStore<DioError, List<ProgramModel>> with Disposable {
   final ProgramRepository _repository = Modular.get();
   final ModulesStore modulesStore = Modular.get();
   final UserStore userStore = Modular.get();
@@ -19,9 +17,9 @@ class ProgramStore extends NotifierStore<DioError, List<ProgramModel>>
 
   Timer? _debounce;
 
-  ProgramModel get programSelected => userStore.programSelected;
-  bool get canChangeProgram => userStore.oprConfigs.useMultiPrograms;
-  bool get canLeftProgram => userStore.oprConfigs.useLeftProfram;
+  // ProgramModel get programSelected => userStore.programSelected;
+  // bool get canChangeProgram => userStore.oprConfigs.useMultiPrograms;
+  // bool get canLeftProgram => userStore.oprConfigs.useLeftProfram;
 
   Future<void> getPrograms([Map<String, String>? params]) async {
     setLoading(true);
@@ -31,13 +29,13 @@ class ProgramStore extends NotifierStore<DioError, List<ProgramModel>>
       final PreferencesModel prefs = PreferencesModel();
 
       programs.forEach((program) {
-        if (program.id == programSelected.id) {
-          prefs.primaryColor = int.tryParse(
-            '0xFF${program.enterprise!.primaryColor!}',
-          );
-        }
+        // if (program.id == programSelected.id) {
+        // prefs.primaryColor = int.tryParse(
+        //   '0xFF${program.enterprise!.primaryColor!}',
+        // );
+        // }
       });
-      await userStore.setUserPreferences(prefs, userStore.userId);
+      // await userStore.setUserPreferences(prefs, userStore.userId);
       setLoading(false);
     }).catchError((onError) {
       setLoading(false);
@@ -95,13 +93,13 @@ class ProgramStore extends NotifierStore<DioError, List<ProgramModel>>
 
   Future<void> _changeGlobalProgram(ProgramModel program) async {
     final PreferencesModel prefs = PreferencesModel();
-    prefs.primaryColor = int.tryParse(
-      '0xFF${program.enterprise!.primaryColor!}',
-    );
-    prefs.beneficiary = userStore.beneficiary..programSelected = program;
-    program.currentPhase!.modules!.sort((a, b) => a.name!.compareTo(b.name!));
-    modulesStore.update(program.currentPhase!.modules!);
-    await userStore.setUserPreferences(prefs, userStore.userId);
+    // prefs.primaryColor = int.tryParse(
+    //   '0xFF${program.enterprise!.primaryColor!}',
+    // );
+    // prefs.beneficiary = userStore.beneficiary..programSelected = program;
+    // program.currentPhase!.modules!.sort((a, b) => a.name!.compareTo(b.name!));
+    // modulesStore.update(program.currentPhase!.modules!);
+    // await userStore.setUserPreferences(prefs, userStore.userId);
   }
 
   @override

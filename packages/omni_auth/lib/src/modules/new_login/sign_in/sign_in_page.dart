@@ -102,12 +102,12 @@ class _SignInPageState extends State<SignInPage> {
     super.initState();
 
     store.getCredential().then((credential) async {
-      username.text = credential.username ?? '';
-      store.state.username = credential.username ?? '';
+      username.text = credential.cpfOrEmail ?? '';
+      store.state.cpfOrEmail = credential.cpfOrEmail ?? '';
       password.text = credential.password ?? '';
       store.state.password = credential.password ?? '';
       final loginBiometric = await useBiometricsStore.getHasBiometrics();
-      if (loginBiometric == UseBiometricPermission.accepted && credential.username != null) {
+      if (loginBiometric == UseBiometricPermission.accepted && credential.cpfOrEmail != null) {
         await loginWithBiometricMode();
       }
     });
@@ -186,7 +186,7 @@ class _SignInPageState extends State<SignInPage> {
                       textCapitalization: TextCapitalization.none,
                       fem: fem,
                       onChange: (String? input) {
-                        store.state.username = input;
+                        store.state.cpfOrEmail = input;
                         store.updateForm(store.state);
                       },
                     ),

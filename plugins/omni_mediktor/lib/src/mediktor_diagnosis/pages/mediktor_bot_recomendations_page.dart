@@ -16,12 +16,10 @@ class MediktorBotRecomendationsPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _MediktorBotRecomendationsPageState createState() =>
-      _MediktorBotRecomendationsPageState();
+  _MediktorBotRecomendationsPageState createState() => _MediktorBotRecomendationsPageState();
 }
 
-class _MediktorBotRecomendationsPageState
-    extends State<MediktorBotRecomendationsPage> {
+class _MediktorBotRecomendationsPageState extends State<MediktorBotRecomendationsPage> {
   final BotRecommendationStore store = Modular.get();
   final UserStore userStore = Modular.get<UserStore>();
   @override
@@ -36,8 +34,7 @@ class _MediktorBotRecomendationsPageState
       appBar: const NavBarWidget(
         title: MediktorLabels.mediktorBotRecomendationsTitle,
       ).build(context) as AppBar,
-      body:
-          TripleBuilder<BotRecommendationStore, DioError, RecommendedBotsModel>(
+      body: TripleBuilder<BotRecommendationStore, DioError, RecommendedBotsModel>(
         store: store,
         builder: (_, triple) {
           if (triple.isLoading) {
@@ -78,10 +75,9 @@ class _MediktorBotRecomendationsPageState
                         '/home/bots/',
                         arguments: {
                           'title': store.state.recomendedBots![index].nome,
-                          'botId':
-                              store.state.recomendedBots![index].idOriginal,
+                          'botId': store.state.recomendedBots![index].idOriginal,
                           'jwt': userStore.state.jwt,
-                          'beneficiary': userStore.state.beneficiary,
+                          'beneficiary': userStore.state.user,
                         },
                       );
                     },

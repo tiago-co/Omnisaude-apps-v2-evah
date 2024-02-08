@@ -63,8 +63,7 @@ class _DetailsItemExtractState extends State<DetailsItemExtractPage> {
       appBar: const NavBarWidget(
         title: Labels.detailsItemExtractTitle,
       ).build(context) as AppBar,
-      body: TripleBuilder<ItemExtractStore, DioError,
-          CoparticipationExtractModel>(
+      body: TripleBuilder<ItemExtractStore, DioError, CoparticipationExtractModel>(
         store: store.itemExtractStore,
         builder: (_, triple) {
           if (store.itemExtractStore.isLoading) {
@@ -107,8 +106,7 @@ class _DetailsItemExtractState extends State<DetailsItemExtractPage> {
                       width: double.infinity,
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color:
-                            Theme.of(context).primaryColor.withOpacity(0.075),
+                        color: Theme.of(context).primaryColor.withOpacity(0.075),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
@@ -124,44 +122,41 @@ class _DetailsItemExtractState extends State<DetailsItemExtractPage> {
                               children: [
                                 Text(
                                   Labels.detailsItemExtractCovenant,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleLarge!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
                                         color: Theme.of(context).primaryColor,
                                         fontSize: 12,
                                       ),
                                 ),
                                 const SizedBox(height: 10),
-                                TripleBuilder<UserStore, Exception,
-                                    PreferencesModel>(
-                                  store: userStore,
-                                  builder: (_, triple) {
-                                    return Container(
-                                      padding: const EdgeInsets.all(5),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.white,
-                                      ),
-                                      child: Center(
-                                        child: ImageWidget(
-                                          url: triple
-                                                  .state
-                                                  .beneficiary!
-                                                  .programSelected!
-                                                  .enterprise!
-                                                  .logo ??
-                                              '',
-                                          asset: Assets.life,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.06,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
+                                // TripleBuilder<UserStore, Exception,
+                                //     PreferencesModel>(
+                                //   store: userStore,
+                                //   builder: (_, triple) {
+                                //     return Container(
+                                //       padding: const EdgeInsets.all(5),
+                                //       decoration: BoxDecoration(
+                                //         borderRadius: BorderRadius.circular(10),
+                                //         color: Colors.white,
+                                //       ),
+                                //       child: Center(
+                                //         child: ImageWidget(
+                                //           url: triple
+                                //                   .state
+                                //                   .beneficiary!
+                                //                   .programSelected!
+                                //                   .enterprise!
+                                //                   .logo ??
+                                //               '',
+                                //           asset: Assets.life,
+                                //           height: MediaQuery.of(context)
+                                //                   .size
+                                //                   .height *
+                                //               0.06,
+                                //         ),
+                                //       ),
+                                //     );
+                                //   },
+                                // ),
                               ],
                             ),
                           ),
@@ -174,10 +169,7 @@ class _DetailsItemExtractState extends State<DetailsItemExtractPage> {
                               children: [
                                 Text(
                                   Labels.detailsItemExtractUpdateDate,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleLarge!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
                                         color: Theme.of(context).primaryColor,
                                         fontSize: 12,
                                       ),
@@ -185,20 +177,14 @@ class _DetailsItemExtractState extends State<DetailsItemExtractPage> {
                                 const SizedBox(height: 5),
                                 Text(
                                   Formaters.dateToStringDate(dateAtualizacao),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineSmall!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                                         color: Theme.of(context).primaryColor,
                                       ),
                                 ),
                                 const SizedBox(height: 20),
                                 Text(
                                   Labels.detailsItemExtractEnrollment,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleLarge!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
                                         color: Theme.of(context).primaryColor,
                                         fontSize: 12,
                                       ),
@@ -206,10 +192,7 @@ class _DetailsItemExtractState extends State<DetailsItemExtractPage> {
                                 const SizedBox(height: 5),
                                 Text(
                                   store.itemExtractStore.state.cdBeneficiario!,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineSmall!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                                         color: Theme.of(context).primaryColor,
                                       ),
                                 ),
@@ -241,10 +224,8 @@ class _DetailsItemExtractState extends State<DetailsItemExtractPage> {
                       value: Formaters.dateToStringDate(dateReferencia),
                     ),
                     ExtractItemTextFieldWidget(
-                      textLabelField:
-                          Labels.detailsItemExtractCoparticipationValue,
-                      value:
-                          'R\$ ${store.itemExtractStore.state.vlCoparticipacao!.toStringAsFixed(2)}',
+                      textLabelField: Labels.detailsItemExtractCoparticipationValue,
+                      value: 'R\$ ${store.itemExtractStore.state.vlCoparticipacao!.toStringAsFixed(2)}',
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -272,27 +253,19 @@ class _DetailsItemExtractState extends State<DetailsItemExtractPage> {
                                       Visibility(
                                         visible: !triple.isLoading,
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Icon(
                                               Icons.share,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .background,
+                                              color: Theme.of(context).colorScheme.background,
                                               size: 20,
                                             ),
                                             const SizedBox(width: 10),
                                             Text(
                                               Labels.detailsItemExtractShare,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleLarge!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.titleLarge!.copyWith(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .background,
+                                                    color: Theme.of(context).colorScheme.background,
                                                   ),
                                             ),
                                           ],

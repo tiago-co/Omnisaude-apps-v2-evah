@@ -9,7 +9,7 @@ class RegisterTermsStore extends NotifierStore<Exception, bool> {
 
   void onChangeCheckBoxValue(bool? value) {
     update(value ?? false);
-    registerStore.state.termsAccepted = state;
+    // registerStore.state.termsAccepted = state;
     registerStore.updateForm(registerStore.state);
   }
 }

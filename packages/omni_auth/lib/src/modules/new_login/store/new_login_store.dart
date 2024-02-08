@@ -26,8 +26,9 @@ class NewLoginStore extends NotifierStore<DioError, NewCredentialModel> with Dis
       (prefs) async {
         preferencesService.setHasBiometrics(useBiometricsStore.state);
 
-        if (prefs.beneficiary?.individualPerson?.phone != null &&
-            prefs.beneficiary!.individualPerson!.phone != '11999995555') {
+        if (prefs.user?.individualPerson?.phone != null &&
+            prefs.user?.individualPerson!.phone != '11999995555' &&
+            prefs.user?.individualPerson!.maritalStatus != null) {
           Modular.to.navigate('/newHome');
         } else {
           Modular.to.pushNamed(
@@ -53,9 +54,9 @@ class NewLoginStore extends NotifierStore<DioError, NewCredentialModel> with Dis
 
   bool get isDisabled {
     return state.password == null ||
-        state.username == null ||
+        state.cpfOrEmail == null ||
         (state.password != null && state.password!.length < 3) ||
-        (state.username != null && state.username!.length < 3);
+        (state.cpfOrEmail != null && state.cpfOrEmail!.length < 3);
   }
 
   Future<NewCredentialModel> getCredential() async {

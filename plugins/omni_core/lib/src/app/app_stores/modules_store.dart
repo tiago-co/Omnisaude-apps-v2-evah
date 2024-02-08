@@ -5,24 +5,23 @@ import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_general/omni_general.dart';
 import 'package:omni_scheduling/omni_scheduling.dart';
 
-class ModulesStore extends NotifierStore<DioError, List<ModuleModel>>
-    with Disposable {
+class ModulesStore extends NotifierStore<DioError, List<ModuleModel>> with Disposable {
   final ModuleRepository _repository = Modular.get();
   final UserStore userStore = Modular.get();
 
   ModulesStore() : super([]);
 
   Future<void> getActiveModules() async {
-    setLoading(true);
-    await _repository.getActiveModules().then((modules) {
-      modules!.sort((a, b) => a.name!.compareTo(b.name!));
-      update(modules);
-      setLoading(false);
-    }).catchError((onError) {
-      setLoading(false);
-      setError(onError);
-      throw onError;
-    });
+    // setLoading(true);
+    // await _repository.getActiveModules().then((modules) {
+    //   modules!.sort((a, b) => a.name!.compareTo(b.name!));
+    //   update(modules);
+    //   setLoading(false);
+    // }).catchError((onError) {
+    //   setLoading(false);
+    //   setError(onError);
+    //   throw onError;
+    // });
   }
 
   Function? navigate(ModuleModel module) {
@@ -73,7 +72,7 @@ class ModulesStore extends NotifierStore<DioError, List<ModuleModel>>
           '/home/drugControl/drugControlHistoric',
           arguments: {
             'moduleName': module.name,
-            'program': userStore.programSelected,
+            // 'program': userStore.programSelected,
           },
         );
         break;
@@ -84,7 +83,7 @@ class ModulesStore extends NotifierStore<DioError, List<ModuleModel>>
             'title': module.name,
             'botId': module.botId ?? '',
             'jwt': userStore.state.jwt,
-            'beneficiary': userStore.state.beneficiary,
+            'beneficiary': userStore.state.user,
           },
         );
         break;

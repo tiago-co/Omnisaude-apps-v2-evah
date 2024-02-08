@@ -5,15 +5,14 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_general/omni_general.dart'
     show
-        BeneficiaryModel,
         DioHttpClientImpl,
-        JwtModel,
+        IndividualPersonModel,
         LecuponService,
-        OperatorConfigsModel,
-        PreferencesModel,
+        NewBeneficiaryModel,
+        NewCredentialModel,
+        NewJwtModel,
+        NewPreferencesModel,
         PreferencesService;
-import 'package:omni_general/src/core/models/credential_model.dart';
-import 'package:omni_general/src/core/models/new_credential_model.dart';
 
 class AuthRepository extends Disposable {
   late final Dio _client;
@@ -35,7 +34,7 @@ class AuthRepository extends Disposable {
     _httpClientImpl = DioHttpClientImpl(_client);
   }
 
-  Future<PreferencesModel> newAuthenticate(NewCredentialModel data) async {
+  Future<NewPreferencesModel> newAuthenticate(NewCredentialModel data) async {
     try {
       //New Api
 
@@ -48,29 +47,21 @@ class AuthRepository extends Disposable {
 
       // END
 
-      final JwtModel jwt = JwtModel.fromJson(responseLogin.data);
-      final Response responseBeneficiary = await _httpClientImpl.get(
-        path: '/mobile/omni/beneficiario/${jwt.id}/',
-        options: Options(headers: {'Authorization': 'JWT ${jwt.token}'}),
+      final NewJwtModel jwt = NewJwtModel.fromJson(responseLogin.data);
+      final Response responseBeneficiary = await dio.get(
+        '/users/${jwt.id}',
+        options: Options(headers: {'Authorization': 'Bearer ${jwt.token}'}),
       );
-      final BeneficiaryModel beneficiary = BeneficiaryModel.oldFromJson(
+      final NewBeneficiaryModel beneficiary = NewBeneficiaryModel();
+      beneficiary.individualPerson = IndividualPersonModel.fromJson(
         responseBeneficiary.data,
       );
-      final Response responseOprConfigs = await _httpClientImpl.get(
-        path: '/mobile/operadora/',
-      );
-      final OperatorConfigsModel oprConfigs = OperatorConfigsModel.fromJson(
-        responseOprConfigs.data,
-      );
+
       final PreferencesService service = PreferencesService();
-      final PreferencesModel preferences = await service.getUserPreferences(
-        jwt.id!,
+      final NewPreferencesModel preferences = await service.getUserPreferences(
+        'user',
       );
 
-      // final LecuponUserModel lecuponUser =
-      //     await lecuponService.lecuponAuthenticate(
-      //   beneficiary: beneficiary,
-      // );
       await lecuponService
           .lecuponAuthenticate(
         beneficiary: beneficiary,
@@ -80,76 +71,8 @@ class AuthRepository extends Disposable {
           beneficiary.lecuponUser = value;
         }
       });
-      // beneficiary.lecuponUser = lecuponUser;
-
-      // ATUALIZA AS PREFERENCIAS DO USUÁRIO
       preferences.jwt = jwt;
-      preferences.oprConfigs = oprConfigs;
-      preferences.beneficiary = beneficiary;
-      beneficiary.programs?.sort((a, b) => a.name!.compareTo(b.name!));
-      beneficiary.programSelected!.currentPhase?.modules?.sort(
-        (a, b) => a.name!.compareTo(b.name!),
-      );
-      preferences.primaryColor = int.tryParse(
-        '0xFF${beneficiary.programSelected!.enterprise!.primaryColor!}',
-      );
-
-      await service.setUserPreferences(preferences);
-      return preferences;
-    } catch (e) {
-      log('authenticate: $e');
-      rethrow;
-    }
-  }
-
-  Future<PreferencesModel> authenticate(CredentialModel data) async {
-    try {
-      final Response responseLogin = await _httpClientImpl.post(path: '/login/', data: data);
-      final JwtModel jwt = JwtModel.fromJson(responseLogin.data);
-      final Response responseBeneficiary = await _httpClientImpl.get(
-        path: '/mobile/omni/beneficiario/${jwt.id}/',
-        options: Options(headers: {'Authorization': 'JWT ${jwt.token}'}),
-      );
-      final BeneficiaryModel beneficiary = BeneficiaryModel.oldFromJson(
-        responseBeneficiary.data,
-      );
-      final Response responseOprConfigs = await _httpClientImpl.get(
-        path: '/mobile/operadora/',
-      );
-      final OperatorConfigsModel oprConfigs = OperatorConfigsModel.fromJson(
-        responseOprConfigs.data,
-      );
-      final PreferencesService service = PreferencesService();
-      final PreferencesModel preferences = await service.getUserPreferences(
-        jwt.id!,
-      );
-
-      // final LecuponUserModel lecuponUser =
-      //     await lecuponService.lecuponAuthenticate(
-      //   beneficiary: beneficiary,
-      // );
-      await lecuponService
-          .lecuponAuthenticate(
-        beneficiary: beneficiary,
-      )
-          .then((value) {
-        if (value != null) {
-          beneficiary.lecuponUser = value;
-        }
-      });
-      // beneficiary.lecuponUser = lecuponUser;
-
-      // ATUALIZA AS PREFERENCIAS DO USUÁRIO
-      preferences.jwt = jwt;
-      preferences.oprConfigs = oprConfigs;
-      preferences.beneficiary = beneficiary;
-      beneficiary.programs?.sort((a, b) => a.name!.compareTo(b.name!));
-      beneficiary.programSelected!.currentPhase?.modules?.sort(
-        (a, b) => a.name!.compareTo(b.name!),
-      );
-      preferences.primaryColor = int.tryParse(
-        '0xFF${beneficiary.programSelected!.enterprise!.primaryColor!}',
-      );
+      preferences.user = beneficiary;
 
       await service.setUserPreferences(preferences);
       return preferences;

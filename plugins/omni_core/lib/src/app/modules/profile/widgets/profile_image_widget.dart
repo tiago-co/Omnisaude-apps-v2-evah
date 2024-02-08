@@ -108,15 +108,15 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
         shape: BoxShape.circle,
       ),
       padding: const EdgeInsets.all(5),
-      child: TripleBuilder<UserStore, Exception, PreferencesModel>(
+      child: TripleBuilder<UserStore, Exception, NewPreferencesModel>(
         store: profileStore.userStore,
         builder: (_, triple) {
           return ClipOval(
             child: ImageWidget(
               key: ValueKey(
-                triple.state.beneficiary!.individualPerson,
+                triple.state.user!.individualPerson,
               ),
-              url: triple.state.beneficiary!.individualPerson!.image ?? '',
+              url: triple.state.user!.individualPerson!.image ?? '',
               asset: Assets.user,
               assetBase: Assets.userBase,
               boxFit: BoxFit.cover,

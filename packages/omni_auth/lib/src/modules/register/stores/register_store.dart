@@ -17,6 +17,8 @@ import 'package:omni_general/omni_general.dart'
         LecuponRepository,
         LecuponService,
         NewBeneficiaryModel,
+        NewJwtModel,
+        NewPreferencesModel,
         PreferencesModel,
         PreferencesService,
         UserModel,
@@ -34,7 +36,7 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Di
   final NewBeneficiaryModel data = NewBeneficiaryModel();
 
   String password = '';
-  JwtModel? jwtModel;
+  NewJwtModel? jwtModel;
   RegisterStore()
       : super(
           NewBeneficiaryModel(
@@ -46,7 +48,7 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Di
         );
 
   void updateForm(NewBeneficiaryModel form) {
-    update(NewBeneficiaryModel.oldFromJson(form.toJson()));
+    // update(NewBeneficiaryModel.oldFromJson(form.toJson()));
   }
 
   Future<void> verifyUser(Map<String, String> params) async {
@@ -54,9 +56,9 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Di
     await _repository.verifyUser(params).then((beneficiary) {
       update(
         beneficiary
-          ..termsAccepted = state.termsAccepted
-          ..programCode = beneficiary.programCode ?? state.programCode
-          ..responsible = beneficiary.responsible ?? state.responsible
+          // ..termsAccepted = state.termsAccepted
+          // ..programCode = beneficiary.programCode ?? state.programCode
+          // ..responsible = beneficiary.responsible ?? state.responsible
           ..individualPerson = beneficiary.individualPerson ?? state.individualPerson,
       );
       setLoading(false);
@@ -112,19 +114,14 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Di
   }
 
   Future confirmUser(String id, String token, String password) async {
-    try {
-      setLoading(true);
-      this.password = password;
-      jwtModel = await _repository.confirmUserCreate(
-        id,
-        token,
-        password,
-      );
-      setLoading(false);
-    } on DioError catch (e) {
-      setLoading(false);
-      throw Exception(e.response?.data);
-    }
+    setLoading(true);
+    this.password = password;
+    jwtModel = await _repository.confirmUserCreate(
+      id,
+      token,
+      password,
+    );
+    setLoading(false);
   }
 
   Future resendConfirmUser(String email) async {
@@ -138,41 +135,26 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Di
     }
   }
 
-  Future updateUser({PreferencesModel? prefs, String? pass}) async {
+  Future updateUser({NewPreferencesModel? prefs, String? pass}) async {
     setLoading(true);
-    dynamic userData;
+    IndividualPersonModel userData = IndividualPersonModel();
     if (prefs?.jwt != null) {
       jwtModel = prefs!.jwt;
     } else {
       userData = await _repository.fetchUserData(
         jwtModel!.token!,
-        jwtModel!.id!,
+        jwtModel!.id.toString(),
       );
     }
     if (prefs != null) {
-      data.individualPerson = IndividualPersonModel(
-        user: UserModel(email: jwtModel!.email, password: pass),
-        name: prefs.beneficiary!.individualPerson!.name,
-        cpf: prefs.beneficiary!.individualPerson!.cpf,
-        phone: state.individualPerson!.phone,
-      );
-      data.programCode = dotenv.env['CLIENT_LABEL'];
-      state.individualPerson!.name = prefs.beneficiary!.individualPerson!.name;
+      state.individualPerson!.name = prefs.user!.individualPerson!.name;
+      state.individualPerson!.email = prefs.user!.individualPerson!.email;
+      state.individualPerson!.cpf = prefs.user!.individualPerson!.cpf;
     } else {
-      data.individualPerson = IndividualPersonModel(
-        user: UserModel(email: jwtModel!.email, password: password),
-        name: state.individualPerson!.name,
-        cpf: userData['cpf'],
-        phone: state.individualPerson!.phone,
-      );
-      data.programCode = dotenv.env['CLIENT_LABEL'];
-      state.individualPerson!.name = userData['name'];
+      state.individualPerson!.email = userData.email;
+      state.individualPerson!.cpf = userData.cpf;
+      state.individualPerson!.name = userData.name;
     }
-
-    // await lecuponService.registerUser(beneficiary: data).catchError((onError) {
-    //   setLoading(false);
-    //   throw onError;
-    // });
 
     return await _repository
         .updateUser(
@@ -181,15 +163,10 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Di
       jwtModel!.id!,
     )
         .then((value) async {
-      // final individualPerson = await _beneficiaryRepository.getIndividualPerson(
-      //   userData['omni_id'],
-      // );
-      // userStore.beneficiary.individualPerson = individualPerson;
-      // userStore.state.beneficiary = userStore.beneficiary;
-      // userStore.setUserPreferences(
-      //   PreferencesModel.fromJson(userStore.state.toJson()),
-      //   userStore.userId,
-      // );
+      final NewPreferencesModel preferences = NewPreferencesModel();
+      preferences.jwt = jwtModel;
+      preferences.user = state;
+      await _service.setUserPreferences(preferences);
       setLoading(false);
       // se for somente atualizar os dados, como quem já fez o login e
       // foi redirecionado, enviar para a tela inicial
@@ -206,10 +183,10 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Di
   Future<void> registerBeneficiary(NewBeneficiaryModel data) async {
     late BeneficiaryModel beneficiaryModel;
     setLoading(true);
-    await lecuponService.registerUser(beneficiary: data).catchError((onError) {
-      setLoading(false);
-      throw onError;
-    });
+    // await lecuponService.registerUser(beneficiary: data).catchError((onError) {
+    //   setLoading(false);
+    //   throw onError;
+    // });
     await _repository.registerBeneficiary(data).then((beneficiary) async {
       beneficiaryModel = beneficiary;
     }).catchError((onError) {
@@ -229,17 +206,17 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Di
               state.individualPerson!.genre == null;
           return isDisable;
         case 1:
-          return state.programCode == null || state.programCode!.isEmpty;
+        // return state.programCode == null || state.programCode!.isEmpty;
         case 2:
           late final bool isUnderageValid;
           if (isUnderage()) {
-            if (state.responsible == null) {
-              isUnderageValid = true;
-            } else {
-              isUnderageValid = (state.responsible!.name == null || state.responsible!.name!.isEmpty) ||
-                  (state.responsible!.cpf == null || state.responsible!.cpf!.isEmpty) ||
-                  (state.responsible!.type == null);
-            }
+            // if (state.responsible == null) {
+            //   isUnderageValid = true;
+            // } else {
+            //   isUnderageValid = (state.responsible!.name == null || state.responsible!.name!.isEmpty) ||
+            //       (state.responsible!.cpf == null || state.responsible!.cpf!.isEmpty) ||
+            //       (state.responsible!.type == null);
+            // }
           } else {
             isUnderageValid = false;
           }
@@ -261,8 +238,10 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Di
           final bool isDisable =
               (state.individualPerson!.user!.username == null || state.individualPerson!.user!.username!.isEmpty) ||
                   (state.individualPerson!.user!.email == null || state.individualPerson!.user!.email!.isEmpty) ||
-                  (state.individualPerson!.user!.password == null || state.individualPerson!.user!.password!.isEmpty) ||
-                  !state.termsAccepted;
+                  (state.individualPerson!.user!.password == null || state.individualPerson!.user!.password!.isEmpty)
+              // ||
+              // !state.termsAccepted
+              ;
           return isDisable;
 
         default:

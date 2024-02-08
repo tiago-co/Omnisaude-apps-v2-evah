@@ -37,6 +37,10 @@ export 'package:omni_general/src/core/models/lecupom_models/recue_coupon_model.d
 export 'package:omni_general/src/core/models/lecupom_models/smart_link_token_model.dart';
 export 'package:omni_general/src/core/models/local_notification_model.dart';
 export 'package:omni_general/src/core/models/module_model.dart';
+export 'package:omni_general/src/core/models/new_beneficiary_model.dart';
+export 'package:omni_general/src/core/models/new_credential_model.dart';
+export 'package:omni_general/src/core/models/new_jwt_model.dart';
+export 'package:omni_general/src/core/models/new_preferences_model.dart';
 export 'package:omni_general/src/core/models/operator_configs_model.dart';
 export 'package:omni_general/src/core/models/paired_devices_model.dart';
 export 'package:omni_general/src/core/models/preferences_model.dart';

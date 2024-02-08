@@ -3,25 +3,19 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_core/omni_core.dart';
 import 'package:omni_general/omni_general.dart';
+import 'package:omni_general/src/core/models/new_beneficiary_model.dart';
 
-class UserStore extends NotifierStore<Exception, PreferencesModel> with Disposable {
+class UserStore extends NotifierStore<Exception, NewPreferencesModel> with Disposable {
   final PreferencesService _service = PreferencesService();
   final BeneficiaryRepository _repository = Modular.get();
   final FirebaseService firebaseService = Modular.get();
 
   UserStore()
       : super(
-          PreferencesModel(
-            pairedDevices: PairedDevicesModel(
-              accuCheckGuideList: [],
-              nonin3230List: [],
-              td3128List: [],
-              td8255List: [],
-            ),
-          ),
+          NewPreferencesModel(),
         );
 
-  Future<PreferencesModel?> updateUser() async {
+  Future<NewPreferencesModel?> updateUser() async {
     setLoading(true);
     return _service.getUserID().then((userId) async {
       if (userId == null) {
@@ -42,36 +36,27 @@ class UserStore extends NotifierStore<Exception, PreferencesModel> with Disposab
     });
   }
 
-  Future<void> setUserPreferences(PreferencesModel prefs, String userId) async {
+  Future<void> setUserPreferences(NewPreferencesModel prefs, String userId) async {
     await _service.getUserPreferences(userId).then((preferences) {
       prefs.jwt = prefs.jwt ?? preferences.jwt;
-      prefs.oprConfigs = prefs.oprConfigs ?? preferences.oprConfigs;
-      prefs.beneficiary = prefs.beneficiary ?? preferences.beneficiary;
-      prefs.primaryColor = prefs.primaryColor ?? preferences.primaryColor;
-      prefs.renderViewType = prefs.renderViewType ?? preferences.renderViewType;
-      prefs.pairedDevices = prefs.pairedDevices ?? preferences.pairedDevices;
+      prefs.user = prefs.user ?? preferences.user;
       update(prefs);
     });
     await _service.setUserPreferences(prefs);
   }
 
-  Future<BeneficiaryModel> getBeneficiaryById(String userId) async {
-    return _repository.getBeneficiaryById(userId).then((beneficiary) async {
+  Future<NewBeneficiaryModel> getBeneficiaryById(String userId) async {
+    return _repository.getNewIndividualPerson(userId).then((beneficiary) async {
+      final NewBeneficiaryModel user = NewBeneficiaryModel();
+
       await _service.getUserPreferences(userId).then((prefs) async {
-        if (prefs.beneficiary!.lecuponUser != null) {
-          beneficiary.lecuponUser = prefs.beneficiary!.lecuponUser;
+        if (prefs.user!.lecuponUser != null) {
+          user.lecuponUser = prefs.user!.lecuponUser;
         }
-        prefs.beneficiary = beneficiary;
-        beneficiary.programs?.sort((a, b) => a.name!.compareTo(b.name!));
-        prefs.primaryColor = int.tryParse(
-          '0xFF${beneficiary.programSelected!.enterprise!.primaryColor!}',
-        );
-        beneficiary.programSelected!.currentPhase?.modules?.sort(
-          (a, b) => a.name!.compareTo(b.name!),
-        );
+        prefs.user!.individualPerson = beneficiary;
         await setUserPreferences(prefs, userId);
       });
-      return beneficiary;
+      return user;
     }).catchError((onError) {
       throw onError;
     });
@@ -81,22 +66,15 @@ class UserStore extends NotifierStore<Exception, PreferencesModel> with Disposab
     return _repository.getOperatorConfigs().then((oprConfigs) async {
       final PreferencesModel prefs = PreferencesModel();
       prefs.oprConfigs = oprConfigs;
-      if (userId != null) await setUserPreferences(prefs, userId);
+      // if (userId != null) await setUserPreferences(prefs, userId);
       return oprConfigs;
     }).catchError((onError) async {
       throw onError;
     });
   }
 
-  ProgramModel get programSelected => state.beneficiary!.programSelected!;
-  OperatorConfigsModel get oprConfigs => state.oprConfigs!;
-  BeneficiaryModel get beneficiary => state.beneficiary!;
-  RenderViewType get viewType => state.renderViewType!;
-  String get userId => state.jwt!.id!;
-
-  Color? get programColor {
-    return state.primaryColor == null ? null : Color(state.primaryColor!);
-  }
+  NewBeneficiaryModel get beneficiary => state.user!;
+  int get userId => state.jwt!.id!;
 
   @override
   void dispose() {

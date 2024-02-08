@@ -16,7 +16,7 @@ class _TermsCheckBoxWidgetState extends State<TermsCheckBoxWidget> {
   final RegisterTermsStore store = Modular.get();
   @override
   void initState() {
-    store.update(store.registerStore.state.termsAccepted);
+    // store.update(store.registerStore.state.termsAccepted);
     super.initState();
   }
 
@@ -50,22 +50,20 @@ class _TermsCheckBoxWidgetState extends State<TermsCheckBoxWidget> {
                       children: [
                         TextSpan(
                           text: RegisterLabels.termsCheckboxCoditions,
-                          style:
-                              Theme.of(context).textTheme.titleLarge!.copyWith(
-                                    color: Theme.of(context).primaryColor,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.w600,
+                              ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Modular.to.pushNamed(
                                 '/terms',
-                                arguments:
-                                    store.registerStore.state.programCode,
+                                // arguments:
+                                //     store.registerStore.state.programCode,
                               );
                             },
                         ),
-                        const TextSpan(
-                            text: RegisterLabels.termsCheckboxProgram),
+                        const TextSpan(text: RegisterLabels.termsCheckboxProgram),
                       ],
                     ),
                   ),

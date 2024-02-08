@@ -4,7 +4,8 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:omni_general/omni_general.dart' show DioHttpClientImpl, IndividualPersonModel, PreferencesModel;
+import 'package:omni_general/omni_general.dart'
+    show DioHttpClientImpl, IndividualPersonModel, NewPreferencesModel, PreferencesModel;
 import 'package:omni_general/src/core/models/address_model.dart';
 import 'package:omni_general/src/core/models/beneficiary_model.dart';
 import 'package:omni_general/src/core/models/jwt_model.dart';
@@ -49,11 +50,11 @@ class BeneficiaryRepository extends Disposable {
       dio.interceptors.add(
         LogInterceptor(responseHeader: false, responseBody: true, error: false),
       );
-      final PreferencesModel prefs = await service.getUserPreferences(id);
+      final NewPreferencesModel prefs = await service.getUserPreferences(id);
 
       final Response response = await dio.get(
         '/users/$id',
-        options: Options(headers: {'Authorization': 'JWT ${prefs.jwt?.token}'}),
+        options: Options(headers: {'Authorization': 'Bearer ${prefs.jwt?.token}'}),
       );
       return IndividualPersonModel.fromJson(response.data);
     } on DioError catch (e) {
@@ -100,11 +101,11 @@ class BeneficiaryRepository extends Disposable {
       dio.interceptors.add(
         LogInterceptor(responseHeader: false, responseBody: true, error: false),
       );
-      final PreferencesModel prefs = await service.getUserPreferences(id);
+      final NewPreferencesModel prefs = await service.getUserPreferences(id);
 
       final Response response = await dio.patch(
         '/users/$id',
-        options: Options(headers: {'Authorization': 'JWT ${prefs.jwt?.token}'}),
+        options: Options(headers: {'Authorization': 'Bearer ${prefs.jwt?.token}'}),
         data: data,
       );
 
@@ -119,7 +120,7 @@ class BeneficiaryRepository extends Disposable {
   Future<JwtModel?> verifyToken(String userId) async {
     try {
       final PreferencesService service = PreferencesService();
-      final PreferencesModel prefs = await service.getUserPreferences(userId);
+      final NewPreferencesModel prefs = await service.getUserPreferences(userId);
 
       final Response response = await _client.post(
         path: '/token-verify/',

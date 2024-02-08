@@ -57,7 +57,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
 
   @override
   void initState() {
-    store.updateProfile(store.userStore.state.beneficiary!.individualPerson!);
+    store.updateProfile(store.userStore.state.user!.individualPerson!);
     nameController.text = store.state.name ?? '';
     final dataNascimento = DateTime.parse(store.state.birth!);
     birthController.text = Formaters.dateToStringDate(dataNascimento);

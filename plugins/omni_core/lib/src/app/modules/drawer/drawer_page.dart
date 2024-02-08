@@ -109,7 +109,7 @@ class _DrawerPageState extends State<DrawerPage> {
         DrawerMenuItem(
           onTap: () => Modular.to.pushNamed(
             '/terms',
-            arguments: store.programStore.programSelected.code,
+            // arguments: store.programStore.programSelected.code,
           ),
           title: DrawerLabels.drawerTerms,
           asset: Assets.terms,
@@ -146,8 +146,7 @@ class _DrawerPageState extends State<DrawerPage> {
                 style: Theme.of(context).textTheme.titleLarge,
                 children: [
                   TextSpan(
-                    text:
-                        '${triple.state.version} (${triple.state.buildNumber})',
+                    text: '${triple.state.version} (${triple.state.buildNumber})',
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           fontWeight: FontWeight.w600,
                         ),

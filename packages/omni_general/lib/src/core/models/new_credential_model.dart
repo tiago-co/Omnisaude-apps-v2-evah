@@ -1,26 +1,17 @@
 class NewCredentialModel {
-  String? cpf;
-  String? email;
+  String? cpfOrEmail;
   String? password;
-  String? username;
 
-  NewCredentialModel({this.cpf, this.email, this.password});
+  NewCredentialModel({this.cpfOrEmail, this.password});
 
   NewCredentialModel.fromJson(Map<String, dynamic> json) {
-    // cpf = json['cpf'];
-    // email = json['email'];
-    username = json['username'];
+    cpfOrEmail = json['cpf_or_email'];
     password = json['password'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    if (username != null && username!.contains('@')) {
-      data['email'] = username;
-    } else {
-      data['cpf'] = username;
-    }
-    data['username'] = username;
+    data['cpf_or_email'] = cpfOrEmail;
     data['password'] = password;
     return data;
   }

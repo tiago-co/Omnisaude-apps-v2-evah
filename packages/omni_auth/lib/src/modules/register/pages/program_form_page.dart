@@ -4,11 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_auth/src/modules/register/stores/register_store.dart';
 import 'package:omni_general/omni_general.dart'
-    show
-        BottomButtonType,
-        BottomButtonWidget,
-        NewBeneficiaryModel,
-        TextFieldWidget;
+    show BottomButtonType, BottomButtonWidget, NewBeneficiaryModel, TextFieldWidget;
 import 'package:omni_register_labels/labels.dart';
 
 class ProgramFormPage extends StatefulWidget {
@@ -33,8 +29,8 @@ class _ProgramFormPageState extends State<ProgramFormPage> {
   @override
   void initState() {
     programController = TextEditingController(
-      text: store.state.programCode ?? '',
-    );
+        // text: store.state.programCode ?? '',
+        );
 
     super.initState();
   }
@@ -88,20 +84,20 @@ class _ProgramFormPageState extends State<ProgramFormPage> {
           builder: (_, triple) {
             return BottomButtonWidget(
               onPressed: () async {
-                await store.verifyPsp(store.state.programCode!).then(
-                  (value) {
-                    _formKey.currentState!.reset();
-                    widget.pageController.nextPage(
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.decelerate,
-                    );
-                  },
-                ).catchError(
-                  (onError) {
-                    validatePsp = false;
-                    _formKey.currentState!.validate();
-                  },
-                );
+                // await store.verifyPsp(store.state.programCode!).then(
+                //   (value) {
+                //     _formKey.currentState!.reset();
+                //     widget.pageController.nextPage(
+                //       duration: const Duration(milliseconds: 500),
+                //       curve: Curves.decelerate,
+                //     );
+                //   },
+                // ).catchError(
+                //   (onError) {
+                //     validatePsp = false;
+                //     _formKey.currentState!.validate();
+                //   },
+                // );
               },
               isDisabled: store.isDisabled(page: 1),
               isLoading: triple.isLoading,
@@ -128,7 +124,7 @@ class _ProgramFormPageState extends State<ProgramFormPage> {
           suffixIcon: const Icon(Icons.code_rounded),
           enableSuggestions: false,
           onChange: (String? input) {
-            triple.state.programCode = input ?? '';
+            // triple.state.programCode = input ?? '';
             store.updateForm(triple.state);
           },
           validator: (psp) {

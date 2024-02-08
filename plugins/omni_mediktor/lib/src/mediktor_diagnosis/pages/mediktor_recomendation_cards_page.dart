@@ -30,14 +30,14 @@ class _MediktorRecomendationCardsPageState extends State<MediktorRecomendationCa
   }
 
   bool moduleIsActive(ModuleType moduleType) {
-    bool moduleIsActive = false;
+    bool moduleIsActive = true;
 
-    userStore.programSelected.currentPhase!.modules!.forEach((module) {
-      if (module.type == moduleType) {
-        moduleIsActive = true;
-        return;
-      }
-    });
+    // userStore.programSelected.currentPhase!.modules!.forEach((module) {
+    //   if (module.type == moduleType) {
+    //     moduleIsActive = true;
+    //     return;
+    //   }
+    // });
 
     return moduleIsActive;
   }

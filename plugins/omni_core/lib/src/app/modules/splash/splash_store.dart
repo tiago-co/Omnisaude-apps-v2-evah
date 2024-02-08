@@ -36,32 +36,33 @@ class SplashStore extends NotifierStore<DioError, bool> with Disposable {
     await _service.getUserID().then((userId) async {
       if (userId == null) throw Exception();
 
-      await _repository.verifyToken(userId).then((jwt) async {
-        if (jwt == null) return;
-        await _repository.refreshToken(userId, jwt.refreshToken!).then((jwt) async {
-          final PreferencesModel prefs = PreferencesModel(jwt: jwt);
-          await userStore.setUserPreferences(prefs, userId);
-        });
-        final PreferencesModel prefs = PreferencesModel(jwt: jwt);
-        await userStore.setUserPreferences(prefs, userId);
-      });
+      // await _repository.verifyToken(userId).then((jwt) async {
+      //   if (jwt == null) return;
+      //   await _repository.refreshToken(userId, jwt.refreshToken!).then((jwt) async {
+      //     final PreferencesModel prefs = PreferencesModel(jwt: jwt);
+      //     // await userStore.setUserPreferences(prefs, userId);
+      //   });
+      //   final PreferencesModel prefs = PreferencesModel(jwt: jwt);
+      //   // await userStore.setUserPreferences(prefs, userId);
+      // });
 
-      await userStore.getOperatorConfigs(userId);
+      // await userStore.getOperatorConfigs(userId);
 
       await _service.getUserPreferences(userId).then((prefs) async {
-        if (prefs.beneficiary == null) throw Exception();
-        expanded = prefs.beneficiary!.isPlanCardExpansive!;
+        // if (prefs.beneficiary == null) throw Exception();
+        // expanded = prefs.beneficiary!.isPlanCardExpansive!;
       });
 
-      await userStore.getBeneficiaryById(userId).then((beneficiary) async {
-        beneficiary.isPlanCardExpansive = expanded;
-        programStore.update(beneficiary.programs!);
-        modulesStore.update(
-          beneficiary.programSelected!.currentPhase!.modules!,
-        );
-      });
+      await userStore.getBeneficiaryById(userId);
+      // .then((beneficiary) async {
+      // beneficiary.isPlanCardExpansive = expanded;
+      // programStore.update(beneficiary.programs!);
+      // modulesStore.update(
+      //   beneficiary.programSelected!.currentPhase!.modules!,
+      // );
+      // });
     }).catchError((onError) async {
-      firebaseService.onUnsubscribeFromTopic(userStore.userId);
+      firebaseService.onUnsubscribeFromTopic(userStore.userId.toString());
       await _service.clear();
       await Future.delayed(const Duration(milliseconds: 1500));
       throw onError;
@@ -75,7 +76,7 @@ class SplashStore extends NotifierStore<DioError, bool> with Disposable {
       ..data();
     final info = await PackageInfo.fromPlatform();
     final appVersion = info.version;
-
+    final teste = firebaseVersion.data()![info.packageName];
     if (appVersion == firebaseVersion.data()![info.packageName]) {
       return true;
     } else {

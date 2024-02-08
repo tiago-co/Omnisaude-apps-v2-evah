@@ -22,8 +22,7 @@ class DrugControlHistoricPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _DrugControlHistoricPageState createState() =>
-      _DrugControlHistoricPageState();
+  _DrugControlHistoricPageState createState() => _DrugControlHistoricPageState();
 }
 
 class _DrugControlHistoricPageState extends State<DrugControlHistoricPage> {
@@ -39,8 +38,7 @@ class _DrugControlHistoricPageState extends State<DrugControlHistoricPage> {
     store.getDrugControls(store.params);
 
     scrollController.addListener(() {
-      if (scrollController.offset ==
-              scrollController.position.maxScrollExtent &&
+      if (scrollController.offset == scrollController.position.maxScrollExtent &&
           store.state.results!.length != store.state.count) {
         store.params.limit = (int.parse(store.params.limit!) + 10).toString();
         store.getDrugControls(store.params);
@@ -86,8 +84,7 @@ class _DrugControlHistoricPageState extends State<DrugControlHistoricPage> {
           ),
         ],
       ),
-      bottomNavigationBar: TripleBuilder<DrugControlHistoricStore, DioError,
-          DrugControlResultsModel>(
+      bottomNavigationBar: TripleBuilder<DrugControlHistoricStore, DioError, DrugControlResultsModel>(
         store: store,
         builder: (_, triple) {
           return BottomButtonWidget(
@@ -97,9 +94,9 @@ class _DrugControlHistoricPageState extends State<DrugControlHistoricPage> {
               '/home/drugControl/newDrugControl',
               arguments: {
                 'moduleName': 'Controle Medicamentoso',
-                'program': userStore.programSelected,
-                'useCaregiver': userStore.oprConfigs.useCaregiver,
-                'useCustomMedication': userStore.oprConfigs.useCustomMedication,
+                // 'program': userStore.programSelected,
+                // 'useCaregiver': userStore.oprConfigs.useCaregiver,
+                // 'useCustomMedication': userStore.oprConfigs.useCustomMedication,
               },
             ),
             text: DrugControlLabels.drugControlHistoricNewControl,
@@ -117,8 +114,7 @@ class _DrugControlHistoricPageState extends State<DrugControlHistoricPage> {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: TextFieldWidget(
             label: DrugControlLabels.drugControlHistoricDrugControlLabel,
-            placeholder:
-                DrugControlLabels.drugControlHistoricDrugControlPlaceholder,
+            placeholder: DrugControlLabels.drugControlHistoricDrugControlPlaceholder,
             controller: TextEditingController(),
             onChange: store.getDrugControlsParams,
           ),
@@ -147,8 +143,7 @@ class _DrugControlHistoricPageState extends State<DrugControlHistoricPage> {
   }
 
   Widget get _buildDrugControlListWidget {
-    return TripleBuilder<DrugControlHistoricStore, DioError,
-        DrugControlResultsModel>(
+    return TripleBuilder<DrugControlHistoricStore, DioError, DrugControlResultsModel>(
       store: store,
       builder: (_, triple) {
         Widget loading = const SizedBox();
@@ -185,8 +180,7 @@ class _DrugControlHistoricPageState extends State<DrugControlHistoricPage> {
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         physics: const BouncingScrollPhysics(),
                         child: EmptyWidget(
-                          message:
-                              DrugControlLabels.drugControlHistoricEmptyList,
+                          message: DrugControlLabels.drugControlHistoricEmptyList,
                           textButton: DrugControlLabels.tryAgain,
                           onPressed: () => store.getDrugControls(store.params),
                         ),
@@ -210,8 +204,7 @@ class _DrugControlHistoricPageState extends State<DrugControlHistoricPage> {
                   ),
                   itemBuilder: (_, index) {
                     return SafeArea(
-                      bottom: triple.state.results!.last ==
-                          triple.state.results![index],
+                      bottom: triple.state.results!.last == triple.state.results![index],
                       child: VerticalTimelineItemWidget(
                         child: DrugControlHistoricItemWidget(
                           drugControl: triple.state.results![index],

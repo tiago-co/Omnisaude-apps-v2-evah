@@ -12,8 +12,7 @@ class InactivateProgramWidget extends StatefulWidget {
   const InactivateProgramWidget({Key? key}) : super(key: key);
 
   @override
-  _InactivateProgramWidgetState createState() =>
-      _InactivateProgramWidgetState();
+  _InactivateProgramWidgetState createState() => _InactivateProgramWidgetState();
 }
 
 class _InactivateProgramWidgetState extends State<InactivateProgramWidget> {
@@ -27,25 +26,25 @@ class _InactivateProgramWidgetState extends State<InactivateProgramWidget> {
   }
 
   void inactivateProgram() {
-    final Map<String, String> data = {'motivo': textController.text};
-    store
-        .inactivateProgramSelected(
-      data,
-      store.programStore.programSelected.id!,
-    )
-        .then((value) {
-      Modular.to.pop();
-    }).catchError((onError) {
-      Helpers.showDialog(
-        context,
-        RequestErrorWidget(
-          error: onError,
-          onPressed: () => Modular.to.pop(),
-          buttonText: DrawerLabels.close,
-        ),
-        showClose: true,
-      );
-    });
+    // final Map<String, String> data = {'motivo': textController.text};
+    // store
+    //     .inactivateProgramSelected(
+    //   data,
+    //   store.programStore.programSelected.id!,
+    // )
+    //     .then((value) {
+    //   Modular.to.pop();
+    // }).catchError((onError) {
+    //   Helpers.showDialog(
+    //     context,
+    //     RequestErrorWidget(
+    //       error: onError,
+    //       onPressed: () => Modular.to.pop(),
+    //       buttonText: DrawerLabels.close,
+    //     ),
+    //     showClose: true,
+    //   );
+    // });
   }
 
   @override
@@ -56,9 +55,7 @@ class _InactivateProgramWidgetState extends State<InactivateProgramWidget> {
       children: [
         Container(
           margin: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom >= 60
-                ? MediaQuery.of(context).viewInsets.bottom - 60
-                : 0,
+            bottom: MediaQuery.of(context).viewInsets.bottom >= 60 ? MediaQuery.of(context).viewInsets.bottom - 60 : 0,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: Column(
@@ -153,7 +150,7 @@ class _InactivateProgramWidgetState extends State<InactivateProgramWidget> {
                         ..onTap = () {
                           Modular.to.pushNamed(
                             '/terms',
-                            arguments: store.programStore.programSelected.code,
+                            // arguments: store.programStore.programSelected.code,
                           );
                         },
                     ),

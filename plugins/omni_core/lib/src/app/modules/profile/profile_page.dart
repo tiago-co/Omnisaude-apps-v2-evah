@@ -22,7 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final ProfileStore store = Modular.get();
   @override
   void initState() {
-    store.updateProfile(store.userStore.state.beneficiary!.individualPerson!);
+    store.updateProfile(store.userStore.state.user!.individualPerson!);
     super.initState();
   }
 
@@ -37,8 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   final TextEditingController ethnicityController = TextEditingController();
   final TextEditingController birthController = TextEditingController();
-  final TextEditingController jsonValueController =
-      TextEditingController(text: '');
+  final TextEditingController jsonValueController = TextEditingController(text: '');
 
   final TextEditingController genreController = TextEditingController();
   final TextEditingController bloodTypeController = TextEditingController();
@@ -97,8 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              if (!triple.isLoading)
-                                const SizedBox(height: 2.5),
+                              if (!triple.isLoading) const SizedBox(height: 2.5),
                               if (triple.isLoading)
                                 const Padding(
                                   padding: EdgeInsets.symmetric(
@@ -213,8 +211,7 @@ class _ProfilePageState extends State<ProfilePage> {
             menuType: ProfileMenuItemType.select,
             textEditingController: ethnicityController,
             items: EthnicityType.values,
-            itemsLabels:
-                EthnicityType.values.map((type) => type.label).toList(),
+            itemsLabels: EthnicityType.values.map((type) => type.label).toList(),
             value: store.state.ethnicity?.label,
             label: 'Etnia',
             textLabelField: 'Etnia',
@@ -232,13 +229,8 @@ class _ProfilePageState extends State<ProfilePage> {
             placeholder: 'Informe seu Telefone',
             textLabelField: 'Telefone',
             mask: Masks().phone,
-            onChangeField: (String input) => {
-              'telefone': input
-                  .replaceAll('(', '')
-                  .replaceAll(')', '')
-                  .replaceAll('-', '')
-                  .replaceAll(' ', '')
-            },
+            onChangeField: (String input) =>
+                {'telefone': input.replaceAll('(', '').replaceAll(')', '').replaceAll('-', '').replaceAll(' ', '')},
           ),
           ProfileMenuItemWidget(
             label: 'Altura',

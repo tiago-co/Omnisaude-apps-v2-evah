@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -30,14 +31,14 @@ class AppWidget extends StatelessWidget {
       ),
     );
 
-    return TripleBuilder<UserStore, Exception, PreferencesModel>(
+    return TripleBuilder<UserStore, Exception, NewPreferencesModel>(
       store: userStore,
       builder: (_, triple) {
         Modular.setObservers([
           FirebaseAnalyticsObserver(analytics: analytics),
           Modular.get<MyNavigatorObserver>(),
         ]);
-        final Color color = userStore.programColor ?? this.theme.primaryColor;
+        final Color color = this.theme.primaryColor;
         final ThemeData theme = this.theme.copyWith(
               primaryColor: color,
               textSelectionTheme: TextSelectionThemeData(
@@ -73,6 +74,8 @@ class AppWidget extends StatelessWidget {
           ],
           title: title,
           theme: theme,
+          // locale: DevicePreview.locale(context),
+          // builder: DevicePreview.appBuilder,
           builder: (context, widget) {
             return MediaQuery(
               data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),

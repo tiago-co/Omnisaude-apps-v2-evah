@@ -56,51 +56,51 @@ class BeneficiaryModel {
   }
 }
 
-class NewBeneficiaryModel {
-  IndividualPersonModel? individualPerson;
-  BeneficiaryResponsibleModel? responsible;
-  LecuponUserModel? lecuponUser;
-  String? nrRegistration;
-  String? programCode;
-  late bool termsAccepted;
+// class NewBeneficiaryModel {
+//   IndividualPersonModel? individualPerson;
+//   BeneficiaryResponsibleModel? responsible;
+//   LecuponUserModel? lecuponUser;
+//   String? nrRegistration;
+//   String? programCode;
+//   late bool termsAccepted;
 
-  NewBeneficiaryModel({
-    this.individualPerson,
-    this.lecuponUser,
-    this.responsible,
-    this.nrRegistration,
-    this.programCode,
-    this.termsAccepted = false,
-  });
+//   NewBeneficiaryModel({
+//     this.individualPerson,
+//     this.lecuponUser,
+//     this.responsible,
+//     this.nrRegistration,
+//     this.programCode,
+//     this.termsAccepted = false,
+//   });
 
-  NewBeneficiaryModel.fromJson(Map<String, dynamic> json) {
-    individualPerson = json['pessoa_fisica'] != null ? IndividualPersonModel.fromJson(json['pessoa_fisica']) : null;
-    responsible = json['responsavel'] != null ? BeneficiaryResponsibleModel.fromJson(json['responsavel']) : null;
-    if (json['nr_matricula'] != null) {
-      nrRegistration = json['nr_matricula'];
-    }
-    programCode = json['codigo_psp'];
-    termsAccepted = json['termos_aceito'] ?? false;
-  }
-  NewBeneficiaryModel.oldFromJson(Map<String, dynamic> json) {
-    individualPerson = json['pessoa_fisica'] != null ? IndividualPersonModel.oldFromJson(json['pessoa_fisica']) : null;
-    responsible = json['responsavel'] != null ? BeneficiaryResponsibleModel.fromJson(json['responsavel']) : null;
-    if (json['nr_matricula'] != null) {
-      nrRegistration = json['nr_matricula'];
-    }
-    programCode = json['codigo_psp'];
-    termsAccepted = json['termos_aceito'] ?? false;
-    lecuponUser = json['lecuponUser'] != null ? LecuponUserModel.fromJson(json['lecuponUser']) : null;
-  }
+//   NewBeneficiaryModel.fromJson(Map<String, dynamic> json) {
+//     individualPerson = json['pessoa_fisica'] != null ? IndividualPersonModel.fromJson(json['pessoa_fisica']) : null;
+//     responsible = json['responsavel'] != null ? BeneficiaryResponsibleModel.fromJson(json['responsavel']) : null;
+//     if (json['nr_matricula'] != null) {
+//       nrRegistration = json['nr_matricula'];
+//     }
+//     programCode = json['codigo_psp'];
+//     termsAccepted = json['termos_aceito'] ?? false;
+//   }
+//   NewBeneficiaryModel.oldFromJson(Map<String, dynamic> json) {
+//     individualPerson = json['pessoa_fisica'] != null ? IndividualPersonModel.oldFromJson(json['pessoa_fisica']) : null;
+//     responsible = json['responsavel'] != null ? BeneficiaryResponsibleModel.fromJson(json['responsavel']) : null;
+//     if (json['nr_matricula'] != null) {
+//       nrRegistration = json['nr_matricula'];
+//     }
+//     programCode = json['codigo_psp'];
+//     termsAccepted = json['termos_aceito'] ?? false;
+//     lecuponUser = json['lecuponUser'] != null ? LecuponUserModel.fromJson(json['lecuponUser']) : null;
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['pessoa_fisica'] = individualPerson?.oldToJson();
-    data['responsavel'] = responsible?.toJson();
-    data['nr_matricula'] = nrRegistration;
-    data['codigo_psp'] = programCode;
-    data['lecuponUser'] = lecuponUser?.toJson();
-    data['termos_aceito'] = termsAccepted;
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = <String, dynamic>{};
+//     data['pessoa_fisica'] = individualPerson?.oldToJson();
+//     data['responsavel'] = responsible?.toJson();
+//     data['nr_matricula'] = nrRegistration;
+//     data['codigo_psp'] = programCode;
+//     data['lecuponUser'] = lecuponUser?.toJson();
+//     data['termos_aceito'] = termsAccepted;
+//     return data;
+//   }
+// }

@@ -41,9 +41,7 @@ class _VerifyPersonalDataPageState extends State<VerifyPersonalDataPage> {
   @override
   void initState() {
     cpfController = TextEditingController(
-      text: store.state.individualPerson?.cpf != null
-          ? Formaters.formatCPF(store.state.individualPerson!.cpf!)
-          : '',
+      text: store.state.individualPerson?.cpf != null ? Formaters.formatCPF(store.state.individualPerson!.cpf!) : '',
     );
     birthController = TextEditingController(
       text: store.state.individualPerson?.birth ?? '',
@@ -104,7 +102,7 @@ class _VerifyPersonalDataPageState extends State<VerifyPersonalDataPage> {
       store.verifyUser(params).then(
         (value) {
           if (store.isUnderage()) {
-            store.state.responsible = BeneficiaryResponsibleModel();
+            // store.state.responsible = BeneficiaryResponsibleModel();
           }
           widget.pageController.nextPage(
             duration: const Duration(milliseconds: 500),
@@ -196,8 +194,7 @@ class _VerifyPersonalDataPageState extends State<VerifyPersonalDataPage> {
                 keyboardType: TextInputType.number,
                 onChange: (String? input) {
                   if (input == null) return;
-                  store.state.individualPerson!.cpf =
-                      input.replaceAll(RegExp(r'[^0-9]'), '');
+                  store.state.individualPerson!.cpf = input.replaceAll(RegExp(r'[^0-9]'), '');
                   store.updateForm(store.state);
                 },
                 validator: (String? input) {
@@ -213,8 +210,7 @@ class _VerifyPersonalDataPageState extends State<VerifyPersonalDataPage> {
               const SizedBox(height: 15),
               TextFieldWidget(
                 label: RegisterLabels.verifyPersonalDataBirthDateLabel,
-                placeholder:
-                    RegisterLabels.verifyPersonalDataBirthDatePlaceholder,
+                placeholder: RegisterLabels.verifyPersonalDataBirthDatePlaceholder,
                 readOnly: true,
                 isEnabled: !triple.isLoading,
                 controller: birthController,
@@ -262,8 +258,7 @@ class _VerifyPersonalDataPageState extends State<VerifyPersonalDataPage> {
               SelectFieldWidget<GenreType>(
                 label: RegisterLabels.personalDataFormGenreLabel,
                 items: GenreType.values,
-                itemsLabels:
-                    GenreType.values.map((type) => type.label).toList(),
+                itemsLabels: GenreType.values.map((type) => type.label).toList(),
                 placeholder: RegisterLabels.personalDataFormGenrePlaceholder,
                 controller: genreController,
                 // focusNode: genreFocus,

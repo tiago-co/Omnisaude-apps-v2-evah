@@ -25,21 +25,22 @@ class _HomeNavBarWidgetState extends State<HomeNavBarWidget> {
       // surfaceTintColor: Theme.of(context).colorScheme.background,
       // backgroundColor: Theme.of(context).colorScheme.background,
       elevation: 0,
-      title: TripleBuilder<UserStore, Exception, PreferencesModel>(
-        store: userStore,
-        builder: (_, triple) {
-          return AbsorbPointer(
-            child: ImageWidget(
-              url:
-                  triple.state.beneficiary!.programSelected!.enterprise!.logo ??
-                      '',
-              asset: Assets.logoNavBar,
-              height: 50,
-              width: double.infinity,
-            ),
-          );
-        },
-      ),
+      // title: TripleBuilder<UserStore, Exception, PreferencesModel>(
+      //   store: userStore,
+      //   builder: (_, triple) {
+      //     return AbsorbPointer(
+      //       child: ImageWidget(
+      //         url:
+      //             triple.state.beneficiary!.programSelected!.enterprise!.logo ??
+      //                 '',
+      //         asset: Assets.logoNavBar,
+      //         height: 50,
+      //         width: double.infinity,
+      //       ),
+      //     );
+      //   },
+      // ),
+
       automaticallyImplyLeading: false,
     );
   }

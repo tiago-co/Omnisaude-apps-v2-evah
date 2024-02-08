@@ -20,19 +20,16 @@ class ReimbursementPersonalDataPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ReimbursementPersonalDataPage> createState() =>
-      _ReimbursementPersonalDataPageState();
+  State<ReimbursementPersonalDataPage> createState() => _ReimbursementPersonalDataPageState();
 }
 
-class _ReimbursementPersonalDataPageState
-    extends State<ReimbursementPersonalDataPage>
+class _ReimbursementPersonalDataPageState extends State<ReimbursementPersonalDataPage>
     with AutomaticKeepAliveClientMixin {
   final ReimbursementStepStore reimbursementStepStore = Modular.get();
   final NewReimbursementStore newReimbursementStore = Modular.get();
   final BanksListStore banksListStore = Modular.get();
   final UserStore userstore = Modular.get();
-  final TextEditingController bankSearchController =
-      TextEditingController(text: '');
+  final TextEditingController bankSearchController = TextEditingController(text: '');
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
@@ -57,18 +54,15 @@ class _ReimbursementPersonalDataPageState
   void initState() {
     banksListStore.params.limit = '10';
     scrollController.addListener(() async {
-      if (scrollController.offset ==
-              scrollController.position.maxScrollExtent &&
+      if (scrollController.offset == scrollController.position.maxScrollExtent &&
           banksListStore.state.results!.length != banksListStore.state.count) {
-        banksListStore.params.limit =
-            (int.parse(banksListStore.params.limit!) + 10).toString();
+        banksListStore.params.limit = (int.parse(banksListStore.params.limit!) + 10).toString();
         await banksListStore.getAvaliableBanks(banksListStore.params);
       }
     });
     banksListStore.getAvaliableBanks(banksListStore.params);
 
-    newReimbursementStore.state.name =
-        userstore.state.beneficiary!.individualPerson!.name;
+    newReimbursementStore.state.name = userstore.state.user!.individualPerson!.name;
     newReimbursementStore.updateForm(newReimbursementStore.state);
     banksListStore.getAvaliableBanks(banksListStore.params);
     super.initState();
@@ -122,22 +116,14 @@ class _ReimbursementPersonalDataPageState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            ReimbursementLabels
-                                .reimbursementPersonalDataBeneficiary,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(
+                            ReimbursementLabels.reimbursementPersonalDataBeneficiary,
+                            style: Theme.of(context).textTheme.titleLarge!.copyWith(
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
                           Text(
-                            userstore
-                                .state.beneficiary!.individualPerson!.name!,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineSmall!
-                                .copyWith(
+                            userstore.state.user!.individualPerson!.name!,
+                            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                                   color: Theme.of(context).primaryColor,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -155,10 +141,7 @@ class _ReimbursementPersonalDataPageState
                 ),
                 Text(
                   ReimbursementLabels.reimbursementPersonalDataNotification,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge!
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   height: 5,
@@ -173,10 +156,7 @@ class _ReimbursementPersonalDataPageState
                 ),
                 Text(
                   ReimbursementLabels.reimbursementPersonalDataVerify,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge!
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   height: 15,
@@ -196,26 +176,20 @@ class _ReimbursementPersonalDataPageState
                     child: Column(
                       children: [
                         TextFieldWidget(
-                          label: ReimbursementLabels
-                              .reimbursementPersonalDataPhone,
+                          label: ReimbursementLabels.reimbursementPersonalDataPhone,
                           focusNode: phoneFocusNode,
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.number,
                           controller: phoneController,
                           mask: Masks.generateMask('(##) # ####-####'),
                           onChange: (value) {
-                            newReimbursementStore.state.phone = value!
-                                .replaceAll('(', '')
-                                .replaceAll(')', '')
-                                .replaceAll(' ', '')
-                                .replaceAll('-', '');
-                            newReimbursementStore
-                                .updateForm(newReimbursementStore.state);
+                            newReimbursementStore.state.phone =
+                                value!.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '').replaceAll('-', '');
+                            newReimbursementStore.updateForm(newReimbursementStore.state);
                           },
                         ),
                         TextFieldWidget(
-                          label: ReimbursementLabels
-                              .reimbursementPersonalDataEmail,
+                          label: ReimbursementLabels.reimbursementPersonalDataEmail,
                           focusNode: emailFocusNode,
                           textInputAction: TextInputAction.next,
                           textCapitalization: TextCapitalization.none,
@@ -223,13 +197,11 @@ class _ReimbursementPersonalDataPageState
                           keyboardType: TextInputType.emailAddress,
                           onChange: (value) {
                             newReimbursementStore.state.email = value;
-                            newReimbursementStore
-                                .updateForm(newReimbursementStore.state);
+                            newReimbursementStore.updateForm(newReimbursementStore.state);
                           },
                           validator: (value) {
                             if (!Helpers.isEmail(value!)) {
-                              return ReimbursementLabels
-                                  .reimbursementPersonalDataInavlidEmail;
+                              return ReimbursementLabels.reimbursementPersonalDataInavlidEmail;
                             } else {
                               return null;
                             }
@@ -267,13 +239,11 @@ class _ReimbursementPersonalDataPageState
                       TripleBuilder(
                         store: banksListStore,
                         builder: (_, triple) {
-                          return TripleBuilder<BanksListStore, DioError,
-                              BanksListResultsModel>(
+                          return TripleBuilder<BanksListStore, DioError, BanksListResultsModel>(
                             store: banksListStore,
                             builder: (_, triple) {
                               return TextFieldWidget(
-                                label: ReimbursementLabels
-                                    .reimbursementPersonalDataBank,
+                                label: ReimbursementLabels.reimbursementPersonalDataBank,
                                 controller: bankController,
                                 readOnly: true,
                                 suffixIcon: triple.isLoading
@@ -289,8 +259,7 @@ class _ReimbursementPersonalDataPageState
                                     enableDrag: true,
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
-                                    builder: (_) =>
-                                        _buildChooseDiseaseSheetWidget(_),
+                                    builder: (_) => _buildChooseDiseaseSheetWidget(_),
                                   );
                                 },
                               );
@@ -324,8 +293,7 @@ class _ReimbursementPersonalDataPageState
                         children: [
                           Expanded(
                             child: TextFieldWidget(
-                              label: ReimbursementLabels
-                                  .reimbursementPersonalDataAgency,
+                              label: ReimbursementLabels.reimbursementPersonalDataAgency,
                               focusNode: agencyFocusNode,
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.number,
@@ -333,8 +301,7 @@ class _ReimbursementPersonalDataPageState
                               controller: agencyController,
                               onChange: (value) {
                                 newReimbursementStore.state.agency = value;
-                                newReimbursementStore
-                                    .updateForm(newReimbursementStore.state);
+                                newReimbursementStore.updateForm(newReimbursementStore.state);
                               },
                             ),
                           ),
@@ -344,8 +311,7 @@ class _ReimbursementPersonalDataPageState
                           ),
                           Expanded(
                             child: TextFieldWidget(
-                              label: ReimbursementLabels
-                                  .reimbursementPersonalDataAccount,
+                              label: ReimbursementLabels.reimbursementPersonalDataAccount,
                               focusNode: accountFocusNode,
                               keyboardType: TextInputType.number,
                               mask: Masks().bankAcount,
@@ -356,8 +322,7 @@ class _ReimbursementPersonalDataPageState
                                 } else {
                                   newReimbursementStore.state.account = value;
                                 }
-                                newReimbursementStore
-                                    .updateForm(newReimbursementStore.state);
+                                newReimbursementStore.updateForm(newReimbursementStore.state);
                               },
                             ),
                           ),
@@ -368,14 +333,12 @@ class _ReimbursementPersonalDataPageState
                           Flexible(
                             child: SizedBox(
                               width: 50,
-                              child: TripleBuilder<NewReimbursementStore,
-                                  DioError, NewReimbursementModel>(
+                              child: TripleBuilder<NewReimbursementStore, DioError, NewReimbursementModel>(
                                 store: newReimbursementStore,
                                 builder: (_, triplo) {
                                   return TextFieldWidget(
                                     isEnabled: triplo.state.account!.isNotEmpty,
-                                    label: ReimbursementLabels
-                                        .reimbursementPersonalDataaccountDigit,
+                                    label: ReimbursementLabels.reimbursementPersonalDataaccountDigit,
                                     focusNode: digFocusNode,
                                     keyboardType: TextInputType.number,
                                     mask: Masks().bankAcountDig,
@@ -384,16 +347,11 @@ class _ReimbursementPersonalDataPageState
                                       digitController.text = value!;
 
                                       if (value.isEmpty) {
-                                        final accountNumber =
-                                            accountController.text;
-                                        newReimbursementStore.state.account =
-                                            accountNumber;
+                                        final accountNumber = accountController.text;
+                                        newReimbursementStore.state.account = accountNumber;
                                       } else {
-                                        final accountNumber =
-                                            accountController.text +
-                                                digitController.text;
-                                        newReimbursementStore.state.account =
-                                            accountNumber;
+                                        final accountNumber = accountController.text + digitController.text;
+                                        newReimbursementStore.state.account = accountNumber;
                                       }
 
                                       newReimbursementStore.updateForm(
@@ -421,8 +379,7 @@ class _ReimbursementPersonalDataPageState
                       width: 5,
                     ),
                     Text(
-                      ReimbursementLabels
-                          .reimbursementPersonalDataAttentionAlert,
+                      ReimbursementLabels.reimbursementPersonalDataAttentionAlert,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ],
@@ -443,8 +400,7 @@ class _ReimbursementPersonalDataPageState
           ),
         ),
       ),
-      bottomNavigationBar:
-          TripleBuilder<NewReimbursementStore, DioError, NewReimbursementModel>(
+      bottomNavigationBar: TripleBuilder<NewReimbursementStore, DioError, NewReimbursementModel>(
         store: newReimbursementStore,
         builder: (_, triple) {
           return BottomButtonWidget(
@@ -455,8 +411,7 @@ class _ReimbursementPersonalDataPageState
                   duration: const Duration(milliseconds: 250),
                   curve: Curves.easeIn,
                 );
-                reimbursementStepStore
-                    .updateStep(widget.controller.page!.round());
+                reimbursementStepStore.updateStep(widget.controller.page!.round());
               }
             },
             text: ReimbursementLabels.reimbursementPersonalDataNext,
@@ -476,8 +431,7 @@ class _ReimbursementPersonalDataPageState
         ),
       ),
       margin: const EdgeInsets.only(top: 60),
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -491,15 +445,12 @@ class _ReimbursementPersonalDataPageState
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 BottomSheetHeaderWidget(
-                  title:
-                      ReimbursementLabels.reimbursementPersonalDataSearchBanks,
-                  searchPlaceholder: ReimbursementLabels
-                      .reimbursementPersonalDataBanksSearchPlaceholder,
+                  title: ReimbursementLabels.reimbursementPersonalDataSearchBanks,
+                  searchPlaceholder: ReimbursementLabels.reimbursementPersonalDataBanksSearchPlaceholder,
                   showSearch: true,
                   controller: bankSearchController,
                   onSearch: (String? input) async {
-                    banksListStore.params =
-                        QueryParamsModel(name: input, limit: '10');
+                    banksListStore.params = QueryParamsModel(name: input, limit: '10');
                     await banksListStore.getAvaliableBanks(
                       banksListStore.params,
                     );
@@ -538,8 +489,7 @@ class _ReimbursementPersonalDataPageState
                           const LoadingWidget(),
                           const SizedBox(height: 15),
                           Text(
-                            ReimbursementLabels
-                                .reimbursementPersonalDataBanksSearchLoading,
+                            ReimbursementLabels.reimbursementPersonalDataBanksSearchLoading,
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.titleLarge,
                           )
@@ -557,8 +507,7 @@ class _ReimbursementPersonalDataPageState
                         vertical: 25,
                       ),
                       child: EmptyWidget(
-                        message: ReimbursementLabels
-                            .reimbursementPersonalDataEmptyBanks,
+                        message: ReimbursementLabels.reimbursementPersonalDataEmptyBanks,
                       ),
                     ),
                   );

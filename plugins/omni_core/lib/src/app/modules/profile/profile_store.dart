@@ -53,17 +53,17 @@ class ProfileStore extends NotifierStore<DioError, IndividualPersonModel> with D
     await _repository
         .updateProfile(
       state,
-      userStore.userId,
+      userStore.userId.toString(),
     )
         .then((individualPerson) async {
-      individualPerson = await _repository.getIndividualPerson(userStore.userId);
+      individualPerson = await _repository.getNewIndividualPerson(userStore.userId.toString());
       userStore.beneficiary.individualPerson = individualPerson;
-      userStore.state.beneficiary = userStore.beneficiary;
+      userStore.state.user = userStore.beneficiary;
       userStore.setUserPreferences(
-        PreferencesModel.fromJson(userStore.state.toJson()),
-        userStore.userId,
+        NewPreferencesModel.fromJson(userStore.state.toJson()),
+        userStore.userId.toString(),
       );
-      userStore.update(PreferencesModel.fromJson(userStore.state.toJson()));
+      userStore.update(NewPreferencesModel.fromJson(userStore.state.toJson()));
       update(IndividualPersonModel.fromJson(individualPerson.toJson()));
       setLoading(false);
     }).catchError((onError) {
@@ -79,15 +79,15 @@ class ProfileStore extends NotifierStore<DioError, IndividualPersonModel> with D
     await _repository
         .updateIndividualPerson(
       data,
-      userStore.userId,
+      userStore.userId.toString(),
     )
         .then((individualPerson) {
       userStore.beneficiary.individualPerson = individualPerson;
-      userStore.state.beneficiary = userStore.beneficiary;
-      userStore.setUserPreferences(
-        PreferencesModel.fromJson(userStore.state.toJson()),
-        userStore.userId,
-      );
+      userStore.state.user = userStore.beneficiary;
+      // userStore.setUserPreferences(
+      //   PreferencesModel.fromJson(userStore.state.toJson()),
+      //   userStore.userId,
+      // );
       // userStore.update(PreferencesModel.fromJson(userStore.state.toJson()));
       update(IndividualPersonModel.fromJson(individualPerson.toJson()));
       setLoading(false);
@@ -99,7 +99,7 @@ class ProfileStore extends NotifierStore<DioError, IndividualPersonModel> with D
 
   Future<void> getIndividualPerson() async {
     setLoading(true);
-    await _repository.getIndividualPerson(userStore.userId).then((individualPerson) {
+    await _repository.getNewIndividualPerson(userStore.userId.toString()).then((individualPerson) {
       update(individualPerson);
       setLoading(false);
     }).catchError((onError) {

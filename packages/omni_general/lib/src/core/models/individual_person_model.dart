@@ -10,6 +10,7 @@ class IndividualPersonModel {
   UserModel? user;
   String? name;
   String? cpf;
+  String? email;
   String? fatherName;
   String? motherName;
   String? birth;
@@ -45,6 +46,8 @@ class IndividualPersonModel {
 
   IndividualPersonModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
+    cpf = json['cpf'];
+    email = json['email'];
     birth = json['birth_date'];
     height = json['height'] is String ? double.parse(json['height']) : json['height'];
     weight = json['weight'] is int ? (json['weight'] as int).toDouble() : json['weight'];
@@ -87,6 +90,8 @@ class IndividualPersonModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
+    data['cpf'] = cpf;
+    data['email'] = email;
     data['birth_date'] = birth;
     data['height'] = height;
     data['weight'] = weight;

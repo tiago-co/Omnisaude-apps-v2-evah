@@ -18,7 +18,7 @@ class AuthInterceptor extends Interceptor {
       await service.getUserPreferences(userId).then((preferences) async {
         dio.lock();
         options.headers.addAll(
-          {'Authorization': 'JWT ${preferences.jwt?.token}'},
+          {'Authorization': 'Bearer ${preferences.jwt?.token}'},
         );
         dio.unlock();
       });

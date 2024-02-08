@@ -41,8 +41,7 @@ class _ProceduresPageState extends State<ProceduresPage> {
     store.getProcedures(store.params);
 
     scrollController.addListener(() {
-      if (scrollController.offset ==
-              scrollController.position.maxScrollExtent &&
+      if (scrollController.offset == scrollController.position.maxScrollExtent &&
           store.state.results.length != store.state.count) {
         store.params.limit = (int.parse(store.params.limit!) + 10).toString();
         store.getProcedures(store.params);
@@ -121,7 +120,7 @@ class _ProceduresPageState extends State<ProceduresPage> {
           );
         },
         buttonType: BottomButtonType.outline,
-        isDisabled: !store.programStore.programSelected.activeImplant,
+        // isDisabled: !store.programStore.programSelected.activeImplant,
         text: ProceduresLabels.proceduresCrisisDiary,
       ),
     );

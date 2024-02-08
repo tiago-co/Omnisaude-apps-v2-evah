@@ -11,9 +11,9 @@ class PlanCardModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(
-      Modular.initialRoute,
-      child: (_, args) => PlanCardPage(moduleName: args.data['moduleName']),
-    ),
+    // ChildRoute(
+    //   Modular.initialRoute,
+    //   child: (_, args) => PlanCardPage(moduleName: args.data['moduleName']),
+    // ),
   ];
 }

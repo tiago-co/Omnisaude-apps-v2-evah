@@ -16,8 +16,7 @@ class ProgramInactivateWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ProgramInactivateWidgetState createState() =>
-      _ProgramInactivateWidgetState();
+  _ProgramInactivateWidgetState createState() => _ProgramInactivateWidgetState();
 }
 
 class _ProgramInactivateWidgetState extends State<ProgramInactivateWidget> {
@@ -26,13 +25,13 @@ class _ProgramInactivateWidgetState extends State<ProgramInactivateWidget> {
 
   @override
   void initState() {
-    final String name = store.programSelected.name ?? '';
-    text =
-        '${SharedLabels.inactivatedProgramProgram} ${Formaters.capitalize(name)} ${SharedLabels.inactivatedProgramIsInactive}';
-    if (widget.status == StatusType.inactive) {
-      text =
-          '${SharedLabels.inactivatedProgramEjected} ${Formaters.capitalize(name)}';
-    }
+    // final String name = store.programSelected.name ?? '';
+    // text =
+    //     '${SharedLabels.inactivatedProgramProgram} ${Formaters.capitalize(name)} ${SharedLabels.inactivatedProgramIsInactive}';
+    // if (widget.status == StatusType.inactive) {
+    //   text =
+    //       '${SharedLabels.inactivatedProgramEjected} ${Formaters.capitalize(name)}';
+    // }
     super.initState();
   }
 
@@ -47,8 +46,7 @@ class _ProgramInactivateWidgetState extends State<ProgramInactivateWidget> {
           store: store,
           builder: (_, triple) {
             return EmptyWidget(
-              message:
-                  '$text.\n ${SharedLabels.inactivatedProgramEnterInContact}',
+              message: '$text.\n ${SharedLabels.inactivatedProgramEnterInContact}',
               isDisabled: triple.isLoading,
               onPressed: () => widget.refreshModules(),
               textButton: SharedLabels.inactivatedProgramUpdate,

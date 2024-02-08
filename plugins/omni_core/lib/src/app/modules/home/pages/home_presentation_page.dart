@@ -21,8 +21,8 @@ class _HomePresentationPageState extends State<HomePresentationPage> {
   @override
   void initState() {
     userStore.updateUser().then((prefs) async {
-      programStore.update(prefs!.beneficiary!.programs!);
-      userStore.firebaseService.onSubscribeToTopic(userStore.userId);
+      // programStore.update(prefs!.beneficiary!.programs!);
+      // userStore.firebaseService.onSubscribeToTopic(userStore.userId);
       await modulesStore.getActiveModules().then((value) {
         Modular.to.pushNamedAndRemoveUntil(
           '/home',

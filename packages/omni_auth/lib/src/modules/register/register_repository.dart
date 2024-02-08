@@ -97,13 +97,13 @@ class RegisterRepository extends Disposable {
         },
       );
       final JwtModel jwt = JwtModel.fromJson(responseLogin.data);
-      _client.options.headers['Authorization'] = 'Bearer ${jwt.token}';
-      final PreferencesService service = PreferencesService();
-      final PreferencesModel preferences = await service.getUserPreferences(
-        jwt.id!,
-      );
-      preferences.jwt = jwt;
-      await service.setUserPreferences(preferences);
+      // _client.options.headers['Authorization'] = 'Bearer ${jwt.token}';
+      // final PreferencesService service = PreferencesService();
+      // final PreferencesModel preferences = await service.getUserPreferences(
+      //   jwt.id!,
+      // );
+      // preferences.jwt = jwt;
+      // await service.setUserPreferences(preferences);
 
       return jwt;
     } on Exception catch (e) {
@@ -129,11 +129,11 @@ class RegisterRepository extends Disposable {
   }
 
   // Future<BeneficiaryModel> updateUser(NewBeneficiaryModel data)async{
-  Future updateUser(NewBeneficiaryModel data, String token, String id) async {
+  Future updateUser(NewBeneficiaryModel data, String token, int id) async {
     try {
       final Dio dio = Dio();
       dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
-      dio.options.headers['Authorization'] = 'JWT $token';
+      dio.options.headers['Authorization'] = 'Bearer $token';
       final result = await dio.patch('/users/$id', data: data.individualPerson?.toJson());
       return result.data['message'];
     } on DioError catch (e) {

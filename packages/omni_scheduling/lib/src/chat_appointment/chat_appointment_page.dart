@@ -71,8 +71,7 @@ class _ChatAppointmentPageState extends State<ChatAppointmentPage>
       getOffset(headerKey);
     });
     store.messageStore.avatarUrl = '';
-    store.messageStore.username =
-        userStore.state.beneficiary!.individualPerson!.name;
+    store.messageStore.username = userStore.state.user!.individualPerson!.name;
     store.messageStore.listenMessages(widget.scheduling);
     store.videoCallStore.listenVideoCalls(widget.scheduling);
     super.initState();
@@ -119,8 +118,8 @@ class _ChatAppointmentPageState extends State<ChatAppointmentPage>
                 docId: store.videoCallStore.docId,
                 appointmentId: widget.scheduling.appointment!.id!,
                 peerBeneficiary: widget.scheduling.peerBeneficiary!,
-                professionalName: widget.scheduling.professional?.name ??
-                    SchedulingLabels.chatAppointmentProfessionalPlaceholder,
+                professionalName:
+                    widget.scheduling.professional?.name ?? SchedulingLabels.chatAppointmentProfessionalPlaceholder,
                 professionalImage: widget.scheduling.professional?.image ?? '',
                 token: store.videoCallStore.token ?? '',
               ),
@@ -133,8 +132,7 @@ class _ChatAppointmentPageState extends State<ChatAppointmentPage>
   Widget get _buildChatBodyWidget {
     return Scaffold(
       appBar: NavBarWidget(
-        title: widget.scheduling.specialty?.name ??
-            SchedulingLabels.chatAppointmentSpecialtyPlaceholder,
+        title: widget.scheduling.specialty?.name ?? SchedulingLabels.chatAppointmentSpecialtyPlaceholder,
       ).build(context) as AppBar,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
@@ -160,9 +158,7 @@ class _ChatAppointmentPageState extends State<ChatAppointmentPage>
                       right: 10,
                     ),
                     alignment: Alignment.center,
-                    height: backToCallStore.state
-                        ? MediaQuery.of(context).size.height * 0.05
-                        : 0,
+                    height: backToCallStore.state ? MediaQuery.of(context).size.height * 0.05 : 0,
                     decoration: BoxDecoration(
                       color: Colors.green,
                       borderRadius: BorderRadius.circular(10),
@@ -177,10 +173,7 @@ class _ChatAppointmentPageState extends State<ChatAppointmentPage>
                         const SizedBox(width: 5),
                         Text(
                           SchedulingLabels.chatAppointmentBackCall,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium!
-                              .copyWith(
+                          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                                 color: Theme.of(context).colorScheme.background,
                               ),
                         ),
@@ -277,8 +270,7 @@ class _ChatAppointmentPageState extends State<ChatAppointmentPage>
   }
 
   Widget get _buildMessageListWidget {
-    return TripleBuilder<ChatAppointmentMessageStore, Exception,
-        List<BotMessageModel>>(
+    return TripleBuilder<ChatAppointmentMessageStore, Exception, List<BotMessageModel>>(
       store: store.messageStore,
       builder: (_, triple) {
         return ListView.builder(

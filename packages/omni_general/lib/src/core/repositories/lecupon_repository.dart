@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_general/omni_general.dart';
+import 'package:omni_general/src/core/models/new_beneficiary_model.dart';
 
 class LecuponRepository extends Disposable {
   Map<String, dynamic> apiMobileHeaders = {};
@@ -97,7 +98,7 @@ class LecuponRepository extends Disposable {
   }
 
   Future<List<DiscountCategoryModel>> getDiscountsCategories({
-    required BeneficiaryModel beneficiary,
+    required NewBeneficiaryModel beneficiary,
     required CupomParamsModel params,
   }) async {
     try {
@@ -143,7 +144,7 @@ class LecuponRepository extends Disposable {
   }
 
   Future<List<OrganizationModel>> getOrganizationsList({
-    required BeneficiaryModel beneficiary,
+    required NewBeneficiaryModel beneficiary,
     required CupomParamsModel params,
   }) async {
     try {
@@ -163,14 +164,8 @@ class LecuponRepository extends Disposable {
 
       final List<OrganizationModel> organizationsList = List.empty(growable: true);
 
-      response.data.forEach((element) {
-        final organization = OrganizationModel.fromJson(element);
-        if (organization.id == 4474) {
-          organization.address = 'São Paulo (SP) e Rio de Janeiro (RJ)';
-        } else if (organization.id == 8761) {
-          organization.address = 'Brasília (DF), São Paulo (SP) e Rio de Janeiro (RJ)';
-        }
-        organizationsList.add(organization);
+      response.data.forEach((organization) {
+        organizationsList.add(OrganizationModel.fromJson(organization));
       });
 
       return organizationsList;

@@ -2,21 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_auth/src/modules/register/stores/register_store.dart';
 import 'package:omni_general/omni_general.dart'
-    show
-        Helpers,
-        Masks,
-        SelectFieldWidget,
-        TextFieldWidget,
-        RelationshipType,
-        RelationshipTypeExtension;
+    show Helpers, Masks, SelectFieldWidget, TextFieldWidget, RelationshipType, RelationshipTypeExtension;
 import 'package:omni_register_labels/labels.dart';
 
 class ResponsableDataFormWidget extends StatefulWidget {
   const ResponsableDataFormWidget({Key? key}) : super(key: key);
 
   @override
-  _ResponsableDataFormWidgetState createState() =>
-      _ResponsableDataFormWidgetState();
+  _ResponsableDataFormWidgetState createState() => _ResponsableDataFormWidgetState();
 }
 
 class _ResponsableDataFormWidgetState extends State<ResponsableDataFormWidget> {
@@ -32,11 +25,11 @@ class _ResponsableDataFormWidgetState extends State<ResponsableDataFormWidget> {
 
   @override
   void initState() {
-    nameController = TextEditingController(text: store.state.responsible?.name);
-    cpfController = TextEditingController(text: store.state.responsible?.cpf);
-    typeController = TextEditingController(
-      text: store.state.responsible?.type?.label,
-    );
+    // nameController = TextEditingController(text: store.state.responsible?.name);
+    // cpfController = TextEditingController(text: store.state.responsible?.cpf);
+    // typeController = TextEditingController(
+    //   text: store.state.responsible?.type?.label,
+    // );
     super.initState();
   }
 
@@ -68,7 +61,7 @@ class _ResponsableDataFormWidgetState extends State<ResponsableDataFormWidget> {
               Helpers.changeFocus(context, nameFocus, cpfFocus);
             },
             onChange: (String? input) {
-              store.state.responsible!.name = input ?? '';
+              // store.state.responsible!.name = input ?? '';
               store.updateForm(store.state);
             },
           ),
@@ -85,7 +78,7 @@ class _ResponsableDataFormWidgetState extends State<ResponsableDataFormWidget> {
               Helpers.changeFocus(context, nameFocus, typeFocus);
             },
             onChange: (String? input) {
-              store.state.responsible!.cpf = input ?? '';
+              // store.state.responsible!.cpf = input ?? '';
               store.updateForm(store.state);
             },
           ),
@@ -93,15 +86,13 @@ class _ResponsableDataFormWidgetState extends State<ResponsableDataFormWidget> {
           SelectFieldWidget<RelationshipType>(
             label: RegisterLabels.responsableDataFormRelationshipLabel,
             items: RelationshipType.values,
-            itemsLabels:
-                RelationshipType.values.map((type) => type.label).toList(),
+            itemsLabels: RelationshipType.values.map((type) => type.label).toList(),
             controller: typeController,
             focusNode: typeFocus,
-            placeholder:
-                RegisterLabels.responsableDataFormRelationshipPlaceholder,
+            placeholder: RegisterLabels.responsableDataFormRelationshipPlaceholder,
             onSelectItem: (RelationshipType type) {
               typeController.text = type.label;
-              store.state.responsible!.type = type;
+              // store.state.responsible!.type = type;
               store.updateForm(store.state);
             },
           ),
