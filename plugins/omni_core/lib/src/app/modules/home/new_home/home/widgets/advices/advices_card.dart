@@ -18,78 +18,78 @@ class _AdvicesCardState extends State<AdvicesCard> {
   final PageController _controller = PageController();
 
   final cards = [
-    // Card(
-    //   color: Colors.white,
-    //   surfaceTintColor: Colors.white,
-    //   clipBehavior: Clip.hardEdge,
-    //   child: InkWell(
-    //     onTap: () => launchUrl(
-    //       Uri.parse('https://wa.me/5562998845801'),
-    //       mode: LaunchMode.externalApplication,
-    //     ),
-    //     child: SizedBox(
-    //       width: double.maxFinite,
-    //       child: Stack(
-    //         children: [
-    //           Positioned(
-    //             right: -70,
-    //             top: -10,
-    //             child: SizedBox(
-    //               // width: constraints.maxWidth,
-    //               height: 130,
-    //               child: AspectRatio(
-    //                 aspectRatio: 3.5,
-    //                 child: SvgPicture.asset(
-    //                   Assets.whatsappAdvice,
-    //                   package: AssetsPackage.omniCore,
-    //                 ),
-    //               ),
-    //             ),
-    //           ),
-    //           Padding(
-    //             padding: EdgeInsets.all(16),
-    //             child: Column(
-    //               crossAxisAlignment: CrossAxisAlignment.start,
-    //               children: [
-    //                 const Text(
-    //                   'Dúvidas sobre saude\nda mulher?',
-    //                   style: TextStyle(
-    //                     fontSize: 16,
-    //                     fontWeight: FontWeight.w500,
-    //                   ),
-    //                 ),
-    //                 Text(
-    //                   'Fale conosco pelo whatsapp',
-    //                   style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
-    //                 ),
-    //               ],
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    // ),
     Card(
       color: Colors.white,
       surfaceTintColor: Colors.white,
       clipBehavior: Clip.hardEdge,
       child: InkWell(
         onTap: () => launchUrl(
-          Uri.parse(
-              'https://api.whatsapp.com/send/?phone=556231002629&text=Ol%C3%A1%2C+sou+assinante+Evah+Sa%C3%BAde+e+queria+aproveitar+a+parceria&type=phone_number&app_absent=0'),
+          Uri.parse('https://wa.me/5562998845801'),
           mode: LaunchMode.externalApplication,
         ),
         child: SizedBox(
           width: double.maxFinite,
-          child: Image.asset(
-            Assets.ortoEsteticaAdvice,
-            package: AssetsPackage.omniCore,
-            fit: BoxFit.fill,
+          child: Stack(
+            children: [
+              Positioned(
+                right: -70,
+                top: -10,
+                child: SizedBox(
+                  // width: constraints.maxWidth,
+                  height: 130,
+                  child: AspectRatio(
+                    aspectRatio: 3.5,
+                    child: SvgPicture.asset(
+                      Assets.whatsappAdvice,
+                      package: AssetsPackage.omniCore,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Dúvidas sobre saude\nda mulher?',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      'Fale conosco pelo whatsapp',
+                      style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
-    )
+    ),
+    // Card(
+    //   color: Colors.white,
+    //   surfaceTintColor: Colors.white,
+    //   clipBehavior: Clip.hardEdge,
+    //   child: InkWell(
+    //     onTap: () => launchUrl(
+    //       Uri.parse(
+    //           'https://api.whatsapp.com/send/?phone=556231002629&text=Ol%C3%A1%2C+sou+assinante+Evah+Sa%C3%BAde+e+queria+aproveitar+a+parceria&type=phone_number&app_absent=0'),
+    //       mode: LaunchMode.externalApplication,
+    //     ),
+    //     child: SizedBox(
+    //       width: double.maxFinite,
+    //       child: Image.asset(
+    //         Assets.ortoEsteticaAdvice,
+    //         package: AssetsPackage.omniCore,
+    //         fit: BoxFit.fill,
+    //       ),
+    //     ),
+    //   ),
+    // )
   ];
 
   @override
