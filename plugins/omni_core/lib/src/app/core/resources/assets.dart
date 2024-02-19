@@ -167,6 +167,7 @@ class Assets {
   static String clipboardIcon = 'assets/icons/services/clipboard.svg';
   static String examsIcon = 'assets/icons/discounts/exams_icon.svg';
   static String examsNewIcon = 'assets/icons/discounts/exams_new_icon.svg';
+  static String presentialConsultationService = 'assets/services/dr_pra_voce_logo.png';
 
   //Bottom Navigation Bar
   static String homeIcon = 'assets/icons/bottom_navigation_bar/home-icon.svg';

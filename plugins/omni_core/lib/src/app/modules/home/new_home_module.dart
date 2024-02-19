@@ -27,6 +27,7 @@ import 'package:omni_core/src/app/modules/new_reminders/repository/new_drug_cont
 import 'package:omni_core/src/app/modules/new_reminders/stores/drug_control_historic_store.dart';
 import 'package:omni_core/src/app/modules/new_reminders/stores/new_drug_control_store.dart';
 import 'package:omni_core/src/app/modules/notifications/notifications_module.dart';
+import 'package:omni_core/src/app/modules/presential_consultation/presential_consultation_module.dart';
 import 'package:omni_core/src/app/modules/procedures/procedures_module.dart';
 import 'package:omni_core/src/app/modules/profile/profile_module.dart';
 import 'package:omni_core/src/app/modules/profile/profile_store.dart';
@@ -195,6 +196,11 @@ class NewHomeModule extends Module {
       '/new_chatbot_webview',
       module: NewChatBotModule(),
       // module: DrugControlModule(),
+      transition: TransitionType.fadeIn,
+    ),
+    ModuleRoute(
+      '/presential_consultation',
+      module: PresentialConsultationModule(),
       transition: TransitionType.fadeIn,
     ),
   ];

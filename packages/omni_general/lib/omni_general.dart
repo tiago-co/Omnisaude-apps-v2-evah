@@ -21,6 +21,7 @@ export 'package:omni_general/src/core/models/address_model.dart';
 export 'package:omni_general/src/core/models/beneficiary_model.dart';
 export 'package:omni_general/src/core/models/beneficiary_responsible_model.dart';
 export 'package:omni_general/src/core/models/device_model.dart';
+export 'package:omni_general/src/core/models/discount_info_model.dart';
 export 'package:omni_general/src/core/models/individual_person_model.dart';
 export 'package:omni_general/src/core/models/jwt_model.dart';
 export 'package:omni_general/src/core/models/key_value_model.dart';

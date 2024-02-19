@@ -75,20 +75,46 @@ class ServicesPage extends StatelessWidget {
                       title: 'Pronto Atendimento',
                     ),
                   ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     Modular.to.pushNamed('/newHome/mediktor/historic', arguments: 'Auto Avaliação');
+                  //   },
+                  //   child: ServiceButton(
+                  //     color: const Color(0xffE9F7FC),
+                  //     image: SvgPicture.asset(
+                  //       Assets.selfAssessmentIcon,
+                  //       package: AssetsPackage.omniCore,
+                  //     ),
+                  //     title: 'Auto-avaliação',
+                  //     inverted: true,
+                  //   ),
+                  // ),
                   InkWell(
                     onTap: () {
-                      Modular.to.pushNamed('/newHome/mediktor/historic', arguments: 'Auto Avaliação');
+                      Modular.to.pushNamed('/newHome/presential_consultation/');
                     },
                     child: ServiceButton(
-                      color: const Color(0xffE9F7FC),
-                      image: SvgPicture.asset(
-                        Assets.selfAssessmentIcon,
-                        package: AssetsPackage.omniCore,
+                      color: const Color(0xffFEF6EC),
+                      image: Transform.rotate(
+                        angle: 0.25,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            right: 8,
+                            bottom: 12,
+                          ),
+                          child: SvgPicture.asset(
+                            Assets.examsNewIcon,
+                            package: AssetsPackage.omniCore,
+                            color: const Color(0xffFAD09E),
+                            width: 54,
+                            height: 54,
+                          ),
+                        ),
                       ),
-                      title: 'Auto-avaliação',
-                      inverted: true,
+                      title: 'Consulta\nPresencial',
                     ),
                   ),
+
                   InkWell(
                     onTap: () {
                       Modular.to.pushNamed('/newHome/new_chatbot_webview');
