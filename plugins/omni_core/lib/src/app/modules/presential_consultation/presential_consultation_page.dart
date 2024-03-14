@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:omni_core/src/app/core/resources/assets.dart';
-import 'package:omni_core/src/app/modules/presential_consultation/widgets/exams_consultations_widget.dart';
 import 'package:omni_core/src/app/modules/presential_consultation/widgets/presential_consultation_info.dart';
+import 'package:omni_general/omni_general.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../new_discounts/widgets/discount_detail_item.dart';
 
 class PresentialConsultationPage extends StatefulWidget {
   PresentialConsultationPage({Key? key}) : super(key: key);
@@ -21,6 +23,7 @@ class _PresentialConsultationPageState extends State<PresentialConsultationPage>
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
+        surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
         leading: IconButton(
           icon: const Icon(
             Icons.keyboard_arrow_left_rounded,
@@ -57,9 +60,9 @@ class _PresentialConsultationPageState extends State<PresentialConsultationPage>
                     package: AssetsPackage.omniCore,
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
                 Text(
-                  'Faça consulta com até 15% de desconto',
+                  'Dr. Pra Você',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 22,
@@ -67,7 +70,8 @@ class _PresentialConsultationPageState extends State<PresentialConsultationPage>
                     color: Colors.grey.shade800,
                   ),
                 ),
-                const SizedBox(height: 24),
+
+                const SizedBox(height: 16),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
@@ -101,23 +105,57 @@ class _PresentialConsultationPageState extends State<PresentialConsultationPage>
                     ),
                   ),
                 ),
+                // const SizedBox(height: 24),
+                // Align(
+                //   alignment: Alignment.centerLeft,
+                //   child: Text(
+                //     'Especialidades',
+                //     style: TextStyle(
+                //       fontSize: 18,
+                //       fontWeight: FontWeight.w600,
+                //       color: Colors.grey.shade800,
+                //     ),
+                //   ),
+                // ),
+                // const SizedBox(height: 16),
+                // const ExamsConsultationWidget(),
                 const SizedBox(height: 24),
+                DiscountDetailItem(
+                  title: 'Até 15% off em consultas',
+                  cupom: CupomModel(
+                    discount: 15,
+                    endDate: '2024-12-31',
+                    organizationId: 0,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                const PresentialConsultationInfo(),
+
+                const SizedBox(height: 16),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Especialidades',
+                    'Como agendar',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       fontWeight: FontWeight.w600,
                       color: Colors.grey.shade800,
                     ),
                   ),
                 ),
+                const SizedBox(height: 8),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Entre em contato pelo WhatsApp da Dr. Para Você e diga que é assinante da Evah Saúde',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey.shade800,
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 16),
-                const ExamsConsultationWidget(),
-                const SizedBox(height: 24),
-                const PresentialConsultationInfo(),
-                const SizedBox(height: 24),
               ],
             ),
           ),

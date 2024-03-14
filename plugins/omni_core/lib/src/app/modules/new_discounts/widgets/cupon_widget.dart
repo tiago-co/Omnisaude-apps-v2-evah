@@ -15,23 +15,70 @@ class CuponWidget extends StatelessWidget {
   final CouponRescueType couponRescueType;
   final OrganizationModel organization;
   final String? categoryParam;
+
+  Widget getCoverImage() {
+    if (!organization.coverPicture!.startsWith('assets')) {
+      return Image.network(
+        organization.coverPicture!,
+        width: 60,
+        height: 60,
+        loadingBuilder: (
+          context,
+          child,
+          loadingProgress,
+        ) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          return const CircularProgressIndicator.adaptive();
+        },
+        errorBuilder: (context, error, stackTrace) {
+          return ImageWidget(
+            url: '',
+            asset: Assets.test,
+            width: 60,
+            height: 60,
+            package: AssetsPackage.omniGeneral,
+          );
+        },
+      );
+    } else {
+      return Image.asset(
+        organization.coverPicture!,
+        package: AssetsPackage.omniCore,
+        width: 60,
+        height: 60,
+        errorBuilder: (context, error, stackTrace) {
+          return ImageWidget(
+            url: '',
+            asset: Assets.test,
+            width: 60,
+            height: 60,
+            package: AssetsPackage.omniGeneral,
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    double baseWidth = MediaQuery.of(context).size.width > 500 ? 500 : 375;
-
+    double baseWidth = 335;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     return InkWell(
-      onTap: () => Modular.to.pushNamed(
-        '/newHome/discounts/discount_details',
-        arguments: {
-          'organizationId': organization.id,
-          'couponRescueType': couponRescueType,
-          'organization': organization,
-        },
-      ),
+      onTap: () {
+        Modular.to.pushNamed(
+          '/newHome/discounts/discount_details',
+          arguments: {
+            'organizationId': organization.id,
+            'couponRescueType': couponRescueType,
+            'organization': organization,
+          },
+        );
+      },
       child: Container(
-        padding: EdgeInsets.all(8 * fem),
-        margin: EdgeInsets.only(bottom: 10 * fem),
+        padding: const EdgeInsets.all(8),
+        margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
           border: Border.all(color: const Color(0xffededf1)),
           color: const Color(0xffffffff),
@@ -53,42 +100,19 @@ class CuponWidget extends StatelessWidget {
               height: 80 * fem,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  organization.coverPicture!,
-                  width: 80 * fem,
-                  height: 80 * fem,
-                  loadingBuilder: (
-                    context,
-                    child,
-                    loadingProgress,
-                  ) {
-                    if (loadingProgress == null) {
-                      return child;
-                    }
-                    return const CircularProgressIndicator.adaptive();
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return ImageWidget(
-                      url: '',
-                      asset: Assets.test,
-                      width: 60,
-                      height: 60,
-                      package: AssetsPackage.omniGeneral,
-                    );
-                  },
-                ),
+                child: getCoverImage(),
               ),
             ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  Padding(
+                    padding: EdgeInsets.zero,
                     child: Text(
                       organization.name!,
-                      style: TextStyle(
-                        fontSize: 16 * fem,
+                      style: const TextStyle(
+                        fontSize: 16,
                         fontWeight: FontWeight.w500,
                         height: 1.6000000238,
                         color: Color(0xff1a1c22),
@@ -108,7 +132,7 @@ class CuponWidget extends StatelessWidget {
                       ),
                     )
                   else
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 20),
                   SizedBox(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

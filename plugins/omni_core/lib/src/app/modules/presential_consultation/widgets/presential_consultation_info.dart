@@ -66,30 +66,6 @@ class PresentialConsultationInfo extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 16),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Como agendar',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.grey.shade800,
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Entre em contato pleo WhatsApp da Dr. Para Você e diga que é assinate da Evah Saúde',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: Colors.grey.shade800,
-            ),
-          ),
-        ),
       ],
     );
   }

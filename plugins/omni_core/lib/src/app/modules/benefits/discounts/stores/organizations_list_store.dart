@@ -5,8 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_general/omni_general.dart';
 
-class OrganizationsListStore
-    extends NotifierStore<DioError, List<OrganizationModel>> {
+class OrganizationsListStore extends NotifierStore<DioError, List<OrganizationModel>> {
   OrganizationsListStore() : super([]);
 
   final UserStore userStore = Modular.get();
@@ -62,6 +61,17 @@ class OrganizationsListStore
       params: params,
     )
         .then((organizationsList) {
+      if (categoryId == '247') {
+        organizationsList.add(
+          OrganizationModel(
+            id: 0,
+            name: 'Dr. pra você',
+            address: 'Goiânia (GO)',
+            bestDiscountPercent: 15,
+            coverPicture: 'assets/services/dr_pra_voce_logo.png',
+          ),
+        );
+      }
       update(organizationsList);
       setLoading(false);
     }).catchError((onError) {

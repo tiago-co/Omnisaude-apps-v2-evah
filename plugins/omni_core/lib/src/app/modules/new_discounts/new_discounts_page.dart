@@ -199,7 +199,7 @@ class _NewDiscountsPageState extends State<NewDiscountsPage> {
                                         width: 54,
                                         height: 54,
                                         child: SvgPicture.asset(
-                                          Assets.examsNewIcon,
+                                          Assets.testTubeIcon,
                                           package: AssetsPackage.omniCore,
                                           color: Color(0xcc48BEC2),
                                         ),

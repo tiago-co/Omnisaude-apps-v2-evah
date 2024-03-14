@@ -5,8 +5,9 @@ import 'package:omni_core/src/app/modules/new_discounts/widgets/cupon_descriptio
 import 'package:omni_general/omni_general.dart';
 
 class DiscountDetailItem extends StatefulWidget {
-  const DiscountDetailItem({Key? key, required this.cupom}) : super(key: key);
+  const DiscountDetailItem({Key? key, required this.cupom, this.title}) : super(key: key);
   final CupomModel cupom;
+  final String? title;
   @override
   State<DiscountDetailItem> createState() => _DiscountDetailItemState();
 }
@@ -17,7 +18,7 @@ class _DiscountDetailItemState extends State<DiscountDetailItem> {
     super.initState();
     store.getCouponDetails(
       organizationId: widget.cupom.organizationId!,
-      couponId: widget.cupom.id!,
+      couponId: widget.cupom.id ?? 0,
     );
   }
 
@@ -35,7 +36,7 @@ class _DiscountDetailItemState extends State<DiscountDetailItem> {
       color: Helpers.getTextColor(widget.cupom.discount!),
       child: Container(
         margin: EdgeInsets.all(8),
-        padding: const EdgeInsets.symmetric(vertical: 26),
+        padding: const EdgeInsets.symmetric(vertical: 16),
         width: double.maxFinite,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8 * fem),
@@ -44,7 +45,7 @@ class _DiscountDetailItemState extends State<DiscountDetailItem> {
         child: Column(
           children: [
             Text(
-              'Até ${widget.cupom.discount}% off',
+              widget.title ?? 'Até ${widget.cupom.discount}% off',
               style: TextStyle(
                 fontSize: 22 * ffem,
                 fontWeight: FontWeight.w600,
@@ -52,6 +53,7 @@ class _DiscountDetailItemState extends State<DiscountDetailItem> {
                 color: Helpers.getTextColor(widget.cupom.discount!),
               ),
             ),
+            const SizedBox(height: 8),
             Text(
               'Valido até ${Formaters.dateToStringDate(
                 Formaters.stringToDate(widget.cupom.endDate!),
@@ -63,42 +65,32 @@ class _DiscountDetailItemState extends State<DiscountDetailItem> {
                 color: const Color(0xff52576a),
               ),
             ),
-            const SizedBox(height: 16),
-            TextButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => CuponDescriptionDialog(
-                    store: store,
-                    organizationId: widget.cupom.organizationId,
-                  ),
-                );
-              },
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.zero,
-              ),
-              child: Container(
-                height: 32 * fem,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 14,
-                  vertical: 4,
-                ),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(60 * fem),
+            const SizedBox(height: 8),
+            if (widget.cupom.organizationId != 0)
+              TextButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => CuponDescriptionDialog(
+                      store: store,
+                      organizationId: widget.cupom.organizationId,
+                    ),
+                  );
+                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
                 ),
                 child: Text(
-                  'RESGATAR CUPOM',
+                  'Resgatar cupom',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14 * ffem,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w700,
                     height: 1.7142857143 * ffem / fem,
-                    color: const Color(0xffffffff),
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),
