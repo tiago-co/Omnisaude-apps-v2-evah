@@ -215,11 +215,11 @@ class DiscountsWidget extends StatelessWidget {
                               padding: const EdgeInsets.all(8),
                               // firstaidbagbhR (4511:32341)
                               child: SvgPicture.asset(
-                                Assets.examsNewIcon,
+                                Assets.testTubeIcon,
                                 package: AssetsPackage.omniCore,
                                 color: Colors.white,
-                                width: 24,
-                                height: 24,
+                                width: 32,
+                                height: 32,
                               ),
                             ),
                           ),

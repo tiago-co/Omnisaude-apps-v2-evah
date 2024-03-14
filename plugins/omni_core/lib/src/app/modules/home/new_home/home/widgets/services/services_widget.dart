@@ -90,26 +90,8 @@ class ServicesWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 8 * fem),
-              // AspectRatio(
-              //   aspectRatio: (110 / 65),
-              //   child: InkWell(
-              //     onTap: () {
-              //       Modular.to.pushNamed('/newHome/mediktor/historic', arguments: 'Auto Avaliação');
-              //     },
-              //     child: ServiceButton(
-              //       color: const Color(0xffE9F7FC),
-              //       image: SvgPicture.asset(
-              //         Assets.selfAssessmentIcon,
-              //         package: AssetsPackage.omniCore,
-              //       ),
-              //       title: 'Auto-avaliação',
-              //       inverted: true,
-              //     ),
-              //   ),
-              // ),
-              // SizedBox(width: 8 * fem),
               AspectRatio(
-                aspectRatio: (100 / 65),
+                aspectRatio: (110 / 65),
                 child: InkWell(
                   onTap: () {
                     Modular.to.pushNamed('/newHome/new_chatbot_webview');

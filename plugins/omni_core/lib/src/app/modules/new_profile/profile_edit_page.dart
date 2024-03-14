@@ -156,7 +156,6 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
               const SizedBox(height: 12),
               const AddressForm(),
 
-              const SizedBox(height: 12),
               SelectFieldWidget<MaritalStatus>(
                 label: 'Estado civil',
                 items: MaritalStatus.values,
