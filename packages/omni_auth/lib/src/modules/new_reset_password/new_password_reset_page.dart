@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
-import 'package:omni_auth/src/modules/reset_password/reset_password_store.dart';
+import 'package:omni_auth/src/modules/new_reset_password/store/reset_password_store.dart';
+
 import 'package:omni_general/omni_general.dart';
 
 class NewPasswordResetPage extends StatefulWidget {
@@ -95,6 +96,7 @@ class _NewPasswordResetPageState extends State<NewPasswordResetPage> {
                 padding: EdgeInsets.zero,
                 obscureText: isObscure,
                 maxLines: 1,
+                fem: fem,
                 suffixIcon: InkWell(
                   onTap: () => setState(() {
                     isObscure = !isObscure;
@@ -119,6 +121,7 @@ class _NewPasswordResetPageState extends State<NewPasswordResetPage> {
                 padding: EdgeInsets.zero,
                 obscureText: isObscure,
                 maxLines: 1,
+                fem: fem,
               ),
               const SizedBox(
                 height: 8,
@@ -214,3 +217,5 @@ class _NewPasswordResetPageState extends State<NewPasswordResetPage> {
     );
   }
 }
+
+// adb shell 'am start -d "http://backend.evahsaude.com.br/auth/password/resetPassword?id=MTg3MQ&token=c2rsju-3809ad74d23ceeb117f8a4731669431c"'
