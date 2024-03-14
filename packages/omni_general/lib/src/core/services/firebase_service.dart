@@ -12,7 +12,7 @@ class FirebaseService extends Disposable {
   Future<void> setUpFirebase() async {
     await Firebase.initializeApp();
     _firebaseMessaging = FirebaseMessaging.instance;
-
+    final oken = await _firebaseMessaging.getToken();
     await _firebaseMessaging.setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
@@ -35,6 +35,11 @@ class FirebaseService extends Disposable {
     }).catchError((onError) {
       log('Erro ao Desinscrever no tópico: $topic');
     });
+  }
+
+  Future<String> getToken() async {
+    final token = await _firebaseMessaging.getToken();
+    return token ?? '';
   }
 
   @override
