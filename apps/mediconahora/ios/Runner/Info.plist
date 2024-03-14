@@ -47,11 +47,11 @@
 	<key>NSContactsUsageDescription</key>
 	<string>Precisamos ter acesso aos contatos para otimizar os serviços oferecidos</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Precisamos saber sua localização, para que possamos localizar as melhores ofertas próximas a você!</string>
+<string>Usamos sua localização para localizar os melhores descontos próximos à você!</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Precisamos saber sua localização, para que possamos localizar as melhores ofertas próximas a você!</string>
+<string>Usamos sua localização para localizar os melhores descontos próximos à você!</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Precisamos saber sua localização, para que possamos localizar as melhores ofertas próximas a você!</string>
+<string>Usamos sua localização para localizar os melhores descontos próximos à você!</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Precisamos ter acesso ao microfone para que possa enviar áudios e realizar ligações</string>
 	<key>NSMotionUsageDescription</key>
