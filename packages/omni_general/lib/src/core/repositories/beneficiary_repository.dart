@@ -6,6 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_general/omni_general.dart'
     show DioHttpClientImpl, IndividualPersonModel, NewPreferencesModel, PreferencesModel;
+import 'package:omni_general/src/core/enums/first_acess_send_to_enum.dart';
 import 'package:omni_general/src/core/models/address_model.dart';
 import 'package:omni_general/src/core/models/beneficiary_model.dart';
 import 'package:omni_general/src/core/models/jwt_model.dart';
@@ -142,6 +143,50 @@ class BeneficiaryRepository extends Disposable {
       return JwtModel.fromJson(response.data);
     } on DioError catch (e) {
       log('refreshToken: $e');
+      rethrow;
+    }
+  }
+
+  Future<IndividualPersonModel> getIndividualPersonByEmailCPF(String data, String param) async {
+    try {
+      final Dio dio = Dio();
+      dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
+      dio.interceptors.add(
+        LogInterceptor(responseHeader: false, responseBody: true, error: false),
+      );
+
+      final Response response = await dio.get('/users/', queryParameters: {param: data});
+      return IndividualPersonModel.fromJson(response.data.first);
+    } on DioError catch (e) {
+      log('##### getIndividualPersonByEmailCPF: $e');
+      rethrow;
+    } catch (e) {
+      log('##### getIndividualPersonByEmailCPF: $e');
+      rethrow;
+    }
+  }
+
+  Future sendActivationLink(FirstAcessType type, int id) async {
+    try {
+      final Dio dio = Dio();
+      dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
+      dio.interceptors.add(
+        LogInterceptor(responseHeader: false, responseBody: true, error: false),
+      );
+
+      final Response response = await dio.post(
+        '/users/send-activation-link',
+        data: {
+          'send_to': type.name,
+          'user_id': id,
+        },
+      );
+      return response.data;
+    } on DioError catch (e) {
+      log('##### sendActivationLink: $e');
+      rethrow;
+    } catch (e) {
+      log('##### sendActivationLink: $e');
       rethrow;
     }
   }

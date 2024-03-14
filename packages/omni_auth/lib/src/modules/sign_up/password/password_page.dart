@@ -62,6 +62,7 @@ class _PasswordPageState extends State<PasswordPage> {
                 padding: EdgeInsets.zero,
                 obscureText: isObscure,
                 maxLines: 1,
+                fem: fem,
                 suffixIcon: InkWell(
                   onTap: () => setState(() {
                     isObscure = !isObscure;

@@ -30,11 +30,15 @@ class Permissions {
 
   static Future<void> notification() async {
     await FirebaseMessaging.instance.requestPermission(
-      provisional: true,
-      announcement: true,
-      carPlay: true,
-      criticalAlert: true,
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
     );
+    final reset = await FirebaseMessaging.instance.getNotificationSettings();
   }
 
   static Future<bool> locationAlways() async {
@@ -58,8 +62,7 @@ class Permissions {
   }
 
   static Future<bool> getLocations() async {
-    final locationWhenInUseStatus =
-        await Permission.locationWhenInUse.request();
+    final locationWhenInUseStatus = await Permission.locationWhenInUse.request();
     final locationAlways = await Permission.locationAlways.request();
 
     return locationWhenInUseStatus.isGranted || locationAlways.isGranted;

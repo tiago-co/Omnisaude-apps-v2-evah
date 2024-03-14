@@ -8,6 +8,7 @@ import 'package:omni_general/src/core/models/user_model.dart';
 
 class IndividualPersonModel {
   UserModel? user;
+  int? id;
   String? name;
   String? cpf;
   String? email;
@@ -23,6 +24,7 @@ class IndividualPersonModel {
   EthnicityType? ethnicity;
   GenreType? genre;
   String? image;
+  bool? isCompleted;
   AddressModel? address;
 
   IndividualPersonModel({
@@ -45,6 +47,7 @@ class IndividualPersonModel {
   });
 
   IndividualPersonModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     name = json['name'];
     cpf = json['cpf'];
     email = json['email'];
@@ -55,6 +58,7 @@ class IndividualPersonModel {
     emergencyContact = json['emergency_phone'];
     maritalStatus = maritalStatusFromJson(json['marital_status']);
     image = json['image'];
+    isCompleted = json['is_completed'];
     if (json['address'] != null) {
       address = AddressModel.fromJson(json['address']);
     } else {

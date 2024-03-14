@@ -114,14 +114,21 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Di
   }
 
   Future confirmUser(String id, String token, String password) async {
-    setLoading(true);
-    this.password = password;
-    jwtModel = await _repository.confirmUserCreate(
-      id,
-      token,
-      password,
-    );
-    setLoading(false);
+    try {
+      setLoading(true);
+      this.password = password;
+      jwtModel = await _repository.confirmUserCreate(
+        id,
+        token,
+        password,
+      );
+    } catch (e) {
+      setLoading(false);
+      rethrow;
+    } finally {
+      // TODO
+      setLoading(false);
+    }
   }
 
   Future resendConfirmUser(String email) async {
@@ -136,48 +143,68 @@ class RegisterStore extends NotifierStore<DioError, NewBeneficiaryModel> with Di
   }
 
   Future updateUser({NewPreferencesModel? prefs, String? pass}) async {
-    setLoading(true);
-    IndividualPersonModel userData = IndividualPersonModel();
-    if (prefs?.jwt != null) {
-      jwtModel = prefs!.jwt;
-    } else {
-      userData = await _repository.fetchUserData(
-        jwtModel!.token!,
-        jwtModel!.id.toString(),
-      );
-    }
-    if (prefs != null) {
-      state.individualPerson!.name = prefs.user!.individualPerson!.name;
-      state.individualPerson!.email = prefs.user!.individualPerson!.email;
-      state.individualPerson!.cpf = prefs.user!.individualPerson!.cpf;
-    } else {
-      state.individualPerson!.email = userData.email;
-      state.individualPerson!.cpf = userData.cpf;
-      state.individualPerson!.name = userData.name;
-    }
-
-    return await _repository
-        .updateUser(
-      state,
-      jwtModel!.token!,
-      jwtModel!.id!,
-    )
-        .then((value) async {
-      final NewPreferencesModel preferences = NewPreferencesModel();
-      preferences.jwt = jwtModel;
-      preferences.user = state;
-      await _service.setUserPreferences(preferences);
-      setLoading(false);
-      // se for somente atualizar os dados, como quem já fez o login e
-      // foi redirecionado, enviar para a tela inicial
-      if (prefs != null) {
-        Modular.to.pushReplacementNamed('/newHome');
+    try {
+      setLoading(true);
+      IndividualPersonModel userData = IndividualPersonModel();
+      if (prefs?.jwt != null) {
+        jwtModel = prefs!.jwt;
+      } else {
+        userData = await _repository.fetchUserData(
+          jwtModel!.token!,
+          jwtModel!.id.toString(),
+        );
       }
-      return value;
-    }).catchError((onError) {
+      if (prefs != null) {
+        state.individualPerson!.name = prefs.user!.individualPerson!.name;
+        state.individualPerson!.email = prefs.user!.individualPerson!.email;
+        state.individualPerson!.cpf = prefs.user!.individualPerson!.cpf;
+      } else {
+        state.individualPerson!.email = userData.email;
+        state.individualPerson!.cpf = userData.cpf;
+        state.individualPerson!.name = userData.name;
+      }
+
+      return await _repository
+          .updateUser(
+        state,
+        jwtModel!.token!,
+        jwtModel!.id!,
+      )
+          .then((value) async {
+        final NewPreferencesModel preferences = NewPreferencesModel();
+        final NewBeneficiaryModel _user = NewBeneficiaryModel();
+        preferences.jwt = jwtModel;
+        preferences.user = state;
+        await lecuponService
+            .lecuponAuthenticate(
+          beneficiary: NewBeneficiaryModel(
+            individualPerson: state.individualPerson,
+          ),
+        )
+            .then((value) {
+          if (value != null) {
+            preferences.user!.lecuponUser = value;
+          }
+        });
+        await _service.setUserPreferences(preferences);
+        setLoading(false);
+        // se for somente atualizar os dados, como quem já fez o login e
+        // foi redirecionado, enviar para a tela inicial
+        if (prefs != null) {
+          Modular.to.pushReplacementNamed('/newHome');
+        }
+        return value;
+      }).catchError((onError) {
+        setLoading(false);
+        throw onError;
+      });
+    } on Exception catch (e) {
       setLoading(false);
-      throw onError;
-    });
+      rethrow;
+      // TODO
+    } finally {
+      setLoading(false);
+    }
   }
 
   Future<void> registerBeneficiary(NewBeneficiaryModel data) async {

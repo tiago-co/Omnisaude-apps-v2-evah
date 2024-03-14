@@ -3,7 +3,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_general/omni_general.dart'
-    show BeneficiaryModel, DioHttpClientImpl, JwtModel, NewBeneficiaryModel, PreferencesModel, PreferencesService;
+    show
+        BeneficiaryModel,
+        DioHttpClientImpl,
+        IndividualPersonModel,
+        NewBeneficiaryModel,
+        NewJwtModel,
+        PreferencesModel,
+        PreferencesService;
 
 class RegisterRepository extends Disposable {
   late final Dio _client;
@@ -96,7 +103,7 @@ class RegisterRepository extends Disposable {
           'password': password,
         },
       );
-      final JwtModel jwt = JwtModel.fromJson(responseLogin.data);
+      final NewJwtModel jwt = NewJwtModel.fromJson(responseLogin.data);
       // _client.options.headers['Authorization'] = 'Bearer ${jwt.token}';
       // final PreferencesService service = PreferencesService();
       // final PreferencesModel preferences = await service.getUserPreferences(
@@ -146,9 +153,10 @@ class RegisterRepository extends Disposable {
     try {
       final Dio dio = Dio();
       dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
-      dio.options.headers['Authorization'] = 'JWT $token';
+      dio.options.headers['Authorization'] = 'Bearer $token';
       final result = await dio.get('/users/$id');
-      return result.data;
+      final user = IndividualPersonModel.fromJson(result.data);
+      return user;
     } on DioError catch (e) {
       log('##### Update user: $e');
       rethrow;

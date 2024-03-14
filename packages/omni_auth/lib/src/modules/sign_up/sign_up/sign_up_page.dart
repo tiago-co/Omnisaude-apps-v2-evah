@@ -163,7 +163,6 @@ class SignUpPage extends StatelessWidget {
                             const SizedBox(height: 12),
                             const AddressForm(),
 
-                            const SizedBox(height: 12),
                             SelectFieldWidget<MaritalStatus>(
                               label: 'Estado civil',
                               items: MaritalStatus.values,
@@ -213,81 +212,82 @@ class SignUpPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      TextButton(
-                        onPressed: () async {
-                          await store
-                              .updateUser(
-                            pass: args.data?['password'],
-                            prefs: args.data?['data'],
-                          )
-                              .then((value) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.green,
-                                content: Text(
-                                  "$value",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            );
-                            Modular.to.pushReplacementNamed('/newHome');
-                          }).catchError((onError) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.red,
-                                content: Text(
-                                  "${onError.message}",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            );
-                            // Helpers.showDialog(
-                            //   context,
-                            //   RequestErrorWidget(
-                            //     error: onError,
-                            //     buttonText: RegisterLabels.close,
-                            //     onPressed: () => Modular.to.pop(),
-                            //   ),
-                            //   showClose: true,
-                            // );
-                          });
-                        },
-                        child: Container(
-                          // masterbuttonmaster82s (I4511:30472;19:7770)
-                          margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
-                          padding: EdgeInsets.fromLTRB(0 * fem, 16 * fem, 0 * fem, 16 * fem),
-
-                          height: 56 * fem,
-                          width: double.maxFinite,
-                          decoration: BoxDecoration(
-                            color: true ? Color(0xff2D73B3) : Color(0xff2d72b3),
-                            borderRadius: BorderRadius.circular(60 * fem),
-                          ),
-                          child: Container(
-                            // autogroupfwxxDa7 (MYmMmLCB3rKy918MJrfWxX)
-                            padding: EdgeInsets.fromLTRB(13 * fem, 0 * fem, 0 * fem, 0 * fem),
-                            child: TripleBuilder(
-                              store: store,
-                              builder: (context, triple) {
-                                if (triple.isLoading) {
-                                  return const LoadingWidget(
-                                    indicatorColor: Colors.white,
+                      TripleBuilder(
+                        store: store,
+                        builder: (context, triple) {
+                          return TextButton(
+                            onPressed: () async {
+                              if (!triple.isLoading) {
+                                await store
+                                    .updateUser(
+                                  pass: args.data?['password'],
+                                  prefs: args.data?['data'],
+                                )
+                                    .then((value) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: Colors.green,
+                                      content: Text(
+                                        "$value",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
                                   );
-                                }
-                                return Text(
-                                  'Completar',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 16 * ffem,
-                                    fontWeight: FontWeight.w600,
-                                    height: 1.5 * ffem / fem,
-                                    color: Color(0xffffffff),
-                                  ),
-                                );
-                              },
+                                  Modular.to.pushReplacementNamed('/newHome');
+                                }).catchError((onError) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: Colors.red,
+                                      content: Text(
+                                        "${onError.message}",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  );
+                                  // Helpers.showDialog(
+                                  //   context,
+                                  //   RequestErrorWidget(
+                                  //     error: onError,
+                                  //     buttonText: RegisterLabels.close,
+                                  //     onPressed: () => Modular.to.pop(),
+                                  //   ),
+                                  //   showClose: true,
+                                  // );
+                                });
+                              }
+                            },
+                            child: Container(
+                              // masterbuttonmaster82s (I4511:30472;19:7770)
+                              margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
+                              padding: EdgeInsets.fromLTRB(0 * fem, 16 * fem, 0 * fem, 16 * fem),
+
+                              height: 56 * fem,
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                color: true ? Color(0xff2D73B3) : Color(0xff2d72b3),
+                                borderRadius: BorderRadius.circular(60 * fem),
+                              ),
+                              child: Container(
+                                // autogroupfwxxDa7 (MYmMmLCB3rKy918MJrfWxX)
+                                padding: EdgeInsets.fromLTRB(13 * fem, 0 * fem, 0 * fem, 0 * fem),
+                                child: triple.isLoading
+                                    ? const LoadingWidget(
+                                        indicatorColor: Colors.white,
+                                      )
+                                    : Text(
+                                        'Completar',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 16 * ffem,
+                                          fontWeight: FontWeight.w600,
+                                          height: 1.5 * ffem / fem,
+                                          color: Color(0xffffffff),
+                                        ),
+                                      ),
+                              ),
                             ),
-                          ),
-                        ),
+                          );
+                        },
                       ),
                     ],
                   ),
