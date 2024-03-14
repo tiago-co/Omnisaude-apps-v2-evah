@@ -32,4 +32,15 @@ extension EnvTypeExtension on TermsType {
         return toString();
     }
   }
+
+  String get dotEnvLabel {
+    switch (this) {
+      case TermsType.terms:
+        return 'TERMS_OF_USE_URL';
+      case TermsType.programTerm:
+        return '';
+      case TermsType.policies:
+        return 'PRIVACY_POLICIE_URL';
+    }
+  }
 }
