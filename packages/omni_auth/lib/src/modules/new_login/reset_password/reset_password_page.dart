@@ -49,7 +49,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Por favor, digite o e-mail para redefinirmos a senha',
+                'Por favor, digite sao e-mail para redefinirmos a senha',
                 style: TextStyle(
                   fontSize: 22 * ffem,
                   fontWeight: FontWeight.w600,

@@ -21,7 +21,7 @@ class AuthRepository extends Disposable {
 
   AuthRepository() {
     _client = Dio();
-    _client.options.baseUrl = dotenv.env['BASE_URL']! + dotenv.env['API']!;
+    _client.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
     _client.options.connectTimeout = int.parse(dotenv.env['TIMEOUT']!);
     _client.options.headers['X-Powered-By'] = dotenv.env['POWERED_BY'];
     _client.interceptors.add(
@@ -36,19 +36,10 @@ class AuthRepository extends Disposable {
 
   Future<NewPreferencesModel> newAuthenticate(NewCredentialModel data) async {
     try {
-      //New Api
-
-      final Dio dio = Dio();
-      dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
-      dio.interceptors.add(
-        LogInterceptor(responseHeader: false, responseBody: true, error: false),
-      );
-      final Response responseLogin = await dio.post('/auth/token/', data: data.toJson());
-
-      // END
+      final Response responseLogin = await _client.post('/auth/token/', data: data.toJson());
 
       final NewJwtModel jwt = NewJwtModel.fromJson(responseLogin.data);
-      final Response responseBeneficiary = await dio.get(
+      final Response responseBeneficiary = await _client.get(
         '/users/${jwt.id}',
         options: Options(headers: {'Authorization': 'Bearer ${jwt.token}'}),
       );
@@ -58,9 +49,7 @@ class AuthRepository extends Disposable {
       );
 
       final PreferencesService service = PreferencesService();
-      final NewPreferencesModel preferences = await service.getUserPreferences(
-        'user',
-      );
+      final NewPreferencesModel preferences = await service.getUserPreferences('user');
 
       await lecuponService
           .lecuponAuthenticate(

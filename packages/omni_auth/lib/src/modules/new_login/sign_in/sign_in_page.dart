@@ -2,16 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_triple/flutter_triple.dart';
-import 'package:omni_auth/src/modules/login/stores/login_store.dart';
-import 'package:omni_auth/src/modules/new_login/sign_in/widgets/dont_have_account_widget.dart';
 import 'package:omni_auth/src/modules/new_login/store/new_login_store.dart';
 import 'package:omni_auth/src/modules/new_login/widgets/save_data_dialog.dart';
-import 'package:omni_auth/src/modules/sign_up/widgets/welcome_form_field.dart';
+import 'package:omni_core/omni_core.dart';
 import 'package:omni_general/omni_general.dart';
-import 'package:omni_login_labels/labels.dart';
 import 'package:omni_general/src/core/enums/biometric_type_enum.dart';
-import 'package:omni_general/src/core/enums/use_biometric_permission_enum.dart';
+import 'package:omni_login_labels/labels.dart';
 
 class SignInPage extends StatefulWidget {
   SignInPage();
@@ -136,8 +134,12 @@ class _SignInPageState extends State<SignInPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    SizedBox(
+                      height: 150 * fem,
+                      child: SvgPicture.asset(Assets.logoSplash),
+                    ),
+                    const SizedBox(height: 24),
                     Container(
-                      // welcomebackdDH (4511:30467)
                       margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 4 * fem),
                       child: Text(
                         'Bem-vindo de volta',
@@ -151,7 +153,6 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     Container(
-                      // enteryouraccessdataandwewillta (4511:30468)
                       constraints: BoxConstraints(
                         maxWidth: 306 * fem,
                       ),
@@ -170,10 +171,8 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
               Container(
-                // autogroupznhmbpK (MYmLMNYjpJxFJkyJuSznhm)
                 margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 28 * fem),
                 width: double.infinity,
-
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -215,17 +214,6 @@ class _SignInPageState extends State<SignInPage> {
                         store.updateForm(store.state);
                       },
                     ),
-                    // const SizedBox(height: 12),
-                    // WelcomeFormField(
-                    //   label: 'Senha',
-                    //   controller: password,
-                    //   focus: passwordFocus,
-                    //   isPassword: true,
-                    //   // onChange: (String? input) {
-                    //   //   store.state.username = input;
-                    //   //   store.updateForm(store.state);
-                    //   // },
-                    // ),
                     const SizedBox(height: 12),
                     InkWell(
                       onTap: () {
@@ -245,44 +233,76 @@ class _SignInPageState extends State<SignInPage> {
                   ],
                 ),
               ),
-              TextButton(
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xff2D73B3),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(60 * fem),
+                  ),
+                ),
                 onPressed: () {
                   login(context);
                 },
-                child: Container(
-                  height: 56 * fem,
-                  decoration: BoxDecoration(
-                    color: true ? Color(0xff2D73B3) : Color(0xff2d72b3),
-                    borderRadius: BorderRadius.circular(60 * fem),
-                  ),
-                  child: SizedBox.expand(
-                    child: TripleBuilder(
-                      store: store,
-                      builder: (context, triple) {
-                        if (triple.isLoading) {
-                          return const LoadingWidget(
-                            indicatorColor: Colors.white,
-                          );
-                        }
-                        return Center(
-                          child: Text(
-                            'Entrar',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 16 * ffem,
-                              fontWeight: FontWeight.w600,
-                              height: 1.5 * ffem / fem,
-                              color: Color(0xffffffff),
-                            ),
+                child: TripleBuilder(
+                  store: store,
+                  builder: (context, triple) {
+                    if (triple.isLoading) {
+                      return const LoadingWidget(
+                        indicatorColor: Colors.white,
+                      );
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Center(
+                        child: Text(
+                          'Entrar',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16 * ffem,
+                            fontWeight: FontWeight.w600,
+                            height: 1.5 * ffem / fem,
+                            color: Color(0xffffffff),
                           ),
-                        );
-                      },
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  surfaceTintColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    side: BorderSide(
+                      color: Theme.of(context).primaryColor,
+                      width: 2,
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Modular.to.pushNamed('/auth/firstAcess');
+                },
+                child: Center(
+                  child: Text(
+                    'Primeiro acesso',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14 * ffem,
+                      fontWeight: FontWeight.w600,
+                      height: 1.5 * ffem / fem,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ),
               ),
               const Spacer(),
-              // const DontHaveAccountWidget(),
             ],
           ),
         ),
