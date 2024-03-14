@@ -162,6 +162,7 @@ class Assets {
   //Serviços
   static String consultationIcon = 'assets/icons/services/consultation-icon.svg';
   static String mentalCareIcon = 'assets/icons/services/mental-care-icon.svg';
+  static String testTubeIcon = 'assets/icons/services/test-tube.svg';
   static String selfAssessmentIcon = 'assets/icons/services/self-assessment-icon.svg';
   static String pillFilledIcon = 'assets/icons/services/pill-filled.svg';
   static String clipboardIcon = 'assets/icons/services/clipboard.svg';

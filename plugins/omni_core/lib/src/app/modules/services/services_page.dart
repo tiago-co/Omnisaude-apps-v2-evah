@@ -165,7 +165,7 @@ class ServicesPage extends StatelessWidget {
                           'organizationId': 0,
                           'moduleName': 'Desconto em Farmácias',
                           'coverImage': '',
-                          'couponRescueType': '',
+                          'couponRescueType': 'physical',
                         },
                       );
                     },
@@ -194,18 +194,18 @@ class ServicesPage extends StatelessWidget {
                     child: ServiceButton(
                       color: const Color(0xffEDF7F8),
                       image: Transform.rotate(
-                        angle: 0.25,
+                        angle: -0.25,
                         child: Padding(
                           padding: const EdgeInsets.only(
                             right: 8,
                             bottom: 12,
                           ),
                           child: SvgPicture.asset(
-                            Assets.examsNewIcon,
+                            Assets.testTubeIcon,
                             package: AssetsPackage.omniCore,
                             color: const Color(0xffBAE7E8),
-                            width: 54,
-                            height: 54,
+                            width: 85,
+                            height: 85,
                           ),
                         ),
                       ),
