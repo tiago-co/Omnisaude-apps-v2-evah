@@ -64,7 +64,7 @@ class TermsPageState extends State<TermsPage> {
                     TermsItemWidget(
                       onTap: () => Modular.to.pushNamed(
                         'termsOfUse',
-                        arguments: widget.programCode,
+                        arguments: 'termsOfUse',
                       ),
                       title: TermsLabels.termsConditions,
                     ),
@@ -72,18 +72,11 @@ class TermsPageState extends State<TermsPage> {
                     TermsItemWidget(
                       onTap: () => Modular.to.pushNamed(
                         'privacyPolicies',
-                        arguments: widget.programCode,
+                        arguments: 'privacyPolicies',
                       ),
                       title: TermsLabels.termsPrivacy,
                     ),
                     const Divider(),
-                    TermsItemWidget(
-                      onTap: () => Modular.to.pushNamed(
-                        'programContract',
-                        arguments: widget.programCode,
-                      ),
-                      title: TermsLabels.termscontract,
-                    ),
                   ],
                 ),
               ),

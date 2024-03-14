@@ -25,7 +25,7 @@ class _ProgramContractPageState extends State<ProgramContractPage> {
 
   @override
   void initState() {
-    store.getTerms(TermsType.programTerm, widget.programCode, service);
+    store.getTerms(TermsType.programTerm, service);
     super.initState();
   }
 
@@ -86,7 +86,7 @@ class _ProgramContractPageState extends State<ProgramContractPage> {
                         onPressed: () {
                           store.getTerms(
                             TermsType.policies,
-                            widget.programCode,
+                            // widget.programCode,
                             service,
                           );
                         },

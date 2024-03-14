@@ -22,7 +22,6 @@ class TermsItemWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: Theme.of(context).cardColor.withOpacity(0.025),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         child: Row(

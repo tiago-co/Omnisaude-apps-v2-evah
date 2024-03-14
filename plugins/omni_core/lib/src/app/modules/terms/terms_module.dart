@@ -22,11 +22,11 @@ class TermsModule extends Module {
     ),
     ChildRoute(
       '/termsOfUse',
-      child: (_, args) => TermOfUsePage(programCode: args.data),
+      child: (_, args) => const TermOfUsePage(),
     ),
     ChildRoute(
       '/privacyPolicies',
-      child: (_, args) => PrivacyPoliciesPage(programCode: args.data),
+      child: (_, args) => const PrivacyPoliciesPage(),
     ),
     ChildRoute(
       '/programContract',

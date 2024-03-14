@@ -8,11 +8,8 @@ import 'package:omni_general/omni_general.dart';
 import 'package:terms_labels/labels.dart';
 
 class TermOfUsePage extends StatefulWidget {
-  final String programCode;
-
   const TermOfUsePage({
     Key? key,
-    required this.programCode,
   }) : super(key: key);
 
   @override
@@ -25,7 +22,7 @@ class _TermOfUsePageState extends State<TermOfUsePage> {
 
   @override
   void initState() {
-    store.getTerms(TermsType.terms, widget.programCode, service);
+    store.getTerms(TermsType.terms, service);
     super.initState();
   }
 
@@ -35,24 +32,11 @@ class _TermOfUsePageState extends State<TermOfUsePage> {
     super.dispose();
   }
 
-  void _shareDocument(BuildContext context) {
-    store.pdfStore.sharePDF(PDFDocumentType.url, context, url: store.state).catchError((onError) {
-      Helpers.showDialog(
-        context,
-        RequestErrorWidget(
-          message: TermsLabels.termsOfUseErrorOnLoadFile,
-          buttonText: TermsLabels.close,
-          onPressed: () => Modular.to.pop(),
-        ),
-        showClose: true,
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.white,
         leading: IconButton(
           onPressed: () => Modular.to.pop(),
           icon: const Icon(
@@ -82,13 +66,6 @@ class _TermOfUsePageState extends State<TermOfUsePage> {
                     clipBehavior: Clip.antiAlias,
                     physics: const BouncingScrollPhysics(),
                     child: RequestErrorWidget(
-                      onPressed: () {
-                        store.getTerms(
-                          TermsType.policies,
-                          widget.programCode,
-                          service,
-                        );
-                      },
                       error: triple.error,
                     ),
                   ),
@@ -96,25 +73,9 @@ class _TermOfUsePageState extends State<TermOfUsePage> {
               ],
             );
           }
-
-          if (store.pdfStore.state) {
-            return ClipRRect(child: service.pdfView(context));
-          }
-          return const SizedBox();
+          return ClipRRect(child: service.pdfView(context));
         },
       ),
-      // bottomNavigationBar: TripleBuilder<PdfViewStore, Exception, bool>(
-      //   store: store.pdfStore,
-      //   builder: (_, triple) {
-      //     return BottomButtonWidget(
-      //       onPressed: () => _shareDocument(_),
-      //       buttonType: BottomButtonType.outline,
-      //       isLoading: triple.isLoading,
-      //       isDisabled: triple.isLoading || !triple.state,
-      //       text: TermsLabels.termsOfUseShare,
-      //     );
-      //   },
-      // ),
     );
   }
 }

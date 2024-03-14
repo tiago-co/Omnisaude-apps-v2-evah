@@ -8,11 +8,8 @@ import 'package:omni_general/omni_general.dart';
 import 'package:terms_labels/labels.dart';
 
 class PrivacyPoliciesPage extends StatefulWidget {
-  final String programCode;
-
   const PrivacyPoliciesPage({
     Key? key,
-    required this.programCode,
   }) : super(key: key);
 
   @override
@@ -25,7 +22,10 @@ class _PrivacyPoliciesPageState extends State<PrivacyPoliciesPage> {
 
   @override
   void initState() {
-    store.getTerms(TermsType.policies, widget.programCode, service);
+    service.loadDocument(
+      PDFDocumentType.url,
+      url: 'https://drive.google.com/uc?export=download&id=1CPn2W_AjljveFay72sOIWIO96OFrgyer',
+    );
     super.initState();
   }
 
@@ -35,24 +35,11 @@ class _PrivacyPoliciesPageState extends State<PrivacyPoliciesPage> {
     super.dispose();
   }
 
-  void _shareDocument(BuildContext context) {
-    store.pdfStore.sharePDF(PDFDocumentType.url, context, url: store.state).catchError((onError) {
-      Helpers.showDialog(
-        context,
-        RequestErrorWidget(
-          message: TermsLabels.privacyPoliciesErrorOnLoadFile,
-          buttonText: TermsLabels.close,
-          onPressed: () => Modular.to.pop(),
-        ),
-        showClose: true,
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.white,
         leading: IconButton(
           onPressed: () => Modular.to.pop(),
           icon: const Icon(
@@ -83,13 +70,13 @@ class _PrivacyPoliciesPageState extends State<PrivacyPoliciesPage> {
                       clipBehavior: Clip.antiAlias,
                       physics: const BouncingScrollPhysics(),
                       child: RequestErrorWidget(
-                        onPressed: () {
-                          store.getTerms(
-                            TermsType.policies,
-                            widget.programCode,
-                            service,
-                          );
-                        },
+                        // onPressed: () {
+                        //   store.getTerms(
+                        //     TermsType.policies,
+                        //     widget.programCode,
+                        //     service,
+                        //   );
+                        // },
                         error: triple.error,
                       ),
                     ),
@@ -99,24 +86,9 @@ class _PrivacyPoliciesPageState extends State<PrivacyPoliciesPage> {
             );
           }
 
-          if (store.pdfStore.state) {
-            return ClipRRect(child: service.pdfView(context));
-          }
-          return const SizedBox();
+          return ClipRRect(child: service.pdfView(context));
         },
       ),
-      // bottomNavigationBar: TripleBuilder<PdfViewStore, Exception, bool>(
-      //   store: store.pdfStore,
-      //   builder: (_, triple) {
-      //     return BottomButtonWidget(
-      //       onPressed: () => _shareDocument(_),
-      //       buttonType: BottomButtonType.outline,
-      //       isLoading: triple.isLoading,
-      //       isDisabled: triple.isLoading || !triple.state,
-      //       text: TermsLabels.privacyPoliciesShare,
-      //     );
-      //   },
-      // ),
     );
   }
 }
