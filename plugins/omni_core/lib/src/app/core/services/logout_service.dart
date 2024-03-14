@@ -23,7 +23,7 @@ class LogoutService {
     // await service.setUserPreferences(userStore.state);
     // await userStore.setUserPreferences(userStore.state, userStore.userId);
     // await userStore.updateUser();
-    // service.removeUserPreferences(userStore.state);
+    service.removeUserPreferences(userStore.state);
     Modular.to.popUntil(ModalRoute.withName('/'));
     // Modular.to.navigate('/presentation/letsGo');
 
