@@ -49,7 +49,7 @@ class NewResetPasswordRepository extends Disposable {
       );
     } on DioError catch (e) {
       log('reset password: $e');
-      rethrow;
+      throw Exception(Helpers.requestErrorMessage(e.response!.data));
     }
   }
 

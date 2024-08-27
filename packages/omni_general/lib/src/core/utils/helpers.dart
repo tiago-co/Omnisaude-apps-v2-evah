@@ -306,4 +306,22 @@ class Helpers {
       return const Color(0xffED8282);
     }
   }
+
+  static String requestErrorMessage(dynamic error) {
+    String messageErrors = '';
+    if (error is Map<String, dynamic>) {
+      error?.forEach((key, value) {
+        if (value == null) return;
+        messageErrors += '* $key: $value\n';
+      });
+    } else if (error is List) {
+      error?.forEach((value) {
+        if (value == null) return;
+        messageErrors += '* $value\n';
+      });
+    } else {
+      messageErrors = 'Não foi possível completar a requisição!';
+    }
+    return messageErrors;
+  }
 }
