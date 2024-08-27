@@ -5,7 +5,8 @@ import 'package:omni_auth/src/auth_repository.dart';
 import 'package:omni_auth/src/modules/login/stores/obscure_text_store.dart';
 import 'package:omni_general/omni_general.dart';
 
-class NewLoginStore extends NotifierStore<DioError, NewCredentialModel> with Disposable {
+class NewLoginStore extends NotifierStore<DioError, NewCredentialModel>
+    with Disposable {
   NewLoginStore() : super(NewCredentialModel());
 
   final ObscureTextStore obscureTextStore = Modular.get();
@@ -27,6 +28,8 @@ class NewLoginStore extends NotifierStore<DioError, NewCredentialModel> with Dis
         if (prefs.user?.individualPerson?.phone != null &&
             prefs.user?.individualPerson!.phone != '11999995555' &&
             prefs.user?.individualPerson!.maritalStatus != null) {
+          await preferencesService.setUserPreferences(prefs);
+
           Modular.to.navigate('/newHome');
         } else {
           Modular.to.pushNamed(
@@ -61,6 +64,16 @@ class NewLoginStore extends NotifierStore<DioError, NewCredentialModel> with Dis
     final credential = await preferencesService.getCredential();
     if (credential.password != null) hasSavedCredential = true;
     return credential;
+  }
+
+  Future<bool> credentialIsDiferent() async {
+    final credential = await preferencesService.getCredential();
+    if (credential.cpfOrEmail != state.cpfOrEmail ||
+        credential.password != state.password) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override

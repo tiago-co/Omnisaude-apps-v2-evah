@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:local_auth_android/local_auth_android.dart';
@@ -27,7 +29,7 @@ class LocalAuthService {
     final biometricType = await getBiometricType();
     final hasBiometric = await hasBiometrics();
     final isDeviceSupported = await _auth.isDeviceSupported();
-    if (biometricType.isNotEmpty) {
+    if (biometricType.isNotEmpty && Platform.isAndroid) {
       return (hasBiometric || isDeviceSupported) &&
           (biometricType.first == BiometricType.fingerprint ||
               biometricType.first == BiometricType.weak ||
@@ -42,7 +44,8 @@ class LocalAuthService {
     final canAuthenticate = await canAuthenticateUser();
     if (!canAuthenticate) return false;
     try {
-      return _auth.authenticate(
+      return _auth
+          .authenticate(
         localizedReason: 'Utilize sua biometria para entrar',
         authMessages: const <AuthMessages>[
           AndroidAuthMessages(
@@ -55,7 +58,13 @@ class LocalAuthService {
           sensitiveTransaction: false,
           stickyAuth: true,
         ),
-      );
+      )
+          .then((value) {
+        if (!value) {
+          throw PlatformException(code: 'biometric_error');
+        }
+        return value;
+      });
     } on PlatformException {
       return false;
     }

@@ -35,7 +35,7 @@ class _SignInPageState extends State<SignInPage> {
   BiometricTypeEnum? biometricType;
 
   Future<void> askSaveData() async {
-    if (!store.hasSavedCredential) {
+    if (!store.hasSavedCredential || await store.credentialIsDiferent()) {
       await Helpers.showDialog(
         context,
         SaveDataDialog(state: store.state),
@@ -70,7 +70,11 @@ class _SignInPageState extends State<SignInPage> {
 
   void login(BuildContext context) async {
     await store.useBiometricsStore.canAuthenticateUser();
-    if (store.useBiometricsStore.canUseBiometricAuth) {
+    final loginBiometric = await useBiometricsStore.getHasBiometrics();
+    if (store.useBiometricsStore.canUseBiometricAuth &&
+        store.useBiometricsStore.biometricType ==
+            BiometricTypeEnum.fingerprint &&
+        loginBiometric == UseBiometricPermission.accepted) {
       Helpers.showDialog(
         context,
         Helpers.activateBiometricAuth(
@@ -105,7 +109,8 @@ class _SignInPageState extends State<SignInPage> {
       password.text = credential.password ?? '';
       store.state.password = credential.password ?? '';
       final loginBiometric = await useBiometricsStore.getHasBiometrics();
-      if (loginBiometric == UseBiometricPermission.accepted && credential.cpfOrEmail != null) {
+      if (loginBiometric == UseBiometricPermission.accepted &&
+          credential.cpfOrEmail != null) {
         await loginWithBiometricMode();
       }
     });
@@ -129,7 +134,8 @@ class _SignInPageState extends State<SignInPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(14.5 * fem, 0 * fem, 33.5 * fem, 28 * fem),
+                margin: EdgeInsets.fromLTRB(
+                    14.5 * fem, 0 * fem, 33.5 * fem, 28 * fem),
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -140,7 +146,8 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     const SizedBox(height: 24),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 4 * fem),
+                      margin: EdgeInsets.fromLTRB(
+                          0 * fem, 0 * fem, 0 * fem, 4 * fem),
                       child: Text(
                         'Bem-vindo de volta',
                         textAlign: TextAlign.center,
@@ -171,7 +178,8 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 28 * fem),
+                margin:
+                    EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 28 * fem),
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,7 +213,9 @@ class _SignInPageState extends State<SignInPage> {
                           isObscure = !isObscure;
                         }),
                         child: Icon(
-                          isObscure ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                          isObscure
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
                           color: Colors.grey,
                         ),
                       ),

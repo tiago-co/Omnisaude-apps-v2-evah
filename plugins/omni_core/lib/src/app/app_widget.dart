@@ -27,7 +27,7 @@ class AppWidget extends StatelessWidget {
     WidgetsBinding.instance.addObserver(
       LifecycleEventHandler(
         pausedCallBack: () => service.onPauseApp(),
-        resumeCallBack: () => service.onResumeAppWithBiometrics(),
+        // resumeCallBack: () => service.onResumeAppWithBiometrics(),
       ),
     );
 
