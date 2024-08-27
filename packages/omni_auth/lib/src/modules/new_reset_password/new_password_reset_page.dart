@@ -1,8 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_auth/src/modules/new_reset_password/store/reset_password_store.dart';
-
 import 'package:omni_general/omni_general.dart';
 
 class NewPasswordResetPage extends StatefulWidget {
@@ -22,21 +23,17 @@ class _NewPasswordResetPageState extends State<NewPasswordResetPage> {
 
   bool isObscure = true;
 
-  bool validate(BuildContext context) {
-    if (passwordController.text.length < 6) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.red,
-          content: Text(
-            'Senha deve conter no mínimo 6 caracteres!',
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-        ),
-      );
+  bool fieldValidation() {
+    if (passwordController.text.length >= 9 &&
+        repeatController.text.length >= 9) {
       return false;
-    } else if (passwordController.text != repeatController.text) {
+    } else {
+      return true;
+    }
+  }
+
+  bool validate(BuildContext context) {
+    if (passwordController.text != repeatController.text) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Colors.red,
@@ -72,7 +69,7 @@ class _NewPasswordResetPageState extends State<NewPasswordResetPage> {
           margin: EdgeInsets.only(top: 40),
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: Color(0xffffffff),
+            color: Theme.of(context).scaffoldBackgroundColor,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,7 +99,9 @@ class _NewPasswordResetPageState extends State<NewPasswordResetPage> {
                     isObscure = !isObscure;
                   }),
                   child: Icon(
-                    isObscure ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                    isObscure
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
                     color: Colors.grey,
                   ),
                 ),
@@ -122,93 +121,84 @@ class _NewPasswordResetPageState extends State<NewPasswordResetPage> {
                 obscureText: isObscure,
                 maxLines: 1,
                 fem: fem,
+                onChange: (_) {
+                  store.updateForm(store.state);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               Container(
                 padding: EdgeInsets.only(left: 8),
-                child: Text(
-                  'Mínimo 6 carcteres com pelo menos um número, letra maiúscula e símbolo',
-                  style: TextStyle(
-                    fontSize: 12 * ffem,
-                    fontWeight: FontWeight.w400,
-                    height: 1.3333333333 * ffem / fem,
-                    color: Color(0xff878da0),
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '• Senha deve conter no mínimo 9 caracteres',
+                      style: TextStyle(
+                        fontSize: 12 * ffem,
+                        fontWeight: FontWeight.w400,
+                        height: 1.3333333333 * ffem / fem,
+                        color: const Color(0xff878da0),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '• Deve conter pelo menos um número e uma letra',
+                      style: TextStyle(
+                        fontSize: 12 * ffem,
+                        fontWeight: FontWeight.w400,
+                        height: 1.3333333333 * ffem / fem,
+                        color: const Color(0xff878da0),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(
                 height: 32,
               ),
-              TextButton(
-                onPressed: () async {
-                  if (validate(context)) {
-                    await store.newResetPassword(store.state).then((value) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          backgroundColor: Colors.green,
-                          content: Text(
-                            'Senha Atualizada!',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      );
-                      Modular.to.navigate('/auth/newLogin');
-                    }).catchError((onError) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          backgroundColor: Colors.red,
-                          content: Text(
-                            onError.message,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      );
-                    });
-                  }
-                },
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                ),
-                child: SizedBox(
-                  height: 56 * fem,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: const Color(0xff2d72b3),
-                      borderRadius: BorderRadius.circular(60 * fem),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(4 * fem, 0 * fem, 0 * fem, 0 * fem),
-                      width: double.infinity,
-                      height: double.infinity,
-                      child: TripleBuilder(
-                        store: store,
-                        builder: (context, triple) {
-                          if (triple.isLoading) {
-                            return const LoadingWidget(
-                              indicatorColor: Colors.white,
-                            );
-                          }
-                          return Center(
-                            child: Text(
-                              'Continuar',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 16 * ffem,
-                                fontWeight: FontWeight.w600,
-                                height: 1.5 * ffem / fem,
-                                color: Color(0xffffffff),
+              TripleBuilder(
+                store: store,
+                builder: (context, triple) {
+                  return SizedBox(
+                    width: double.maxFinite,
+                    height: 56,
+                    child: DefaultButtonWidget(
+                      isLoading: triple.isLoading,
+                      isDisabled: fieldValidation(),
+                      onPressed: () {
+                        if (validate(context)) {
+                          store.newResetPassword(store.state).then((value) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                backgroundColor: Colors.green,
+                                content: Text(
+                                  'Senha Atualizada!',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
+                            );
+                            Modular.to.navigate('/auth/newLogin');
+                          }).catchError((onError) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text(
+                                  onError.message,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            );
+                          });
+                        }
+                      },
+                      text: 'Continuar',
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             ],
           ),
@@ -217,5 +207,3 @@ class _NewPasswordResetPageState extends State<NewPasswordResetPage> {
     );
   }
 }
-
-// adb shell 'am start -d "http://backend.evahsaude.com.br/auth/password/resetPassword?id=MTg3MQ&token=c2rsju-3809ad74d23ceeb117f8a4731669431c"'
