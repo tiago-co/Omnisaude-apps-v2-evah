@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:omni_general/src/core/enums/buttons_enum.dart';
+import 'package:omni_general/src/widgets/loading/loading_widget.dart';
 
 class DefaultButtonWidget extends StatelessWidget {
   final DefaultButtonType buttonType;
@@ -34,34 +35,40 @@ class DefaultButtonWidget extends StatelessWidget {
         elevation: MaterialStateProperty.all(0),
         backgroundColor: MaterialStateProperty.all(
           Theme.of(context).primaryColor.withOpacity(
-                isDisabled || isLoading || onPressed == null ? 0.5 : 1.0,
+                isDisabled || isLoading || onPressed == null ? 0.7 : 1.0,
               ),
         ),
         padding: MaterialStateProperty.all(
           const EdgeInsets.all(10),
         ),
-        side: MaterialStateProperty.all(
-          BorderSide(color: Theme.of(context).primaryColor, width: 0.5),
-        ),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(50),
           ),
         ),
         overlayColor: MaterialStateProperty.all(
           Colors.white.withOpacity(0.1),
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Container(
+        padding: EdgeInsets.zero,
         child: isLoading
-            ? const CircularProgressIndicator.adaptive()
-            : Text(
-                text,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: Colors.white,
-                    ),
+            ? const LoadingWidget(
+                indicatorColor: Colors.white,
+              )
+            : Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
+                child: Text(
+                  text,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
               ),
       ),
     );
