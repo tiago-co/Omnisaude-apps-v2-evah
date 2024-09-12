@@ -68,6 +68,7 @@ class LecuponService {
     required NewBeneficiaryModel beneficiary,
   }) async {
     late String smartLinkToken;
+    late String webSmartLink;
 
     try {
       await _lecuponRepository.getAdmminToken();
@@ -77,17 +78,22 @@ class LecuponService {
 
     await _lecuponRepository
         .getSmartlinkAuthenticationToken(
-          cpf: beneficiary.individualPerson!.cpf!,
-        )
-        .then((value) => smartLinkToken = value)
-        .catchError(
+      cpf: beneficiary.individualPerson!.cpf!,
+    )
+        .then((value) {
+      smartLinkToken = value['smart_link_token'];
+      webSmartLink = value['web_smart_link'];
+    }).catchError(
       (onError) {
         log(onError.toString());
       },
     );
-    await _lecuponRepository.smartLinkAuthenticate(smartToken: smartLinkToken).then(
+    await _lecuponRepository
+        .smartLinkAuthenticate(smartToken: smartLinkToken)
+        .then(
       (value) {
         lecuponUser = value;
+        lecuponUser.webSmartLink = webSmartLink;
       },
     ).catchError((onError) {
       log(onError.toString());

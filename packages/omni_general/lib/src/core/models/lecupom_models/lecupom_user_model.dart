@@ -15,6 +15,7 @@ class LecuponUserModel {
   String? lng;
   String? client;
   String? accessToken;
+  String? webSmartLink;
 
   LecuponUserModel({
     this.id,
@@ -29,6 +30,7 @@ class LecuponUserModel {
     this.fullAddress,
     this.lat,
     this.lng,
+    this.webSmartLink,
   });
 
   LecuponUserModel.fromJson(Map<String, dynamic> json) {
@@ -47,6 +49,7 @@ class LecuponUserModel {
     lng = json['lng'] ?? '';
     accessToken = json['access_token'] ?? '';
     client = json['client'] ?? '';
+    webSmartLink = json['web_smart_link'] ?? '';
   }
 
   Map<String, dynamic> toJson() {
@@ -67,6 +70,7 @@ class LecuponUserModel {
     data['lng'] = lng;
     data['access_token'] = accessToken;
     data['client'] = client;
+    data['web_smart_link'] = webSmartLink;
     return data;
   }
 }

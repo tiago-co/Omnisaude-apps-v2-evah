@@ -44,11 +44,13 @@ class LecuponRepository extends Disposable {
         ).toJson(),
       );
 
-      final AdministratorUserModel administratorUser = AdministratorUserModel.fromJson(response.data);
+      final AdministratorUserModel administratorUser =
+          AdministratorUserModel.fromJson(response.data);
 
       _client.options.headers.addAll(
         {
-          'X-ClientEmployee-Email': dotenv.env['LECUPON_X_ClientEmployee_Email'],
+          'X-ClientEmployee-Email':
+              dotenv.env['LECUPON_X_ClientEmployee_Email'],
           'X-ClientEmployee-Token': administratorUser.authToken,
         },
       );
@@ -63,7 +65,8 @@ class LecuponRepository extends Disposable {
   }) async {
     try {
       final Response response = await _httpClientImpl.get(
-        path: '/api/v1/public_integration/organizations/$organizationUid/coupons',
+        path:
+            '/api/v1/public_integration/organizations/$organizationUid/coupons',
         queryParameters: params.toJson(),
       );
 
@@ -90,7 +93,8 @@ class LecuponRepository extends Disposable {
         path: '/businesses/$cnpj/authorized_users',
         data: activeUser.toJson(),
       );
-      final ActivateUserModel activateUser = ActivateUserModel.fromJson(response.data);
+      final ActivateUserModel activateUser =
+          ActivateUserModel.fromJson(response.data);
       return activateUser;
     } catch (e) {
       rethrow;
@@ -102,7 +106,8 @@ class LecuponRepository extends Disposable {
     required CupomParamsModel params,
   }) async {
     try {
-      final List<DiscountCategoryModel> discountsCategories = List.empty(growable: true);
+      final List<DiscountCategoryModel> discountsCategories =
+          List.empty(growable: true);
       _client.options.headers.addAll(
         {
           'Api-Secret': dotenv.env['LECUPON_API_SECRET'],
@@ -117,7 +122,8 @@ class LecuponRepository extends Disposable {
       );
 
       response.data.forEach((discountCategory) {
-        discountsCategories.add(DiscountCategoryModel.fromMap(discountCategory));
+        discountsCategories
+            .add(DiscountCategoryModel.fromMap(discountCategory));
       });
 
       return discountsCategories;
@@ -135,7 +141,8 @@ class LecuponRepository extends Disposable {
         data: activateUser.toJson(),
       );
 
-      final LecuponUserModel lecuponUser = LecuponUserModel.fromJson(response.data);
+      final LecuponUserModel lecuponUser =
+          LecuponUserModel.fromJson(response.data);
 
       return lecuponUser;
     } on DioError {
@@ -162,7 +169,8 @@ class LecuponRepository extends Disposable {
         queryParameters: params.toJson(),
       );
 
-      final List<OrganizationModel> organizationsList = List.empty(growable: true);
+      final List<OrganizationModel> organizationsList =
+          List.empty(growable: true);
 
       response.data.forEach((organization) {
         organizationsList.add(OrganizationModel.fromJson(organization));
@@ -174,10 +182,11 @@ class LecuponRepository extends Disposable {
     }
   }
 
-  Future<String> getSmartlinkAuthenticationToken({
+  Future<Map<String, dynamic>> getSmartlinkAuthenticationToken({
     required String cpf,
   }) async {
     String smartLinkToken = '';
+    String webSmartLink = '';
 
     try {
       final Response response = await _httpClientImpl.post(
@@ -185,11 +194,15 @@ class LecuponRepository extends Disposable {
       );
 
       smartLinkToken = response.data['smart_token'];
+      webSmartLink = response.data['web_smart_link'];
     } catch (e) {
       log(e.toString());
     }
 
-    return smartLinkToken;
+    return {
+      'smart_link_token': smartLinkToken,
+      'web_smart_link': webSmartLink,
+    };
   }
 
   Future<LecuponUserModel> smartLinkAuthenticate({
@@ -224,7 +237,8 @@ class LecuponRepository extends Disposable {
   }) async {
     try {
       final Response response = await _httpClientImpl.get(
-        path: '/api/v1/public_integration/organizations/$organizationId/coupons/$couponId',
+        path:
+            '/api/v1/public_integration/organizations/$organizationId/coupons/$couponId',
       );
       final CupomModel coupon = CupomModel.fromJson(response.data);
 
