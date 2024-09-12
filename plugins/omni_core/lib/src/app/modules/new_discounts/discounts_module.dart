@@ -12,6 +12,7 @@ import 'package:omni_core/src/app/modules/benefits/discounts/stores/rescue_coupo
 import 'package:omni_core/src/app/modules/new_discounts/discount_detail.dart';
 import 'package:omni_core/src/app/modules/new_discounts/new_cupons_page.dart';
 import 'package:omni_core/src/app/modules/new_discounts/new_discounts_page.dart';
+import 'package:omni_core/src/app/modules/new_discounts/pages/other_discount_webview.dart';
 
 class NewDiscountsModule extends Module {
   @override
@@ -71,6 +72,10 @@ class NewDiscountsModule extends Module {
         coupon: args.data['coupon'],
         organizationId: args.data['organizationId'],
       ),
+    ),
+    ChildRoute(
+      '/smart_link_webview',
+      child: (_, args) => const OtherDiscountsWebview(),
     ),
   ];
 }

@@ -64,7 +64,8 @@ class ServicesPage extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      Modular.to.pushNamed('/newHome/teleattendanceUrgency', arguments: 'Pronto Atendimento');
+                      Modular.to.pushNamed('/newHome/teleattendanceUrgency',
+                          arguments: 'Pronto Atendimento');
                     },
                     child: ServiceButton(
                       color: const Color(0xffedf5fc),
@@ -214,17 +215,19 @@ class ServicesPage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Modular.to.pushNamed(
-                        '/newHome/discounts/cupons',
-                        arguments: {
-                          // 'moduleName': 'Desconto em Farmácia',
-                          'categoryParam': '',
-                          'organizationId': 0,
-                          'moduleName': 'Outros descontos',
-                          'coverImage': '',
-                          'couponRescueType': 'online',
-                        },
-                      );
+                      // Modular.to.pushNamed(
+                      //   '/newHome/discounts/cupons',
+                      //   arguments: {
+                      //     // 'moduleName': 'Desconto em Farmácia',
+                      //     'categoryParam': '',
+                      //     'organizationId': 0,
+                      //     'moduleName': 'Outros descontos',
+                      //     'coverImage': '',
+                      //     'couponRescueType': 'online',
+                      //   },
+                      // );
+                      Modular.to
+                          .pushNamed('/newHome/discounts/smart_link_webview');
                     },
                     child: ServiceButton(
                       color: const Color(0xffF1F1F6),

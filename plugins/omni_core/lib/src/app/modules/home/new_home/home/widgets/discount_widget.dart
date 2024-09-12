@@ -58,7 +58,8 @@ class DiscountsWidget extends StatelessWidget {
                       height: double.infinity,
                       child: Container(
                         // autogroupxjf5nrT (MYo2hYg9nTYQaMZ1aYXjf5)
-                        margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
+                        margin: EdgeInsets.fromLTRB(
+                            0 * fem, 0 * fem, 0 * fem, 0 * fem),
 
                         height: double.infinity,
                         child: Center(
@@ -184,7 +185,8 @@ class DiscountsWidget extends StatelessWidget {
                 ),
                 Container(
                   // frame1573oFm (4511:32338)
-                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
+                  margin:
+                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
                   child: TextButton(
                     onPressed: () {
                       Modular.to.pushNamed(
@@ -243,19 +245,9 @@ class DiscountsWidget extends StatelessWidget {
                   width: 32,
                 ),
                 TextButton(
-                  // frame1575hXV (5303:17815)
                   onPressed: () {
-                    Modular.to.pushNamed(
-                      '/newHome/discounts/cupons',
-                      arguments: {
-                        // 'moduleName': 'Desconto em Farmácia',
-                        'categoryParam': '',
-                        'organizationId': 0,
-                        'moduleName': 'Outros descontos',
-                        'coverImage': '',
-                        'couponRescueType': 'online',
-                      },
-                    );
+                    Modular.to
+                        .pushNamed('/newHome/discounts/smart_link_webview');
                   },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
