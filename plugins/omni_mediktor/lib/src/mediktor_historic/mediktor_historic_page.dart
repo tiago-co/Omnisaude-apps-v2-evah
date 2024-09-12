@@ -89,7 +89,7 @@ class MediktorHistoricPageState extends State<MediktorHistoricPage> {
             },
           ),
         ),
-        const MediktorDiagnosisPage(moduleName: 'Novo Diagnóstico'),
+        // const MediktorDiagnosisPage(moduleName: 'Novo Diagnóstico'),
       ],
     );
   }

@@ -29,10 +29,10 @@ class MediktorDiagnosisModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(
-      Modular.initialRoute,
-      child: (_, args) => MediktorDiagnosisPage(moduleName: args.data),
-    ),
+    // ChildRoute(
+    //   Modular.initialRoute,
+    //   child: (_, args) => MediktorDiagnosisPage(moduleName: args.data),
+    // ),
     ChildRoute(
       '/mediktorRecomendationDiagnosisPage',
       child: (_, args) => MediktorRecomendationDiagnosisPage(

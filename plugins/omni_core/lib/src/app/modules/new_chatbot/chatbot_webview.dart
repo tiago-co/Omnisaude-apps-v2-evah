@@ -8,6 +8,12 @@ class ChatbotWebview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _webViewController = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(
+        Uri.parse(
+            'https://chat.omnisaude.co/chat?id=ad2051aa-c258-4d2a-b3bf-5c13f2bc4578&color=139ecc'),
+      );
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -21,27 +27,11 @@ class ChatbotWebview extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           'Enfermeira Virtual',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
+          style: TextStyle(
+              fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
         ),
       ),
-      body: WebView(
-        initialUrl: 'https://chat.omnisaude.co/chat?id=ad2051aa-c258-4d2a-b3bf-5c13f2bc4578&color=139ecc',
-        zoomEnabled: false,
-        javascriptMode: JavascriptMode.unrestricted,
-        javascriptChannels: {
-          JavascriptChannel(
-            name: 'flutterChannel',
-            onMessageReceived: (JavascriptMessage message) {
-              // Captura a mensagem emitida pelo JavaScript
-              final String data = message.message;
-              print('Evento do JavaScript: $data');
-            },
-          ),
-        },
-        onWebViewCreated: (controller) {
-          _webViewController = controller;
-        },
-      ),
+      body: WebViewWidget(controller: _webViewController),
     );
   }
 }

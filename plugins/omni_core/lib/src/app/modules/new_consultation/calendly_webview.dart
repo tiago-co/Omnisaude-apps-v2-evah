@@ -8,6 +8,12 @@ class CalendlyWebview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _webViewController = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(
+        Uri.parse(
+            'https://calendly.com/juliana-galante/consulta-de-saude-da-mulher'),
+      );
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -21,27 +27,11 @@ class CalendlyWebview extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           'Agendamento de consulta',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
+          style: TextStyle(
+              fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
         ),
       ),
-      body: WebView(
-        initialUrl: 'https://calendly.com/juliana-galante/consulta-de-saude-da-mulher',
-        zoomEnabled: false,
-        javascriptMode: JavascriptMode.unrestricted,
-        javascriptChannels: {
-          JavascriptChannel(
-            name: 'flutterChannel',
-            onMessageReceived: (JavascriptMessage message) {
-              // Captura a mensagem emitida pelo JavaScript
-              final String data = message.message;
-              print('Evento do JavaScript: $data');
-            },
-          ),
-        },
-        onWebViewCreated: (controller) {
-          _webViewController = controller;
-        },
-      ),
+      body: WebViewWidget(controller: _webViewController),
     );
   }
 }

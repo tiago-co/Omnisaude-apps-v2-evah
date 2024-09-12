@@ -37,7 +37,7 @@ class _MediktorDiagnosisStateDetailsPage
   void initState() {
     super.initState();
 
-    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+    // if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }
 
   @override
