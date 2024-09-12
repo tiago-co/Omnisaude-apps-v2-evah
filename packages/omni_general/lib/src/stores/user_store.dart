@@ -1,14 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:omni_core/omni_core.dart';
 import 'package:omni_general/omni_general.dart';
 import 'package:omni_general/src/core/models/new_beneficiary_model.dart';
 
-class UserStore extends NotifierStore<Exception, NewPreferencesModel> with Disposable {
+class UserStore extends NotifierStore<Exception, NewPreferencesModel>
+    with Disposable {
   final PreferencesService _service = PreferencesService();
   final BeneficiaryRepository _repository = Modular.get();
   final FirebaseService firebaseService = Modular.get();
+  final LecuponService lecuponService = LecuponService();
 
   UserStore()
       : super(
@@ -36,7 +37,8 @@ class UserStore extends NotifierStore<Exception, NewPreferencesModel> with Dispo
     });
   }
 
-  Future<void> setUserPreferences(NewPreferencesModel prefs, String userId) async {
+  Future<void> setUserPreferences(
+      NewPreferencesModel prefs, String userId) async {
     await _service.getUserPreferences(userId).then((preferences) {
       prefs.jwt = prefs.jwt ?? preferences.jwt;
       prefs.user = prefs.user ?? preferences.user;
@@ -71,6 +73,26 @@ class UserStore extends NotifierStore<Exception, NewPreferencesModel> with Dispo
     }).catchError((onError) async {
       throw onError;
     });
+  }
+
+  Future<void> lecuponAuthenticate() async {
+    await lecuponService
+        .lecuponAuthenticate(
+      beneficiary: beneficiary,
+    )
+        .then((value) {
+      if (value != null) {
+        beneficiary.lecuponUser = value;
+      }
+    });
+    await _service.getUserPreferences('').then((prefs) async {
+      if (beneficiary.lecuponUser != null) {
+        prefs.user!.lecuponUser = beneficiary.lecuponUser;
+      }
+      await setUserPreferences(prefs, '');
+      update(prefs);
+    });
+    setLoading(false);
   }
 
   NewBeneficiaryModel get beneficiary => state.user!;

@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
     userStore.updateUser().then((prefs) async {
       // programStore.update(prefs!.beneficiary!.programs!);
       userStore.firebaseService.onSubscribeToTopic(userStore.userId.toString());
+      await userStore.lecuponAuthenticate();
     });
     // store.modulesStore.getActiveModules().then(
     //   (value) {
