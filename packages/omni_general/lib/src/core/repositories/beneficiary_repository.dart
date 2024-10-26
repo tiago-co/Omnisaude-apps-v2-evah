@@ -5,13 +5,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:omni_general/omni_general.dart'
-    show DioHttpClientImpl, IndividualPersonModel, NewPreferencesModel, PreferencesModel;
+    show DioHttpClientImpl, IndividualPersonModel, NewPreferencesModel;
 import 'package:omni_general/src/core/enums/first_acess_send_to_enum.dart';
-import 'package:omni_general/src/core/models/address_model.dart';
 import 'package:omni_general/src/core/models/beneficiary_model.dart';
 import 'package:omni_general/src/core/models/jwt_model.dart';
 import 'package:omni_general/src/core/models/operator_configs_model.dart';
 import 'package:omni_general/src/core/services/preferences_service.dart';
+import 'package:omni_general/src/core/utils/helpers.dart';
 
 class BeneficiaryRepository extends Disposable {
   final DioHttpClientImpl _client;
@@ -55,7 +55,8 @@ class BeneficiaryRepository extends Disposable {
 
       final Response response = await dio.get(
         '/users/$id',
-        options: Options(headers: {'Authorization': 'Bearer ${prefs.jwt?.token}'}),
+        options:
+            Options(headers: {'Authorization': 'Bearer ${prefs.jwt?.token}'}),
       );
       return IndividualPersonModel.fromJson(response.data);
     } on DioError catch (e) {
@@ -106,7 +107,8 @@ class BeneficiaryRepository extends Disposable {
 
       final Response response = await dio.patch(
         '/users/$id',
-        options: Options(headers: {'Authorization': 'Bearer ${prefs.jwt?.token}'}),
+        options:
+            Options(headers: {'Authorization': 'Bearer ${prefs.jwt?.token}'}),
         data: data,
       );
 
@@ -121,7 +123,8 @@ class BeneficiaryRepository extends Disposable {
   Future<JwtModel?> verifyToken(String userId) async {
     try {
       final PreferencesService service = PreferencesService();
-      final NewPreferencesModel prefs = await service.getUserPreferences(userId);
+      final NewPreferencesModel prefs =
+          await service.getUserPreferences(userId);
 
       final Response response = await _client.post(
         path: '/token-verify/',
@@ -147,16 +150,24 @@ class BeneficiaryRepository extends Disposable {
     }
   }
 
-  Future<IndividualPersonModel> getIndividualPersonByEmailCPF(String data, String param) async {
+  Future<IndividualPersonModel> getIndividualPersonByEmailCPF(
+      String data, String param) async {
     try {
       final Dio dio = Dio();
       dio.options.baseUrl = dotenv.env['PRD_NEW_EVAH_API']!;
       dio.interceptors.add(
         LogInterceptor(responseHeader: false, responseBody: true, error: false),
       );
+      final Response response =
+          await dio.get('/users/', queryParameters: {param: data});
+      final decryptedId = Helpers.decryptText(response.data[0]['id']);
+      final decryptedEmail = Helpers.decryptText(response.data[0]['email']);
 
-      final Response response = await dio.get('/users/', queryParameters: {param: data});
-      return IndividualPersonModel.fromJson(response.data.first);
+      return IndividualPersonModel(
+        id: int.parse(decryptedId),
+        email: decryptedEmail,
+        isCompleted: response.data[0]['is_completed'],
+      );
     } on DioError catch (e) {
       log('##### getIndividualPersonByEmailCPF: $e');
       rethrow;
@@ -193,7 +204,7 @@ class BeneficiaryRepository extends Disposable {
 
   Future<void> deleteUser() async {
     try {
-      final Response _response = await _client.post(
+      await _client.post(
         path: '/mobile/deletar-usuario/',
       );
     } on DioError catch (e) {

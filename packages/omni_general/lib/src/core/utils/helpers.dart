@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:encrypt/encrypt.dart' as Encrypt;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -323,5 +325,21 @@ class Helpers {
       messageErrors = 'Não foi possível completar a requisição!';
     }
     return messageErrors;
+  }
+
+  static String decryptText(String text) {
+    // A chave secreta compartilhada (mesma chave usada no backend)
+    final key = Encrypt.Key.fromUtf8(dotenv.env['DECRYPTION_KEY']!);
+    // IV padrão (ou o mesmo IV usado no backend)
+    final iv = Encrypt.IV.allZerosOfLength(16);
+    // Inicializa o encriptador usando AES
+    final encrypter =
+        Encrypt.Encrypter(Encrypt.AES(key, mode: Encrypt.AESMode.cbc));
+    // Decodifica o ID criptografado de base64
+    final encryptedId = Encrypt.Encrypted.fromBase64(text);
+    // Descriptografa o ID
+    final decryptedId = encrypter.decrypt(encryptedId, iv: iv);
+    return decryptedId;
+    return '';
   }
 }

@@ -28,6 +28,9 @@ class IndividualPersonModel {
   AddressModel? address;
 
   IndividualPersonModel({
+    this.id,
+    this.email,
+    this.isCompleted,
     this.user,
     this.name,
     this.cpf,
@@ -52,8 +55,12 @@ class IndividualPersonModel {
     cpf = json['cpf'];
     email = json['email'];
     birth = json['birth_date'];
-    height = json['height'] is String ? double.parse(json['height']) : json['height'];
-    weight = json['weight'] is int ? (json['weight'] as int).toDouble() : json['weight'];
+    height = json['height'] is String
+        ? double.parse(json['height'])
+        : json['height'];
+    weight = json['weight'] is int
+        ? (json['weight'] as int).toDouble()
+        : json['weight'];
     phone = json['phone'];
     emergencyContact = json['emergency_phone'];
     maritalStatus = maritalStatusFromJson(json['marital_status']);
@@ -76,7 +83,9 @@ class IndividualPersonModel {
     motherName = json['nome_mae'];
     fatherName = json['nome_pai'];
     birth = json['dt_nascimento'];
-    height = json['altura'] is double ? (json['altura'] as double).toInt() : json['altura'];
+    height = json['altura'] is double
+        ? (json['altura'] as double).toInt()
+        : json['altura'];
     weight = json['peso'];
     phone = json['telefone'];
     bloodType = bloodTypeFromJson(json['tipo_sanguineo']);
