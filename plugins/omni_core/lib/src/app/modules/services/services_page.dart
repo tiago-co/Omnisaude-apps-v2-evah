@@ -115,20 +115,6 @@ class ServicesPage extends StatelessWidget {
                       title: 'Consulta\nPresencial',
                     ),
                   ),
-
-                  InkWell(
-                    onTap: () {
-                      Modular.to.pushNamed('/newHome/new_chatbot_webview');
-                    },
-                    child: ServiceButton(
-                      color: const Color(0xffECF9F6),
-                      image: SvgPicture.asset(
-                        Assets.mentalCareIcon,
-                        package: AssetsPackage.omniCore,
-                      ),
-                      title: 'Enfermeira Virtual',
-                    ),
-                  ),
                 ],
               ),
               SizedBox(

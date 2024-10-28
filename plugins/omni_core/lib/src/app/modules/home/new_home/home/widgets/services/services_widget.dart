@@ -71,7 +71,7 @@ class ServicesWidget extends StatelessWidget {
             padding: EdgeInsets.only(right: 16 * fem, bottom: 10),
             children: [
               AspectRatio(
-                aspectRatio: (110 / 65),
+                aspectRatio: (115 / 65),
                 child: InkWell(
                   onTap: () {
                     Modular.to.pushNamed(
@@ -90,40 +90,6 @@ class ServicesWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 8 * fem),
-              AspectRatio(
-                aspectRatio: (110 / 65),
-                child: InkWell(
-                  onTap: () {
-                    Modular.to.pushNamed('/newHome/new_chatbot_webview');
-                  },
-                  child: ServiceButton(
-                    color: const Color(0xffECF9F6),
-                    image: SvgPicture.asset(
-                      Assets.mentalCareIcon,
-                      package: AssetsPackage.omniCore,
-                    ),
-                    title: 'Enfermeira Virtual',
-                  ),
-                ),
-              ),
-              // ServiceButton(
-              //   image: SvgPicture.asset(
-              //     Assets.selfAssessmentIcon,
-              //     package: AssetsPackage.omniCore,
-              //   ),
-              //   title: 'Saúde da mulher',
-              //   inverted: true,
-              // ),
-              // const SizedBox(width: 8),
-              // ServiceButton(
-              //   color: const Color(0xffECF9F6),
-              //   image: SvgPicture.asset(
-              //     Assets.selfAssessmentIcon,
-              //     package: AssetsPackage.omniCore,
-              //   ),
-              //   inverted: true,
-              //   title: 'Auto-avaliação ',
-              // ),
             ],
           ),
         ),
